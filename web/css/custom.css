@@ -1,0 +1,244 @@
+	.navbar-inverse{
+			background: #2196f3;
+			border-color:#2196f3;
+			box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+	}
+	.navbar-inverse .navbar-nav>li>a{
+		color:#fff;
+		font-size: 16px;
+		font-family: 微软雅黑;
+	}
+	.navbar-inverse .navbar-nav>li:hover{
+		background:#ff6600;
+	}
+	
+	.row{
+		margin-top: 20px;
+	}
+
+  .snav-margin{
+    height:50px;
+    margin-top: 10px;
+    background:url("../images/snav.png");
+  }
+  
+  .snav-lfont{
+    width:120px;
+    height:50px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 50px;
+    color:#fff;
+    float: left;
+  }
+  .snav-rfont{
+    width:50px;
+    height:50px;
+    font-size:14px;
+    text-align:center;
+    line-height: 50px;
+    color:#333;
+    float: right;
+  }
+
+  .textoverflow{
+    width:237px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .textoverflow ~ p{
+    color:red;
+  }
+  
+/*--------------------------------------------------登录注册-------------------------------------------------------------*/
+.breadcrumb{
+  margin-top: 10px;
+}
+.register-box{
+  width:50%;
+  margin:0 auto;
+}
+.register{
+  width:100%;
+  margin-top:-8px;
+  border-radius:5px;
+  border: 1px solid #d6e9c6;
+}
+
+.register-font{
+  width: 100%;
+  height:50px;
+  text-align: center;
+  line-height: 50px;
+  color:#3c763d;
+  background:#d6e9c6;
+}
+
+.register-form{
+  margin-top: 20px;
+}
+
+
+.login-box{
+  width:50%;
+  margin:0 auto;
+}
+.login{
+  width:100%;
+  margin-top:-8px;
+  border-radius:5px;
+  border: 1px solid #d6e9c6;
+}
+
+.login-font{
+  width: 100%;
+  height:50px;
+  text-align: center;
+  line-height: 50px;
+  color:#3c763d;
+  background:#d6e9c6;
+}
+
+.login-form{
+  margin-top: 20px;
+}
+
+.form-control{
+  width:90%;
+}
+
+/*--------------------------------------------------商品详情-------------------------------------------------------------*/
+.good-left{
+  width:44%;
+  height:60%;
+  overflow: hidden;
+  float: left;
+}
+
+.good-border{
+  overflow: hidden;
+}
+
+.good-small ul{
+  list-style:none;
+  margin-left: -50px;
+}
+
+.good-small ul li {
+  width:20%;
+  height:20%;
+  float: left;
+  margin-left: 10px;
+  border:1px solid #ddd;
+  overflow: hidden;
+}
+
+.good-small ul li div{
+  text-align: center;
+  line-height: 15%;
+}
+
+.good-small ul li img{
+  width:95%;
+  height:95%;  
+}
+
+.good-small ul li:hover{
+  border:1px solid #51adf6;
+}
+
+.good-right{
+  width:54%;
+  height:50%;
+  float: right;
+  /*margin-left: 20px;*/
+}
+
+.good-right caption{
+  font-size: 18px;
+  font-weight: bold;
+  padding-left: 10px;
+}
+
+.good-td{
+  font-size: 15px;
+  font-weight:bold;
+}
+
+.good-price{
+  color:#ff6600;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.good-num{
+  width:30px;
+  text-align: center;
+
+}
+
+.sub-num{
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  .bq-img{
+    margin-top: 10px;
+  }
+
+  .links{
+    margin-top: 15px;
+  }
+
+  .links-font{
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .links ul {
+    list-style: none;
+    margin-top: -15px;
+    margin-left:40px;
+  }
+
+  .links ul li{
+    float: left;
+    padding-left: 10px;
+  }
+
+  .copyright{
+    width:100%;
+    height:50px;
+    background:#0088cc;
+  }
+  .copyright-font{
+    text-align: center;
+    line-height: 50px;
+    color:#fff;
+  }
+  .snav-green{
+    height:50px;
+    margin-top: 10px;
+    background:url("../images/snav - green.png");
+  }
