@@ -127,8 +127,8 @@
 }
 
 .good-small ul li {
-  width:20%;
-  height:20%;
+  width:70px;
+  height:70px;
   float: left;
   margin-left: 10px;
   border:1px solid #ddd;
@@ -137,12 +137,12 @@
 
 .good-small ul li div{
   text-align: center;
-  line-height: 15%;
+  line-height: 70px;
 }
 
 .good-small ul li img{
-  width:95%;
-  height:95%;  
+  width:70px;
+  height:70px;  
 }
 
 .good-small ul li:hover{
@@ -183,6 +183,103 @@
   font-size: 24px;
   cursor: pointer;
   color: #666;
+}
+
+/*--------------------------------------------------购物车-------------------------------------------------------------*/
+.order-table th{
+  text-align: center;
+}
+.order-table td{
+  line-height: 70px !important;
+  text-align: center;
+}
+
+.order-img img{
+  width:70px;
+  height:70px;
+}
+
+.cart-num{
+  width:50px;
+  height:20px;
+  text-align: center;
+
+}
+
+.cart-sub{
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+}
+
+.order-price{
+  color:#ff6600;
+  font-weight: bold;
+}
+
+.order-pay{
+  width:100%;
+  height:80px;
+  border-radius: 5px;
+  background:#dff0d8;
+  border:1px solid #d6e9c6;
+}
+.order-pay span{
+  color:#ff6600;
+}
+.order-payleft{
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 80px;
+  padding-left: 20px;
+  float: left;
+}
+
+.order-payright{
+  float: right;
+  line-height: 80px;
+  padding-right: 20px;
+}
+.order-payright button{
+  width:100px;
+  height:50px;
+}
+
+/*--------------------------------------------------结算页面-------------------------------------------------------------*/
+
+.address-list{
+  width:100%;
+  /*height:150px;*/
+  border-radius: 5px;
+  border: 1px solid #d6e9c6;
+}
+.address-bg{
+  width:100%;
+  height:50px;
+  color:#3c763d;
+  background:#dff0d8;
+  line-height: 50px;
+  padding-left: 20px;
+}
+.address-add button{
+  width:100px;
+  height:50px;
+  margin: 10px;
+}
+
+.address-display{
+  width:98%;
+  margin-left: 10px;
+}
+.address-panel{
+  width:600px;
+  margin:0 auto;
+}
+
+.address-panel select{
+  width:142px;
+  float:left;
+  margin-left: 10px;
 }
 
 
