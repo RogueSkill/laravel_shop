@@ -423,16 +423,3 @@
     margin-top: 10px;
     background:url("../images/snav - green.png");
   }
-
-
-
-/*放大镜*/
-#show{
-      width: 400px;
-      height: 300px;
-      /*overflow: scroll;*/
-      overflow: hidden;
-      position: absolute;
-      left:430px;
-      top:10px;
-    }

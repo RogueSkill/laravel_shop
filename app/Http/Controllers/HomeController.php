@@ -12,6 +12,8 @@ class homeController extends BaseController
 {
     public function index()
     {
+
+        
     	$name = '黎志强';
     	$data = array(
             
