@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @extends("web.master")
 @section("title", "商城首页")
 @section("content")
@@ -312,3 +313,12 @@
     </div>
     <!-- end -->
 @endsection
+=======
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Administrator
+ * Date: 2017/6/20
+ * Time: 13:56
+ */
+>>>>>>> 1025c49471d18ec921906d87ac2f36851547b93e
