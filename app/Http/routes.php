@@ -55,10 +55,13 @@ Route::get('/admin/order_list', 'AdminController@order_list');
 Route::get('/admin/order_add', 'AdminController@order_add');
 Route::get('/admin/order_edit', 'AdminController@order_edit');
 Route::get('/admin/order_del', 'AdminController@order_del');
-
+//
+Route::get('/admin/admin_add/', 'AdminController@admin_add');
+Route::post('/admin/admin_add/', 'AdminController@doAdminAdd');
 Route::get('/admin/admin_list', 'AdminController@admin_list');
-Route::get('/admin/admin_edit', 'AdminController@admin_edit');
-
+Route::get('/admin/admin_edit/{id}', 'AdminController@admin_edit');
+Route::post('/admin/admin_edit/', 'AdminController@doAdminEdit');
+Route::get('/admin/admin_del/{id}', 'AdminController@admin_del');
 
 // Route::get('/admin', 'AdminController@index');
 // Route::get('/admin', 'AdminController@index');

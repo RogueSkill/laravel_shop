@@ -15,7 +15,7 @@
 <div class="panel admin-panel">
   <div class="panel-head"><strong><span class="icon-key"></span> 添加管理员</strong></div>
   <div class="body-content">
-    <form method="post" class="form-x" action="{{url('/admin/admin_edit')}}">
+    <form method="post" class="form-x" action="{{url('/admin/admin_add')}}">
     <?php echo csrf_field(); ?>
       <div class="form-group">
         <!-- <div class="label">
@@ -33,10 +33,10 @@
           </div>
           <div class="field">
             <select name="level" class="input w50">
-              <option <?php echo $user_data['level']==0? 'selected':'' ?> value="0">超级管理员</option>
-              <option <?php echo $user_data['level']==1? 'selected':'' ?> value="1">一般管理员</option>
-              <option <?php echo $user_data['level']==2? 'selected':'' ?> value="2">录入管理员</option>
-              <option <?php echo $user_data['level']==3? 'selected':'' ?> value="3">审核管理员</option>
+              <option value="0">超级管理员</option>
+              <option value="1">一般管理员</option>
+              <option value="2">录入管理员</option>
+              <option value="3">审核管理员</option>
             </select>
             <div class="tips"></div>
           </div>
@@ -46,8 +46,7 @@
           <label for="sitename">管理员账号：</label>
         </div>
         <div class="field">
-          <input type="hidden" value="{{$user_data['id']}}" class="input w50" id="id" name="id" size="50" placeholder="请输入账号" data-validate="required:请输入账号" /> 
-          <input type="text" value="{{$user_data['username']}}" class="input w50" id="username" name="username" size="50" placeholder="请输入账号" data-validate="required:请输入账号" />       
+          <input type="text" class="input w50" id="username" name="username" size="50" placeholder="请输入账号" data-validate="required:请输入账号" />       
         </div>
       </div>      
       <div class="form-group">
@@ -55,9 +54,18 @@
           <label for="sitename">密码：</label>
         </div>
         <div class="field">
-          <input type="password" value="{{$user_data['pass']}}" class="input w50" id="pass" name="pass" size="50" placeholder="请输入新密码" data-validate="required:请输入密码,length#>=5:密码不能小于5位" />         
+          <input type="password" class="input w50" id="pass" name="pass" size="50" placeholder="请输入新密码" data-validate="required:请输入密码,length#>=5:密码不能小于5位" />         
         </div>
       </div>
+      <!-- <div class="form-group">
+        <div class="label">
+          <label for="sitename">确认新密码：</label>
+        </div>
+        <div class="field">
+          <input type="password" class="input w50" name="renewpass" size="50" placeholder="请再次输入新密码" data-validate="required:请再次输入新密码,repeat#newpass:两次输入的密码不一致" />          
+        </div>
+      </div> -->
+      
       <div class="form-group">
         <div class="label">
           <label></label>
