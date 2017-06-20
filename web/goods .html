@@ -67,9 +67,9 @@
       </div>
       <div class="good-small">
         <ul>
-          <li><div><a href=""><img src="./images/1.jpg" alt="" align="center"></a></div></li>
-          <li><div><a href=""><img src="./images/1.jpg" alt="" align="center"></a></div></li>
-          <li><div><a href=""><img src="./images/1.jpg" alt="" align="center"></a></div></li>
+          <li><div><a href=""><img src="./images/1.jpg" id="small" alt="" align="center"></a></div></li>
+          <li><div><a href=""><img src="./images/1.jpg" id="small" alt="" align="center"></a></div></li>
+          <li><div><a href=""><img src="./images/1.jpg" id="small" alt="" align="center"></a></div></li>
         </ul>
       </div>
     </div>
@@ -99,9 +99,11 @@
         <tr>
           <td class="good-td">购买数量:</td>
           <td>
-            <span class="sub-num">-</span>
+            <a href="javascript:;" class="reduce">&nbsp;-&nbsp;</a>
+            
             <input type="text" name="good-num" value="1" class="good-num">
-            <span class="sub-num">+</span>
+             <a href="javascript:;" class="add">&nbsp;+</a>
+            
           </td>
         </tr>
       </table>
@@ -171,3 +173,4 @@
 </html>
 <script src="./js/jquery-1.10.2.min.js"></script>
 <script src="./js/bootstrap.min.js"></script>
+<script src="./goods.js"></script>
