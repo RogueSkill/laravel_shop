@@ -29,7 +29,41 @@ Route::resource('/bb', 'BbController');
 //Route::get('/Home/prolist', 'HomeController@prolist');//产品列表页
 //Route::get('/Home/prodetail', 'HomeController@prodetail');//产品详细页
 //######################后台#################################
-//Route::get('/Admin', 'AdminController@index');
+Route::get('/admin', 'AdminController@index');
+//登录
+Route::get('/admin/login', 'AdminController@login');
+Route::post('/admin/login', 'AdminController@login');
+//网站设置页
+Route::get('/admin/info', 'AdminController@info');
+//用户模块
+Route::get('/admin/user_list', 'AdminController@user_list');
+Route::get('/admin/user_add', 'AdminController@user_add');
+Route::get('/admin/user_edit', 'AdminController@user_edit');
+Route::get('/admin/user_del', 'AdminController@user_del');
+//商品分类模块
+Route::get('/admin/cate_list', 'AdminController@cate_list');
+Route::get('/admin/cate_add', 'AdminController@cate_add');
+Route::get('/admin/cate_edit', 'AdminController@cate_edit');
+Route::get('/admin/cate_del', 'AdminController@cate_del');
+//商品模块
+Route::get('/admin/goods_list', 'AdminController@goods_list');
+Route::get('/admin/goods_add', 'AdminController@goods_add');
+Route::get('/admin/goods_edit', 'AdminController@goods_edit');
+Route::get('/admin/goods_del', 'AdminController@goods_del');
+//订单模块
+Route::get('/admin/order_list', 'AdminController@order_list');
+Route::get('/admin/order_add', 'AdminController@order_add');
+Route::get('/admin/order_edit', 'AdminController@order_edit');
+Route::get('/admin/order_del', 'AdminController@order_del');
+
+Route::get('/admin/admin_list', 'AdminController@admin_list');
+Route::get('/admin/admin_edit', 'AdminController@admin_edit');
+
+
+// Route::get('/admin', 'AdminController@index');
+// Route::get('/admin', 'AdminController@index');
+// Route::get('/admin', 'AdminController@index');
+// Route::get('/admin', 'AdminController@index');
 //Route::get('/Admin/login', 'AdminController@login');//后台登录
 //Route::post('/Admin/login', 'AdminController@login');//后台登录处理
 
