@@ -1,5 +1,8 @@
 <?php
 
+//引入前台路由
+include_once("WebRoute.php");
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -19,15 +22,21 @@
 // });
 
 //######################前台#################################
-Route::get('/', 'HomeController@index');//首页
-//Route::get('/Home/res','HomeController@res');//注册页
-//Route::post('/Home/res', 'HomeController@res');//注册处理页
-Route::get('/login','HomeController@login');//登录页
-Route::resource('/bb', 'BbController');
-//Route::post('/Home/login','HomeController@login');//登录处理页
-//Route::get('/Home/cat', 'HomeController@cat');//分类页
-//Route::get('/Home/prolist', 'HomeController@prolist');//产品列表页
-//Route::get('/Home/prodetail', 'HomeController@prodetail');//产品详细页
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //######################后台#################################
 Route::get('/admin', 'AdminController@index');
 //登录
