@@ -5,7 +5,6 @@
   <title>商品详情页</title>
   <link rel="stylesheet" href="./css/bootstrap.min.css">
   <link rel="stylesheet" href="./css/custom.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
   
@@ -63,18 +62,21 @@
   <div class="container">
     <div class="good-left">
       <div class="good-border">
-        <img src="./images/4.jpg" alt="商品图" class="img-responsive">
+        <img src="./images/4.jpg" alt="商品图" id="small" width="500" height="500">
+      </div>
+      <div class="good-big" id="big">
+        <img src="./images/4.jpg" alt="商品图" width="1000" height="1000">
       </div>
       <div class="good-small">
         <ul>
-          <li><div><a href=""><img src="./images/1.jpg" id="small" alt="" align="center"></a></div></li>
-          <li><div><a href=""><img src="./images/1.jpg" id="small" alt="" align="center"></a></div></li>
-          <li><div><a href=""><img src="./images/1.jpg" id="small" alt="" align="center"></a></div></li>
+          <li><div><a href=""><img src="./images/1.jpg" alt="" align="center" id="small-01"></a></div></li>
+          <li><div><a href=""><img src="./images/2.jpg" alt="" align="center" id="small-02"></a></div></li>
+          <li><div><a href=""><img src="./images/01.jpg" alt="" align="center" id="small-03"></a></div></li>
         </ul>
       </div>
     </div>
-    <div class="good-right table-responsive">
-      <table class="table table-hover">
+    <div class="good-right">
+      <table class="table table-hover table-responsive">
         <caption>商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题</caption>
         <tr>
           <td class="good-td">商品货号:</td>
@@ -99,11 +101,9 @@
         <tr>
           <td class="good-td">购买数量:</td>
           <td>
-            <a href="javascript:;" class="reduce">&nbsp;-&nbsp;</a>
-            
+            <span class="sub-num" id="minus">-</span>
             <input type="text" name="good-num" value="1" class="good-num">
-             <a href="javascript:;" class="add">&nbsp;+</a>
-            
+            <span class="sub-num" id="add">+</span>
           </td>
         </tr>
       </table>
@@ -173,4 +173,4 @@
 </html>
 <script src="./js/jquery-1.10.2.min.js"></script>
 <script src="./js/bootstrap.min.js"></script>
-<script src="./js/goods.js"></script>
+<script src="./js/good.js"></script>

@@ -63,7 +63,7 @@
   <div class="container">
     <div class="table-responsive">
       <table class="table table-hover table-bordered order-table">
-        <th><input type="checkbox" name="check[]">全选</th>
+        <th><input type="checkbox" name="checkall">全选</th>
         <th>缩略图</th>
         <th>商品名称</th>
         <th>商品属性</th>
@@ -76,21 +76,36 @@
           <td class="order-img"><img src="./images/1.jpg" alt="商品缩略图" class="img-rounded"></td>
           <td>saber模型</td>
           <td>蓝白色</td>
-          <td>120.00</td>
+          <td class="price">120.12</td>
           <td>
-            <span class="cart-sub">-</span>
+            <span class="cart-sub min" >-</span>
             <input type="text" name="good-num" value="1" class="cart-num">
-            <span class="cart-sub">+</span>
+            <span class="cart-sub add" >+</span>
           </td>
-          <td class="order-price">120.00</td>
+          <td class="order-price">120.12</td>
+          <td><button type="button" class="btn btn-danger">删除</button></td>
+        </tr>
+         <tr>
+          <td><input type="checkbox" name="check[]"></td>
+          <td class="order-img"><img src="./images/1.jpg" alt="商品缩略图" class="img-rounded"></td>
+          <td>saber模型</td>
+          <td>蓝白色</td>
+          <td class="price">120.12</td>
+          <td>
+            <span class="cart-sub min" >-</span>
+            <input type="text" name="good-num" value="1" class="cart-num">
+            <span class="cart-sub add" >+</span>
+          </td>
+          <td class="order-price">120.12</td>
           <td><button type="button" class="btn btn-danger">删除</button></td>
         </tr>
       </table>
   </div>
+
   <div class="order-pay">
     <div class="order-payleft">
       总计:
-      <span>120.00元</span>
+      <span>0.00元</span>
       <strong>共1件</strong>
     </div>
     <div class="order-payright">
@@ -129,3 +144,4 @@
 </html>
 <script src="./js/jquery-1.10.2.min.js"></script>
 <script src="./js/bootstrap.min.js"></script>
+<script src="./js/cart.js"></script>
