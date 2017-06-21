@@ -1,175 +1,201 @@
-<!DOCTYPE html>
-<html lang="zh-cn">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="renderer" content="webkit">
-    <title>网站信息</title>  
-    <link rel="stylesheet" href="{{asset('../admin/css/pintuer.css')}}">
-    <link rel="stylesheet" href="{{asset('../admin/css/admin.css')}}">
-    <script src="{{asset('../admin/js/jquery.js')}}"></script>
-    <script src="{{asset('../admin/js/pintuer.js')}}"></script>  
-</head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link href="{{asset('./admin/css/bootstrap.min.css')}}" rel="stylesheet" />
+        <link rel="stylesheet" href="{{asset('../admin/css/style.css')}}"/>
+        	<link rel="stylesheet" href="{{asset('../admin/css/ace.min.css')}}" />
+        <link rel="stylesheet" href="{{asset('../admin/css/font-awesome.min.css')}}" />
+        <link href="{{asset('../admin/css/codemirror.css')}}" rel="stylesheet">
+		<!--[if IE 7]>
+		  <!--<link rel="stylesheet" href="{{asset('../admin/css/font-awesome-ie7.min.css')}}" />-->
+		<![endif]-->
+        <!--[if lte IE 8]>
+		  <!--<link rel="stylesheet" href="{{asset('../admin/css/ace-ie.min.css')}}" />-->
+		<![endif]-->
+		<script src="{{asset('../admin/js/ace-extra.min.js')}}"></script>
+		<!--[if lt IE 9]>
+		<!--<script src="{{asset('../admin/js/html5shiv.js')}}"></script>-->
+		<!--<script src="{{asset('../admin/js/respond.min.js')}}"></script>-->
+		<![endif]-->
+        		<!--[if !IE]> -->
+		{{--<script src="{{asset('../admin/js/jquery.min.js')}}"></script>--}}
+		<!-- <![endif]-->
+           	<script src="{{asset('../admin/dist/echarts.js')}}"></script>
+        <script src="{{asset('../admin/js/bootstrap.min.js')}}"></script>
+       <title></title>
+       </head>		
 <body>
-<div class="panel admin-panel">
-  <div class="panel-head"><strong><span class="icon-pencil-square-o"></span> 网站信息</strong></div>
-  <div class="body-content">
-    <form method="post" class="form-x" action="">
-      <div class="form-group">
-        <div class="label">
-          <label>网站标题：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input" name="stitle" value="" />
-          <div class="tips"></div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>网站LOGO：</label>
-        </div>
-        <div class="field">
-          <input type="text" id="url1" name="slogo" class="input tips" style="width:25%; float:left;" value="" data-toggle="hover" data-place="right" data-image=""  />
-          <input type="button" class="button bg-blue margin-left" id="image1" value="+ 浏览上传" >
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>网站域名：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input" name="surl" value="" />
-        </div>
-      </div>
-      <div class="form-group" style="display:none">
-        <div class="label">
-          <label>副加标题：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input" name="sentitle" value="" />
-          <div class="tips"></div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>网站关键字：</label>
-        </div>
-        <div class="field">
-          <textarea class="input" name="skeywords" style="height:80px"></textarea>
-          <div class="tips"></div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>网站描述：</label>
-        </div>
-        <div class="field">
-          <textarea class="input" name="sdescription"></textarea>
-          <div class="tips"></div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>联系人：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input" name="s_name" value="" />
-          <div class="tips"></div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>手机：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input" name="s_phone" value="" />
-          <div class="tips"></div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>电话：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input" name="s_tel" value="" />
-          <div class="tips"></div>
-        </div>
-      </div>
-      <div class="form-group" style="display:none;">
-        <div class="label">
-          <label>400电话：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input" name="s_400" value="" />
-          <div class="tips"></div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>传真：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input" name="s_fax" value="" />
-          <div class="tips"></div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>QQ：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input" name="s_qq" value="" />
-          <div class="tips"></div>
-        </div>
-      </div>
-      <div class="form-group" style="display:none">
-        <div class="label">
-          <label>QQ群：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input" name="s_qqu" value="" />
-          <div class="tips"></div>
-        </div>
-      </div>
-     
-      <div class="form-group">
-        <div class="label">
-          <label>Email：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input" name="s_email" value="" />
-          <div class="tips"></div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>地址：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input" name="s_address" value="" />
-          <div class="tips"></div>
-        </div>
-      </div>  
-              
-      <div class="form-group">
-        <div class="label">
-          <label>底部信息：</label>
-        </div>
-        <div class="field">
-          <textarea name="scopyright" class="input" style="height:120px;"></textarea>
-          <div class="tips"></div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label></label>
-        </div>
-        <div class="field">
-          <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
-        </div>
-      </div>
-    </form>
+<div class="page-content clearfix">
+ <div class="alert alert-block alert-success">
+  <button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
+  <i class="icon-ok green"></i>欢迎使用<strong class="green">后台管理系统<small>(v1.2)</small></strong>,你本次登陆时间为2016年7月12日13时34分，登陆IP:192.168.1.110.	
+ </div>
+ <div class="state-overview clearfix">
+                  <div class="col-lg-3 col-sm-6">
+                      <section class="panel">
+                      <a href="#" title="商城会员">
+                          <div class="symbol terques">
+                             <i class="icon-user"></i>
+                          </div>
+                          <div class="value">
+                              <h1>34522</h1>
+                              <p>商城用户</p>
+                          </div>
+                          </a>
+                      </section>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                      <section class="panel">
+                          <div class="symbol red">
+                              <i class="icon-tags"></i>
+                          </div>
+                          <div class="value">
+                              <h1>140</h1>
+                              <p>分销记录</p>
+                          </div>
+                      </section>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                      <section class="panel">
+                          <div class="symbol yellow">
+                              <i class="icon-shopping-cart"></i>
+                          </div>
+                          <div class="value">
+                              <h1>345</h1>
+                              <p>商城订单</p>
+                          </div>
+                      </section>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                      <section class="panel">
+                          <div class="symbol blue">
+                              <i class="icon-bar-chart"></i>
+                          </div>
+                          <div class="value">
+                              <h1>￥34,500</h1>
+                              <p>交易记录</p>
+                          </div>
+                      </section>
+                  </div>
+              </div>
+             <!--实时交易记录-->
+             <div class="clearfix">
+              <div class="Order_Statistics ">
+          <div class="title_name">订单统计信息</div>
+           <table class="table table-bordered">
+           <tbody>
+           <tr><td class="name">未处理订单：</td><td class="munber"><a href="#">0</a>&nbsp;个</td></tr>
+           <tr><td class="name">待发货订单：</td><td class="munber"><a href="#">10</a>&nbsp;个</td></tr>
+           <tr><td class="name">待结算订单：</td><td class="munber"><a href="#">13</a>&nbsp;个</td></tr>
+           <tr><td class="name">已成交订单数：</td><td class="munber"><a href="#">26</a>&nbsp;个</td></tr>
+           <tr><td class="name">交易失败：</td><td class="munber"><a href="#">26</a>&nbsp;个</td></tr>
+           </tbody>
+          </table>
+         </div> 
+         <div class="Order_Statistics">
+          <div class="title_name">商品统计信息</div>
+           <table class="table table-bordered">
+           <tbody>
+           <tr><td class="name">商品总数：</td><td class="munber"><a href="#">340</a>&nbsp;个</td></tr>
+           <tr><td class="name">回收站商品：</td><td class="munber"><a href="#">10</a>&nbsp;个</td></tr>
+           <tr><td class="name">上架商品：</td><td class="munber"><a href="#">13</a>&nbsp;个</td></tr>
+           <tr><td class="name">下架商品：</td><td class="munber"><a href="#">26</a>&nbsp;个</td></tr>
+           <tr><td class="name">商品评论：</td><td class="munber"><a href="#">21s6</a>&nbsp;条</td></tr>
+
+           </tbody>
+          </table>
+         </div> 
+         <div class="Order_Statistics">
+          <div class="title_name">会员登陆统计信息</div>
+           <table class="table table-bordered">
+           <tbody>
+           <tr><td class="name">注册会员登陆：</td><td class="munber"><a href="#">3240</a>&nbsp;次</td></tr>
+           <tr><td class="name">新浪会员登陆：</td><td class="munber"><a href="#">1130</a>&nbsp;次</td></tr>
+           <tr><td class="name">支付宝登陆：</td><td class="munber"><a href="#">1130</a>&nbsp;次</td></tr>
+           <tr><td class="name">QQ会员登陆：</td><td class="munber"><a href="#">1130</a>&nbsp;次</td></tr>
+           </tbody>
+          </table>
+         </div> 
+             <!--<div class="t_Record">
+               <div id="main" style="height:300px; overflow:hidden; width:100%; overflow:auto" ></div>     
+              </div> -->
+         <div class="news_style">
+          <div class="title_name">最新消息</div>
+          <ul class="list">
+           <li><i class="icon-bell red"></i><a href="#">后台系统找那个是开通了。</a></li>
+           <li><i class="icon-bell red"></i><a href="#">6月共处理订单3451比，作废为...</a></li>
+           <li><i class="icon-bell red"></i><a href="#">后台系统找那个是开通了。</a></li>
+           <li><i class="icon-bell red"></i><a href="#">后台系统找那个是开通了。</a></li>
+           <li><i class="icon-bell red"></i><a href="#">后台系统找那个是开通了。</a></li>
+          </ul>
+         </div> 
+         </div>
+ <!--记录-->
+ <div class="clearfix">
+  <div class="home_btn">
+     <div>
+     <a href="picture-add.html"  title="添加商品" class="btn  btn-info btn-sm no-radius">
+     <i class="bigger-200"><img src="{{asset('../admin/images/icon-addp.png')}}" /></i>
+     <h5 class="margin-top">添加商品</h5>
+     </a>
+     <a href="Category_Manage.html"  title="产品分类" class="btn  btn-primary btn-sm no-radius">
+     <i class="bigger-200"><img src="{{asset('../admin/images/icon-cpgl.png')}}" /></i>
+     <h5 class="margin-top">产品分类</h5>
+     </a>
+     <a href="admin_info.html"  title="个人信息" class="btn  btn-success btn-sm no-radius">
+     <i class="bigger-200"><img src="{{asset('../admin/images/icon-grxx.png')}}" /></i>
+     <h5 class="margin-top">个人信息</h5>
+     </a>
+     <a href="Systems.html"  title="系统设置" class="btn  btn-info btn-sm no-radius">
+     <i class="bigger-200"><img src="{{asset('../admin/images/xtsz.png')}}" /></i>
+     <h5 class="margin-top">系统设置</h5>
+     </a>
+     <a href="Order_handling.html"  title="商品订单" class="btn  btn-purple btn-sm no-radius">
+     <i class="bigger-200"><img src="{{asset('../admin/images/icon-gwcc.png')}}" /></i>
+     <h5 class="margin-top">商品订单</h5>
+     </a>
+     <a href="picture-add.html"  title="添加广告" class="btn  btn-pink btn-sm no-radius">
+     <i class="bigger-200"><img src="{{asset('../admin/images/icon-ad.png')}}" /></i>
+     <h5 class="margin-top">添加广告</h5>
+     </a>
+      <a href="article_add.html"  title="添加文章" class="btn  btn-info btn-sm no-radius">
+     <i class="bigger-200"><img src="{{asset('../admin/images/icon-addwz.png')}}" /></i>
+     <h5 class="margin-top">添加文章</h5>
+     </a>
+     </div>
   </div>
-</div>
-</body></html>
+ 
+ </div>
+   
+     </div>
+</body>
+</html>
+<script type="text/javascript">
+//面包屑返回值
+var index = parent.layer.getFrameIndex(window.name);
+parent.layer.iframeAuto(index);
+$('.no-radius').on('click', function(){
+	var cname = $(this).attr("title");
+	var chref = $(this).attr("href");
+	var cnames = parent.$('.Current_page').html();
+	var herf = parent.$("#iframe").attr("src");
+    parent.$('#parentIframe').html(cname);
+    parent.$('#iframe').attr("src",chref).ready();;
+	parent.$('#parentIframe').css("display","inline-block");
+	parent.$('.Current_page').attr({"name":herf,"href":"javascript:void(0)"}).css({"color":"#4c8fbd","cursor":"pointer"});
+	//parent.$('.Current_page').html("<a href='javascript:void(0)' name="+herf+" class='iframeurl'>" + cnames + "</a>");
+    parent.layer.close(index);
+	
+});
+     $(document).ready(function(){
+		 
+		  $(".t_Record").width($(window).width()-640);
+		  //当文档窗口发生改变时 触发  
+    $(window).resize(function(){
+		 $(".t_Record").width($(window).width()-640);
+		});
+ });
+	 
+	 
+ </script>   

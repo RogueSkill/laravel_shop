@@ -38,8 +38,10 @@ Route::get('/admin/info', 'AdminController@info');
 //用户模块
 Route::get('/admin/user_list', 'AdminController@user_list');
 Route::get('/admin/user_add', 'AdminController@user_add');
-Route::get('/admin/user_edit', 'AdminController@user_edit');
-Route::get('/admin/user_del', 'AdminController@user_del');
+Route::get('/admin/user_edit/{id}', 'AdminController@user_edit');
+Route::post('/admin/update/{id}', 'AdminController@update');
+Route::post('/admin/insert', 'AdminController@insert');
+Route::get('/admin/user_del/{id}', 'AdminController@user_del');
 //商品分类模块
 Route::get('/admin/cate_list', 'AdminController@cate_list');
 Route::get('/admin/cate_add', 'AdminController@cate_add');
