@@ -47,7 +47,7 @@ class AdminController extends BaseController
     	return view('admin/user/add');
     }
 
-<<<<<<< HEAD
+
     //用户添加执行操作
     public function insert(Request $request){
         //表单验证
@@ -79,8 +79,8 @@ class AdminController extends BaseController
 
     }
 
-=======
->>>>>>> afee7ac6391f2c55214177ad53b9e21b67b00187
+
+
     //用户编辑
     public function user_edit($id)
     {
