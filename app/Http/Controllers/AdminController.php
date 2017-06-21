@@ -9,12 +9,13 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesResources;
+// use Illuminate\Pagination\LengthAwarePaginator;
 use DB;
 class AdminController extends BaseController
 {
     public function index()
     {
-
+        $data = DB::table('users')->get();
     	return view('admin/index');
     }
 
@@ -46,6 +47,7 @@ class AdminController extends BaseController
     	return view('admin/user/add');
     }
 
+<<<<<<< HEAD
     //用户添加执行操作
     public function insert(Request $request){
         //表单验证
@@ -77,6 +79,8 @@ class AdminController extends BaseController
 
     }
 
+=======
+>>>>>>> afee7ac6391f2c55214177ad53b9e21b67b00187
     //用户编辑
     public function user_edit($id)
     {
@@ -225,25 +229,68 @@ class AdminController extends BaseController
     //管理员模块
     public function admin_list()
     {
-        return view('admin/admin/index');
+        $user_admin = DB::table('users')->where('level','<=','3')->paginate(10);
+
+        $users_page = DB::table('users')->paginate(10);
+        // dump($user_admin);
+        return view('admin/admin/index',compact('user_admin','users_page'));
     }
 
     //管理员添加
     public function admin_add()
     {
+
+        return view('admin/admin/add');
+    }
+
+    public function doAdminAdd()
+    {
+        $add_user['username'] = $_POST['username'];
+        $add_user['pass'] = $_POST['pass'];
+        $add_user['level'] = $_POST['level'];
+        $bloon = DB::table('users')->insert($add_user);
+        if($bloon){
+            echo "<script>alert('添加成功')</script>"; 
+            return view('admin/admin/add');
+  
+        }
         return view('admin/admin/add');
     }
 
      //管理员编辑
-    public function admin_edit()
+    public function admin_edit($id)
     {
-        return view('admin/admin/edit');
+        $user_data = DB::table('users')->where('id',$id)->get();
+        $user_data = $user_data[0];
+        // dd($user_data);
+        return view('admin/admin/edit',compact('user_data'));
     }
 
-    //管理员删除
-    public function admin_del()
+    public function doAdminEdit()
     {
-        return view('admin/admin/del');
+        $id = $_POST['id'];
+        $edit_user['username'] = $_POST['username'];
+        $edit_user['pass'] = $_POST['pass'];
+        $edit_user['level'] = $_POST['level'];
+        $booln = DB::table('users')->where('id',$id)->update(['username'=>$_POST['username'],'pass'=>$_POST['pass'],'level'=>$_POST['level']]);
+        if($booln){
+            echo "<script>alert('修改成功')</script>"; 
+            return redirect('/admin/admin_list/');
+        }
+
+
+    }
+    //管理员删除
+    public function admin_del($id)
+    {
+
+        $userid = DB::table('users')->where('id',$id)->delete();
+        if($userid){
+             echo "<script>alert('删除成功')</script>"; 
+
+            return redirect('/admin/admin_list/');
+        }
+        
     }
 
 
