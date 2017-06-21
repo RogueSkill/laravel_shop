@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<link href="{{asset('./admin/css/bootstrap.min.css')}}" rel="stylesheet" />
+		<link href="{{asset('../admin/css/bootstrap.min.css')}}" rel="stylesheet" />
         <link rel="stylesheet" href="{{asset('../admin/css/style.css')}}"/>
         	<link rel="stylesheet" href="{{asset('../admin/css/ace.min.css')}}" />
         <link rel="stylesheet" href="{{asset('../admin/css/font-awesome.min.css')}}" />
