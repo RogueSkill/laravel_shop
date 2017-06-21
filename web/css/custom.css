@@ -282,6 +282,10 @@
   margin-left: 10px;
 }
 
+.address-panel2{
+  width:568px;
+  margin:0 auto;
+}
 /*--------------------------------------------------支付页面-------------------------------------------------------------*/
 .pay-list{
   width:100%;
@@ -423,6 +427,9 @@
     margin-top: 10px;
     background:url("../images/snav - green.png");
   }
+<<<<<<< HEAD
+  
+=======
 
 
 
@@ -436,3 +443,4 @@
       left:430px;
       top:10px;
     }
+>>>>>>> 348fd13eb3608c0de11b3e6fff3bfd0835858ffc
