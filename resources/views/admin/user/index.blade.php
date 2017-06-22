@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="renderer" content="webkit">
     <title></title>  
-    <link rel="stylesheet" href="{{asset('../admin/css/pintuer.css')}}">
-    <link rel="stylesheet" href="{{asset('../admin/css/admin.css')}}">
-    <script src="{{asset('../admin/js/jquery.js')}}"></script>
-    <script src="{{asset('../admin/js/pintuer.js')}}"></script>  
+    <link rel="stylesheet" href="{{asset('style/css/pintuer.css')}}">
+    <link rel="stylesheet" href="{{asset('style/css/admin.css')}}">
+    <script src="{{asset('style/js/jquery.js')}}"></script>
+    <script src="{{asset('style/js/pintuer.js')}}"></script>  
 </head>
 <body>
 <form method="post" action="">
