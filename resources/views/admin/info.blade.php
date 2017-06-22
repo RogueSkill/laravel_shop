@@ -1,6 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<<<<<<< HEAD
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -12,6 +13,15 @@
         <link rel="stylesheet" href="{{asset('style/css/font-awesome.min.css')}}" />
         <link href="{{asset('style/css/codemirror.css')}}" rel="stylesheet">
 </head>
+=======
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link href="{{asset('../admin/css/bootstrap.min.css')}}" rel="stylesheet" />
+        <link rel="stylesheet" href="{{asset('../admin/css/style.css')}}"/>
+        	<link rel="stylesheet" href="{{asset('../admin/css/ace.min.css')}}" />
+        <link rel="stylesheet" href="{{asset('../admin/css/font-awesome.min.css')}}" />
+        <link href="{{asset('../admin/css/codemirror.css')}}" rel="stylesheet">
+        <script src="{{asset('../admin/js/jquery.js')}}"></script>
+>>>>>>> 8f03f4eebecbce1710e8b4c054faf44778ee4eae
 		<!--[if IE 7]>
 		  <!--<link rel="stylesheet" href="{{asset('style/css/font-awesome-ie7.min.css')}}" />-->
 		<![endif]-->
@@ -30,7 +40,10 @@
         <script src="{{asset('style/js/bootstrap.min.js')}}"></script>
        <title></title>
        </head>		
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8f03f4eebecbce1710e8b4c054faf44778ee4eae
 <body>
 <div class="page-content clearfix">
  <div class="alert alert-block alert-success">
@@ -204,4 +217,4 @@ $('.no-radius').on('click', function(){
  });
 	 
 	 
- </script>   
+ </script>

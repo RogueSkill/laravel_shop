@@ -2,7 +2,14 @@
 
 //引入前台路由
 include_once("WebRoute.php");
+<<<<<<< HEAD
 include_once("AdminRoute.php");
+=======
+include_once("AdminRoute.php");//用户模块
+
+
+
+>>>>>>> 8f03f4eebecbce1710e8b4c054faf44778ee4eae
 
 /*
 |--------------------------------------------------------------------------
