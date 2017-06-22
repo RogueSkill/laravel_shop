@@ -81,11 +81,6 @@ class AdminController extends BaseController
 
     }
 
-
-<<<<<<< HEAD
-
-=======
->>>>>>> 296a5cb9cceef7370b3a668d05dd428dad84b234
     //用户编辑
     public function user_edit($id)
     {
@@ -108,10 +103,11 @@ class AdminController extends BaseController
                                                 'level'=>$request->level
                                                ])
            ){
+
                 return redirect('/admin/user_list');
             }else{
                 return back();
-                  }
+            }
     }
 
     //用户删除
@@ -214,16 +210,80 @@ class AdminController extends BaseController
 
     }
 
-     //商品分类编辑
-    public function cate_edit()
+     //商品分类编辑显示
+    public function cate_edit($id,$pid,$name)
     {
-        return view('admin/cate/edit');
+
+        //分类列表
+        $types = DB::table('types')->get();
+        
+        return view('admin/cate/edit',compact('types','id','pid','name'));
+    }
+    //商品分类处理
+    public function doCateEdit(Request $request)
+    {
+        // var_dump($request->all());
+        if(!$request->has('id') || !$request->has('title') ){
+            return back()->withInput();
+        }
+        $id = $request->input('id');
+        $title = $request->input('title');
+
+        $boo = DB::table('types')->where('id', $id)->update(['name'=>$title]);
+        if($boo){
+            echo "<script>alert('修改成功')</script>"; 
+             // return false;
+        }
+        return redirect('/admin/cate_list');
+        // return view('/admin/cate_list');
+    }
+
+    //添加子分类显示
+    public function cate_child($id,$pid)
+    {
+
+        //分类列表
+        $types = DB::table('types')->get();
+        return view('/admin/cate/child' ,compact('types','id','pid'));
+    }
+
+    //添加子分类处理
+    public function doCateChild(Request $request)
+    {
+
+
+        if(!$request->has('title')){
+            return back();
+        }
+
+        $id = $request->input('pid');
+        $name = $request->input('title');    
+        $data = DB::table('types')->where('id', $id)->get();
+        $data = $data[0];
+        // id,pid,path
+        $path = $data['path'].$id;
+        $boo = DB::table('types')->insert(['pid'=>$id,'path'=>$path,'name'=>$name,'created_at'=>date('Y-m-d H:i:s')]);
+
+        if($boo){
+            echo "<script>alert('子类添加成功')</script>";
+        }
+        // return view('admin/cate/del');
+        return redirect('/admin/cate_list');
+
+
     }
 
     //商品分类删除
-    public function cate_del()
+    public function cate_del(Request $request,$id)
     {
-        return view('admin/cate/del');
+        
+        $boo = DB::table('types')->where('id',$id)->delete();
+        
+        if($boo){
+            echo "<script>alert('删除成功')</script>";
+        }
+        // return view('admin/cate/del');
+        return redirect('/admin/cate_list');
     }
 
     /**
@@ -337,10 +397,11 @@ class AdminController extends BaseController
         $edit_user['level'] = $_POST['level'];
         $booln = DB::table('users')->where('id',$id)->update(['username'=>$_POST['username'],'pass'=>$_POST['pass'],'level'=>$_POST['level']]);
         if($booln){
-            echo "<script>alert('修改成功')</script>"; 
-            return redirect('/admin/admin_list/');
-        }
 
+            echo "<script>alert('修改成功')</script>"; 
+            return redirect('/admin/admin_list');
+
+        }
 
     }
     //管理员删除
