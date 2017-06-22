@@ -2,10 +2,7 @@
 
 //引入前台路由
 include_once("WebRoute.php");
-include_once("AdminRoute.php");//用户模块
-
-
-
+include_once("AdminRoute.php");
 
 /*
 |--------------------------------------------------------------------------
@@ -28,19 +25,6 @@ include_once("AdminRoute.php");//用户模块
 //######################前台#################################
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 //######################后台#################################
 
 Route::group([],function(){
@@ -56,11 +40,14 @@ Route::group([],function(){
 	//商品分类模块
 	Route::get('/admin/cate_list', 'AdminController@cate_list');
 	Route::get('/admin/cate_add', 'AdminController@cate_add');
-
 	Route::post('/admin/cate_add','AdminController@doCateAdd');
 
-	Route::get('/admin/cate_edit', 'AdminController@cate_edit');
-	Route::get('/admin/cate_del', 'AdminController@cate_del');
+	Route::get('/admin/cate_edit/{id}/{pid}/{name}', 'AdminController@cate_edit');
+	Route::post('/admin/cate_edit/','AdminController@doCateEdit');
+	Route::get('/admin/cate_del/{id}', 'AdminController@cate_del');
+
+	Route::get('/admin/cate_child/{id}/{pid}', 'AdminController@cate_child');
+	Route::post('/admin/cate_child', 'AdminController@doCateChild');
 	//商品模块
 	Route::get('/admin/goods_list', 'AdminController@goods_list');
 	Route::get('/admin/goods_add', 'AdminController@goods_add');

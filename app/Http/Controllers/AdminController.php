@@ -27,114 +27,6 @@ class AdminController extends BaseController
         return view('admin/info');
     }
 
-    /**
-    *
-    *********************************************用户模块****************************************
-    */
-
-
-
-//     public function user_list(Request $request)
-//     {
-//         $user = User::paginate(5)->all();
-// //        dd($user);
-//     	return view('admin/user/index',compact('user'));
-//     }
-
-//     //用户添加
-//     public function user_add()
-//     {
-//     	// echo '编辑的'.$id;
-
-//     	return view('admin/user/add');
-//     }
-
-
-//     //用户添加执行操作
-//     public function insert(Request $request){
-//         //表单验证
-// //        $this->validata($request, [
-// //            'username'=>'required|min:3|max:10',
-// //                'pass'=>'required',
-// //                'phone'=>'required',
-// //                'email'=>'required'
-// //        ],[
-// //                'required'=>':attribute是必填字段',
-// //                'min'=>':attribute必须大于3个字符',
-// //                'max'=>':attribute不能大于10个字符',
-// //            ],[
-// //                'username'=>'用户名',
-// //                'pass'=>'密码',
-// //                'phone'=>'电话号码',
-// //                'email'=>'电子邮箱',
-// //            ]
-// //        );
-
-
-//        $data = $request->only(['username','pass','sex','address','code','phone','email','state','level']);
-
-//         if (DB::table('users')->insert($data)) {
-//             return redirect('/admin/user_list')->with(['success' => '添加成功！！！！！！！']);
-//         } else {
-//             return back()->withInput();
-//         }
-
-//     }
-
-
-//     //用户编辑
-//     public function user_edit($id)
-//     {
-//         $data = User::find($id);
-// //        dd($data);
-//         return view('admin/user/edit',compact('data'));
-//     }
-
-//     public  function  update(Request $request, $id)
-//     {
-// //        dd($id);
-//         if(User::where('id','=',$id)->update(['username'=>$request->username,
-//                                                 'pass'=>$request->pass,
-//                                                 'sex'=>$request->sex,
-//                                                 'address'=>$request->address,
-//                                                 'code'=>$request->code,
-//                                                 'phone'=>$request->phone,
-//                                                 'email'=>$request->email,
-//                                                 'state'=>$request->state,
-//                                                 'level'=>$request->level
-//                                                ])
-//            ){
-//                 return redirect('/admin/user_list');
-//             }else{
-//                 return back();
-//                   }
-//     }
-
-//     //用户删除
-//     public function user_del($id)
-//     {
-// //        dd($id);
-//     	if(User::destroy($id))
-//     	return redirect('/admin/user_list');
-//     	// $url = route('del');
-//     }
-
-//     /**
-//     *
-//     *********************************************登录模块****************************************
-//     */
-//     //登录模块
-//     public function login()
-//     {
-//     	echo '登录';
-//     	return view('admin/login');
-//     }
-//     //提交登录
-//     public function dologin()
-//     {
-
-//     	return view('admin/dologin');
-//     }
 
     /**
     *
@@ -210,16 +102,80 @@ class AdminController extends BaseController
 
     }
 
-     //商品分类编辑
-    public function cate_edit()
+     //商品分类编辑显示
+    public function cate_edit($id,$pid,$name)
     {
-        return view('admin/cate/edit');
+
+        //分类列表
+        $types = DB::table('types')->get();
+        
+        return view('admin/cate/edit',compact('types','id','pid','name'));
+    }
+    //商品分类处理
+    public function doCateEdit(Request $request)
+    {
+        // var_dump($request->all());
+        if(!$request->has('id') || !$request->has('title') ){
+            return back()->withInput();
+        }
+        $id = $request->input('id');
+        $title = $request->input('title');
+
+        $boo = DB::table('types')->where('id', $id)->update(['name'=>$title]);
+        if($boo){
+            echo "<script>alert('修改成功')</script>"; 
+             // return false;
+        }
+        return redirect('/admin/cate_list');
+        // return view('/admin/cate_list');
+    }
+
+    //添加子分类显示
+    public function cate_child($id,$pid)
+    {
+
+        //分类列表
+        $types = DB::table('types')->get();
+        return view('/admin/cate/child' ,compact('types','id','pid'));
+    }
+
+    //添加子分类处理
+    public function doCateChild(Request $request)
+    {
+
+
+        if(!$request->has('title')){
+            return back();
+        }
+
+        $id = $request->input('pid');
+        $name = $request->input('title');    
+        $data = DB::table('types')->where('id', $id)->get();
+        $data = $data[0];
+        // id,pid,path
+        $path = $data['path'].','.$id.',';
+        $boo = DB::table('types')->insert(['pid'=>$id,'path'=>$path,'name'=>$name,'created_at'=>date('Y-m-d H:i:s')]);
+
+        if($boo){
+            echo "<script>alert('子类添加成功')</script>";
+        }
+        // return view('admin/cate/del');
+        return redirect('/admin/cate_list');
+
+
     }
 
     //商品分类删除
-    public function cate_del()
+    public function cate_del(Request $request,$id)
     {
-        return view('admin/cate/del');
+        
+        $boo = DB::table('types')->where('id',$id)->delete();
+        
+        if($boo){
+            echo "<script>alert('删除成功')</script>";
+        }
+        // return view('admin/cate/del');
+        return redirect('/admin/cate_list');
     }
 
     /**
@@ -333,10 +289,11 @@ class AdminController extends BaseController
         $edit_user['level'] = $_POST['level'];
         $booln = DB::table('users')->where('id',$id)->update(['username'=>$_POST['username'],'pass'=>$_POST['pass'],'level'=>$_POST['level']]);
         if($booln){
-            echo "<script>alert('修改成功')</script>"; 
-            return redirect('/admin/admin_list/');
-        }
 
+            echo "<script>alert('修改成功')</script>"; 
+            return redirect('/admin/admin_list');
+
+        }
 
     }
     //管理员删除

@@ -15,7 +15,8 @@
 <div class="panel admin-panel">
   <div class="panel-head"><strong class="icon-reorder"> 内容列表</strong></div>
   <div class="padding border-bottom">
-    <button type="button" class="button border-yellow" onclick="window.location.href='#add'"><span class="icon-plus-square-o"></span> 添加分类</button>
+    <!-- <button type="button" class="button border-yellow" onclick="window.location.href={{url('admin/cate_add')}}"><span class="icon-plus-square-o"></span> 添加分类</button> -->
+    <a class="button border-yellow" href="{{url('admin/cate_add')}}"><span class="icon-plus-square-o"></span> 添加分类</a>
   </div>
   <table class="table table-hover text-center">
 
@@ -24,7 +25,7 @@
       <th width="15%">分类名称</th>
       <th width="10%">父类ID</th>
       <th width="10%">路径</th>
-      <th width="10%">操作</th>
+      <th width="15%">操作</th>
     </tr>
     @if($types_data)
     @foreach($types_data as $val)
@@ -33,7 +34,14 @@
       <td>{{$val['name']}}</td>
       <td>{{$val['pid']}}</td>
       <td>{{$val['path']}}</td>
-      <td><div class="button-group"> <a class="button border-main" href="cateedit.html"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,2)"><span class="icon-trash-o"></span> 删除</a> </div></td>
+      <td><div class="button-group"> 
+
+          <a class="button border-main" href="{{url('admin/cate_child')}}/{{$val['id']}}/{{$val['pid']}}" ><span class="icon-add"></span>添加子分类</a> 
+
+          <a class="button border-main" href="{{url('admin/cate_edit')}}/{{$val['id']}}/{{$val['pid']}}/{{$val['name']}}"><span class="icon-edit"></span> 修改</a> 
+          <a class="button border-red" href="{{url('admin/cate_del')}}/{{$val['id']}}" onclick="return del(1,2)"><span class="icon-trash-o"></span> 删除</a>
+          </div>
+      </td>
     </tr>
     @endforeach
     @endif
