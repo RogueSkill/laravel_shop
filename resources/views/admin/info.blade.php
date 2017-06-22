@@ -7,6 +7,7 @@
         	<link rel="stylesheet" href="{{asset('../admin/css/ace.min.css')}}" />
         <link rel="stylesheet" href="{{asset('../admin/css/font-awesome.min.css')}}" />
         <link href="{{asset('../admin/css/codemirror.css')}}" rel="stylesheet">
+        <script src="{{asset('../admin/js/jquery.js')}}"></script>
 		<!--[if IE 7]>
 		  <!--<link rel="stylesheet" href="{{asset('../admin/css/font-awesome-ie7.min.css')}}" />-->
 		<![endif]-->
@@ -198,4 +199,4 @@ $('.no-radius').on('click', function(){
  });
 	 
 	 
- </script>   
+ </script>

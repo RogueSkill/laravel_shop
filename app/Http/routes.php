@@ -2,6 +2,11 @@
 
 //引入前台路由
 include_once("WebRoute.php");
+include_once("AdminRoute.php");//用户模块
+include_once("BackLoginRoute.php");//登录
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -40,17 +45,17 @@ include_once("WebRoute.php");
 //######################后台#################################
 Route::get('/admin', 'AdminController@index');
 //登录
-Route::get('/admin/login', 'AdminController@login');
-Route::post('/admin/login', 'AdminController@login');
+// Route::get('/admin/login', 'AdminController@login');
+// Route::post('/admin/dologin', 'AdminController@dologin');
 //网站设置页
 Route::get('/admin/info', 'AdminController@info');
 //用户模块
-Route::get('/admin/user_list', 'AdminController@user_list');
-Route::get('/admin/user_add', 'AdminController@user_add');
-Route::get('/admin/user_edit/{id}', 'AdminController@user_edit');
-Route::post('/admin/update/{id}', 'AdminController@update');
-Route::post('/admin/insert', 'AdminController@insert');
-Route::get('/admin/user_del/{id}', 'AdminController@user_del');
+// Route::get('/admin/user_list', 'AdminController@user_list');
+// Route::get('/admin/user_add', 'AdminController@user_add');
+// Route::get('/admin/user_edit/{id}', 'AdminController@user_edit');
+// Route::post('/admin/update/{id}', 'AdminController@update');
+// Route::post('/admin/insert', 'AdminController@insert');
+// Route::get('/admin/user_del/{id}', 'AdminController@user_del');
 //商品分类模块
 Route::get('/admin/cate_list', 'AdminController@cate_list');
 Route::get('/admin/cate_add', 'AdminController@cate_add');
