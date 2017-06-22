@@ -12,7 +12,10 @@ use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 use DB;
 class BackUserController extends BaseController
 {
-
+    /**
+    *
+    *********************************************用户模块****************************************
+    */
     public function user_list(Request $request)
     {
         $user = User::paginate(5)->all();
@@ -96,5 +99,48 @@ class BackUserController extends BaseController
     	if(User::destroy($id))
     	return redirect('/admin/user_list');
     	// $url = route('del');
+    }
+
+
+//     /**
+//     *
+//     *********************************************登录模块****************************************
+//     */
+    //登录模块
+    public function login()
+    {
+     $value = session()->all();
+
+     if($value == null){
+
+     return view('admin/login');
+
+        }else{
+
+      return redirect('admin');      
+      
+        }
+    }
+    //提交登录
+    public function dologin(Request $request)
+    {
+   
+    // 查输入的名字和密码的第一条数据
+    $check = DB::table('users')->where('username','=',$request->input('username'))->where('pass','=',$request->input('pass'))->first();
+    // dd($check);
+   
+        // dd($value);
+        if($check == null ){
+            // echo 111;
+           return back();
+
+        }else{
+         
+         // 存入session   
+        session($check);
+
+         return redirect('admin');
+
+        }
     }
 }
