@@ -3,16 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesResources;
+// use Illuminate\Http\Request\CreatePostRequest;
 // use Illuminate\Pagination\LengthAwarePaginator;
 use DB;
 class AdminController extends BaseController
 {
     public function index()
     {
+
         $data = DB::table('users')->get();
     	return view('admin/index');
     }
@@ -79,13 +82,71 @@ class AdminController extends BaseController
     //商品分类
     public function cate_list()
     {
-        return view('admin/cate/index');
+        $types_page = DB::table('types')->paginate(10);
+
+        $types_data = DB::table('types')->paginate(10);
+
+        return view('admin/cate/index', compact('types_data','types_page'));
+    }
+
+    //商品分类添加显示
+    public function cate_add()
+    {
+        $types = DB::table('types')->get();
+        return view('admin/cate/add',compact('types'));
     }
 
     //商品分类添加
-    public function cate_add()
+    public function doCateAdd(Request\CreatePostRequest $request)
     {
-        return view('admin/cate/add');
+
+        $this->validate($request, [
+            'title' => 'required|min:3|max:30',
+            // 'content' => 'required',
+            // 'published_at' => 'required'
+        ],[
+            'required' => ':attribute 是必填字段',
+            'min' => ':attribute 必须不少于3个字符',
+            'max' => ':attribute 必须少于30个字符',
+        ],[
+            'title' => '文章标题',
+            // 'content' => '文章内容',
+            // 'published_at' => '发布时间',
+        ]);
+        
+      //判断是不是传递过来的值
+      if(!$request->has('id') || !$request->has('title')){
+        return back();
+      }
+
+      $id = 0;
+      $path = '0,';
+
+      if($request->input('id') !=0){
+            $id = $request->input('id');
+            $path = DB::table('types')->where('id',$id)->pluck('path');
+            $path = $path[0].$id.',';
+      }
+
+      $name = $request->input('title');
+      $created_at = date("Y-m-d H:i:s");
+            
+
+      $type_add = DB::table('types')->insert(['name'=>$name,'pid'=>$id,'path'=>$path,'created_at'=>$created_at]);
+      // if($type_add){
+      //    echo "<script>alert('添加成功')</script>";
+      //    return view('/admin/cate_list');
+      //    return redirect('/admin/cate_list');
+      // }
+       //1. 使用 请求 Request $request->all()
+        // $post = $request->all();
+//        dd($post);
+        if ($type_add) {
+            return redirect('/admin/cate_list')->with(['success' => '添加成功！！！！！！！']);
+        } else {
+            return back()->withInput();
+        }
+
     }
 
      //商品分类编辑

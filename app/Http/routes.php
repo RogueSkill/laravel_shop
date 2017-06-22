@@ -2,6 +2,7 @@
 
 //引入前台路由
 include_once("WebRoute.php");
+include_once('AdminRoute.php');
 
 /*
 |--------------------------------------------------------------------------
@@ -38,40 +39,44 @@ include_once("WebRoute.php");
 
 
 //######################后台#################################
-Route::get('/admin', 'AdminController@index');
-//登录
-Route::get('/admin/login', 'AdminController@login');
-Route::post('/admin/login', 'AdminController@login');
-//网站设置页
-Route::get('/admin/info', 'AdminController@info');
-//用户模块
-Route::get('/admin/user_list', 'AdminController@user_list');
-Route::get('/admin/user_add', 'AdminController@user_add');
-Route::get('/admin/user_edit', 'AdminController@user_edit');
-Route::get('/admin/user_del', 'AdminController@user_del');
-//商品分类模块
-Route::get('/admin/cate_list', 'AdminController@cate_list');
-Route::get('/admin/cate_add', 'AdminController@cate_add');
-Route::get('/admin/cate_edit', 'AdminController@cate_edit');
-Route::get('/admin/cate_del', 'AdminController@cate_del');
-//商品模块
-Route::get('/admin/goods_list', 'AdminController@goods_list');
-Route::get('/admin/goods_add', 'AdminController@goods_add');
-Route::get('/admin/goods_edit', 'AdminController@goods_edit');
-Route::get('/admin/goods_del', 'AdminController@goods_del');
-//订单模块
-Route::get('/admin/order_list', 'AdminController@order_list');
-Route::get('/admin/order_add', 'AdminController@order_add');
-Route::get('/admin/order_edit', 'AdminController@order_edit');
-Route::get('/admin/order_del', 'AdminController@order_del');
-//
-Route::get('/admin/admin_add/', 'AdminController@admin_add');
-Route::post('/admin/admin_add/', 'AdminController@doAdminAdd');
-Route::get('/admin/admin_list', 'AdminController@admin_list');
-Route::get('/admin/admin_edit/{id}', 'AdminController@admin_edit');
-Route::post('/admin/admin_edit/', 'AdminController@doAdminEdit');
-Route::get('/admin/admin_del/{id}', 'AdminController@admin_del');
 
+Route::group([],function(){
+
+	Route::get('/admin', 'AdminController@index');
+	//登录
+	Route::get('/admin/login', 'AdminController@login');
+	Route::post('/admin/login', 'AdminController@login');
+	//网站设置页
+	Route::get('/admin/info', 'AdminController@info');
+	//用户模块
+
+	//商品分类模块
+	Route::get('/admin/cate_list', 'AdminController@cate_list');
+	Route::get('/admin/cate_add', 'AdminController@cate_add');
+
+	Route::post('/admin/cate_add','AdminController@doCateAdd');
+
+	Route::get('/admin/cate_edit', 'AdminController@cate_edit');
+	Route::get('/admin/cate_del', 'AdminController@cate_del');
+	//商品模块
+	Route::get('/admin/goods_list', 'AdminController@goods_list');
+	Route::get('/admin/goods_add', 'AdminController@goods_add');
+	Route::get('/admin/goods_edit', 'AdminController@goods_edit');
+	Route::get('/admin/goods_del', 'AdminController@goods_del');
+	//订单模块
+	Route::get('/admin/order_list', 'AdminController@order_list');
+	Route::get('/admin/order_add', 'AdminController@order_add');
+	Route::get('/admin/order_edit', 'AdminController@order_edit');
+	Route::get('/admin/order_del', 'AdminController@order_del');
+	//管理员
+	Route::get('/admin/admin_add/', 'AdminController@admin_add');
+	Route::post('/admin/admin_add/', 'AdminController@doAdminAdd');
+	Route::get('/admin/admin_list', 'AdminController@admin_list');
+	Route::get('/admin/admin_edit/{id}', 'AdminController@admin_edit');
+	Route::post('/admin/admin_edit/', 'AdminController@doAdminEdit');
+	Route::get('/admin/admin_del/{id}', 'AdminController@admin_del');
+
+});
 // Route::get('/admin', 'AdminController@index');
 // Route::get('/admin', 'AdminController@index');
 // Route::get('/admin', 'AdminController@index');

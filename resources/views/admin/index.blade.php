@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="renderer" content="webkit">
     <title>后台管理中心</title>  
-    <link rel="stylesheet" href="{{asset('../admin/css/pintuer.css')}}">
-    <link rel="stylesheet" href="{{asset('../admin/css/admin.css')}}">
-    <script src="{{asset('../admin/js/jquery.js')}}"></script>   
+    <link rel="stylesheet" href="style/css/pintuer.css">
+    <link rel="stylesheet" href="style/css/admin.css">
+    <script src="style/js/jquery.js"></script>   
 </head>
 <body style="background-color:#f2f9fd;">
 <div class="header bg-main">
   <div class="logo margin-big-left fadein-top">
-    <h1><img src="{{asset('../admin/images/y.jpg')}}" class="radius-circle rotate-hover" height="50" alt="" />后台管理中心</h1>
+    <h1><img src="style/images/y.jpg" class="radius-circle rotate-hover" height="50" alt="" />后台管理中心</h1>
   </div>
   <div class="head-l"><a class="button button-little bg-green" href="" target="_blank"><span class="icon-home"></span> 前台首页</a> &nbsp;&nbsp;<a href="##" class="button button-little bg-blue"><span class="icon-wrench"></span> 清除缓存</a> &nbsp;&nbsp;<a class="button button-little bg-red" href="login.html"><span class="icon-power-off"></span> 退出登录</a> </div>
 </div>
@@ -36,8 +36,8 @@
 
   <h2><span class="icon-pencil-square-o"></span>商品分类模块</h2>
   <ul>
-    <li><a href="{{url('admin/cate_list')}}" target="right"><span class="icon-caret-right"></span>添加商品分类</a></li>
-    <li><a href="{{url('admin/cate_add')}}" target="right"><span class="icon-caret-right"></span>商品分类列表</a></li>    
+    <li><a href="{{url('admin/cate_list')}}" target="right"><span class="icon-caret-right"></span>商品分类列表</a></li>
+    <li><a href="{{url('admin/cate_add')}}" target="right"><span class="icon-caret-right"></span>添加商品分类</a></li>    
   </ul>
 
 	<h2><span class="icon-pencil-square-o"></span>商品模块</h2>
