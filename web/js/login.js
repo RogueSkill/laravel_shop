@@ -2,7 +2,7 @@ if($('#inputPassword3').val()==""){
 	$('#inputPassword3').on('click',function(){ 
 	  $("p").remove();
 	  if($(this).val()==""){   
-	            $(this).after("<p style='color:red'>请输入密码<p>");   
+	            $(this).after("<p class='info' style='color:red'>请输入密码<p>");   
 	        }   
 	        return false;       
 	});
@@ -17,7 +17,7 @@ if($('#inputPassword3').val()==""){
 	      var ret = /[\!\@\#\$\%\^&\*\_\+\-\{\}\(\)\?]+/;
 	       // console.log(ret.test(str));
 	      if(ret.test(str)==false){
-	      	$(this).after("<p style='color:red'>密码必须包含一个特殊字符<p>"); 
+	      	$(this).after("<p class='info' style='color:red'>密码必须包含一个特殊字符<p>"); 
 	        return false; }  
 
 
@@ -26,7 +26,7 @@ if($('#inputPassword3').val()==""){
 	      var ret = /[A-Z]+/;
 	       // console.log(ret.test(str));
 	      if(ret.test(str)==false){
-	      	$(this).after("<p style='color:red'>密码必须包含大写字母<p>"); 
+	      	$(this).after("<p class='info' style='color:red'>密码必须包含大写字母<p>"); 
 	        return false;  }
 
 
@@ -35,7 +35,7 @@ if($('#inputPassword3').val()==""){
 	      var ret = /\d+/;
 	       // console.log(ret.test(str));
 	      if(ret.test(str)==false){
-	      	$(this).after("<p style='color:red'>密码必须包含数字<p>"); 
+	      	$(this).after("<p class='info' style='color:red'>密码必须包含数字<p>"); 
 	        return false;
 
 	   }

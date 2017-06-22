@@ -5,6 +5,7 @@
     <title>@yield('title')</title>
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/custom.css')}}">
+    <link rel="stylesheet" href="{{asset('css/list.css')}}">
 </head>
 <body>
 
@@ -21,13 +22,13 @@
         </div>
         <div class="navbar-collapse collapse" role="navigation">
             <ul class="nav navbar-nav">
-                <li class="hidden-sm hidden-md"><a href="http://v2.bootcss.com/" target="_blank" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'v2doc'])">测试</a></li>
+                <li class="hidden-sm hidden-md"><a href="{{url('#')}}" target="_blank" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'v2doc'])">测试</a></li>
 
-                <li><a href="http://v3.bootcss.com/" target="_blank" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'v3doc'])">测试</a></li>
-                <li><a href="http://v4.bootcss.com/" target="_blank" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'v4doc'])">测试</a></li>
-                <li><a href="/p/lesscss/" target="_blank" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'less'])">测试</a></li>
-                <li><a href="http://www.jquery123.com/" target="_blank" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'jquery'])">测试</a></li>
-                <li><a href="http://expo.bootcss.com" target="_blank" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'expo'])">测试</a></li>
+                <li><a href="{{url('#')}}" target="_blank" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'v3doc'])">测试</a></li>
+                <li><a href="{{url('#')}}" target="_blank" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'v4doc'])">测试</a></li>
+                <li><a href="{{url('#')}}" target="_blank" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'less'])">测试</a></li>
+                <li><a href="{{url('#')}}" target="_blank" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'jquery'])">测试</a></li>
+                <li><a href="{{url('#')}}" target="_blank" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'expo'])">测试</a></li>
             </ul>
             <form class="navbar-form navbar-left">
                 <div class="form-group">
@@ -36,8 +37,8 @@
                 <button type="submit" class="btn btn-default">搜索</button>
             </form>
             <ul class="nav navbar-nav navbar-right hidden-sm">
-                <li><a href="/about/" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'about'])">登录</a></li>
-                <li><a href="/about/" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'about'])">注册</a></li>
+                <li><a href="{{url('login')}}" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'about'])">登录</a></li>
+                <li><a href="{{url('register')}}" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'about'])">注册</a></li>
             </ul>
         </div>
     </div>
@@ -57,9 +58,9 @@
     <div class="links">
         <div class="links-font">友情链接</div>
         <ul>
-            <li><a href="">百度</a></li>
-            <li><a href="">谷歌</a></li>
-            <li><a href="">必应</a></li>
+            <li><a href="{{url('http://www.baidu.com')}}">百度</a></li>
+            <li><a href="{{url('http://www.google.com.hk')}}">谷歌</a></li>
+            <li><a href="{{url('http://www.bing.com')}}">必应</a></li>
         </ul>
         <hr>
     </div>
@@ -75,3 +76,4 @@
 </html>
 <script src="{{asset('js/jquery-1.10.2.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
+@yield('javaScript')
