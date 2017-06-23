@@ -11,3 +11,6 @@ Route::get('/admin/user_del/{id}', 'BackUserController@user_del');
 	//登录
 Route::get('/admin/login', 'BackUserController@login');
 Route::post('/admin/dologin', 'BackUserController@dologin');
+
+	//退出登录
+Route::get('/admin/logout','BackUserController@logout');
