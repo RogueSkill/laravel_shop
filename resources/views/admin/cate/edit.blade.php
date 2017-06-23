@@ -22,7 +22,7 @@
           <label>上级分类：</label>
         </div>
         <div class="field">
-          <select name="pid" id="pid" class="input w50">
+          <select name="tpid" id="tpid" class="input w50">
             <option <?php echo $pid==0? 'selected':'' ?> value="0">顶级分类</option>
             @if($types)
               @foreach($types as $val)

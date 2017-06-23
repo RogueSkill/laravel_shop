@@ -48,10 +48,10 @@ Route::group([],function(){
 	Route::post('/admin/cate_child', 'AdminController@doCateChild');
 
 	//商品模块
-	Route::get('/admin/goods_list', 'GoodsController@index');
-	Route::get('/admin/goods_add', 'GoodsController@add');
-	Route::get('/admin/goods_edit', 'GoodsController@edit');
-	Route::get('/admin/goods_del', 'GoodsController@del');
+	Route::get('/admin/goods_list', 'GoodController@index');
+	Route::get('/admin/goods_add', 'GoodController@add');
+	Route::get('/admin/goods_edit', 'GoodController@edit');
+	Route::get('/admin/goods_del', 'GoodController@del');
 	//订单模块
 	Route::get('/admin/order_list', 'AdminController@order_list');
 	Route::get('/admin/order_add', 'AdminController@order_add');

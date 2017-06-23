@@ -40,7 +40,7 @@ class AdminController extends BaseController
 
         $types_data = DB::table('types')->paginate(10);
 
-        
+
 
         return view('admin/cate/index', compact('types_data','types_page'));
     }
@@ -53,22 +53,22 @@ class AdminController extends BaseController
     }
 
     //商品分类添加
-    public function doCateAdd(Request\CreatePostRequest $request)
+    public function doCateAdd(Request $request)
     {
 
-        $this->validate($request, [
-            'title' => 'required|min:3|max:30',
-            // 'content' => 'required',
-            // 'published_at' => 'required'
-        ],[
-            'required' => ':attribute 是必填字段',
-            'min' => ':attribute 必须不少于3个字符',
-            'max' => ':attribute 必须少于30个字符',
-        ],[
-            'title' => '文章标题',
-            // 'content' => '文章内容',
-            // 'published_at' => '发布时间',
-        ]);
+        // $this->validate($request, [
+        //     'title' => 'required|min:3|max:30',
+        //     // 'content' => 'required',
+        //     // 'published_at' => 'required'
+        // ],[
+        //     'required' => ':attribute 是必填字段',
+        //     'min' => ':attribute 必须不少于3个字符',
+        //     'max' => ':attribute 必须少于30个字符',
+        // ],[
+        //     'title' => '文章标题',
+        //     // 'content' => '文章内容',
+        //     // 'published_at' => '发布时间',
+        // ]);
         
       //判断是不是传递过来的值
       if(!$request->has('id') || !$request->has('title')){
@@ -111,25 +111,42 @@ class AdminController extends BaseController
 
         //分类列表
         $types = DB::table('types')->get();
+        // var_dump($types);
         
         return view('admin/cate/edit',compact('types','id','pid','name'));
     }
     //商品分类处理
     public function doCateEdit(Request $request)
     {
-        // var_dump($request->all());
+        // dd($request->all());
+
         if(!$request->has('id') || !$request->has('title') ){
             return back()->withInput();
         }
+        //修改记录ID
         $id = $request->input('id');
+        //原来父ID
+        $pid = $request->input('pid');
+        //
+        $tpid = $request->input('tpid');
+
         $title = $request->input('title');
 
-        $boo = DB::table('types')->where('id', $id)->update(['name'=>$title]);
+        if($tpid==0){
+            $path = '0,';
+        }else{
+            $path = DB::table('types')->where('id',$tpid)->pluck('path');
+            $path = $path[0];
+            $path = $path.$tpid.',';
+        }
+
+        $boo = DB::table('types')->where('id', $id)->update(['pid'=>$tpid,'path'=>$path,'name'=>$title]);
         if($boo){
             echo "<script>alert('修改成功')</script>"; 
              // return false;
+            return redirect('/admin/cate_list');
         }
-        return redirect('/admin/cate_list');
+        
         // return view('/admin/cate_list');
     }
 
@@ -156,7 +173,7 @@ class AdminController extends BaseController
         $data = DB::table('types')->where('id', $id)->get();
         $data = $data[0];
         // id,pid,path
-        $path = $data['path'].','.$id.',';
+        $path = $data['path'].$id.',';
         $boo = DB::table('types')->insert(['pid'=>$id,'path'=>$path,'name'=>$name,'created_at'=>date('Y-m-d H:i:s')]);
 
         if($boo){
