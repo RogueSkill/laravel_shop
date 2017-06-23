@@ -41,18 +41,17 @@ Route::group([],function(){
 	Route::get('/admin/cate_list', 'AdminController@cate_list');
 	Route::get('/admin/cate_add', 'AdminController@cate_add');
 	Route::post('/admin/cate_add','AdminController@doCateAdd');
-
 	Route::get('/admin/cate_edit/{id}/{pid}/{name}', 'AdminController@cate_edit');
 	Route::post('/admin/cate_edit/','AdminController@doCateEdit');
 	Route::get('/admin/cate_del/{id}', 'AdminController@cate_del');
-
 	Route::get('/admin/cate_child/{id}/{pid}', 'AdminController@cate_child');
 	Route::post('/admin/cate_child', 'AdminController@doCateChild');
+
 	//商品模块
-	Route::get('/admin/goods_list', 'AdminController@goods_list');
-	Route::get('/admin/goods_add', 'AdminController@goods_add');
-	Route::get('/admin/goods_edit', 'AdminController@goods_edit');
-	Route::get('/admin/goods_del', 'AdminController@goods_del');
+	Route::get('/admin/goods_list', 'GoodsController@index');
+	Route::get('/admin/goods_add', 'GoodsController@add');
+	Route::get('/admin/goods_edit', 'GoodsController@edit');
+	Route::get('/admin/goods_del', 'GoodsController@del');
 	//订单模块
 	Route::get('/admin/order_list', 'AdminController@order_list');
 	Route::get('/admin/order_add', 'AdminController@order_add');

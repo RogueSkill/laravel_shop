@@ -24,6 +24,7 @@ class AdminController extends BaseController
     //后台网站设置页面
     public function info()
     {
+
         return view('admin/info');
     }
 
@@ -38,6 +39,8 @@ class AdminController extends BaseController
         $types_page = DB::table('types')->paginate(10);
 
         $types_data = DB::table('types')->paginate(10);
+
+        
 
         return view('admin/cate/index', compact('types_data','types_page'));
     }
@@ -186,24 +189,28 @@ class AdminController extends BaseController
     //商品管理
     public function goods_list()
     {
+
         return view('admin/goods/index');
     }
 
     //商品添加
     public function goods_add()
     {
+
         return view('admin/goods/add');
     }
 
      //商品编辑
     public function goods_edit()
     {
+
         return view('admin/goods/edit');
     }
 
     //商品删除
     public function goods_del()
     {
+
         return view('admin/goods/del');
     }
 
@@ -215,24 +222,28 @@ class AdminController extends BaseController
     //订单管理
     public function order_list()
     {
+
         return view('admin/order/index');
     }
 
     //订单添加
     public function order_add()
     {
+
         return view('admin/order/add');
     }
 
      //订单编辑
     public function order_edit()
     {
+
         return view('admin/order/edit');
     }
 
     //订单删除
     public function order_del()
     {
+
         return view('admin/order/del');
     }
 

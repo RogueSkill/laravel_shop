@@ -13,7 +13,7 @@ class types extends Seeder
     {
         //
         $arr = [];
-        for($i=0; $i<10; $i++){
+        for($i=0; $i<15; $i++){
         	$tmp = [];
         	$tmp['name'] = str_random(6);
         	$tmp['pid'] = rand(0,10);
