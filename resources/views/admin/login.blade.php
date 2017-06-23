@@ -1,5 +1,3 @@
-<!-- <form method="post" action="{{url('admin/dologin')}}">
-	<?php echo csrf_field(); ?> -->
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
@@ -8,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="renderer" content="webkit">
     <title>登录</title>  
-    <link rel="stylesheet" href="{{asset('../admin/css/pintuer.css')}}">
-    <link rel="stylesheet" href="{{asset('../admin/css/admin.css')}}">
-    <script src="{{asset('../admin/js/jquery.js')}}"></script>
-    <script src="{{asset('../admin/js/pintuer.js')}}"></script>  
+    <link rel="stylesheet" href="{{asset('../public/style/css/pintuer.css')}}">
+    <link rel="stylesheet" href="{{asset('../public/style/css/admin.css')}}">
+    <script src="{{asset('../public/style/js/jquery.js')}}"></script>
+    <script src="{{asset('../public/style/js/pintuer.js')}}"></script>  
 </head>
 <body>
 <div class="bg"></div>
@@ -22,6 +20,7 @@
             <div class="media media-y margin-big-bottom">           
             </div>         
             <form action="{{url('/admin/dologin')}}" method="post">
+            {{ csrf_field() }}
             <div class="panel loginbox">
                 <div class="text-center margin-big padding-big-top"><h1>后台管理中心</h1></div>
                 <div class="panel-body" style="padding:30px; padding-bottom:10px; padding-top:10px;">
@@ -37,11 +36,12 @@
                             <span class="icon icon-key margin-small"></span>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <div class="field">
                             <input type="text" class="input input-big" name="code" placeholder="填写右侧的验证码" data-validate="required:请填写右侧的验证码" />
                            <img src="images/passcode.jpg" alt="" width="100" height="32" class="passcode" style="height:43px;cursor:pointer;" onclick="this.src=this.src+'?'">                      
-                        </div>
+
+                        </div> -->
                     </div>
                 </div>
                 <div style="padding:30px;"><input type="submit" class="button button-block bg-main text-big input-big" value="登录"></div>

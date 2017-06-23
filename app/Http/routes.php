@@ -31,8 +31,8 @@ Route::group([],function(){
 
 	Route::get('/admin', 'AdminController@index');
 	//登录
-	Route::get('/admin/login', 'AdminController@login');
-	Route::post('/admin/login', 'AdminController@login');
+	// Route::get('/admin/login', 'AdminController@login');
+	// Route::post('/admin/login', 'AdminController@login');
 	//网站设置页
 	Route::get('/admin/info', 'AdminController@info');
 	//用户模块
