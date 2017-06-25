@@ -55,12 +55,14 @@
               <a class="button border-red" href="{{url('/admin/user_edit/'.$v['id'])}}"><span class="icon-trash-o"></span> 修改</a>
               {{--<a class="button border-red" href="javascript:void(0)" onclick="return del(1)"><span class="icon-trash-o"></span> 删除</a></div></td>--}}
                   <a class="button border-red" href="{{url('/admin/user_del/'.$v['id'])}}"><span class="icon-trash-o"></span> 删除</a>
-
         </tr>
       @endforeach
+
       <tr>
-        <td colspan="8"><div class="pagelist"> <a href="">上一页</a> <span class="current">1</span><a href="">下一页</a><a href="">尾页</a> </div></td>
+        <!-- <td colspan="8"><div class="pagelist"> <a href="">上一页</a> <span class="current">1</span><a href="">下一页</a><a href="">尾页</a> </div></td> -->
+      {{$user->links()}}
       </tr>
+
     </table>
   </div>
 </form>
@@ -72,16 +74,16 @@
 //	}
 //}
 
-//$("#checkall").click(function(){
-//  $("input[name='id[]']").each(function(){
-//	  if (this.checked) {
-//		  this.checked = false;
-//	  }
-//	  else {
-//		  this.checked = true;
-//	  }
-//  });
-//})
+$("#checkall").click(function(){
+ $("input[name='id[]']").each(function(){
+	  if (this.checked) {
+		  this.checked = false;
+	  }
+	  else {
+		  this.checked = true;
+	  }
+ });
+})
 //
 //function DelSelect(){
 //	var Checkbox=false;

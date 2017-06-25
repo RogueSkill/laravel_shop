@@ -1,9 +1,10 @@
 <?php
 
-//引入前台路由
-include_once("WebRoute.php");
-include_once("AdminRoute.php");
+	//引入前台路由
+	include_once("WebRoute.php");
 
+	Route::get('/admin/login', 'BackUserController@login');//后台登录,不要放入路由组
+	Route::post('/admin/dologin', 'BackUserController@dologin');//后台登录,不要放入路由组
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -27,12 +28,13 @@ include_once("AdminRoute.php");
 
 //######################后台#################################
 
-Route::group([],function(){
+Route::group(['middleware'=>['web','admin.login']],function(){
+
+
+	include_once("AdminRoute.php");//后台用户登录路由
 
 	Route::get('/admin', 'AdminController@index');
-	//登录
-	// Route::get('/admin/login', 'AdminController@login');
-	// Route::post('/admin/login', 'AdminController@login');
+
 	//网站设置页
 	Route::get('/admin/info', 'AdminController@info');
 	//用户模块
