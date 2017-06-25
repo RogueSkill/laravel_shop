@@ -13,11 +13,11 @@ class types extends Seeder
     {
         //
         $arr = [];
-        for($i=0; $i<10; $i++){
+        for($i=0; $i<15; $i++){
         	$tmp = [];
         	$tmp['name'] = str_random(6);
-        	$tmp['pid'] = rand(0,10);
-        	$tmp['path'] = rand(1,10).','.rand(0,10).',';
+        	$tmp['pid'] = 0;
+        	$tmp['path'] = '0,';
         	$tmp['created_at'] = date('Y-m-d H:i:s');
         	$tmp['updated_at'] = date('Y-m-d H:i:s');
         	$arr[] = $tmp;
