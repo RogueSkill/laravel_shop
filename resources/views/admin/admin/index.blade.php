@@ -11,10 +11,10 @@ $level = [0=>'超级管理员',1=>'一般管理员',2=>'录入管理员',3=>'审
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="renderer" content="webkit">
 <title></title>
-<link rel="stylesheet" href="{{asset('../admin/css/pintuer.css')}}">
-<link rel="stylesheet" href="{{asset('../admin/css/admin.css')}}">
-<script src="{{asset('../admin/js/jquery.js')}}"></script>
-<script src="{{asset('../admin/js/pintuer.js')}}"></script>
+<link rel="stylesheet" href="{{asset('style/css/pintuer.css')}}">
+<link rel="stylesheet" href="{{asset('style/css/admin.css')}}">
+<script src="{{asset('style/js/jquery.js')}}"></script>
+<script src="{{asset('style/js/pintuer.js')}}"></script>
 </head>
 <body>
 <div class="panel admin-panel">
@@ -44,13 +44,12 @@ $level = [0=>'超级管理员',1=>'一般管理员',2=>'录入管理员',3=>'审
     <tr>
         <td colspan="8">
           <div class="pagelist"> 
-
                 <!-- <a href="">上一页</a> 
                 <span class="current">1</span>
                 <a href="">2</a>
                 <a href="">3</a><a href="">下一页</a>
                 <a href="">尾页</a>  -->
-                {{$users_page->links()}}
+                {{$user_admin->links()}}
           </div>
         </td>
     </tr>

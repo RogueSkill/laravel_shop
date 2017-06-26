@@ -6,10 +6,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="renderer" content="webkit">
 <title></title>
-<link rel="stylesheet" href="{{asset('../admin/css/pintuer.css')}}">
-<link rel="stylesheet" href="{{asset('../admin/css/admin.css')}}">
-<script src="{{asset('../admin/js/jquery.js')}}"></script>
-<script src="{{asset('../admin/js/pintuer.js')}}"></script>
+<link rel="stylesheet" href="{{asset('style/css/pintuer.css')}}">
+<link rel="stylesheet" href="{{asset('style/css/admin.css')}}">
+<script src="{{asset('style/js/jquery.js')}}"></script>
+<script src="{{asset('style/js/pintuer.js')}}"></script>
 </head>
 <body>
 <form method="post" action="" id="listform">
@@ -68,72 +68,21 @@
         <th width="310">操作</th>
       </tr>
       <volist name="list" id="vo">
+<!-- 商品列表 -->
+        @foreach($goods as $val)
         <tr>
           <td style="text-align:left; padding-left:20px;"><input type="checkbox" name="id[]" value="" />
-           1</td>
-          <td><input type="text" name="sort[1]" value="1" style="width:50px; text-align:center; border:1px solid #ddd; padding:7px 0;" /></td>
-          <td width="10%"><img src="{{asset('../admin/images/11.jpg')}}" alt="" width="70" height="50" /></td>
-          <td>这是一套MUI后台精美管理系统，感谢您的支持</td>
+           {{$val['goods_id']}}</td>
+          <td><input type="text" name="sort[1]" value="{{$val['sort']}}" style="width:50px; text-align:center; border:1px solid #ddd; padding:7px 0;" /></td>
+          <td width="10%"><img src="{{asset('style/images/11.jpg')}}" alt="" width="70" height="50" /></td>
+          <td>{{$val['goods_name']}}</td>
           <td><font color="#00CC99">首页</font></td>
-          <td>产品分类</td>
+          <td></td>
           <td>2016-07-01</td>
           <td><div class="button-group"> <a class="button border-main" href="add.html"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,1,1)"><span class="icon-trash-o"></span> 删除</a> </div></td>
         </tr>
-   		 <tr>
-          <td style="text-align:left; padding-left:20px;"><input type="checkbox" name="id[]" value="" />
-           1</td>
-          <td><input type="text" name="sort[1]" value="1" style="width:50px; text-align:center; border:1px solid #ddd; padding:7px 0;" /></td>
-          <td width="10%"><img src="{{asset('../admin/images/11.jpg')}}" alt="" width="70" height="50" /></td>
-          <td>这是一套MUI后台精美管理系统，感谢您的支持</td>
-          <td><font color="#00CC99">首页</font></td>
-          <td>产品分类</td>
-          <td>2016-07-01</td>
-          <td><div class="button-group"> <a class="button border-main" href="add.html"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,1,1)"><span class="icon-trash-o"></span> 删除</a> </div></td>
-        </tr>
-         <tr>
-          <td style="text-align:left; padding-left:20px;"><input type="checkbox" name="id[]" value="" />
-           1</td>
-          <td><input type="text" name="sort[1]" value="1" style="width:50px; text-align:center; border:1px solid #ddd; padding:7px 0;" /></td>
-          <td width="10%"><img src="{{asset('../admin/images/11.jpg')}}" alt="" width="70" height="50" /></td>
-          <td>这是一套MUI后台精美管理系统，感谢您的支持</td>
-          <td><font color="#00CC99">首页</font></td>
-          <td>产品分类</td>
-          <td>2016-07-01</td>
-          <td><div class="button-group"> <a class="button border-main" href="add.html"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,1,1)"><span class="icon-trash-o"></span> 删除</a> </div></td>
-        </tr>
-         <tr>
-          <td style="text-align:left; padding-left:20px;"><input type="checkbox" name="id[]" value="" />
-           1</td>
-          <td><input type="text" name="sort[1]" value="1" style="width:50px; text-align:center; border:1px solid #ddd; padding:7px 0;" /></td>
-          <td width="10%"><img src="{{asset('../admin/images/11.jpg')}}" alt="" width="70" height="50" /></td>
-          <td>这是一套MUI后台精美管理系统，感谢您的支持</td>
-          <td><font color="#00CC99">首页</font></td>
-          <td>产品分类</td>
-          <td>2016-07-01</td>
-          <td><div class="button-group"> <a class="button border-main" href="add.html"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,1,1)"><span class="icon-trash-o"></span> 删除</a> </div></td>
-        </tr>
-         <tr>
-          <td style="text-align:left; padding-left:20px;"><input type="checkbox" name="id[]" value="" />
-           1</td>
-          <td><input type="text" name="sort[1]" value="1" style="width:50px; text-align:center; border:1px solid #ddd; padding:7px 0;" /></td>
-          <td width="10%"><img src="{{asset('../admin/images/11.jpg')}}" alt="" width="70" height="50" /></td>
-          <td>这是一套MUI后台精美管理系统，感谢您的支持</td>
-          <td><font color="#00CC99">首页</font></td>
-          <td>产品分类</td>
-          <td>2016-07-01</td>
-          <td><div class="button-group"> <a class="button border-main" href="add.html"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,1,1)"><span class="icon-trash-o"></span> 删除</a> </div></td>
-        </tr>
-         <tr>
-          <td style="text-align:left; padding-left:20px;"><input type="checkbox" name="id[]" value="" />
-           1</td>
-          <td><input type="text" name="sort[1]" value="1" style="width:50px; text-align:center; border:1px solid #ddd; padding:7px 0;" /></td>
-          <td width="10%"><img src="{{asset('../admin/images/11.jpg')}}" alt="" width="70" height="50" /></td>
-          <td>这是一套MUI后台精美管理系统，感谢您的支持</td>
-          <td><font color="#00CC99">首页</font></td>
-          <td>产品分类</td>
-          <td>2016-07-01</td>
-          <td><div class="button-group"> <a class="button border-main" href="add.html"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,1,1)"><span class="icon-trash-o"></span> 删除</a> </div></td>
-        </tr>
+        @endforeach
+<!-- 商品列表end -->
       <tr>
         <td style="text-align:left; padding:19px 0;padding-left:20px;"><input type="checkbox" id="checkall"/>
           全选 </td>

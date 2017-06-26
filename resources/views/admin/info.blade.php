@@ -1,30 +1,34 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<link href="{{asset('../admin/css/bootstrap.min.css')}}" rel="stylesheet" />
-        <link rel="stylesheet" href="{{asset('../admin/css/style.css')}}"/>
-        	<link rel="stylesheet" href="{{asset('../admin/css/ace.min.css')}}" />
-        <link rel="stylesheet" href="{{asset('../admin/css/font-awesome.min.css')}}" />
-        <link href="{{asset('../admin/css/codemirror.css')}}" rel="stylesheet">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title>网站信息</title>  
+    <link href="{{asset('style/css/bootstrap.min.css')}}" rel="stylesheet" />
+        <link rel="stylesheet" href="{{asset('style/css/style.css')}}"/>
+          <link rel="stylesheet" href="{{asset('style/css/ace.min.css')}}" />
+        <link rel="stylesheet" href="{{asset('style/css/font-awesome.min.css')}}" />
+        <link href="{{asset('style/css/codemirror.css')}}" rel="stylesheet">
+</head>
+
 		<!--[if IE 7]>
-		  <!--<link rel="stylesheet" href="{{asset('../admin/css/font-awesome-ie7.min.css')}}" />-->
+		  <!--<link rel="stylesheet" href="{{asset('style/css/font-awesome-ie7.min.css')}}" />-->
 		<![endif]-->
         <!--[if lte IE 8]>
-		  <!--<link rel="stylesheet" href="{{asset('../admin/css/ace-ie.min.css')}}" />-->
+		  <!--<link rel="stylesheet" href="{{asset('style/css/ace-ie.min.css')}}" />-->
 		<![endif]-->
-		<script src="{{asset('../admin/js/ace-extra.min.js')}}"></script>
+		<script src="{{asset('style/js/ace-extra.min.js')}}"></script>
 		<!--[if lt IE 9]>
-		<!--<script src="{{asset('../admin/js/html5shiv.js')}}"></script>-->
-		<!--<script src="{{asset('../admin/js/respond.min.js')}}"></script>-->
+		<!--<script src="{{asset('style/js/html5shiv.js')}}"></script>-->
+		<!--<script src="{{asset('style/js/respond.min.js')}}"></script>-->
 		<![endif]-->
         		<!--[if !IE]> -->
-		{{--<script src="{{asset('../admin/js/jquery.min.js')}}"></script>--}}
+		{{--<script src="{{asset('style/js/jquery.min.js')}}"></script>--}}
 		<!-- <![endif]-->
-           	<script src="{{asset('../admin/dist/echarts.js')}}"></script>
-        <script src="{{asset('../admin/js/bootstrap.min.js')}}"></script>
-       <title></title>
-       </head>		
+           	<script src="{{asset('style/dist/echarts.js')}}"></script>
+        <script src="{{asset('style/js/bootstrap.min.js')}}"></script>
 <body>
 <div class="page-content clearfix">
  <div class="alert alert-block alert-success">
@@ -136,31 +140,31 @@
   <div class="home_btn">
      <div>
      <a href="picture-add.html"  title="添加商品" class="btn  btn-info btn-sm no-radius">
-     <i class="bigger-200"><img src="{{asset('../admin/images/icon-addp.png')}}" /></i>
+     <i class="bigger-200"><img src="{{asset('style/images/icon-addp.png')}}" /></i>
      <h5 class="margin-top">添加商品</h5>
      </a>
      <a href="Category_Manage.html"  title="产品分类" class="btn  btn-primary btn-sm no-radius">
-     <i class="bigger-200"><img src="{{asset('../admin/images/icon-cpgl.png')}}" /></i>
+     <i class="bigger-200"><img src="{{asset('style/images/icon-cpgl.png')}}" /></i>
      <h5 class="margin-top">产品分类</h5>
      </a>
      <a href="admin_info.html"  title="个人信息" class="btn  btn-success btn-sm no-radius">
-     <i class="bigger-200"><img src="{{asset('../admin/images/icon-grxx.png')}}" /></i>
+     <i class="bigger-200"><img src="{{asset('style/images/icon-grxx.png')}}" /></i>
      <h5 class="margin-top">个人信息</h5>
      </a>
      <a href="Systems.html"  title="系统设置" class="btn  btn-info btn-sm no-radius">
-     <i class="bigger-200"><img src="{{asset('../admin/images/xtsz.png')}}" /></i>
+     <i class="bigger-200"><img src="{{asset('style/images/xtsz.png')}}" /></i>
      <h5 class="margin-top">系统设置</h5>
      </a>
      <a href="Order_handling.html"  title="商品订单" class="btn  btn-purple btn-sm no-radius">
-     <i class="bigger-200"><img src="{{asset('../admin/images/icon-gwcc.png')}}" /></i>
+     <i class="bigger-200"><img src="{{asset('style/images/icon-gwcc.png')}}" /></i>
      <h5 class="margin-top">商品订单</h5>
      </a>
      <a href="picture-add.html"  title="添加广告" class="btn  btn-pink btn-sm no-radius">
-     <i class="bigger-200"><img src="{{asset('../admin/images/icon-ad.png')}}" /></i>
+     <i class="bigger-200"><img src="{{asset('style/images/icon-ad.png')}}" /></i>
      <h5 class="margin-top">添加广告</h5>
      </a>
       <a href="article_add.html"  title="添加文章" class="btn  btn-info btn-sm no-radius">
-     <i class="bigger-200"><img src="{{asset('../admin/images/icon-addwz.png')}}" /></i>
+     <i class="bigger-200"><img src="{{asset('style/images/icon-addwz.png')}}" /></i>
      <h5 class="margin-top">添加文章</h5>
      </a>
      </div>
@@ -198,4 +202,4 @@ $('.no-radius').on('click', function(){
  });
 	 
 	 
- </script>   
+ </script>
