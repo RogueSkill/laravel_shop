@@ -18,7 +18,12 @@ $("button[name='login']").on("click", function() {
                 alert("登录成功");
                 window.location.href='center';
             }else {
-                alert("登录失败");
+
+                var that = $("input[name='pass']");
+
+                //改变提示图标和提示文本
+                that.next().css({display:"block",color:"red"}).find('i').removeClass().addClass("glyphicon glyphicon-remove").next()
+                    .html("用户名或密码不正确");
             }
         }
     });
