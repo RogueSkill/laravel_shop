@@ -49,7 +49,7 @@ $level = [0=>'超级管理员',1=>'一般管理员',2=>'录入管理员',3=>'审
                 <a href="">2</a>
                 <a href="">3</a><a href="">下一页</a>
                 <a href="">尾页</a>  -->
-                {{$users_page->links()}}
+                {{$user_admin->links()}}
           </div>
         </td>
     </tr>

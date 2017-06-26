@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>@yield('title')</title>
+    @yield("meta")
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/custom.css')}}">
     <link rel="stylesheet" href="{{asset('css/list.css')}}">
@@ -22,13 +23,13 @@
         </div>
         <div class="navbar-collapse collapse" role="navigation">
             <ul class="nav navbar-nav">
-                <li class="hidden-sm hidden-md"><a href="{{url('#')}}" target="_blank" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'v2doc'])">测试</a></li>
+                <li class="hidden-sm hidden-md"><a href="{{url('#')}}" target="_blank">测试</a></li>
 
-                <li><a href="{{url('#')}}" target="_blank" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'v3doc'])">测试</a></li>
-                <li><a href="{{url('#')}}" target="_blank" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'v4doc'])">测试</a></li>
-                <li><a href="{{url('#')}}" target="_blank" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'less'])">测试</a></li>
-                <li><a href="{{url('#')}}" target="_blank" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'jquery'])">测试</a></li>
-                <li><a href="{{url('#')}}" target="_blank" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'expo'])">测试</a></li>
+                <li><a href="{{url('#')}}" target="_blank">测试</a></li>
+                <li><a href="{{url('#')}}" target="_blank">测试</a></li>
+                <li><a href="{{url('#')}}" target="_blank">测试</a></li>
+                <li><a href="{{url('#')}}" target="_blank">测试</a></li>
+                <li><a href="{{url('center')}}" target="_blank">用户中心</a></li>
             </ul>
             <form class="navbar-form navbar-left">
                 <div class="form-group">
@@ -37,8 +38,8 @@
                 <button type="submit" class="btn btn-default">搜索</button>
             </form>
             <ul class="nav navbar-nav navbar-right hidden-sm">
-                <li><a href="{{url('login')}}" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'about'])">登录</a></li>
-                <li><a href="{{url('register')}}" onclick="_hmt.push(['_trackEvent', 'navbar', 'click', 'about'])">注册</a></li>
+                <li><a href="{{url('login')}}">登录</a></li>
+                <li><a href="{{url('register')}}">注册</a></li>
             </ul>
         </div>
     </div>

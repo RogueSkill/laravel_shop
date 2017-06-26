@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use DB;
 
 class WebController extends Controller
 {
@@ -73,4 +74,67 @@ class WebController extends Controller
     {
         return view("web/addres");
     }
+
+    //注册页Ajax请求处理
+    public function registerAjax()
+    {
+
+        if(isset($_POST['email']) == false && isset($_POST['pass']) == false) {
+
+            $username = $_POST['username'];
+
+            $data = DB::table("members")->where("username","=",$username)->get();
+
+            echo count($data);
+
+        } else {
+
+            $data = DB::table("members")->insert([
+
+                "username"=>$_POST['username'],
+                "email"=>$_POST['email'],
+                "pass"=>password_hash($_POST['pass'],PASSWORD_DEFAULT)
+
+            ]);
+            echo $data;
+        }
+
+    }
+
+    //登录页Ajax请求处理
+    public function loginAjax()
+    {
+        $username = $_POST['username'];
+        $pass = $_POST['pass'];
+
+        //查询用户名是否存在
+        $data = DB::table('members')->where('username', '=', $username)->get();
+
+        $bool =  count($data);
+
+        //大于0则存在
+        if($bool > 0) {
+
+          $data = DB::table('members')->where('username', '=', $username)->get();
+
+            foreach($data as $val) {
+
+               $password = $val['pass'];
+
+               $bool =  password_verify($pass,$password);
+            }
+
+        }
+
+        if($bool){
+
+            echo "1";
+        }else {
+
+            echo "0";
+        }
+
+
+    }
+
 }

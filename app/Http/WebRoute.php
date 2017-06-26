@@ -36,3 +36,9 @@ Route::get("center", "WebController@ucenter");
 
 //地址管理页
 Route::get("addres", "WebController@addres");
+
+//注册页ajax请求地址
+Route::post("registerAjax", "WebController@registerAjax");
+
+//登录页ajax请求地址
+Route::post("loginAjax", "WebController@loginAjax");

@@ -18,7 +18,7 @@ class BackUserController extends BaseController
     */
     public function user_list(Request $request)
     {
-        $user = User::paginate(5)->all();
+        $user = User::paginate(5);
 //        dd($user);
     	return view('admin/user/index',compact('user'));
     }
@@ -110,18 +110,18 @@ class BackUserController extends BaseController
     public function login(Request $request)
     {
 
-    $value=session('username');
+    // $value=session('username');
 
-     if($value == null){
+    //  if($value == null){
 
      return view('admin/login');
 
-        }else{
+      //   }else{
 
 
-      return redirect('admin');      
+      // return redirect('admin');      
 
-        }
+      //   }
     }
 
     //提交登录
@@ -138,7 +138,7 @@ class BackUserController extends BaseController
     
         // 如果获取数据为空不跳转
         if($check == null){
-            // echo 111;
+
            return back();
 
         }else{
@@ -153,6 +153,7 @@ class BackUserController extends BaseController
     {
         
         $request->session()->flush();
+
         return redirect('admin/login');
     }
 }

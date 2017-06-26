@@ -49,7 +49,7 @@
     text-overflow:ellipsis;
   }
   .textoverflow ~ p{
-    color:red;
+   color:red;
   }
   
 /*--------------------------------------------------登录注册-------------------------------------------------------------*/
@@ -108,7 +108,15 @@
 .form-control{
   width:90%;
 }
-
+.form-span{
+  margin-left:5px;
+}
+.form-group i{
+}
+.hint{
+  display: none;
+  color:#c1b6b6;
+}
 /*--------------------------------------------------商品详情-------------------------------------------------------------*/
 .good-left{
   width:44%;
@@ -436,9 +444,6 @@
     margin-top: 10px;
     background:url("../images/snav - green.png");
   }
-<<<<<<< HEAD
-  
-=======
 
 
 
@@ -452,4 +457,4 @@
       left:430px;
       top:10px;
     }
->>>>>>> 348fd13eb3608c0de11b3e6fff3bfd0835858ffc
+

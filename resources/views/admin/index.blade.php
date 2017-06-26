@@ -12,7 +12,6 @@
 </head>
 <body style="background-color:#f2f9fd;">
 
-  <!-- {{(session('username'))}} -->
 
 <div class="header bg-main">
   <div class="logo margin-big-left fadein-top">

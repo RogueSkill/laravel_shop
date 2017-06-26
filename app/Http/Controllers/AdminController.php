@@ -105,8 +105,17 @@ class AdminController extends BaseController
 
     }
 
+<<<<<<< HEAD
+
+
+
+
+    //用户编辑
+    public function user_edit($id)
+=======
      //商品分类编辑显示
     public function cate_edit($id,$pid,$name)
+>>>>>>> 3cbcbd995e86ee9bb62ff1230bd4c8cf50b5d225
     {
 
         //分类列表
