@@ -80,10 +80,9 @@ class AdminController extends BaseController
     }
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 296a5cb9cceef7370b3a668d05dd428dad84b234
+
+
     //用户编辑
     public function user_edit($id)
     {
