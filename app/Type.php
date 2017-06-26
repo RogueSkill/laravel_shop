@@ -11,14 +11,14 @@ class Type extends Model
     protected $primaryKey = 'id';
 
 
-   // public function Good()
-   // {
-   // 		return $this->belongsTo('App\Good','typeid', 'goods_id');
-   // }
-
    public function Good()
-    {
-    	return $this->hasMany('App\Good', 'typeid', 'goods_id');
-    }
+   {
+   		return $this->belongsTo('App\Good','typeid', 'goods_id');
+   }
+
+   // public function Good()
+   //  {
+   //  	return $this->hasMany('App\Good', 'typeid', 'goods_id');
+   //  }
 
 }

@@ -50,6 +50,9 @@ Route::group([],function(){
 	//商品模块
 	Route::get('/admin/goods_list', 'GoodController@index');
 	Route::get('/admin/goods_add', 'GoodController@add');
+
+	Route::post('/admin/goods_add','GoodController@doAdd');
+	
 	Route::get('/admin/goods_edit', 'GoodController@edit');
 	Route::get('/admin/goods_del', 'GoodController@del');
 	//订单模块
