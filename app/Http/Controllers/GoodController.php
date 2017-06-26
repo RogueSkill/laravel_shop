@@ -39,7 +39,7 @@ class GoodController extends Controller
         if($request->isMethod('POST')){
 
             var_dump($request->except('_token'));
-            exit;
+            
             $file = $request->File('pic');
             // dd($file);
             if(count($file) > 0){
