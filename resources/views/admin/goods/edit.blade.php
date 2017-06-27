@@ -2,19 +2,22 @@
 <html lang="zh-cn">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="renderer" content="webkit">
-<title></title>
-<link rel="stylesheet" href="{{asset('style/css/pintuer.css')}}">
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<title>title</title>
 <link rel="stylesheet" href="{{asset('style/css/bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{asset('style/css/pintuer.css')}}">
 <link rel="stylesheet" href="{{asset('style/css/admin.css')}}">
-<script src="{{asset('style/js/jquery.js')}}"></script>
+
 <script src="{{asset('style/js/pintuer.js')}}"></script>
 <!-- ueditor -->
-<script src="{{asset('./editor/ueditor.config.js')}}"></script>
-<script src="{{asset('./editor/ueditor.all.min.js')}}"></script>
+<script src="{{asset('editor/ueditor.config.js')}}"></script>
+<script src="{{asset('editor/ueditor.all.min.js')}}"></script>
 <!-- //ueditor -->
+<script src="{{asset('style/js/jquery.js')}}"></script>
 </head>
 <body>
 <div class="panel admin-panel">
@@ -91,18 +94,33 @@
             <label>图片：</label>
           </div>
           <div class="field">
-            @if($orimg)
+          <!-- aa -->
+            @if(count($orimg)>0)
                 @foreach($orimg as $val)
 
                   <div class="col-xs-6 col-md-3">
-                    <input type="file" >
+                    
                     <a href="#" class="thumbnail">
-                      <img width="100" height="100" src="../../upload/{{$val}}" />
+                      <img width="100" height="100"  src="../../upload/{{$val}}" />
                     </a>
-                    <a href="#"><img width="15" height="15" src="../../images/icon/del.jpg" id="srcId"></a>
+                    <a href="javascript:;">
+                      <img width="15" height="15" dataid="{{$id}}" src="../../images/icon/del.jpg" name="srcId">
+                    </a>
                   </div>
                 <!-- <div><img src="../../upload/{{$val}}" /></div>    -->
                 @endforeach
+
+                <div class="col-xs-6 col-md-3">
+                    
+                    <a href="#" class="thumbnail">
+                      <img width="100" height="100"  src="" />
+                    </a>
+                    <a href="javascript:;">
+                      <img width="15" height="15" dataid="" src="../../images/icon/del.jpg" name="srcId">
+                    </a>
+                  </div>
+            @else
+                  
             @endif
             <!-- <input type="file" id="original_img" name="original_img[]" class="input tips" style="width:25%; float:left;"   data-toggle="hover" data-place="right" data-image="" />
             <input type="button" class="button bg-blue margin-left" name="add" value="+"  style="float:left;">
@@ -260,12 +278,44 @@
 
       });
 
+      $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
      $(".upload_class").on('click','input[name=reduce]', function(){
           $(this).parent().parent().remove();
      });
 
+    
 
+     //aa
+     $('img[name=srcId]').click(function(){
+          var that = $(this);
+          var id = $(this).attr('dataid');
+          var url = $(this).parent().siblings().children().attr('src');
+          var path = url.substr(13);
+
+          $.ajax({         
+
+             url:'/admin/goods_edit',
+             data:{id:id,path:path},
+             type:'POST',
+         dataType:'JSON',
+         
+             success: function(data)
+             {
+                if(data==1){
+                    that.parent().parent().remove();
+                    // alert($(this).attr('dataid'));
+
+                }
+             }
+
+          });
+
+     });
 
 
   });

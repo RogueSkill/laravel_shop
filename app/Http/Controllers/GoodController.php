@@ -114,12 +114,33 @@ class GoodController extends Controller
         $goodsrow = Good::find($id);
         $orimg = explode(',', $goodsrow['original_img']);
 
-        return view('admin/goods/edit', compact('goodtypes','goodsrow','orimg'));
+        return view('admin/goods/edit', compact('goodtypes','goodsrow','orimg','id'));
     }
 
     //产品编译处理页
-    public function doEdit()
-    {
+    public function doEdit(Request $request)
+    {   
+        // dd($request->all());
+
+        $id = $request->input('id');
+        $path = $request->input('path');
+
+
+        $url = DB::table('goods')->where('goods_id',$id)->pluck('original_img');
+        $url = $url[0];
+        $urlarr = explode(',', $url);
+        // var_dump($urlarr);
+        $key = array_search($path,$urlarr);
+        unset($urlarr[$key]);
+        // var_dump($urlarr);
+        $url = implode(',', $urlarr);
+        // echo $url;
+        $boo = DB::table('goods')->where('goods_id',$id)->update(['original_img'=>$url]);
+        if($boo){
+            echo 1;
+        }else{
+            echo 0;
+        }
 
     }
 }
