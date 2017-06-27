@@ -57,7 +57,7 @@ class BackUserController extends BaseController
 //        );
 
 
-       $data = $request->only(['username','pass','sex','address','code','phone','email','state','level']);
+       $data = $request->only(['username','pass','sex','address','code','phone','email','state']);
 
         if (DB::table('members')->insert($data)) {
             return redirect('/admin/user_list')->with(['success' => '添加成功！！！！！！！']);
@@ -71,7 +71,7 @@ class BackUserController extends BaseController
     //用户编辑
     public function user_edit($id)
     {
-        $data = User::find($id);
+        $data = Member::find($id);
 //        dd($data);
         return view('admin/user/edit',compact('data'));
     }
@@ -86,8 +86,7 @@ class BackUserController extends BaseController
                                                 'code'=>$request->code,
                                                 'phone'=>$request->phone,
                                                 'email'=>$request->email,
-                                                'state'=>$request->state,
-                                                'level'=>$request->level
+                                                'state'=>$request->state
                                                ])
            ){
                 return redirect('/admin/user_list');

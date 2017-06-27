@@ -44,7 +44,7 @@
           <div class="tips"></div>
         </div>
       </div>
-      {{--<div class="form-group">--}}
+<!--       {{--<div class="form-group">--}}
         {{--<div class="label">--}}
           {{--<label>图片：</label>--}}
         {{--</div>--}}
@@ -53,7 +53,7 @@
           {{--<input type="button" class="button bg-blue margin-left" id="image1" value="+ 浏览上传"  style="float:left;">--}}
           {{--<div class="tipss">图片尺寸：500*500</div>--}}
         {{--</div>--}}
-      {{--</div>--}}
+      {{--</div>--}} -->
       
       <if condition="$iscid eq 1">
         <div class="form-group">
@@ -99,18 +99,7 @@
             <div class="tips"></div>
           </div>
         </div>
-          <div class="form-group">
-            <div class="label">
-              <label>等级：</label>
-            </div>
-            <div class="field">
-              <select name="level" class="input w50">
-                <option value="1">一级</option>
-                <option value="2">二级</option>
-              </select>
-              <div class="tips"></div>
-            </div>
-          </div>
+
       </if>
       <div class="form-group">
         <div class="label">
@@ -131,81 +120,6 @@
           <div class="tips"></div>
         </div>
       </div>
-
-
-      {{----}}
-      {{--<div class="form-group">--}}
-        {{--<div class="label">--}}
-          {{--<label>邮编：</label>--}}
-        {{--</div>--}}
-        {{--<div class="field">--}}
-          {{--<input type="number" name="code" class="input" style="height:450px; border:1px solid #ddd;"></input>--}}
-          {{--<div class="tips"></div>--}}
-        {{--</div>--}}
-      {{--</div>--}}
-     
-      {{--<div class="clear"></div>--}}
-      {{--<div class="form-group">--}}
-        {{--<div class="label">--}}
-          {{--<label>关键字标题：</label>--}}
-        {{--</div>--}}
-        {{--<div class="field">--}}
-          {{--<input type="text" class="input" name="s_title" value="" />--}}
-        {{--</div>--}}
-      {{--</div>--}}
-      {{--<div class="form-group">--}}
-        {{--<div class="label">--}}
-          {{--<label>内容关键字：</label>--}}
-        {{--</div>--}}
-        {{--<div class="field">--}}
-          {{--<input type="text" class="input" name="s_keywords" value=""/>--}}
-        {{--</div>--}}
-      {{--</div>--}}
-      {{--<div class="form-group">--}}
-        {{--<div class="label">--}}
-          {{--<label>关键字描述：</label>--}}
-        {{--</div>--}}
-        {{--<div class="field">--}}
-          {{--<textarea type="text" class="input" name="s_desc" style="height:80px;"></textarea>--}}
-        {{--</div>--}}
-      {{--</div>--}}
-      {{--<div class="form-group">--}}
-        {{--<div class="label">--}}
-          {{--<label>排序：</label>--}}
-        {{--</div>--}}
-        {{--<div class="field">--}}
-          {{--<input type="text" class="input w50" name="sort" value="0"  data-validate="number:排序必须为数字" />--}}
-          {{--<div class="tips"></div>--}}
-        {{--</div>--}}
-      {{--</div>--}}
-      {{--<div class="form-group">--}}
-        {{--<div class="label">--}}
-          {{--<label>发布时间：</label>--}}
-        {{--</div>--}}
-        {{--<div class="field"> --}}
-          {{--<script src="js/laydate/laydate.js"></script>--}}
-          {{--<input type="text" class="laydate-icon input w50" name="datetime" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" value=""  data-validate="required:日期不能为空" style="padding:10px!important; height:auto!important;border:1px solid #ddd!important;" />--}}
-          {{--<div class="tips"></div>--}}
-        {{--</div>--}}
-      {{--</div>--}}
-      {{--<div class="form-group">--}}
-        {{--<div class="label">--}}
-          {{--<label>作者：</label>--}}
-        {{--</div>--}}
-        {{--<div class="field">--}}
-          {{--<input type="text" class="input w50" name="authour" value=""  />--}}
-          {{--<div class="tips"></div>--}}
-        {{--</div>--}}
-      {{--</div>--}}
-      {{--<div class="form-group">--}}
-        {{--<div class="label">--}}
-          {{--<label>点击次数：</label>--}}
-        {{--</div>--}}
-        {{--<div class="field">--}}
-          {{--<input type="text" class="input w50" name="views" value="" data-validate="member:只能为数字"  />--}}
-          {{--<div class="tips"></div>--}}
-        {{--</div>--}}
-      {{--</div>--}}
       <div class="form-group">
         <div class="label">
           <label></label>

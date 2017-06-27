@@ -32,7 +32,6 @@
           <th>邮编</th>
         <th>邮箱</th>
         <th width="25%">地址</th>
-        <th>等级</th>
         <th>状态</th>
          <th width="100">创建时间</th>
         <th>操作</th>       
@@ -48,7 +47,6 @@
             <td>{{$v['code']}}</td>
           <td>{{$v['email']}}</td>
            <td>{{$v['address']}}</td>
-          <td>{{$v['level']}}</td>
           <td>{{$v['state']}}</td>
           <td>{{$v['created_at']}}</td>
           <td><div class="button-group">

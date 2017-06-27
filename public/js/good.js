@@ -86,7 +86,7 @@ function goodNum(){
 	});
 
 	//点击加号加1
-	$(".add").on("click", function() {
+	$("#add").on("click", function() {
 
 		//获取当前的数量
 		var num = $(this).prev("input").val();
@@ -100,7 +100,7 @@ function goodNum(){
 	});
 
 	//点击减号减1
-	$(".min").on("click", function() {
+	$("#minus").on("click", function() {
 
 		//获取当前的数量
 		var num = $(this).next('input').val();

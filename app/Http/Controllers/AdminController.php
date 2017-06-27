@@ -105,7 +105,6 @@ class AdminController extends BaseController
 
     }
 
-
      //商品分类编辑显示
     public function cate_edit($id,$pid,$name)
     {
@@ -240,8 +239,9 @@ class AdminController extends BaseController
     //订单管理
     public function order_list()
     {
+        $data = DB::table('orders')->get();
 
-        return view('admin/order/index');
+        return view('admin/order/index', compact('data'));
     }
 
     //订单添加
