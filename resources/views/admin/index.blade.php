@@ -56,7 +56,8 @@
   <h2><span class="icon-pencil-square-o"></span>管理员模块</h2>
   <ul>
   	<li><a href="{{url('admin/admin_list')}}" target="right"><span class="icon-caret-right"></span>管理员列表</a></li>
-    <li><a href="{{url('admin/admin_edit')}}" target="right"><span class="icon-caret-right"></span>修改密码</a></li>   
+    <li><a href="{{url('admin/admin_edit')}}" target="right"><span class="icon-caret-right"></span>修改密码</a></li>
+    <li><a href="{{url('admin/competence')}}" target="right"><span class="icon-caret-right"></span>权限管理</a></li>  
   </ul>    
 
 </div>

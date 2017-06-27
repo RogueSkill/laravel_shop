@@ -52,8 +52,8 @@
           <td>{{$v['state']}}</td>
           <td>{{$v['created_at']}}</td>
           <td><div class="button-group">
-              <a class="button border-red" href="{{url('/admin/user_edit/'.$v['id'])}}"><span class="icon-trash-o"></span> 修改</a>
-              {{--<a class="button border-red" href="javascript:void(0)" onclick="return del(1)"><span class="icon-trash-o"></span> 删除</a></div></td>--}}
+              <a class="button border-red" href="{{url('/admin/user_edit/'.$v['id'])}}"><span class="icon-trash-o"></span> 审核</a>
+            <!--   <a class="button border-red" href="javascript:void(0)" onclick="return del(1)"><span class="icon-trash-o"></span> 删除</a></div></td> -->
                   <a class="button border-red" href="{{url('/admin/user_del/'.$v['id'])}}"><span class="icon-trash-o"></span> 删除</a>
         </tr>
       @endforeach

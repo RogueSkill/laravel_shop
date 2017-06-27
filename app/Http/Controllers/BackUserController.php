@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Member;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Http\Request;
@@ -18,8 +19,11 @@ class BackUserController extends BaseController
     */
     public function user_list(Request $request)
     {
-        $user = User::paginate(5);
-//        dd($user);
+
+        // $user = User::paginate(5);
+        $user = Member::paginate(5);
+
+       // dd($user);
     	return view('admin/user/index',compact('user'));
     }
 
@@ -55,7 +59,7 @@ class BackUserController extends BaseController
 
        $data = $request->only(['username','pass','sex','address','code','phone','email','state','level']);
 
-        if (DB::table('users')->insert($data)) {
+        if (DB::table('members')->insert($data)) {
             return redirect('/admin/user_list')->with(['success' => '添加成功！！！！！！！']);
         } else {
             return back()->withInput();
@@ -75,7 +79,7 @@ class BackUserController extends BaseController
     public  function  update(Request $request, $id)
     {
 //        dd($id);
-        if(User::where('id','=',$id)->update(['username'=>$request->username,
+        if(Member::where('id','=',$id)->update(['username'=>$request->username,
                                                 'pass'=>$request->pass,
                                                 'sex'=>$request->sex,
                                                 'address'=>$request->address,
@@ -96,7 +100,7 @@ class BackUserController extends BaseController
     public function user_del($id)
     {
 //        dd($id);
-    	if(User::destroy($id))
+    	if(Member::destroy($id))
     	return redirect('/admin/user_list');
     	// $url = route('del');
     }
@@ -156,4 +160,37 @@ class BackUserController extends BaseController
 
         return redirect('admin/login');
     }
+
+
+    //     /**
+//     *
+//     *********************************************控制管理模块****************************************
+//     */
+
+    public function competence(Request $request)
+    {
+
+        return view('admin/conadmin/competence');
+    }
+
+        public function competence_add(Request $request)
+    {
+
+        return view('admin/conadmin/competence_add');
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

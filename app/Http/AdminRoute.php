@@ -14,3 +14,9 @@ Route::get('/admin/user_del/{id}', 'BackUserController@user_del');
 
 	//退出登录
 Route::get('/admin/logout','BackUserController@logout');
+
+
+//控制管理员
+Route::get('/admin/competence', 'BackUserController@competence');
+Route::get('/admin/competence_add', 'BackUserController@competence_add');//编辑添加权限
+
