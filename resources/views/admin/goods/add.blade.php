@@ -39,7 +39,7 @@
           </div>
           <div class="field">
             <select name="cid" class="input w50">
-              <option value="">请选择分类</option>
+              <!-- <option value="0">请选择分类</option> -->
               @foreach($goodtypes as $val)     
               <option value="{{$val['id']}}">{{$val['name']}}</option>
               @endforeach

@@ -20,7 +20,7 @@ class GoodController extends Controller
         $goods = DB::table('goods as g')->join('types as t','t.id','=','g.typeid')->select('g.goods_id','g.goods_name','g.sort','original_img','t.name','g.updated_at');
 
         $goods = $goods->get();
-
+        // var_dump($goods);
     	return view('admin/goods/index', compact('goods'));
     }
 
