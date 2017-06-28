@@ -24,7 +24,8 @@ class CreateGoodsTable extends Migration
             $table->decimal('cost_price',8,2)->comment('成本价格');
             $table->string('goods_remake')->comment('简单描述');
             $table->text('goods_content')->comment('描述内容');
-            $table->string('original_img')->comment('原始图片');
+            $table->text('original_img')->comment('原始图片');
+            $table->string('cover_img')->comment('封面图');
             $table->tinyInteger('is_on_sale')->comment('是否上架');
             $table->tinyInteger('sort')->comment('排序');
             $table->tinyInteger('is_recommend')->comment('是否推荐');

@@ -40,8 +40,9 @@ class GoodController extends Controller
 
             // var_dump($request->except('_token'));
             // exit;
-            $goods_name = $request->input('title');
-            $typeid = $request->input('cid');
+
+            $goods_name = $request->input('goods_name');
+            $typeid = $request->input('typeid');
             $goods_sn = $request->input('goods_sn');
             $shop_price = $request->input('shop_price');
             $mareket_price = $request->input('mareket_price');
@@ -112,30 +113,50 @@ class GoodController extends Controller
         $goodtypes = DB::table('types')->get();
 
         $goodsrow = Good::find($id);
+        // dd($goodsrow['goods_id']);
         $orimg = explode(',', $goodsrow['original_img']);
 
         return view('admin/goods/edit', compact('goodtypes','goodsrow','orimg','id'));
     }
 
-    //产品编译处理页
+    //商品编辑处理页
     public function doEdit(Request $request)
+    {
+        // dd($request->all());
+        $data = $request->except('_token');
+        $id = $data['goods_id'];
+        unset($data['goods_id']);
+        // dd($data);
+        $boo = Good::where('goods_id',$id)->update($data);
+        if($boo){
+            return redirect('/admin/goods_list');
+        }
+    }
+
+    //产品编辑删除图片处理
+    public function delEditImg(Request $request)
     {   
         // dd($request->all());
 
         $id = $request->input('id');
         $path = $request->input('path');
-
+        $fileDir = './upload/';
+        $fileName = $fileDir.$path;
 
         $url = DB::table('goods')->where('goods_id',$id)->pluck('original_img');
         $url = $url[0];
         $urlarr = explode(',', $url);
-        // var_dump($urlarr);
         $key = array_search($path,$urlarr);
-        unset($urlarr[$key]);
-        // var_dump($urlarr);
-        $url = implode(',', $urlarr);
-        // echo $url;
-        $boo = DB::table('goods')->where('goods_id',$id)->update(['original_img'=>$url]);
+
+            unset($urlarr[$key]);
+            $url = implode(',', $urlarr);
+
+            if($fileName){
+                unlink($fileName);
+            }
+
+            $boo = DB::table('goods')->where('goods_id',$id)->update(['original_img'=>$url]);
+
         if($boo){
             echo 1;
         }else{

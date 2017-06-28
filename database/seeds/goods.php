@@ -25,6 +25,7 @@ class goods extends Seeder
         	$tmp['goods_remake'] = rand(0,1000);
         	$tmp['goods_content'] = str_random(8);
         	$tmp['original_img'] = str_random(20);
+            $tmp['cover_img'] = '../../style/images/image.png';
         	$tmp['is_on_sale'] = rand(0,1);
 			$tmp['sort'] = rand(0,100);
             $tmp['is_recommend'] = rand(0,1);

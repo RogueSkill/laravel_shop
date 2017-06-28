@@ -27,7 +27,7 @@
           <label>标题：</label>
         </div>
         <div class="field">
-          <input type="text" class="input w50" value="" name="title" data-validate="required:请输入标题" />
+          <input type="text" class="input w50" value="" name="goods_name" data-validate="required:请输入标题" />
           <div class="tips"></div>
         </div>
       </div>
@@ -38,7 +38,7 @@
             <label>分类标题：</label>
           </div>
           <div class="field">
-            <select name="cid" class="input w50">
+            <select name="typeid" class="input w50">
               <!-- <option value="0">请选择分类</option> -->
               @foreach($goodtypes as $val)     
               <option value="{{$val['id']}}">{{$val['name']}}</option>
@@ -90,7 +90,7 @@
             <label>图片：</label>
           </div>
           <div class="field">
-            <input type="file" id="original_img" name="original_img[]" class="input tips" style="width:25%; float:left;"   data-toggle="hover" data-place="right" data-image="" />
+            <input type="file" multiple="multiple" id="original_img" name="original_img[]" class="input tips" style="width:25%; float:left;"   data-toggle="hover" data-place="right" data-image="" />
             <input type="button" class="button bg-blue margin-left" name="add" value="+"  style="float:left;">
             <div class="tipss">图片尺寸：500*500</div>   
           </div>
