@@ -32,7 +32,6 @@
           <th>邮编</th>
         <th>邮箱</th>
         <th width="25%">地址</th>
-        <th>等级</th>
         <th>状态</th>
          <th width="100">创建时间</th>
         <th>操作</th>       
@@ -48,12 +47,11 @@
             <td>{{$v['code']}}</td>
           <td>{{$v['email']}}</td>
            <td>{{$v['address']}}</td>
-          <td>{{$v['level']}}</td>
           <td>{{$v['state']}}</td>
           <td>{{$v['created_at']}}</td>
           <td><div class="button-group">
-              <a class="button border-red" href="{{url('/admin/user_edit/'.$v['id'])}}"><span class="icon-trash-o"></span> 修改</a>
-              {{--<a class="button border-red" href="javascript:void(0)" onclick="return del(1)"><span class="icon-trash-o"></span> 删除</a></div></td>--}}
+              <a class="button border-red" href="{{url('/admin/user_edit/'.$v['id'])}}"><span class="icon-trash-o"></span> 审核</a>
+            <!--   <a class="button border-red" href="javascript:void(0)" onclick="return del(1)"><span class="icon-trash-o"></span> 删除</a></div></td> -->
                   <a class="button border-red" href="{{url('/admin/user_del/'.$v['id'])}}"><span class="icon-trash-o"></span> 删除</a>
         </tr>
       @endforeach

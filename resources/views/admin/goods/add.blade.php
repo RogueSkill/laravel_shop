@@ -90,7 +90,7 @@
             <label>图片：</label>
           </div>
           <div class="field">
-            <input type="file" id="pic" name="pic[]" class="input tips" style="width:25%; float:left;"   data-toggle="hover" data-place="right" data-image="" />
+            <input type="file" id="original_img" name="original_img[]" class="input tips" style="width:25%; float:left;"   data-toggle="hover" data-place="right" data-image="" />
             <input type="button" class="button bg-blue margin-left" name="add" value="+"  style="float:left;">
             <div class="tipss">图片尺寸：500*500</div>   
           </div>
@@ -113,7 +113,7 @@
           <label>描述：</label>
         </div>
         <div class="field">
-          <script id="describe" type="text/plain"  name="content" style="width:900px;height:200px;"></script>
+          <script id="goods_remake" type="text/plain"  name="goods_remake" style="width:900px;height:200px;"></script>
           <!-- <textarea class="input" name="note" style=" height:90px;"></textarea> -->
           <div class="tips"></div>
         </div>
@@ -123,7 +123,7 @@
           <label>内容：</label>
         </div>
         <div class="field">
-        <script id="content" type="text/plain"  name="content" style="width:900px;height:300px;"></script>
+        <script id="goods_content" type="text/plain"  name="goods_content" style="width:900px;height:300px;"></script>
           <!-- <textarea name="content" class="input" style="height:450px; border:1px solid #ddd;"></textarea> -->
           <div class="tips"></div>
         </div>
@@ -131,7 +131,7 @@
      
       <div class="clear"></div>
 
-      <div class="form-group">
+      <!-- <div class="form-group">
         <div class="label">
           <label>关键字标题：</label>
         </div>
@@ -148,6 +148,7 @@
           <input type="text" class="input" name="s_keywords" value=""/>
         </div>
       </div>
+
       <div class="form-group">
         <div class="label">
           <label>关键字描述：</label>
@@ -155,13 +156,14 @@
         <div class="field">
           <textarea type="text" class="input" name="s_desc" style="height:80px;"></textarea>
         </div>
-      </div>
+      </div> -->
+
       <div class="form-group">
         <div class="label">
-          <label>排序：</label>
+          <label>销售数量：</label>
         </div>
         <div class="field">
-          <input type="text" class="input w50" name="sort" value="0"  data-validate="number:排序必须为数字" />
+          <input type="text" class="input w50" name="sales_num" value="0"  data-validate="number:排序必须为数字" />
           <div class="tips"></div>
         </div>
       </div>
@@ -171,9 +173,9 @@
           <label>是否上架：</label>
         </div>
         <div class="field">
-          <input type="radio" class="" checked name="is_on_sale"/>是
+          <input type="radio" class="" value="1" checked name="is_on_sale"/>是
           <div class="tips"></div>
-          <input type="radio" class="" name="is_on_sale"/>否
+          <input type="radio" class="" value="0" name="is_on_sale"/>否
         </div>
       </div>
 
@@ -222,10 +224,10 @@
       </div>
       <div class="form-group">
         <div class="label">
-          <label>作者：</label>
+          <label>库存：</label>
         </div>
         <div class="field">
-          <input type="text" class="input w50" name="authour" value=""  />
+          <input type="number" class="input w50" name="store_count" value=""  />
           <div class="tips"></div>
         </div>
       </div>
@@ -234,7 +236,7 @@
           <label>点击次数：</label>
         </div>
         <div class="field">
-          <input type="text" class="input w50" name="views" value="" data-validate="member:只能为数字"  />
+          <input type="number" class="input w50" name="click_num" value="" data-validate="member:只能为数字"  />
           <div class="tips"></div>
         </div>
       </div>
@@ -253,22 +255,18 @@
 </body></html>
 <script>
       laydate({
-
             elem: '#datetime'
-
         });
-
       //实例化编辑器
       //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
-      var ue = UE.getEditor('describe');
-      var ue = UE.getEditor('content');
+      var ue = UE.getEditor('goods_remake');
+      var ue = UE.getEditor('goods_content');
 
   $(function(){
 
-
       $('input[name=add]').click(function(){
           
-        var html = "<div class='form-group'><div class='label'><label>图片：</label></div><div class='field'><input type='file' name='pic[]' class='input tips' style='width:25%; float:left;'   data-toggle='hover' data-place='right' data-image='' /><input type='button' name='reduce' class='button bg-blue margin-left' value='-'  style='float:left;><div class='tipss'>图片尺寸：500*500</div></div></div>";
+        var html = "<div class='form-group'><div class='label'><label>图片：</label></div><div class='field'><input type='file' name='original_img[]' class='input tips' style='width:25%; float:left;'   data-toggle='hover' data-place='right' data-image='' /><input type='button' name='reduce' class='button bg-blue margin-left' value='-'  style='float:left;><div class='tipss'>图片尺寸：500*500</div></div></div>";
         $('.upload_class').append(html);
 
       });
