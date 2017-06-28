@@ -59,9 +59,10 @@ Route::group(['middleware'=>['web','admin.login']],function(){
 	Route::get('/admin/goods_del', 'GoodController@del');
 	//订单模块
 	Route::get('/admin/order_list', 'AdminController@order_list');
-	Route::get('/admin/order_add', 'AdminController@order_add');
-	Route::get('/admin/order_edit', 'AdminController@order_edit');
+	Route::post('/admin/order_update', 'AdminController@order_update');
+	Route::get('/admin/order_edit/{id}', 'AdminController@order_edit');
 	Route::get('/admin/order_del', 'AdminController@order_del');
+	Route::get('/admin/order_send', 'AdminController@order_send');
 	//管理员
 	Route::get('/admin/admin_add/', 'AdminController@admin_add');
 	Route::post('/admin/admin_add/', 'AdminController@doAdminAdd');

@@ -244,25 +244,51 @@ class AdminController extends BaseController
         return view('admin/order/index', compact('data'));
     }
 
-    //订单添加
-    public function order_add()
+    //订单修改
+    public function order_update()
     {
+        $id = $_POST['id'];
+        $order_linkman = $_POST['order_linkman'];
+        $order_address = $_POST['order_address'];
+        $order_code = $_POST['order_code'];
+        $order_phone = $_POST['order_phone'];
+        $order_price = $_POST['order_price'];
+        $update_bool = DB::table('orders')->where('id', $id)->update([
+            "linkman" => $order_linkman,
+            "code" => $order_code,
+            "address" => $order_address,
+            "phone" => $order_phone,
+            "total" => $order_price
+        ]);
+        echo $update_bool;
 
-        return view('admin/order/add');
     }
 
      //订单编辑
-    public function order_edit()
+    public function order_edit($id)
     {
+       $data = DB::table('orders')->where('id','=',$id)->get();
 
-        return view('admin/order/edit');
+       $data = $data[0];
+
+        return view('admin/order/edit', compact('data'));
     }
 
     //订单删除
     public function order_del()
     {
+       $id = $_GET['id'];
 
-        return view('admin/order/del');
+       $data = DB::table('orders')->where("id", "=", $id)->delete();
+
+       echo $data;
+
+    }
+
+    //发货
+    public function order_send()
+    {
+        return view('admin/order/send');
     }
 
     /**
