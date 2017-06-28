@@ -112,12 +112,12 @@
 
                 <div class="col-xs-6 col-md-3">
                     
-                    <a href="#" class="thumbnail">
-                      <img width="100" height="100"  src="" />
+                    <a style="display:block; width: 200px; height:100px; " href="#" class="thumbnail">
+                      <img  width="100" height="100" class="glyphicon glyphicon-plus"  src="" />
                     </a>
-                    <a href="javascript:;">
+<!--                     <a href="javascript:;">
                       <img width="15" height="15" dataid="" src="../../images/icon/del.jpg" name="srcId">
-                    </a>
+                    </a> -->
                   </div>
             @else
                   
