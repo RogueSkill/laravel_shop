@@ -59,7 +59,7 @@ Route::group(['middleware'=>['web','admin.login']],function(){
 	Route::post('/admin/goods_edit', 'GoodController@doEdit');
 	// Route::post('/admin/goods_addimg', 'GoodController@addEditImg');
 	Route::post('/admin/goods_delimg', 'GoodController@delEditImg');
-	Route::get('/admin/goods_del', 'GoodController@del');
+	Route::get('/admin/goods_del/{id}', 'GoodController@del');
 	//订单模块
 	Route::get('/admin/order_list', 'AdminController@order_list');
 	Route::post('/admin/order_update', 'AdminController@order_update');

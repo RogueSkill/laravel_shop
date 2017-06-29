@@ -119,7 +119,7 @@ class GoodController extends Controller
     //商品编辑处理页
     public function doEdit(Request $request)
     {
-        var_dump($request->all());
+        // var_dump($request->all());
         // exit;
         $data = $request->except('_token');
         $data['cover_img'] = substr($data['cover_img'], 6);
@@ -158,7 +158,7 @@ class GoodController extends Controller
 
     // }
 
-    //产品编辑删除图片处理
+    //商品编辑删除图片处理
     public function delEditImg(Request $request)
     {   
         // dd($request->all());
@@ -188,5 +188,21 @@ class GoodController extends Controller
             echo 0;
         }
 
+    }
+
+    //删除商品
+    public function del($id)
+    {
+        $original_img = DB::table('goods')->where('goods_id',$id)->pluck('original_img');
+        $original_img = $original_img[0];
+        $original = explode(',', $original_img);
+        foreach($original as $val){
+
+            unlink('./upload/'.$val);
+
+        }
+    
+        $good = Good::find($id); 
+        $good->delete();
     }
 }
