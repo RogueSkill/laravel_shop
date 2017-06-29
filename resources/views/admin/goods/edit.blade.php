@@ -23,6 +23,7 @@
   .img{ width: 150px; height: 150px; padding: 5px; margin: 5px; border: 2px orange dashed;display:block;}
   .input_file{width: 150px; height: 150px; padding: 5px; margin: 5px; border: 2px orange dashed;display:block; opacity: 0;}
   .add{width: 150px; height: 150px; padding: 5px; margin: 5px; border: 2px orange dashed;display:block; background:url('../../style/images/jia.png') no-repeat center}
+  .has{width: 150px; height: 150px; padding: 5px; margin: 5px; border: 2px orange dashed;display:block;}
 </style>
 <body>
 <div class="panel admin-panel">
@@ -94,6 +95,19 @@
         </div>
       </div>
       
+      <!-- <div class="upload_class" style="width:1000px; height:auto;">
+          <div class="form-group">
+          <div class="label">
+            <label>图片：</label>
+          </div>
+          <div class="field">
+            <input type="file" multiple="multiple" id="original_img" name="original_img[]" class="input tips" style="width:25%; float:left;"   data-toggle="hover" data-place="right" data-image="" />
+            <input type="button" class="button bg-blue margin-left" name="add" value="+"  style="float:left;">
+            <div class="tipss">图片尺寸：500*500</div>   
+          </div>
+        </div>
+      </div> -->
+
       <div class="form-group">
         <div class="label">
           <label>封面图：</label>
@@ -133,10 +147,13 @@
                 @endforeach 
                 <div class="col-xs-6 col-md-3">
                 <a class="add" href="javascript:;">
-                      <input class="input_file" style="margin-left:15px" name="edit_add" type="file" />
+                      <input class="input_file" id="file" name="file" style="margin-left:15px" name="edit_add" type="file" value="" />
+                </a>
+                <a href="javascript:;">
+                  <img width="15" height="15" name="up" dataid="{{$id}}" src="../../style/images/up.png" name="srcId">
                 </a>
                 </div>
-            @endif
+                @endif
             <!-- <input type="file" id="original_img" name="original_img[]" class="input tips" style="width:25%; float:left;"   data-toggle="hover" data-place="right" data-image="" />
             <input type="button" class="button bg-blue margin-left" name="add" value="+"  style="float:left;">
             <div class="tipss">图片尺寸：500*500</div> -->   
@@ -286,17 +303,31 @@
 
   $(function(){
 
-      // $('input[name=add]').click(function(){
-          
-      //   var html = "<div class='form-group'><div class='label'><label>图片：</label></div><div class='field'><input type='file' name='original_img[]' class='input tips' style='width:25%; float:left;'   data-toggle='hover' data-place='right' data-image='' /><input type='button' name='reduce' class='button bg-blue margin-left' value='-'  style='float:left;><div class='tipss'>图片尺寸：500*500</div></div></div>";
-      //   $('.upload_class').append(html);
-
-      // });
 
       $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
+      });
+
+      $("#file").click(function(){
+//           $(document).ready(function () {
+//   $("#uploadbutton").click(function () {
+//     var filename = $("#file").val();
+ 
+//     $.ajax({
+//       type: "POST",
+//       url: "addFile.do",
+//       enctype: 'multipart/form-data',
+//       data: {
+//         file: filename
+//       },
+//       success: function () {
+//         alert("Data Uploaded: ");
+//       }
+//     });
+//   });
+// });
       });
 
      $(".upload_class").on('click','input[name=reduce]', function(){
@@ -338,6 +369,40 @@
           $('input[name=cover_img]').val(newcover);
 
      });
+
+    
+      //修改添加上传按钮样式
+      $('input[name=file]').change(function(){
+            var fileval = $(this).val();
+
+            $(this).parent().removeClass('add');
+            $(this).removeClass("input_file");
+            $(this).addClass('has');
+      });
+
+       //添加上传文件
+     // $('img[name=up]').click(function(){
+     //      var that = $(this);
+     //      var id = $(this).attr('dataid');
+     //      var name = $(this).parent().siblings().children().attr('name');
+          
+     //      // alert(value);
+
+     //      $.ajax({         
+
+     //         url:'/admin/goods_addimg',
+     //         data:{id:id,name:name},
+     //         type:'POST',
+     //     dataType:'JSON',
+         
+     //         success: function(data)
+     //         {
+     //           console.log(data);
+     //         }
+
+     //      });
+
+     // });
 
   });
 </script>

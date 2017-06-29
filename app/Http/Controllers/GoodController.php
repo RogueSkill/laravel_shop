@@ -16,7 +16,6 @@ class GoodController extends Controller
     public function index()
     {
 
-
         $goods = DB::table('goods as g')->join('types as t','t.id','=','g.typeid')->select('g.goods_id','g.goods_name','g.sort','original_img','t.name','g.updated_at');
 
         $goods = $goods->get();
@@ -40,7 +39,6 @@ class GoodController extends Controller
 
             // var_dump($request->except('_token'));
             // exit;
-
             $goods_name = $request->input('goods_name');
             $typeid = $request->input('typeid');
             $goods_sn = $request->input('goods_sn');
@@ -122,16 +120,43 @@ class GoodController extends Controller
     //商品编辑处理页
     public function doEdit(Request $request)
     {
-        // dd($request->all());
+        // var_dump($request->all());
+        // exit;
         $data = $request->except('_token');
         $id = $data['goods_id'];
+        
+
+        if($request->hasFile('file')){
+
+            $ext = $request->file('file')->getClientOriginalExtension();     // 扩展名
+            $fileName = date('Y-m-d_H-i-s').uniqid().'.'.$ext;
+            $request->file('file')->move('./upload',$fileName);
+            
+            $original_img = DB::table('goods')->where('goods_id',$id)->pluck('original_img');
+            $original_img = $original_img[0];
+            $original_img .= ','.$fileName;
+            DB::table('goods')->where('goods_id',$id)->update(['original_img'=>$original_img]);
+        }
         unset($data['goods_id']);
+        unset($data['file']);
+
         // dd($data);
         $boo = Good::where('goods_id',$id)->update($data);
         if($boo){
             return redirect('/admin/goods_list');
         }
     }
+
+    // 商品编辑添加
+    // public function addEditImg(Request $request)
+    // {
+    //     dump($request->all());
+    //     $id = $request->input('id');
+    //     $name = $request->input('name');
+    //     $file = $request->file($name);
+    //     dd($file);
+
+    // }
 
     //产品编辑删除图片处理
     public function delEditImg(Request $request)
