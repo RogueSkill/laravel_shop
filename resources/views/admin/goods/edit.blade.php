@@ -114,8 +114,8 @@
         </div>
         <div class="field">
             @if($goodsrow['cover_img'])
-            <input type="hidden" name="cover_img" value="{{$goodsrow['cover_img']}}" >
-            <img style="width:100px; height:100px;" name="cover" src="{{$goodsrow['cover_img']}}" alt="">
+            <input type="hidden" name="cover_img" value="../../{{$goodsrow['cover_img']}}" >
+            <img style="width:100px; height:100px;" name="cover" src="../../{{$goodsrow['cover_img']}}" alt="">
             @else
             <input type="hidden" name="cover_img" value="../../style/images/image.png" >
             <img style="width:100px; height:100px;" name="cover" src="../../style/images/image.png" alt="">

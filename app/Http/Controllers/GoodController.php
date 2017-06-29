@@ -16,7 +16,7 @@ class GoodController extends Controller
     public function index()
     {
 
-        $goods = DB::table('goods as g')->join('types as t','t.id','=','g.typeid')->select('g.goods_id','g.goods_name','g.sort','original_img','t.name','g.updated_at');
+        $goods = DB::table('goods as g')->join('types as t','t.id','=','g.typeid')->select('g.goods_id','g.goods_name','g.sort','cover_img','t.name','g.updated_at');
 
         $goods = $goods->get();
         // var_dump($goods);
@@ -55,7 +55,6 @@ class GoodController extends Controller
             $store_count = $request->input('store_count');
             $click_num = $request->input('click_num');
             $created_at = $request->input('datetime');
-
             $original_img = $request->File('original_img');
 
             // $file = $request->File('original_img');
@@ -100,7 +99,7 @@ class GoodController extends Controller
                 echo "<script>alert('添加成功');</script>";
                 return redirect('/admin/goods_list');
             }
-            // $data_add = Good::create(['goods_name'=>$goods_name,'typeid'=>$typeid, 'goods_sn'=>$goods_sn, 'shop_price'=>$shop_price, 'mareket_price'=>$mareket_price, 'cost_price'=>$cost_price, 'goods_remake'=>$goods_remake, 'goods_content'=>$goods_content,'sales_num'=>$sales_num, 'is_on_sale'=>$is_on_sale, 'is_recommend'=>$is_recommend, 'is_new'=>$is_new, 'is_hot'=>$is_hot, 'store_count'=>$store_count,'click_num'=>$click_num, 'created_at'=>$created_at,'original_img'=>$fileUrl]);
+            
         }
 
     }
@@ -120,9 +119,10 @@ class GoodController extends Controller
     //商品编辑处理页
     public function doEdit(Request $request)
     {
-        // var_dump($request->all());
+        var_dump($request->all());
         // exit;
         $data = $request->except('_token');
+        $data['cover_img'] = substr($data['cover_img'], 6);
         $id = $data['goods_id'];
         
 
