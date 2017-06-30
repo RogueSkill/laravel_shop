@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{asset('/style/css/admin.css')}}">
     <script src="{{asset('/style/js/jquery.js')}}"></script>
     <script src="{{asset('/style/js/pintuer.js')}}"></script>  
+
 </head>
 <body>
 <div class="bg"></div>

@@ -189,27 +189,6 @@
     </div>
     <!-- end -->
 
-    <!-- 配送方式 -->
-    <div class="container">
-        <div class="pay-list">
-            <div class="pay-bg">配送方式</div>
-            <div class="pay-add">
-                <table>
-                    <tr>
-                        <td>请选择配送方式</td>
-                        <td>
-                            <select class="form-control" name="province" id="province" style="margin-left:10px; width:200px;">
-                                <option>--请选择配送方式--</option>
-                                <option>顺丰</option>
-                                <option>邮政</option>
-                            </select>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>
-    <!-- end -->
 
     <!-- 商品列表 -->
     <div class="container">

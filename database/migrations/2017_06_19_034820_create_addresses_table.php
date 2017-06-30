@@ -22,6 +22,7 @@ class CreateAddressesTable extends Migration
             $table->string('county')->comment('县/区');
             $table->string('detailed_address')->comment('详细地址');
             $table->tinyInteger('status')->comment('状态');
+            $table->string('code')->comment('邮编');
             $table->timestamps();
             $table->engine = 'InnoDB';
         });

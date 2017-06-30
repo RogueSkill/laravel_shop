@@ -85,16 +85,120 @@ class WebController extends Controller
         return view("web/order");
     }
 
-    //用户中心页
+//用户中心页
     public function ucenter()
     {
-        return view("web/center");
+        $id = 'aa';
+
+        $user_datas = DB::table('members')->where('username','=',$id)->get();
+
+        $user_datas = $user_datas[0];
+
+        return view('web/center')->with('user_datas',$user_datas);
+
     }
 
-    //地址管理页
+    //用户组中心修改
+    public function ucenteradd()
+    {
+        $uname = $_POST['uname'];
+
+        $add = DB::table('members')->where('username',$uname)->update(['pname'=>$_POST['pname'],'name'=>$_POST['name'],'sex'=>$_POST['sex'],'address'=>$_POST['address'],'code'=>$_POST['code'],'email'=>$_POST['uemail'],'phone'=>$_POST['uphone']]);
+
+        if($add>0)
+        {
+
+            exit("<script>alert('资料修改成功');window.location.href='center'</script>");
+
+        }else{
+
+            exit("<script>alert('修改资料失败，请修改资料后在提交');window.location.href='center'</script>");
+
+        }
+    }
+
+    //地址删除设置默认
     public function addres()
     {
-        return view("web/addres");
+        $uid = 1;
+
+        $addres_data = DB::table('addresses')->where('userid',$uid)->paginate(10);
+
+        if (isset($_GET['id']) == true && $_GET['perform'] == 'delete')
+        {
+            $delete = DB::table('addresses')->where('id',$_GET['id'])->delete();
+
+            if ($delete > 0)
+            {
+
+                exit("<script>alert('删除成功');window.location.href='addres'</script>");
+
+            }else{
+
+                exit("<script>alert('删除失败');window.location.href='addres'</script>");
+
+            }
+        }
+
+        if (isset($_GET['id']) == true && isset($_GET['perform']) == true)
+        {
+            DB::table('addresses')->where('userid',$_GET['perform'])->update(['status'=>0]);
+            $status = DB::table('addresses')->where('id',$_GET['id'])->update(['status'=>1]);
+
+            if ($status > 0)
+            {
+
+                exit("<script>alert('设置默认成功');window.location.href='addres'</script>");
+
+            }else{
+
+                exit("<script>alert('设置默认失败');window.location.href='addres'</script>");
+
+            }
+        }
+
+        return view("web/addres",compact('addres_data'));
+
+    }
+
+    //地址添加修改
+    public function addresadd()
+    {
+        $uid = 1;
+
+        if (isset($_POST['created_at']) == true)
+        {
+            $add = DB::table('addresses')->insert(['userid'=>$uid,'created_at'=>$_POST['created_at'],'province'=>$_POST['province'],'city'=>$_POST['city'],'county'=>$_POST['county'],'detailed_address'=>$_POST['uaddress'],'consignee'=>$_POST['uname'],'phone'=>$_POST['uphone'],'code'=>$_POST['code']]);
+
+            if ($add)
+            {
+
+                exit("<script>alert('添加地址成功');window.location.href='addres'</script>");
+
+            }else{
+
+                exit("<script>alert('添加地址失败');window.location.href='addres'</script>");
+
+            }
+        }
+
+        if (isset($_POST['updated_at']) == true && isset($_POST['addresid']) == true) {
+
+             $update = DB::table('addresses')->where('id',$_POST['addresid'])->update(['updated_at'=>$_POST['updated_at'],'province'=>$_POST['province'],'city'=>$_POST['city'],'county'=>$_POST['county'],'detailed_address'=>$_POST['uaddress'],'consignee'=>$_POST['uname'],'phone'=>$_POST['uphone'],'code'=>$_POST['code']]);
+
+             if ($update > 0)
+             {
+
+                 exit("<script>alert('修改地址成功');window.location.href='addres'</script>");
+
+             }else{
+
+                 exit("<script>alert('修改地址失败');window.location.href='addres'</script>");
+
+             }
+        }
+
+
     }
 
     //注册页Ajax请求处理
@@ -160,3 +264,5 @@ class WebController extends Controller
     }
 
 }
+
+

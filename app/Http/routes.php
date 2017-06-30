@@ -58,21 +58,16 @@ Route::group(['middleware'=>['web','admin.login']],function(){
 	Route::post('/admin/goods_add','GoodController@doAdd');
 	
 	Route::get('/admin/goods_edit/{id}', 'GoodController@edit');
-	Route::post('/admin/goods_edit/', 'GoodController@doEdit');
-	Route::get('/admin/goods_del', 'GoodController@del');
+	Route::post('/admin/goods_edit', 'GoodController@doEdit');
+	// Route::post('/admin/goods_addimg', 'GoodController@addEditImg');
+	Route::post('/admin/goods_delimg', 'GoodController@delEditImg');
+	Route::get('/admin/goods_del/{id}', 'GoodController@del');
 	//订单模块
 	Route::get('/admin/order_list', 'AdminController@order_list');
-	Route::get('/admin/order_add', 'AdminController@order_add');
-	Route::get('/admin/order_edit', 'AdminController@order_edit');
+	Route::post('/admin/order_update', 'AdminController@order_update');
+	Route::get('/admin/order_edit/{id}', 'AdminController@order_edit');
 	Route::get('/admin/order_del', 'AdminController@order_del');
-	// //管理员
-	// Route::get('/admin/admin_add/', 'AdminController@admin_add');
-	// Route::post('/admin/admin_add/', 'AdminController@doAdminAdd');
-	// Route::get('/admin/admin_list', 'AdminController@admin_list');
-	// Route::get('/admin/admin_edit/{id}', 'AdminController@admin_edit');
-	// Route::post('/admin/admin_edit/', 'AdminController@doAdminEdit');
-	// Route::get('/admin/admin_del/{id}', 'AdminController@admin_del');
-
+	Route::get('/admin/order_send', 'AdminController@order_send');
 });
 
 Route::group(['middleware'=>['web','admin.login','level']],function(){

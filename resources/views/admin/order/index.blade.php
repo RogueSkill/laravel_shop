@@ -1,3 +1,6 @@
+<?php
+    $arr = [0=>'待发货',1=>'已发货',2=>'待评价',3=>'交易完成'];
+?>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
@@ -32,7 +35,6 @@
         <th>商品图</th>
         <th>联系人</th>
         <th>手机</th>
-        <th>订单创建时间</th>
          <th>购买时间</th>
          <th>总价</th>
          <th>订单状态</th>
@@ -41,35 +43,62 @@
 
         @foreach($data as $val)
         <tr>
-          <td><input type="checkbox" name="id[]" value="1" />
+          <td><input type="checkbox" name="id[]" />
             {{$val['id']}}</td>
           <td>{{$val['userid']}}</td>
           <td>{{$val['ordernum']}}</td>
           <td>{{$val['goods']}}</td>
-           <td>商品图</td>
+           <td><img src="{{asset('images/upic/4.jpg')}}" alt="" width="70" height="70"></td>
           <td>{{$val['linkman']}}</td>
           <td>{{$val['phone']}}</td>
-          <td>{{$val['created_at']}}</td>
           <td>{{$val['updated_at']}}</td>
           <td>{{$val['total']}}</td>
-          <td>{{$val['status']}}</td>
-          <td><div class="button-group"> <a class="button border-red" href="javascript:void(0)" onclick="return del(1)"><span class="icon-trash-o"></span> 删除</a> </div></td>
+          <td>{{$arr[$val['status']]}}</td>
+          <!-- <td><div class="button-group"> <a class="button border-blue" href="{{url('/admin/order_edit/'.$val['id'])}}"><span class="icon-edit"></span> 编辑</a> </div></td> -->
+          <td>
+            @if($val['status'] == 0)
+
+                <a href="{{url('/admin/order_send')}}">发货</a>
+              
+            @endif
+            <a href="{{url('/admin/order_edit/'.$val['id'])}}">编辑</a> 
+            <a name='del' valid="{{$val['id']}}" >删除</a></td>
         </tr>
 
         @endforeach
 
-        <td colspan="8"><div class="pagelist"> <a href="">上一页</a> <span class="current">1</span><a href="">2</a><a href="">3</a><a href="">下一页</a><a href="">尾页</a> </div></td>
+        <td colspan="11"><div class="pagelist"> <a href="">上一页</a> <span class="current">1</span><a href="">2</a><a href="">3</a><a href="">下一页</a><a href="">尾页</a> </div></td>
       </tr>
     </table>
   </div>
 </form>
 <script type="text/javascript">
 
-function del(id){
-	if(confirm("您确定要删除吗?")){
-		
-	}
-}
+$("a[name='del']").on("click", function() {
+
+  if(confirm("您确定要删除吗?")) {
+    var that = $(this);
+    var id = $(this).attr('valid');
+   
+    $.ajax({
+
+        type:"get",
+        url:"{{url('/admin/order_del')}}",
+        data:"id="+id,
+        success:function(data) {
+            
+            if(data > 0) {
+              that.parent().parent().remove();
+            }
+           
+        }
+    });
+      
+  }
+});
+
+
+
 
 $("#checkall").click(function(){ 
   $("input[name='id[]']").each(function(){

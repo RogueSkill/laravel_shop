@@ -2,33 +2,43 @@
 <html lang="zh-cn">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="renderer" content="webkit">
-<title></title>
-<link rel="stylesheet" href="{{asset('style/css/pintuer.css')}}">
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<title>title</title>
 <link rel="stylesheet" href="{{asset('style/css/bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{asset('style/css/pintuer.css')}}">
 <link rel="stylesheet" href="{{asset('style/css/admin.css')}}">
-<script src="{{asset('style/js/jquery.js')}}"></script>
+
 <script src="{{asset('style/js/pintuer.js')}}"></script>
 <!-- ueditor -->
-<script src="{{asset('./editor/ueditor.config.js')}}"></script>
-<script src="{{asset('./editor/ueditor.all.min.js')}}"></script>
+<script src="{{asset('editor/ueditor.config.js')}}"></script>
+<script src="{{asset('editor/ueditor.all.min.js')}}"></script>
 <!-- //ueditor -->
+<script src="{{asset('style/js/jquery.js')}}"></script>
 </head>
+<style>
+  .img{ width: 150px; height: 150px; padding: 5px; margin: 5px; border: 2px orange dashed;display:block;}
+  .input_file{width: 150px; height: 150px; padding: 5px; margin: 5px; border: 2px orange dashed;display:block; opacity: 0;}
+  .add{width: 150px; height: 150px; padding: 5px; margin: 5px; border: 2px orange dashed;display:block; background:url('../../style/images/jia.png') no-repeat center}
+  .has{width: 150px; height: 150px; padding: 5px; margin: 5px; border: 2px orange dashed;display:block;}
+</style>
 <body>
 <div class="panel admin-panel">
   <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>增加内容</strong></div>
   <div class="body-content">
 
-    <form method="post" id="form" class="form-x" action="{{url('/admin/goods_add')}}" enctype="multipart/form-data">
+    <form method="post" id="form" class="form-x" action="{{url('/admin/goods_edit')}}" enctype="multipart/form-data">
     <?php echo csrf_field(); ?>  
       <div class="form-group">
         <div class="label">
           <label>标题：</label>
         </div>
         <div class="field">
-          <input type="text" class="input w50" value="{{$goodsrow['goods_name']}}" name="title" data-validate="required:请输入标题" />
+          <input type="hidden" id="goods_id" name="goods_id" value="{{$goodsrow['goods_id']}}" > 
+          <input type="text" class="input w50" value="{{$goodsrow['goods_name']}}" name="goods_name" data-validate="required:请输入标题" />
           <div class="tips"></div>
         </div>
       </div>
@@ -39,7 +49,7 @@
             <label>分类标题：</label>
           </div>
           <div class="field">
-            <select name="cid" class="input w50">
+            <select name="typeid" class="input w50">
               <option value="">请选择分类</option>
               @foreach($goodtypes as $val)     
               <option <?php echo $val['id']==$goodsrow['typeid']? 'selected':'' ?> value="{{$val['id']}}">{{$val['name']}}</option>
@@ -85,25 +95,65 @@
         </div>
       </div>
       
+      <!-- <div class="upload_class" style="width:1000px; height:auto;">
+          <div class="form-group">
+          <div class="label">
+            <label>图片：</label>
+          </div>
+          <div class="field">
+            <input type="file" multiple="multiple" id="original_img" name="original_img[]" class="input tips" style="width:25%; float:left;"   data-toggle="hover" data-place="right" data-image="" />
+            <input type="button" class="button bg-blue margin-left" name="add" value="+"  style="float:left;">
+            <div class="tipss">图片尺寸：500*500</div>   
+          </div>
+        </div>
+      </div> -->
+
+      <div class="form-group">
+        <div class="label">
+          <label>封面图：</label>
+        </div>
+        <div class="field">
+            @if($goodsrow['cover_img'])
+            <input type="hidden" name="cover_img" value="../../{{$goodsrow['cover_img']}}" >
+            <img style="width:100px; height:100px;" name="cover" src="../../{{$goodsrow['cover_img']}}" alt="">
+            @else
+            <input type="hidden" name="cover_img" value="../../style/images/image.png" >
+            <img style="width:100px; height:100px;" name="cover" src="../../style/images/image.png" alt="">
+            @endif
+        </div>
+      </div>
+
       <div class="upload_class" style="width:1000px; height:auto;">
           <div class="form-group">
           <div class="label">
             <label>图片：</label>
           </div>
           <div class="field">
-            @if($orimg)
+          <!-- aa -->
+            @if(count($orimg)>0)
                 @foreach($orimg as $val)
-
+                  
+                  @if(!empty($val))
                   <div class="col-xs-6 col-md-3">
-                    <input type="file" >
-                    <a href="#" class="thumbnail">
-                      <img width="100" height="100" src="../../upload/{{$val}}" />
+                    <a href="javascript:;"> <!--  class="thumbnail" -->
+                      <img class="img" name="img"  src="../../upload/{{$val}}" />
                     </a>
-                    <a href="#"><img width="15" height="15" src="../../images/icon/del.jpg" id="srcId"></a>
+                    <a href="javascript:;">
+                      <img width="15" height="15" dataid="{{$id}}" src="../../images/icon/del.jpg" name="srcId">
+                    </a>
                   </div>
+                  @endif
                 <!-- <div><img src="../../upload/{{$val}}" /></div>    -->
-                @endforeach
-            @endif
+                @endforeach 
+                <div class="col-xs-6 col-md-3">
+                <a class="add" href="javascript:;">
+                      <input class="input_file" id="file" name="file" style="margin-left:15px" name="edit_add" type="file" value="" />
+                </a>
+                <a href="javascript:;">
+                  <img width="15" height="15" name="up" dataid="{{$id}}" src="../../style/images/up.png" name="srcId">
+                </a>
+                </div>
+                @endif
             <!-- <input type="file" id="original_img" name="original_img[]" class="input tips" style="width:25%; float:left;"   data-toggle="hover" data-place="right" data-image="" />
             <input type="button" class="button bg-blue margin-left" name="add" value="+"  style="float:left;">
             <div class="tipss">图片尺寸：500*500</div> -->   
@@ -206,7 +256,7 @@
         </div>
         <div class="field"> 
           <script src="{{asset('js/datejs/laydate.dev.js')}}"></script>
-          <input type="text" class="laydate-icon input w50" id="datetime" name="datetime" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" value="{{$goodsrow['updated_at']}}"  data-validate="required:日期不能为空" style="padding:10px!important; height:auto!important;border:1px solid #ddd!important;" />
+          <input type="text" class="laydate-icon input w50" id="updated_at" name="updated_at" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" value="{{$goodsrow['updated_at']}}"  data-validate="required:日期不能为空" style="padding:10px!important; height:auto!important;border:1px solid #ddd!important;" />
           <div class="tips"></div>
         </div>
       </div>
@@ -244,7 +294,7 @@
 <script>
       $("#srcId").css({"position":"absolute","float":"right"});
       laydate({
-            elem: '#datetime'
+            elem: '#updated_at'
         });
       //实例化编辑器
       //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
@@ -253,20 +303,106 @@
 
   $(function(){
 
-      $('input[name=add]').click(function(){
-          
-        var html = "<div class='form-group'><div class='label'><label>图片：</label></div><div class='field'><input type='file' name='original_img[]' class='input tips' style='width:25%; float:left;'   data-toggle='hover' data-place='right' data-image='' /><input type='button' name='reduce' class='button bg-blue margin-left' value='-'  style='float:left;><div class='tipss'>图片尺寸：500*500</div></div></div>";
-        $('.upload_class').append(html);
 
+      $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
       });
 
+      $("#file").click(function(){
+//           $(document).ready(function () {
+//   $("#uploadbutton").click(function () {
+//     var filename = $("#file").val();
+ 
+//     $.ajax({
+//       type: "POST",
+//       url: "addFile.do",
+//       enctype: 'multipart/form-data',
+//       data: {
+//         file: filename
+//       },
+//       success: function () {
+//         alert("Data Uploaded: ");
+//       }
+//     });
+//   });
+// });
+      });
 
      $(".upload_class").on('click','input[name=reduce]', function(){
           $(this).parent().parent().remove();
      });
 
 
+     //删除已上传图片
+     $('img[name=srcId]').click(function(){
+          var that = $(this);
+          var id = $(this).attr('dataid');
+          var url = $(this).parent().siblings().children().attr('src');
+          var path = url.substr(13);
 
+          $.ajax({         
+
+             url:'/admin/goods_delimg',
+             data:{id:id,path:path},
+             type:'POST',
+         dataType:'JSON',
+         
+             success: function(data)
+             {
+                if(data==1){
+                    that.parent().parent().remove();
+                }
+             }
+
+          });
+
+     });
+
+     //设置封面图
+     $('img[name=img]').click(function(){
+
+          var newcover = $(this).attr('src');
+
+          $('img[name=cover]').attr('src',newcover);
+          $('input[name=cover_img]').val(newcover);
+
+     });
+
+    
+      //修改添加上传按钮样式
+      $('input[name=file]').change(function(){
+            var fileval = $(this).val();
+
+            $(this).parent().removeClass('add');
+            $(this).removeClass("input_file");
+            $(this).addClass('has');
+      });
+
+       //添加上传文件
+     // $('img[name=up]').click(function(){
+     //      var that = $(this);
+     //      var id = $(this).attr('dataid');
+     //      var name = $(this).parent().siblings().children().attr('name');
+          
+     //      // alert(value);
+
+     //      $.ajax({         
+
+     //         url:'/admin/goods_addimg',
+     //         data:{id:id,name:name},
+     //         type:'POST',
+     //     dataType:'JSON',
+         
+     //         success: function(data)
+     //         {
+     //           console.log(data);
+     //         }
+
+     //      });
+
+     // });
 
   });
 </script>

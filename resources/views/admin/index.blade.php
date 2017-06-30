@@ -59,7 +59,7 @@
 
   <h2><span class="icon-pencil-square-o"></span>订单模块</h2>
   <ul>
-    <li><a href="{{url('admin/order_list')}}" target="right"><span class="icon-caret-right"></span>订单列表</a></li>   
+    <li><a href="{{url('admin/order_list')}}" target="right"><span class="icon-caret-right"></span>订单列表</a></li>      
   </ul>
 
   @if($pass == 1)

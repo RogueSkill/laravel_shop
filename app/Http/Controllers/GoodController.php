@@ -16,11 +16,10 @@ class GoodController extends Controller
     public function index()
     {
 
-
-        $goods = DB::table('goods as g')->join('types as t','t.id','=','g.typeid')->select('g.goods_id','g.goods_name','g.sort','original_img','t.name','g.updated_at');
+        $goods = DB::table('goods as g')->join('types as t','t.id','=','g.typeid')->select('g.goods_id','g.goods_name','g.sort','cover_img','t.name','g.updated_at');
 
         $goods = $goods->get();
-
+        // var_dump($goods);
     	return view('admin/goods/index', compact('goods'));
     }
 
@@ -40,8 +39,8 @@ class GoodController extends Controller
 
             // var_dump($request->except('_token'));
             // exit;
-            $goods_name = $request->input('title');
-            $typeid = $request->input('cid');
+            $goods_name = $request->input('goods_name');
+            $typeid = $request->input('typeid');
             $goods_sn = $request->input('goods_sn');
             $shop_price = $request->input('shop_price');
             $mareket_price = $request->input('mareket_price');
@@ -56,7 +55,6 @@ class GoodController extends Controller
             $store_count = $request->input('store_count');
             $click_num = $request->input('click_num');
             $created_at = $request->input('datetime');
-
             $original_img = $request->File('original_img');
 
             // $file = $request->File('original_img');
@@ -101,7 +99,7 @@ class GoodController extends Controller
                 echo "<script>alert('添加成功');</script>";
                 return redirect('/admin/goods_list');
             }
-            // $data_add = Good::create(['goods_name'=>$goods_name,'typeid'=>$typeid, 'goods_sn'=>$goods_sn, 'shop_price'=>$shop_price, 'mareket_price'=>$mareket_price, 'cost_price'=>$cost_price, 'goods_remake'=>$goods_remake, 'goods_content'=>$goods_content,'sales_num'=>$sales_num, 'is_on_sale'=>$is_on_sale, 'is_recommend'=>$is_recommend, 'is_new'=>$is_new, 'is_hot'=>$is_hot, 'store_count'=>$store_count,'click_num'=>$click_num, 'created_at'=>$created_at,'original_img'=>$fileUrl]);
+            
         }
 
     }
@@ -112,14 +110,99 @@ class GoodController extends Controller
         $goodtypes = DB::table('types')->get();
 
         $goodsrow = Good::find($id);
+        // dd($goodsrow['goods_id']);
         $orimg = explode(',', $goodsrow['original_img']);
 
-        return view('admin/goods/edit', compact('goodtypes','goodsrow','orimg'));
+        return view('admin/goods/edit', compact('goodtypes','goodsrow','orimg','id'));
     }
 
-    //产品编译处理页
-    public function doEdit()
+    //商品编辑处理页
+    public function doEdit(Request $request)
     {
+        // var_dump($request->all());
+        // exit;
+        $data = $request->except('_token');
+        $data['cover_img'] = substr($data['cover_img'], 6);
+        $id = $data['goods_id'];
+        
 
+        if($request->hasFile('file')){
+
+            $ext = $request->file('file')->getClientOriginalExtension();     // 扩展名
+            $fileName = date('Y-m-d_H-i-s').uniqid().'.'.$ext;
+            $request->file('file')->move('./upload',$fileName);
+            
+            $original_img = DB::table('goods')->where('goods_id',$id)->pluck('original_img');
+            $original_img = $original_img[0];
+            $original_img .= ','.$fileName;
+            DB::table('goods')->where('goods_id',$id)->update(['original_img'=>$original_img]);
+        }
+        unset($data['goods_id']);
+        unset($data['file']);
+
+        // dd($data);
+        $boo = Good::where('goods_id',$id)->update($data);
+        if($boo){
+            return redirect('/admin/goods_list');
+        }
+    }
+
+    // 商品编辑添加
+    // public function addEditImg(Request $request)
+    // {
+    //     dump($request->all());
+    //     $id = $request->input('id');
+    //     $name = $request->input('name');
+    //     $file = $request->file($name);
+    //     dd($file);
+
+    // }
+
+    //商品编辑删除图片处理
+    public function delEditImg(Request $request)
+    {   
+        // dd($request->all());
+
+        $id = $request->input('id');
+        $path = $request->input('path');
+        $fileDir = './upload/';
+        $fileName = $fileDir.$path;
+
+        $url = DB::table('goods')->where('goods_id',$id)->pluck('original_img');
+        $url = $url[0];
+        $urlarr = explode(',', $url);
+        $key = array_search($path,$urlarr);
+
+            unset($urlarr[$key]);
+            $url = implode(',', $urlarr);
+
+            if($fileName){
+                unlink($fileName);
+            }
+
+            $boo = DB::table('goods')->where('goods_id',$id)->update(['original_img'=>$url]);
+
+        if($boo){
+            echo 1;
+        }else{
+            echo 0;
+        }
+
+    }
+
+    //删除商品
+    public function del($id)
+    {
+        $original_img = DB::table('goods')->where('goods_id',$id)->pluck('original_img');
+        $original_img = $original_img[0];
+        $original = explode(',', $original_img);
+        foreach($original as $val){
+
+            unlink('./upload/'.$val);
+
+        }
+    
+        $good = Good::find($id); 
+        $good->delete();
     }
 }

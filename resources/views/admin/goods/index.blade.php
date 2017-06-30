@@ -75,12 +75,14 @@
           <td style="text-align:left; padding-left:20px;"><input type="checkbox" name="id[]" value="" />
            {{$val['goods_id']}}</td>
           <td><input type="text" name="sort[1]" value="{{$val['sort']}}" style="width:50px; text-align:center; border:1px solid #ddd; padding:7px 0;" /></td>
-          <td width="10%"><img src="{{asset('style/images/11.jpg')}}" alt="" width="70" height="50" /></td>
+
+          <td width="10%"><img src="../{{$val['cover_img']}}" alt="" width="70" height="50" /></td>
+
           <td>{{$val['goods_name']}}</td>
           <td><font color="#00CC99">首页</font></td>
           <td>{{$val['name']}}</td>
           <td>{{$val['updated_at']}}</td>
-          <td><div class="button-group"> <a class="button border-main" href="{{url('/admin/goods_edit')}}/{{$val['goods_id']}}"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="javascript:void(0)" onclick="return del(1,1,1)"><span class="icon-trash-o"></span> 删除</a> </div></td>
+          <td><div class="button-group"> <a class="button border-main" href="{{url('/admin/goods_edit')}}/{{$val['goods_id']}}"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="{{url('/admin/goods_del')}}/{{$val['goods_id']}}" onclick="return del(1,1,1)"><span class="icon-trash-o"></span> 删除</a> </div></td>
         </tr>
         @endforeach
 <!-- 商品列表end -->
