@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Good;
 use App\Pic;
+use App\Type;
 use App\Http\Requests;
 use DB;
 
@@ -23,9 +24,11 @@ class WebController extends Controller
         // //热卖商品
         // $hotsale = Good::where('is_hot','1')->paginate(8);
 
-
+        //分类
+        $bigType = Type::where('pid','0')->paginate(10);
+        // dd($bigType);
         // return view('web/index',compact('pic','user','hotsale'));
-        return view('web/lar_index');
+        return view('web/lar_index',compact('bigType'));
 
 
 

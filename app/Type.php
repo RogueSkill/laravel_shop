@@ -7,14 +7,14 @@ use App\Good;
 class Type extends Model
 {
     //
-    protected $table = 'types';
-    protected $primaryKey = 'id';
+   //  protected $table = 'types';
+   //  protected $primaryKey = 'id';
 
 
-   public function Good()
-   {
-   		return $this->belongsTo('App\Good','typeid', 'goods_id');
-   }
+   // public function Goods()
+   // {
+   // 		return $this->belongsTo('App\Good','typeid', 'goods_id');
+   // }
 
    // public function Good()
    //  {
