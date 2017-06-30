@@ -14,7 +14,7 @@ Route::get("login", "WebController@login");
 Route::get("register", "WebController@register");
 
 //商品详情页
-Route::get("goods", "WebController@goods");
+Route::get("goods/{goods_id}", "WebController@goods");
 
 //购物车页
 Route::get("cart", "WebController@cart");

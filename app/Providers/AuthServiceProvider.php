@@ -14,7 +14,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Model' => 'App\Policies\ModelPolicy',
-        'App\NnAuthGroupAccess' => 'App\Policies\NnAuthGroupAccessPolicy',
+        'App\User' => 'App\Policies\UserPolicy',
 
     ];
 
@@ -29,5 +29,8 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies($gate);
 
         //
+         $gate->define('update-post', function ($user, $post) {
+            return $user->id === $post->user_id;
+        });
     }
 }

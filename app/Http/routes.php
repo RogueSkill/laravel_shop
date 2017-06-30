@@ -5,6 +5,8 @@
 
 	Route::get('/admin/login', 'BackUserController@login');//后台登录,不要放入路由组
 	Route::post('/admin/dologin', 'BackUserController@dologin');//后台登录,不要放入路由组
+	Route::get('welcome', 'BackUserController@welcome');//无权限
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -63,6 +65,18 @@ Route::group(['middleware'=>['web','admin.login']],function(){
 	Route::get('/admin/order_add', 'AdminController@order_add');
 	Route::get('/admin/order_edit', 'AdminController@order_edit');
 	Route::get('/admin/order_del', 'AdminController@order_del');
+	// //管理员
+	// Route::get('/admin/admin_add/', 'AdminController@admin_add');
+	// Route::post('/admin/admin_add/', 'AdminController@doAdminAdd');
+	// Route::get('/admin/admin_list', 'AdminController@admin_list');
+	// Route::get('/admin/admin_edit/{id}', 'AdminController@admin_edit');
+	// Route::post('/admin/admin_edit/', 'AdminController@doAdminEdit');
+	// Route::get('/admin/admin_del/{id}', 'AdminController@admin_del');
+
+});
+
+Route::group(['middleware'=>['web','admin.login','level']],function(){
+
 	//管理员
 	Route::get('/admin/admin_add/', 'AdminController@admin_add');
 	Route::post('/admin/admin_add/', 'AdminController@doAdminAdd');
@@ -71,7 +85,14 @@ Route::group(['middleware'=>['web','admin.login']],function(){
 	Route::post('/admin/admin_edit/', 'AdminController@doAdminEdit');
 	Route::get('/admin/admin_del/{id}', 'AdminController@admin_del');
 
+
 });
+
+
+
+
+
+
 // Route::get('/admin', 'AdminController@index');
 // Route::get('/admin', 'AdminController@index');
 // Route::get('/admin', 'AdminController@index');

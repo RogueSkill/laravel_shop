@@ -14,11 +14,16 @@ use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 use DB;
 class AdminController extends BaseController
 {
-    public function index()
+    public function index(Request $request)
     {
+    $pass = '';
+         if(session('level') == 0)
+         {
+            $pass = 1;
+         }
 
         $data = DB::table('users')->get();
-    	return view('admin/index');
+    	return view('admin/index',compact('data','pass'));
     }
 
     //后台网站设置页面

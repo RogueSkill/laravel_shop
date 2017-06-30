@@ -17,6 +17,11 @@ Route::get('/admin/logout','BackUserController@logout');
 
 
 //控制管理员
-Route::get('/admin/competence', 'BackUserController@competence');
-Route::get('/admin/competence_add', 'BackUserController@competence_add');//编辑添加权限
+// Route::get('/admin/competence', 'BackUserController@competence');
+// Route::get('/admin/competence_add', 'BackUserController@competence_add');//编辑添加权限 
 
+//轮播图
+Route::get('/admin/pic','BackUserController@pic_add');
+Route::post('/admin/pic_insert','BackUserController@pic_insert');
+Route::get('/admin/pic_list','BackUserController@pic_list');
+Route::post('/admin/{id}/pic_del/','BackUserController@pic_del');

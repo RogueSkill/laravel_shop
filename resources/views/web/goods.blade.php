@@ -6,7 +6,7 @@
     <!-- 路径导航 -->
     <div class="container">
         <ol class="breadcrumb">
-            <li><a href="#">首页</a></li>
+            <li><a href="{{url('/')}}">首页</a></li>
             <li class="active">家电</li>
         </ol>
     </div>
@@ -31,18 +31,19 @@
         </div>
         <div class="good-right">
             <table class="table table-hover table-responsive">
-                <caption>商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题</caption>
+
+                <caption>{{$info->goods_name}}</caption>
                 <tr>
                     <td class="good-td">商品货号:</td>
-                    <td>ps-20161027040227-IlD</td>
+                    <td>{{$info->goods_sn}}</td>
                 </tr>
                 <tr>
                     <td class="good-td">商品库存:</td>
-                    <td>111</td>
+                    <td>{{$info->store_count}}</td>
                 </tr>
                 <tr>
                     <td class="good-td">品牌:</td>
-                    <td>爱迪达是</td>
+                    <td>{{$info->goods_name}}</td>
                 </tr>
                 <tr>
                     <td class="good-td">会员等级:</td>
@@ -50,7 +51,7 @@
                 </tr>
                 <tr>
                     <td class="good-td">商品价格:</td>
-                    <td class="good-price">110.00</td>
+                    <td class="good-price">{{$info->shop_price}}</td>
                 </tr>
                 <tr>
                     <td class="good-td">购买数量:</td>

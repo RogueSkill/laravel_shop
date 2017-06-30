@@ -3,16 +3,33 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Good;
+use App\Pic;
 use App\Http\Requests;
 use DB;
 
 class WebController extends Controller
 {
     //首页
-    public function index()
+    public function index(Request $request)
     {
-        return view("web/index");
+
+        //轮播图
+        $pic = Pic::paginate(3);
+
+        //最新商品
+        $user = Good::where('is_on_sale','1')->paginate(8);
+
+        //热卖商品
+        $hotsale = Good::where('is_hot','1')->paginate(8);
+
+
+        return view('web/index',compact('pic','user','hotsale'));
+
+
+
+
+        // return view('web/index',compact('hotsale'));
     }
 
     //登录页
@@ -28,9 +45,14 @@ class WebController extends Controller
     }
 
     //商品详情页
-    public function goods()
+    public function goods($id)
     {
-        return view("web/goods");
+
+           // dd($id);
+
+        $info = Good::find($id);
+        // dd($info);
+        return view('web/goods',compact('info'));
     }
 
     //购物车页

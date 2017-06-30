@@ -3,6 +3,7 @@
 @section("content")
     <!-- 幻灯片 -->
     <div class="box box-element ui-draggable" style="display: block; margin-top:52px;">
+    
 
         <div class="view">
 
@@ -67,118 +68,25 @@
     <div class="container">
         <div class="row">
 
+        @foreach($user as $v)
+           
             <div class="col-sm-6 col-md-4 col-lg-3 ">
                 <div class="thumbnail" style="height: 336px;">
-                    <a href="{{url('goods')}}"><img src="{{asset('images/1.jpg')}}" alt="" style="height:250px;"></a>
+                    <a href="{{url('goods/'.$v['goods_id'])}}"><img src="{{asset('images/1.jpg')}}" alt="" style="height:250px;"></a>
                     <div class="caption">
                         <h4>
+                        
                             <div class="textoverflow">
-                                <a href="{{url('goods')}}" target="_blank">Bootstrap 编码规范</a>
+                                <a href="{{url('goods/'.$v['goods_id'])}}" target="_blank">{{$v['goods_name']}}</a>
                             </div>
                             <br>
-                            <p align="center">100.00</p>
+                            <p align="center">{{$v['shop_price']}}</p>
                         </h4>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-md-4 col-lg-3 ">
-                <div class="thumbnail" style="height: 336px;">
-                    <a href="{{url('goods')}}"><img src="./images/1.jpg" alt="" style="height:250px;"></a>
-                    <div class="caption">
-                        <h4>
-                            <div class="textoverflow">
-                                <a href="{{url('goods')}}" target="_blank">Bootstrap 编码规范</a>
-                            </div>
-                            <br>
-                            <p align="center">100.00</p>
-                        </h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3 ">
-                <div class="thumbnail" style="height: 336px;">
-                    <a href="{{url('goods')}}"><img src="./images/1.jpg" alt="" style="height:250px;"></a>
-                    <div class="caption">
-                        <h4>
-                            <div class="textoverflow">
-                                <a href="{{url('goods')}}" target="_blank">Bootstrap 编码规范</a>
-                            </div>
-                            <br>
-                            <p align="center">100.00</p>
-                        </h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3 ">
-                <div class="thumbnail" style="height: 336px;">
-                    <a href="{{url('goods')}}"><img src="./images/1.jpg" alt="" style="height:250px;"></a>
-                    <div class="caption">
-                        <h4>
-                            <div class="textoverflow">
-                                <a href="{{url('goods')}}" target="_blank">Bootstrap 编码规范</a>
-                            </div>
-                            <br>
-                            <p align="center">100.00</p>
-                        </h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3 ">
-                <div class="thumbnail" style="height: 336px;">
-                    <a href="{{url('goods')}}"><img src="./images/1.jpg" alt="" style="height:250px;"></a>
-                    <div class="caption">
-                        <h4>
-                            <div class="textoverflow">
-                                <a href="{{url('goods')}}" target="_blank">Bootstrap 编码规范</a>
-                            </div>
-                            <br>
-                            <p align="center">100.00</p>
-                        </h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3 ">
-                <div class="thumbnail" style="height: 336px;">
-                    <a href="{{url('goods')}}"><img src="./images/1.jpg" alt="" style="height:250px;"></a>
-                    <div class="caption">
-                        <h4>
-                            <div class="textoverflow">
-                                <a href="{{url('goods')}}" target="_blank">Bootstrap 编码规范</a>
-                            </div>
-                            <br>
-                            <p align="center">100.00</p>
-                        </h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3 ">
-                <div class="thumbnail" style="height: 336px;">
-                    <a href="{{url('goods')}}"><img src="./images/1.jpg" alt="" style="height:250px;"></a>
-                    <div class="caption">
-                        <h4>
-                            <div class="textoverflow">
-                                <a href="{{url('goods')}}" target="_blank">Bootstrap 编码规范</a>
-                            </div>
-                            <br>
-                            <p align="center">100.00</p>
-                        </h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3 ">
-                <div class="thumbnail" style="height: 336px;">
-                    <a href="{{url('goods')}}"><img src="./images/1.jpg" alt="" style="height:250px;"></a>
-                    <div class="caption">
-                        <h4>
-                            <div class="textoverflow">
-                                <a href="{{url('goods')}}" target="_blank">Bootstrap 编码规范</a>
-                            </div>
-                            <br>
-                            <p align="center">100.00</p>
-                        </h4>
-                    </div>
-                </div>
-            </div>
+            @endforeach
+
         </div>
     </div>
     <!-- end -->
@@ -196,118 +104,22 @@
     <div class="container">
         <div class="row">
 
+            @foreach($hotsale as $a)
             <div class="col-sm-6 col-md-4 col-lg-3 ">
                 <div class="thumbnail" style="height: 336px;">
-                    <a href="{{url('goods')}}"><img src="./images/1.jpg" alt="" style="height:250px;"></a>
+                    <a href="{{url('goods/'.$a['goods_id'])}}"><img src="./images/1.jpg" alt="" style="height:250px;"></a>
                     <div class="caption">
                         <h4>
                             <div class="textoverflow">
-                                <a href="{{url('goods')}}" target="_blank">Bootstrap 编码规范</a>
+                                <a href="{{url('goods/'.$a['goods_id'])}}" target="_blank">{{$a['goods_name']}}</a>
                             </div>
                             <br>
-                            <p align="center">100.00</p>
+                            <p align="center">{{$a['shop_price']}}</p>
                         </h4>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-md-4 col-lg-3 ">
-                <div class="thumbnail" style="height: 336px;">
-                    <a href="{{url('goods')}}"><img src="./images/1.jpg" alt="" style="height:250px;"></a>
-                    <div class="caption">
-                        <h4>
-                            <div class="textoverflow">
-                                <a href="{{url('goods')}}" target="_blank">Bootstrap 编码规范</a>
-                            </div>
-                            <br>
-                            <p align="center">100.00</p>
-                        </h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3 ">
-                <div class="thumbnail" style="height: 336px;">
-                    <a href="{{url('goods')}}"><img src="./images/1.jpg" alt="" style="height:250px;"></a>
-                    <div class="caption">
-                        <h4>
-                            <div class="textoverflow">
-                                <a href="{{url('goods')}}" target="_blank">Bootstrap 编码规范</a>
-                            </div>
-                            <br>
-                            <p align="center">100.00</p>
-                        </h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3 ">
-                <div class="thumbnail" style="height: 336px;">
-                    <a href="{{url('goods')}}"><img src="./images/1.jpg" alt="" style="height:250px;"></a>
-                    <div class="caption">
-                        <h4>
-                            <div class="textoverflow">
-                                <a href="{{url('goods')}}" target="_blank">Bootstrap 编码规范</a>
-                            </div>
-                            <br>
-                            <p align="center">100.00</p>
-                        </h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3 ">
-                <div class="thumbnail" style="height: 336px;">
-                    <a href="{{url('goods')}}"><img src="./images/1.jpg" alt="" style="height:250px;"></a>
-                    <div class="caption">
-                        <h4>
-                            <div class="textoverflow">
-                                <a href="{{url('goods')}}" target="_blank">Bootstrap 编码规范</a>
-                            </div>
-                            <br>
-                            <p align="center">100.00</p>
-                        </h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3 ">
-                <div class="thumbnail" style="height: 336px;">
-                    <a href="{{url('goods')}}"><img src="./images/1.jpg" alt="" style="height:250px;"></a>
-                    <div class="caption">
-                        <h4>
-                            <div class="textoverflow">
-                                <a href="{{url('goods')}}" target="_blank">Bootstrap 编码规范</a>
-                            </div>
-                            <br>
-                            <p align="center">100.00</p>
-                        </h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3 ">
-                <div class="thumbnail" style="height: 336px;">
-                    <a href="{{url('goods')}}"><img src="./images/1.jpg" alt="" style="height:250px;"></a>
-                    <div class="caption">
-                        <h4>
-                            <div class="textoverflow">
-                                <a href="{{url('goods')}}" target="_blank">Bootstrap 编码规范</a>
-                            </div>
-                            <br>
-                            <p align="center">100.00</p>
-                        </h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3 ">
-                <div class="thumbnail" style="height: 336px;">
-                    <a href="{{url('goods')}}"><img src="./images/1.jpg" alt="" style="height:250px;"></a>
-                    <div class="caption">
-                        <h4>
-                            <div class="textoverflow">
-                                <a href="{{url('goods')}}" target="_blank">Bootstrap 编码规范</a>
-                            </div>
-                            <br>
-                            <p align="center">100.00</p>
-                        </h4>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
     <!-- end -->

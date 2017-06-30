@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use Image;
 use App\Member;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -9,6 +10,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesResources;
+use App\Pic;
 // use Illuminate\Pagination\LengthAwarePaginator;
 use DB;
 class BackUserController extends BaseController
@@ -136,8 +138,9 @@ class BackUserController extends BaseController
 
     $username = $check['username'];
     $pass = $check['pass'];
+    $level = $check['level'];
         //存session
-    session(['username'=>$username,'pass'=>$pass]);
+    session(['username'=>$username,'pass'=>$pass,'level'=>$level]);
     
         // 如果获取数据为空不跳转
         if($check == null){
@@ -166,6 +169,11 @@ class BackUserController extends BaseController
 //     *********************************************控制管理模块****************************************
 //     */
 
+    public function welcome()
+    {
+        return view('welcome');
+    }
+
     public function competence(Request $request)
     {
 
@@ -179,12 +187,66 @@ class BackUserController extends BaseController
     }
 
 
+//     /**
+//     *
+//     *********************************************轮播图模块****************************************
+//     */
+
+    public function pic_add(Request $request)
+    {
+
+        return view('admin/pic/add');
+    }
+
+    public function pic_insert(Request $request)
+    {
+
+        $file = $request->file('img');//获取上传文件信息
+
+        // $arr=$request->all();
+        $filepath = './upload';
+
+        $filetype=$file->getClientOriginalExtension();//获取文件后缀
 
 
+        $filename = md5(date('YmdHis',time())).".".$filetype;
+
+        $file->move($filepath,$filename);//移动到指定文件夹
 
 
+        $url = $request->url;
+        $created_at =  $request->created_at;
+     
+        if($date = DB::insert('insert into pics (url,name,created_at) values (?,?,?)',[$url,$filename,$created_at]))
+            {
+                return redirect('/admin/pic_list');
+            }else
+            {
+                return back()->withInput();
+            }
+    }
 
 
+    public function pic_list(Request $request)
+    {
+        $date=Pic::all();
+
+        return view('admin/pic/pic_list',compact('date'));
+    }
+
+    public function pic_del(Request $request,$id)
+    {
+        // 校验
+
+        // 修改广告图的状态值
+        Pic::destroy($id);
+
+        return [
+            'error' => 0,
+        ];
+        // return redirect('/admin/pic/pic_list');
+
+    }
 
 
 

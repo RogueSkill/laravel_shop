@@ -42,6 +42,15 @@
     <li><a href="{{url('admin/cate_add')}}" target="right"><span class="icon-caret-right"></span>添加商品分类</a></li>    
   </ul>
 
+
+  <h2><span class="icon-pencil-square-o"></span>首页轮播图</h2>
+  <ul>
+    <li><a href="{{url('admin/pic')}}" target="right"><span class="icon-caret-right"></span>添加轮播图</a></li>
+    <li><a href="{{url('admin/pic_list')}}" target="right"><span class="icon-caret-right"></span>轮播图列表</a></li>    
+  </ul>
+
+
+
 	<h2><span class="icon-pencil-square-o"></span>商品模块</h2>
   <ul>
     <li><a href="{{url('admin/goods_add')}}" target="right"><span class="icon-caret-right"></span>添加商品</a></li>
@@ -53,13 +62,14 @@
     <li><a href="{{url('admin/order_list')}}" target="right"><span class="icon-caret-right"></span>订单列表</a></li>   
   </ul>
 
+  @if($pass == 1)
   <h2><span class="icon-pencil-square-o"></span>管理员模块</h2>
   <ul>
   	<li><a href="{{url('admin/admin_list')}}" target="right"><span class="icon-caret-right"></span>管理员列表</a></li>
     <li><a href="{{url('admin/admin_edit')}}" target="right"><span class="icon-caret-right"></span>修改密码</a></li>
-    <li><a href="{{url('admin/competence')}}" target="right"><span class="icon-caret-right"></span>权限管理</a></li>  
+    <!-- <li><a href="{{url('admin/competence')}}" target="right"><span class="icon-caret-right"></span>权限管理</a></li>   -->
   </ul>    
-
+  @endif
 </div>
 <script type="text/javascript">
 $(function(){
