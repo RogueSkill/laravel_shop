@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\MessageBag;
 use App\Good;
 use App\Type;
 use App\Http\Requests;
@@ -26,6 +26,8 @@ class GoodController extends Controller
     //产品页面显示
     public function add()
     {
+
+    
         $goodtypes = DB::table('types')->get();
         // var_dump($goodtypes);
     	return view('admin/goods/add' ,compact('goodtypes'));
@@ -34,6 +36,29 @@ class GoodController extends Controller
     //产品处理页面
     public function doAdd(Request $request)
     {
+        // dump($request->all());
+
+        $this->validate($request, [
+            'goods_name' => 'required|min:3|max:30',
+            'typeid' => 'required',
+            'shop_price'=>'required',
+            'created_at' => 'required'
+        ],[
+            'required' => ':attribute 是必填字段',
+            'min' => ':attribute 必须不少于3个字符',
+            'max' => ':attribute 必须少于30个字符',
+        ],[
+            'goods_name' => '商品名称',
+            'typeid' => '分类名称',
+            'shop_price'=>'商城价格',
+            'created_at' => '发布时间',
+        ]);
+
+        // dd(1);
+
+        // $messages = $validator->errors();
+
+        // echo $messages->first('goods_name');
 
         if($request->isMethod('POST')){
 
@@ -196,12 +221,14 @@ class GoodController extends Controller
         $original_img = DB::table('goods')->where('goods_id',$id)->pluck('original_img');
         $original_img = $original_img[0];
         $original = explode(',', $original_img);
+
+
         foreach($original as $val){
 
             unlink('./upload/'.$val);
 
         }
-    
+
         $good = Good::find($id); 
         $good->delete();
     }

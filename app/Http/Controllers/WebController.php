@@ -88,7 +88,7 @@ class WebController extends Controller
 //用户中心页
     public function ucenter()
     {
-        $id = 'aa';
+        $id = '1';
 
         $user_datas = DB::table('members')->where('username','=',$id)->get();
 

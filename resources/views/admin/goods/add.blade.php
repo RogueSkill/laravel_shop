@@ -13,9 +13,20 @@
 <!-- ueditor -->
 <script src="{{asset('./editor/ueditor.config.js')}}"></script>
 <script src="{{asset('./editor/ueditor.all.min.js')}}"></script>
+
 <!-- //ueditor -->
 </head>
 <body>
+<!-- @if (count(session('errors')) > 0)
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif -->
+<!-- {{dump(session())}} -->
 <div class="panel admin-panel">
   <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>增加内容</strong></div>
   <div class="body-content">
@@ -27,8 +38,9 @@
           <label>标题：</label>
         </div>
         <div class="field">
-          <input type="text" class="input w50" value="" name="goods_name" data-validate="required:请输入标题" />
-          <div class="tips"></div>
+          <input type="text" class="input w50" value="" name="goods_name"  />
+          <div class="tips">{{$errors->first('goods_name')? $errors->first('goods_name') : ''}}</div>
+
         </div>
       </div>
         
@@ -44,7 +56,7 @@
               <option value="{{$val['id']}}">{{$val['name']}}</option>
               @endforeach
             </select>
-            <div class="tips"></div>
+            <div class="tips">{{$errors->first('typeid')? $errors->first('typeid') : ''}}</div>
           </div>
         </div>
         
@@ -65,6 +77,7 @@
           <input type="text" class="input w50" name="shop_price" value="" />
         </div>
       </div>
+      <div class="tips">{{$errors->first('shop_price')? $errors->first('shop_price') : ''}}</div>
 
       <div class="form-group">
         <div class="label">
@@ -218,8 +231,8 @@
         </div>
         <div class="field"> 
           <script src="{{asset('js/datejs/laydate.dev.js')}}"></script>
-          <input type="text" class="laydate-icon input w50" id="datetime" name="datetime" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" value=""  data-validate="required:日期不能为空" style="padding:10px!important; height:auto!important;border:1px solid #ddd!important;" />
-          <div class="tips"></div>
+          <input type="text" class="laydate-icon input w50" id="datetime" name="datetime" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" value=""  style="padding:10px!important; height:auto!important;border:1px solid #ddd!important;" />
+          <div class="tips">{{$errors->first('created_at')? $errors->first('created_at') : ''}}</div>
         </div>
       </div>
       <div class="form-group">

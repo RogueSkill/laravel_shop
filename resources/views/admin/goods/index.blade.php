@@ -18,7 +18,7 @@
     <div class="panel-head"><strong class="icon-reorder"> 内容列表</strong> <a href="" style="float:right; display:none;">添加字段</a></div>
     <div class="padding border-bottom">
       <ul class="search" style="padding-left:10px;">
-        <li> <a class="button border-main icon-plus-square-o" href="add.html"> 添加内容</a> </li>
+        <li> <a class="button border-main icon-plus-square-o" href="{{url('admin/goods_add')}}"> 添加内容</a> </li>
         <li>搜索：</li>
         <li>首页
           <select name="s_ishome" class="input" onchange="changesearch()" style="width:60px; line-height:17px; display:inline-block">
@@ -75,9 +75,11 @@
           <td style="text-align:left; padding-left:20px;"><input type="checkbox" name="id[]" value="" />
            {{$val['goods_id']}}</td>
           <td><input type="text" name="sort[1]" value="{{$val['sort']}}" style="width:50px; text-align:center; border:1px solid #ddd; padding:7px 0;" /></td>
-
+          @if($val['cover_img'])
           <td width="10%"><img src="../{{$val['cover_img']}}" alt="" width="70" height="50" /></td>
-
+          @else
+            <td width="10%"><img src="../style/images/lietu.png" alt="" width="70" height="50" /></td>
+          @endif
           <td>{{$val['goods_name']}}</td>
           <td><font color="#00CC99">首页</font></td>
           <td>{{$val['name']}}</td>
@@ -91,7 +93,7 @@
           全选 </td>
         <td colspan="7" style="text-align:left;padding-left:20px;"><a href="javascript:void(0)" class="button border-red icon-trash-o" style="padding:5px 15px;" onclick="DelSelect()"> 删除</a> <a href="javascript:void(0)" style="padding:5px 15px; margin:0 10px;" class="button border-blue icon-edit" onclick="sorts()"> 排序</a> 操作：
           <select name="ishome" style="padding:5px 15px; border:1px solid #ddd;" onchange="changeishome(this)">
-            <option value="">首页</option>
+            <option value="">新品</option>
             <option value="1">是</option>
             <option value="0">否</option>
           </select>
@@ -101,7 +103,7 @@
             <option value="0">否</option>
           </select>
           <select name="istop" style="padding:5px 15px; border:1px solid #ddd;" onchange="changeistop(this)">
-            <option value="">置顶</option>
+            <option value="">热销</option>
             <option value="1">是</option>
             <option value="0">否</option>
           </select>

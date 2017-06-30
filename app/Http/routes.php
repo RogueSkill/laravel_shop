@@ -29,6 +29,9 @@
 
 
 //######################后台#################################
+Route::get('/admin/goods_add', 'GoodController@add');
+
+Route::post('/admin/goods_add','GoodController@doAdd');
 
 Route::group(['middleware'=>['web','admin.login']],function(){
 
@@ -53,9 +56,7 @@ Route::group(['middleware'=>['web','admin.login']],function(){
 
 	//商品模块
 	Route::get('/admin/goods_list', 'GoodController@index');
-	Route::get('/admin/goods_add', 'GoodController@add');
-
-	Route::post('/admin/goods_add','GoodController@doAdd');
+	
 	
 	Route::get('/admin/goods_edit/{id}', 'GoodController@edit');
 	Route::post('/admin/goods_edit', 'GoodController@doEdit');

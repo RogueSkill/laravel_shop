@@ -50,7 +50,6 @@
           </div>
           <div class="field">
             <select name="typeid" class="input w50">
-              <option value="">请选择分类</option>
               @foreach($goodtypes as $val)     
               <option <?php echo $val['id']==$goodsrow['typeid']? 'selected':'' ?> value="{{$val['id']}}">{{$val['name']}}</option>
               @endforeach
