@@ -94,14 +94,7 @@ class AdminController extends BaseController
             
 
       $type_add = DB::table('types')->insert(['name'=>$name,'pid'=>$id,'path'=>$path,'created_at'=>$created_at]);
-      // if($type_add){
-      //    echo "<script>alert('添加成功')</script>";
-      //    return view('/admin/cate_list');
-      //    return redirect('/admin/cate_list');
-      // }
-       //1. 使用 请求 Request $request->all()
-        // $post = $request->all();
-//        dd($post);
+
         if ($type_add) {
             return redirect('/admin/cate_list')->with(['success' => '添加成功！！！！！！！']);
         } else {

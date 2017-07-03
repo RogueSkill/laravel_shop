@@ -50,7 +50,7 @@ class GoodController extends Controller
         ],[
             'goods_name' => '商品名称',
             'typeid' => '分类名称',
-            'shop_price'=>'商城价格',
+            'shop_price'=>'价格',
             'created_at' => '发布时间',
         ]);
 

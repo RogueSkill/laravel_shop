@@ -15,6 +15,9 @@
 <script src="{{asset('./editor/ueditor.all.min.js')}}"></script>
 
 <!-- //ueditor -->
+<style>
+  .tips{ width: auto; height: 40px; line-height: 40px; font-size: 14px; color:red; font-style: '微软雅黑'}
+</style>
 </head>
 <body>
 <!-- @if (count(session('errors')) > 0)
@@ -103,9 +106,9 @@
             <label>图片：</label>
           </div>
           <div class="field">
-            <input type="file" multiple="multiple" id="original_img" name="original_img[]" class="input tips" style="width:25%; float:left;"   data-toggle="hover" data-place="right" data-image="" />
+            <input type="file" multiple="multiple" id="original_img" name="original_img[]" class="input " style="width:25%; float:left;"   data-toggle="hover" data-place="right" data-image="" />
             <input type="button" class="button bg-blue margin-left" name="add" value="+"  style="float:left;">
-            <div class="tipss">图片尺寸：500*500</div>   
+            <!-- <div class="tips">图片尺寸：500*500</div>   --> 
           </div>
         </div>
       </div>
