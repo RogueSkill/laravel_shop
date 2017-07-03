@@ -68,6 +68,11 @@ Route::group(['middleware'=>['web','admin.login']],function(){
 	Route::get('/admin/order_edit/{id}', 'AdminController@order_edit');
 	Route::get('/admin/order_del', 'AdminController@order_del');
 	Route::get('/admin/order_send', 'AdminController@order_send');
+
+    //评论模块
+    Route::get('/admin/comments_list', 'AdminController@comments_list');
+    Route::get('/admin/comments_add', 'AdminController@comments_add');
+    Route::post('/admin/comments_add', 'AdminController@comments_submit');
 });
 
 Route::group(['middleware'=>['web','admin.login','level']],function(){
@@ -79,12 +84,6 @@ Route::group(['middleware'=>['web','admin.login','level']],function(){
 	Route::get('/admin/admin_edit/{id}', 'AdminController@admin_edit');
 	Route::post('/admin/admin_edit/', 'AdminController@doAdminEdit');
 	Route::get('/admin/admin_del/{id}', 'AdminController@admin_del');
-
-
-    //评论模块
-    Route::get('/admin/comments_list', 'AdminController@comments_list');
-    Route::get('/admin/comments_add', 'AdminController@comments_add');
-    Route::post('/admin/comments_add', 'AdminController@comments_submit');
 });
 
 
