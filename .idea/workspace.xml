@@ -2,28 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="99d77448-6b6e-4035-b35b-45f209973937" name="Default" comment="">
-<<<<<<< HEAD
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/admin/user/edit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/database.php" afterPath="$PROJECT_DIR$/config/database.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/addresses.php" afterPath="$PROJECT_DIR$/database/seeds/addresses.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/cars.php" afterPath="$PROJECT_DIR$/database/seeds/cars.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/goods.php" afterPath="$PROJECT_DIR$/database/seeds/goods.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/goods_comments.php" afterPath="$PROJECT_DIR$/database/seeds/goods_comments.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/links.php" afterPath="$PROJECT_DIR$/database/seeds/links.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/orders.php" afterPath="$PROJECT_DIR$/database/seeds/orders.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/info.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/info.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/user/add.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/user/add.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/user/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/user/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/js/login.js" afterPath="$PROJECT_DIR$/web/js/login.js" />
-    </list>
-    <ignored path="ShopCenter.iws" />
-    <ignored path=".idea/workspace.xml" />
-    <ignored path=".idea/dataSources.local.xml" />
-=======
-<<<<<<< HEAD
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/WebRoute.php" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/web/index.blade.php" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/public/AmazeUI-2.4.2/assets/css/admin.css" afterPath="" />
@@ -338,15 +316,14 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/public/person/refund.html" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/public/person/safety.html" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/public/person/setpay.html" afterPath="" />
-=======
->>>>>>> 1025c49471d18ec921906d87ac2f36851547b93e
+
       <change type="DELETED" beforePath="$PROJECT_DIR$/resources/views/home/home.html" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/resources/views/home/index.blade.php" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/resources/views/home/layout/master.blade.php" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/resources/views/home/login.blade.php" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/resources/views/home/login.html" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/resources/views/home/新建文本文档.txt" afterPath="" />
-<<<<<<< HEAD
+
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/1.jpg" afterPath="$PROJECT_DIR$/public/images/1.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/2.jpg" afterPath="$PROJECT_DIR$/public/images/2.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/4.jpg" afterPath="$PROJECT_DIR$/public/images/4.jpg" />
@@ -356,7 +333,7 @@
     <ignored path="ShopCenter.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
-=======
+
       <change type="DELETED" beforePath="$PROJECT_DIR$/resources/views/one/.project" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/resources/views/one/AmazeUI-2.4.2/assets/css/admin.css" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/resources/views/one/AmazeUI-2.4.2/assets/css/amazeui.css" afterPath="" />
@@ -682,8 +659,6 @@
     </list>
     <ignored path="ShopCenter.iws" />
     <ignored path=".idea/workspace.xml" />
->>>>>>> 1025c49471d18ec921906d87ac2f36851547b93e
->>>>>>> afee7ac6391f2c55214177ad53b9e21b67b00187
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -699,7 +674,7 @@
   <component name="FavoritesManager">
     <favorites_list name="ShopCenter" />
   </component>
-<<<<<<< HEAD
+
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
@@ -708,8 +683,6 @@
             <state vertical-scroll-proportion="-1.4375">
               <caret line="50" column="60" selection-start-line="50" selection-start-column="60" selection-end-line="50" selection-end-column="60" />
               <folding />
-=======
-<<<<<<< HEAD
   <component name="FileEditorManager">
     <leaf>
       <file leaf-file-name="master.blade.php" pinned="false" current-in-tab="false">
@@ -729,7 +702,6 @@
           </provider>
         </entry>
       </file>
-<<<<<<< HEAD
       <file leaf-file-name="info.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/admin/info.blade.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -742,58 +714,13 @@
                 <marker date="1498052943634" expanded="true" signature="9081:9245" placeholder="..." />
                 <marker date="1498052943634" expanded="true" signature="9178:9241" placeholder="..." />
                 <marker date="1498052943634" expanded="true" signature="9189:9240" placeholder="..." />
-=======
-      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/views/web/index.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.15343915">
-              <caret line="182" column="10" selection-start-line="182" selection-start-column="10" selection-end-line="182" selection-end-column="10" />
-              <folding>
-                <element signature="e#132#172#0#HTML" expanded="true" />
-                <element signature="e#90#2906#0#HTML" expanded="false" />
-                <element signature="e#2947#3138#0#HTML" expanded="false" />
-                <element signature="e#3177#8352#0#HTML" expanded="false" />
-                <element signature="e#3321#3343#0#HTML" expanded="true" />
-                <element signature="e#3420#3441#0#HTML" expanded="true" />
-                <element signature="e#3968#3990#0#HTML" expanded="true" />
-                <element signature="e#4056#4077#0#HTML" expanded="true" />
-                <element signature="e#4604#4626#0#HTML" expanded="true" />
-                <element signature="e#4692#4713#0#HTML" expanded="true" />
-                <element signature="e#5240#5262#0#HTML" expanded="true" />
-                <element signature="e#5328#5349#0#HTML" expanded="true" />
-                <element signature="e#5876#5898#0#HTML" expanded="true" />
-                <element signature="e#5964#5985#0#HTML" expanded="true" />
-                <element signature="e#6512#6534#0#HTML" expanded="true" />
-                <element signature="e#6600#6621#0#HTML" expanded="true" />
-                <element signature="e#7148#7170#0#HTML" expanded="true" />
-                <element signature="e#7236#7257#0#HTML" expanded="true" />
-                <element signature="e#7784#7806#0#HTML" expanded="true" />
-                <element signature="e#7872#7893#0#HTML" expanded="true" />
-                <element signature="e#8393#8583#0#HTML" expanded="false" />
-                <element signature="e#8622#13786#0#HTML" expanded="false" />
-                <element signature="e#8766#8788#0#HTML" expanded="true" />
-                <element signature="e#8854#8875#0#HTML" expanded="true" />
-                <element signature="e#9402#9424#0#HTML" expanded="true" />
-                <element signature="e#9490#9511#0#HTML" expanded="true" />
-                <element signature="e#10038#10060#0#HTML" expanded="true" />
-                <element signature="e#10126#10147#0#HTML" expanded="true" />
-                <element signature="e#10674#10696#0#HTML" expanded="true" />
-                <element signature="e#10762#10783#0#HTML" expanded="true" />
-                <element signature="e#11310#11332#0#HTML" expanded="true" />
-                <element signature="e#11398#11419#0#HTML" expanded="true" />
-                <element signature="e#11946#11968#0#HTML" expanded="true" />
-                <element signature="e#12034#12055#0#HTML" expanded="true" />
-                <element signature="e#12582#12604#0#HTML" expanded="true" />
-                <element signature="e#12670#12691#0#HTML" expanded="true" />
-                <element signature="e#13218#13240#0#HTML" expanded="true" />
-                <element signature="e#13306#13327#0#HTML" expanded="true" />
->>>>>>> afee7ac6391f2c55214177ad53b9e21b67b00187
+
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-<<<<<<< HEAD
+
       <file leaf-file-name="AdminController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/AdminController.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -801,56 +728,23 @@
               <caret line="183" column="0" selection-start-line="183" selection-start-column="0" selection-end-line="183" selection-end-column="0" />
               <folding>
                 <element signature="e#40#76#0#PHP" expanded="true" />
-=======
-      <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.0769231">
-              <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-              <folding>
-                <element signature="e#47#432#0#PHP" expanded="false" />
->>>>>>> afee7ac6391f2c55214177ad53b9e21b67b00187
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-<<<<<<< HEAD
       <file leaf-file-name="add.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/admin/user/add.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-55.34375">
               <caret line="92" column="29" selection-start-line="92" selection-start-column="29" selection-end-line="92" selection-end-column="29" />
               <folding />
-=======
-      <file leaf-file-name="WebController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/WebController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.6153846">
-              <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
-              <folding>
-                <element signature="e#40#68#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WebRoute.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/WebRoute.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.3846154">
-              <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
-              <folding>
-                <element signature="e#7#21#0#PHP" expanded="true" />
-              </folding>
->>>>>>> afee7ac6391f2c55214177ad53b9e21b67b00187
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
-<<<<<<< HEAD
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -866,27 +760,7 @@
       </list>
     </option>
   </component>
-=======
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/app/Http/routes.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/WebController.php" />
-        <option value="$PROJECT_DIR$/resources/views/web/index.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/web/master.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/WebRoute.php" />
-      </list>
-    </option>
-  </component>
-=======
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
->>>>>>> 1025c49471d18ec921906d87ac2f36851547b93e
->>>>>>> afee7ac6391f2c55214177ad53b9e21b67b00187
+
   <component name="JsBuildToolGruntFileManager" detection-done="true" />
   <component name="JsBuildToolPackageJson" detection-done="true">
     <package-json value="$PROJECT_DIR$/package.json" />
@@ -914,23 +788,11 @@
     <OptionsSetting value="true" id="Update" />
     <OptionsSetting value="true" id="Status" />
     <OptionsSetting value="true" id="Edit" />
-<<<<<<< HEAD
-    <OptionsSetting value="true" id="添加" />
-    <OptionsSetting value="true" id="移除" />
-    <OptionsSetting value="true" id="签出" />
-    <OptionsSetting value="true" id="更新" />
-    <OptionsSetting value="true" id="状态" />
-    <OptionsSetting value="true" id="编辑" />
-    <ConfirmationsSetting value="0" id="添加" />
-    <ConfirmationsSetting value="0" id="移除" />
-=======
-<<<<<<< HEAD
+
     <ConfirmationsSetting value="2" id="Add" />
-=======
-    <ConfirmationsSetting value="0" id="Add" />
->>>>>>> 1025c49471d18ec921906d87ac2f36851547b93e
+
     <ConfirmationsSetting value="0" id="Remove" />
->>>>>>> afee7ac6391f2c55214177ad53b9e21b67b00187
+
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -967,10 +829,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> afee7ac6391f2c55214177ad53b9e21b67b00187
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="ShopCenter" />
@@ -1007,11 +865,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-<<<<<<< HEAD
               <option name="myItemId" value="admin" />
-=======
-              <option name="myItemId" value="web" />
->>>>>>> afee7ac6391f2c55214177ad53b9e21b67b00187
+
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1039,26 +894,17 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-<<<<<<< HEAD
               <option name="myItemId" value="admin" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-=======
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-=======
->>>>>>> 1025c49471d18ec921906d87ac2f36851547b93e
->>>>>>> afee7ac6391f2c55214177ad53b9e21b67b00187
+
         </subPane>
       </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-<<<<<<< HEAD
     <property name="js-jscs-nodeInterpreter" value="D:\Nodejs\node.exe" />
   </component>
   <component name="RunManager">
@@ -1085,8 +931,7 @@
       <envs />
       <method />
     </configuration>
-=======
->>>>>>> 1025c49471d18ec921906d87ac2f36851547b93e
+
   </component>
   <component name="RunManager">
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
@@ -1132,11 +977,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-<<<<<<< HEAD
-    <frame x="0" y="0" width="1357" height="728" extended-state="0" />
-    <editor active="true" />
-=======
-<<<<<<< HEAD
+
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
@@ -1144,26 +985,19 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24963397" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32913387" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-=======
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
-    <editor active="false" />
->>>>>>> afee7ac6391f2c55214177ad53b9e21b67b00187
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26174498" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-<<<<<<< HEAD
+
       <window_info id="版本控制" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-=======
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
->>>>>>> 1025c49471d18ec921906d87ac2f36851547b93e
+
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
->>>>>>> afee7ac6391f2c55214177ad53b9e21b67b00187
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.87874013" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -1191,7 +1025,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-<<<<<<< HEAD
     <breakpoint-manager>
       <option name="time" value="1" />
     </breakpoint-manager>
@@ -1298,11 +1131,7 @@
       </provider>
     </entry>
   </component>
-=======
-    <breakpoint-manager />
-    <watches-manager />
-  </component>
-<<<<<<< HEAD
+
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/public/index.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -1514,7 +1343,4 @@
       </provider>
     </entry>
   </component>
-=======
->>>>>>> 1025c49471d18ec921906d87ac2f36851547b93e
->>>>>>> afee7ac6391f2c55214177ad53b9e21b67b00187
 </project>

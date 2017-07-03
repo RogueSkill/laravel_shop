@@ -7,15 +7,16 @@
 
 		<title>搜索页面</title>
 
-		<link href="web_style/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css" />
-		<link href="web_style/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css" />
+		<link href="{{asset('web_style/AmazeUI-2.4.2/assets/css/amazeui.css')}}" rel="stylesheet" type="text/css" />
+		<link href="{{asset('web_style/AmazeUI-2.4.2/assets/css/admin.css')}}" rel="stylesheet" type="text/css" />
 
-		<link href="web_style/basic/css/demo.css" rel="stylesheet" type="text/css" />
+		<link href="{{asset('web_style/basic/css/demo.css')}}" rel="stylesheet" type="text/css" />
 
-		<link href="web_style/css/seastyle.css" rel="stylesheet" type="text/css" />
+		<link href="{{asset('web_style/css/seastyle.css')}}" rel="stylesheet" type="text/css" />
 
-		<script type="text/javascript" src="web_style/basic/js/jquery-1.7.min.js"></script>
-		<script type="text/javascript" src="web_style/js/script.js"></script>
+		<script type="text/javascript" src="{{asset('web_style/basic/js/jquery-1.7.min.js')}}"></script>
+		<script type="text/javascript" src="{{asset('web_style/js/script.js')}}"></script>
+
 	</head>
 
 	<body>
@@ -48,7 +49,9 @@
 			<!--悬浮搜索框-->
 
 			<div class="nav white">
-				<div class="logo"><img src="web_style/images/logo.png" /></div>
+
+				<div class="logo"><img src="{{asset('web_style/images/logo.png')}}" /></div>
+
 				<div class="logoBig">
 					<li><img src="web_style/images/logobig.png" /></li>
 				</div>
@@ -164,7 +167,7 @@
 								<ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes">
 									<li>
 										<div class="i-pic limit">
-											<img src="web_style/images/imgsearch1.jpg" />											
+											<img src="{{asset('web_style/images/imgsearch1.jpg')}}" />											
 											<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
 											<p class="price fl">
 												<b>¥</b>
@@ -178,7 +181,8 @@
 									<li>
 										<div class="i-pic limit">
 											
-											<img src="web_style/images/imgsearch1.jpg" />
+											<img src="{{asset('web_style/images/imgsearch1.jpg')}}" />
+
 											<p class="title fl">手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
 											<p class="price fl">
 												<b>¥</b>
@@ -192,7 +196,8 @@
 									<li>
 										<div class="i-pic limit">
 											
-											<img src="web_style/images/imgsearch1.jpg" />
+											<img src="{{asset('web_style/images/imgsearch1.jpg')}}" />
+
 											<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
 											<p class="price fl">
 												<b>¥</b>
@@ -206,7 +211,8 @@
 									<li>
 										<div class="i-pic limit">
 											
-											<img src="web_style/images/imgsearch1.jpg" />
+											<img src="{{asset('web_style/images/imgsearch1.jpg')}}" />
+
 											<p class="title fl">手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
 											<p class="price fl">
 												<b>¥</b>
@@ -219,8 +225,8 @@
 									</li>
 									<li>
 										<div class="i-pic limit">
-											
-											<img src="web_style/images/imgsearch1.jpg" />
+											<img src="{{asset('web_style/images/imgsearch1.jpg')}}" />
+
 											<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
 											<p class="price fl">
 												<b>¥</b>
@@ -233,8 +239,8 @@
 									</li>
 									<li>
 										<div class="i-pic limit">
-											
-											<img src="web_style/images/imgsearch1.jpg" />
+											<img src="{{asset('web_style/images/imgsearch1.jpg')}}" />
+
 											<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
 											<p class="price fl">
 												<b>¥</b>
@@ -247,8 +253,8 @@
 									</li>
 									<li>
 										<div class="i-pic limit">
-											
-											<img src="web_style/images/imgsearch1.jpg" />
+											<img src="{{asset('web_style/images/imgsearch1.jpg')}}" />
+
 											<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
 											<p class="price fl">
 												<b>¥</b>
@@ -261,8 +267,8 @@
 									</li>
 									<li>
 										<div class="i-pic limit">
-											
-											<img src="web_style/images/imgsearch1.jpg" />
+											<img src="{{asset('web_style/images/imgsearch1.jpg')}}" />
+
 											<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
 											<p class="price fl">
 												<b>¥</b>
@@ -275,8 +281,8 @@
 									</li>
 									<li>
 										<div class="i-pic limit">
-											
-											<img src="web_style/images/imgsearch1.jpg" />
+											<img src="{{asset('web_style/images/imgsearch1.jpg')}}" />
+
 											<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
 											<p class="price fl">
 												<b>¥</b>
@@ -289,8 +295,7 @@
 									</li>
 									<li>
 										<div class="i-pic limit">
-											
-											<img src="web_style/images/imgsearch1.jpg" />
+											<img src="{{asset('web_style/images/imgsearch1.jpg')}}" />
 											<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
 											<p class="price fl">
 												<b>¥</b>
@@ -303,8 +308,8 @@
 									</li>
 									<li>
 										<div class="i-pic limit">
-											
-											<img src="web_style/images/imgsearch1.jpg" />
+											<img src="{{asset('web_style/images/imgsearch1.jpg')}}" />
+
 											<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
 											<p class="price fl">
 												<b>¥</b>
@@ -317,8 +322,9 @@
 									</li>
 									<li>
 										<div class="i-pic limit">
-											
-											<img src="web_style/images/imgsearch1.jpg" />
+
+											<img src="{{asset('web_style/images/imgsearch1.jpg')}}" />
+
 											<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
 											<p class="price fl">
 												<b>¥</b>
@@ -339,7 +345,8 @@
 
 								<li>
 									<div class="i-pic check">
-										<img src="web_style/images/cp.jpg" />
+										<img src="{{asset('web_style/images/cp.jpg')}}" />
+
 										<p class="check-title">萨拉米 1+1小鸡腿</p>
 										<p class="price fl">
 											<b>¥</b>
@@ -352,7 +359,8 @@
 								</li>
 								<li>
 									<div class="i-pic check">
-										<img src="web_style/images/cp2.jpg" />
+										<img src="{{asset('web_style/images/cp2.jpg')}}" />
+
 										<p class="check-title">ZEK 原味海苔</p>
 										<p class="price fl">
 											<b>¥</b>
@@ -365,7 +373,7 @@
 								</li>
 								<li>
 									<div class="i-pic check">
-										<img src="web_style/images/cp.jpg" />
+										<img src="{{asset('web_style/images/cp.jpg')}}" />
 										<p class="check-title">萨拉米 1+1小鸡腿</p>
 										<p class="price fl">
 											<b>¥</b>
@@ -423,7 +431,8 @@
 			<li><a href="home2.html"><i class="am-icon-home "></i>首页</a></li>
 			<li><a href="sort.html"><i class="am-icon-list"></i>分类</a></li>
 			<li><a href="shopcart.html"><i class="am-icon-shopping-basket"></i>购物车</a></li>	
-			<li><a href="web_style/person/index.html"><i class="am-icon-user"></i>我的</a></li>					
+			<li><a href="{{asset('web_style/person/index.html')}}"><i class="am-icon-user"></i>我的</a></li>					
+
 		</div>
 
 		<!--菜单 -->
@@ -481,7 +490,7 @@
 
 					<div id="brand" class="item">
 						<a href="{{url('/goods/id')}}">
-							<span class="wdsc"><img src="web_style/images/wdsc.png" /></span>
+							<span class="wdsc"><img src="{{asset('web_style/images/wdsc.png')}}" /></span>
 						</a>
 						<div class="mp_tooltip">
 							我的收藏
@@ -491,7 +500,7 @@
 
 					<div id="broadcast" class="item">
 						<a href="{{url('/goods/id')}}">
-							<span class="chongzhi"><img src="web_style/images/chongzhi.png" /></span>
+							<span class="chongzhi"><img src="{{asset('web_style/images/chongzhi.png')}}" /></span>
 						</a>
 						<div class="mp_tooltip">
 							我要充值
@@ -507,7 +516,7 @@
 						<!--二维码 -->
 						<li class="qtitem">
 							<a href="{{url('/goods/id')}}none"><span class="mpbtn_qrcode"></span></a>
-							<div class="mp_qrcode" style="display:none;"><img src="web_style/images/weixin_code_145.png" /><i class="icon_arrow_white"></i></div>
+							<div class="mp_qrcode" style="display:none;"><img src="{{asset('web_style/images/weixin_code_145.png')}}" /><i class="icon_arrow_white"></i></div>
 						</li>
 						<li class="qtitem">
 							<a href="{{url('/goods/id')}}top" class="return_top"><span class="top"></span></a>
@@ -586,9 +595,10 @@
 			</div>
 		</div>
 		<script>
-			window.jQuery || document.write('<script src="basic/js/jquery-1.9.min.js"><\/script>');
+
+			window.jQuery || document.write('<script src="{{asset('basic/js/jquery-1.9.min.js')}}"><\/script>');
 		</script>
-		<script type="text/javascript" src="web_style/basic/js/quick_links.js"></script>
+		<script type="text/javascript" src="{{asset('web_style/basic/js/quick_links.js')}}"></script>
 
 <div class="theme-popover-mask"></div>
 
