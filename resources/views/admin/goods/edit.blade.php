@@ -211,9 +211,10 @@
         </div>
         <div class="field">
           <input type="radio" class="" <?php echo $goodsrow['is_on_sale']==1? 'checked':'' ?> value="1" name="is_on_sale"/>是
-          <div class="tips"></div>
+          
           <input type="radio" class="" <?php echo $goodsrow['is_on_sale']==0? 'checked':'' ?> value="0" name="is_on_sale"/>否
         </div>
+        <div class="tips"></div>
       </div>
 
       <div class="form-group">
@@ -222,9 +223,9 @@
         </div>
         <div class="field">
           <input type="radio" class="" <?php echo $goodsrow['is_recommend']==1? 'checked':'' ?> name="is_recommend" value="1" />是
-          <div class="tips"></div>
           <input type="radio" class="" <?php echo $goodsrow['is_recommend']==0? 'checked':'' ?> name="is_recommend" value="0" />否
         </div>
+          <div class="tips"></div>
       </div>
 
       <div class="form-group">
@@ -233,9 +234,10 @@
         </div>
         <div class="field">
           <input type="radio" class="" <?php echo $goodsrow['is_new']==1? 'checked':'' ?> name="is_new" value="1" />是
-          <div class="tips"></div>
+          
           <input type="radio" class="" <?php echo $goodsrow['is_new']==0? 'checked':'' ?> name="is_new" value="0" />否
         </div>
+        <div class="tips"></div>
       </div>
 
       <div class="form-group">
@@ -244,9 +246,10 @@
         </div>
         <div class="field">
           <input type="radio" class="" <?php echo  $goodsrow['is_hot']==1? 'checked':'' ?> name="is_hot" value="1" />是
-          <div class="tips"></div>
+          
           <input type="radio" class="" <?php echo $goodsrow['is_hot']==0? 'checked':'' ?> name="is_hot" value="0" />否
         </div>
+        <div class="tips"></div>
       </div>
 
       <div class="form-group">

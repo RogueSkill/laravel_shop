@@ -16,10 +16,10 @@ class GoodController extends Controller
     public function index()
     {
 
-        $goods = DB::table('goods as g')->join('types as t','t.id','=','g.typeid')->select('g.goods_id','g.goods_name','g.sort','cover_img','t.name','g.updated_at');
+        $goods = DB::table('goods as g')->join('types as t','t.id','=','g.typeid')->select('g.goods_id','g.goods_name','g.is_new','g.is_hot','g.is_recommend','g.sort','cover_img','t.name','g.updated_at');
 
         $goods = $goods->get();
-        // var_dump($goods);
+        // dd($goods);
     	return view('admin/goods/index', compact('goods'));
     }
 
@@ -38,21 +38,21 @@ class GoodController extends Controller
     {
         // dump($request->all());
 
-        $this->validate($request, [
-            'goods_name' => 'required|min:3|max:30',
-            'typeid' => 'required',
-            'shop_price'=>'required',
-            'created_at' => 'required'
-        ],[
-            'required' => ':attribute 是必填字段',
-            'min' => ':attribute 必须不少于3个字符',
-            'max' => ':attribute 必须少于30个字符',
-        ],[
-            'goods_name' => '商品名称',
-            'typeid' => '分类名称',
-            'shop_price'=>'价格',
-            'created_at' => '发布时间',
-        ]);
+        // $this->validate($request, [
+        //     'goods_name' => 'required|min:1|max:30',
+        //     'typeid' => 'required',
+        //     'shop_price'=>'required',
+        //     'created_at' => 'required'
+        // ],[
+        //     'required' => ':attribute 是必填字段',
+        //     'min' => ':attribute 必须不少于3个字符',
+        //     'max' => ':attribute 必须少于30个字符',
+        // ],[
+        //     'goods_name' => '商品名称',
+        //     'typeid' => '分类名称',
+        //     'shop_price'=>'价格',
+        //     'created_at' => '发布时间',
+        // ]);
 
         // dd(1);
 
@@ -106,6 +106,8 @@ class GoodController extends Controller
             $goods->typeid = $typeid;
             $goods->goods_sn = $goods_sn;
             $goods->shop_price = $shop_price;
+            $goods->mareket_price = $mareket_price;
+            $goods->cost_price = $cost_price;
             $goods->goods_remake = $goods_remake;
             $goods->goods_content = $goods_content;
             $goods->sales_num = $sales_num;
@@ -117,7 +119,7 @@ class GoodController extends Controller
             $goods->click_num = $click_num;
             $goods->created_at = $created_at;
             $goods->original_img = $fileUrl;
-
+            // dd($goods);
             $data_add = $goods->save();
             
             if($data_add){
@@ -172,6 +174,31 @@ class GoodController extends Controller
         }
     }
 
+    public function changeNew(Request $req)
+    {   
+        // var_dump($req->all());
+        // exit;
+        $id = $req->input('id');
+        $is_new = $req->input('is_new');
+
+        if($is_new == '1'){
+            $is_new = '0';
+        }elseif($is_new == '0'){
+            $is_new = '1';
+        }
+
+        $boo = Good::where('goods_id',$id)->update(['is_new'=>$is_new]);
+
+        $newNum = Good::where('goods_id',$id)->pluck('is_new');
+        $newNum = $newNum[0];
+        dd($newNum);
+        // echo $tt;
+        if($newNum ==1){
+            echo 1;
+        }elseif($newNum==0){
+            echo 0;
+        }
+    }
     // 商品编辑添加
     // public function addEditImg(Request $request)
     // {
@@ -232,4 +259,13 @@ class GoodController extends Controller
         $good = Good::find($id); 
         $good->delete();
     }
+
+    // //前台列表页
+    public function lister($pid)
+    {
+        $goodslist = Good::where('typeid',$pid)->orderBy('updated_at','desc')->get();
+        
+        return  view('web/lar_list', compact('goodslist'));
+    }
+
 }
