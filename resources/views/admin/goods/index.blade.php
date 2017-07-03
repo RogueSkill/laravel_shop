@@ -334,10 +334,13 @@ $(function(){
 		var id = $(this).parent().parent().siblings('td').children('input[type=checkbox]').val();
 		var is_new = $(this).attr('value');
 		if(is_new==1){
+			
 			var url = '../style/images/icon_right_s.png';
 			$(this).attr('value',0);
 			$(this).attr('src',url);
+			
 		}else if(is_new==0){
+			
 			var url = '../style/images/icon_error_s.png';
 			$(this).attr('value',1);
 			$(this).attr('src',url);
@@ -355,13 +358,17 @@ $(function(){
 	   			console.log(data);
 	   			var url = null;
 	   			if(data==1){
+
 	   				url = '../style/images/icon_right_s.png';
 	   				$('img[name=is_new[]]').attr('value',data);
 	   				$('img[name=is_new[]]').attr('src',url);
+
 	   			}else if(data==0){
+
 	   				url = '../style/images/icon_error_s.png';
 	   				$('img[name=is_new[]]').attr('value',data);
 	   				$('img[name=is_new[]]').attr('src',url);
+
 	   			}
 
 	   			

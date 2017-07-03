@@ -79,13 +79,20 @@ class WebController extends Controller
 //用户中心页
     public function ucenter(Request $request)
     {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 717675919b2973be6814de48db980238ca80f0de
         if(!$request->session()->has("username")) {
             echo "<script>alert('请先登录!');window.location.href='login';</script>";
         }
         $name =  $request->session()->get("username");
 
         $id = $name;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 717675919b2973be6814de48db980238ca80f0de
 
         $user_datas = DB::table('members')->where('username','=',$id)->get();
 
@@ -117,11 +124,10 @@ class WebController extends Controller
     //地址删除设置默认
     public function addres(Request $request)
     {
-        $name =  $request->session()->get("username");
-
+        $name =  $request->session()->get("id");
         $uid = $name;
 
-        $addres_data = DB::table('addresses')->where('username',$uid)->paginate(10);
+        $addres_data = DB::table('addresses')->where('id',$uid)->paginate(10);
 
         if (isset($_GET['id']) == true && $_GET['perform'] == 'delete')
         {
@@ -161,9 +167,10 @@ class WebController extends Controller
     }
 
     //地址添加修改
-    public function addresadd()
+    public function addresadd(Request $request)
     {
-        $uid = 1;
+        $name =  $request->session()->get("id");
+        $uid = $name;
 
         if (isset($_POST['created_at']) == true)
         {
@@ -247,6 +254,8 @@ class WebController extends Controller
                $password = $val['pass'];
 
                $bool =  password_verify($pass,$password);
+
+               $id = $val['id'];
             }
 
         }
@@ -254,7 +263,8 @@ class WebController extends Controller
         if($bool){
 
             echo "1";
-            $request->session()->put("username",$username);
+            $request->session()->put("username", $username);
+            $request->session()->put("id", $id);
         }else {
 
             echo "0";
@@ -267,7 +277,45 @@ class WebController extends Controller
     public function quit(Request $request)
     {
         $request->session()->pull("username");
+        $request->session()->pull("id");
         echo "<script>alert(' 退出成功!');window.location.href='index';</script>";
+    }
+
+    //评论页输出
+    public function message(Request $request)
+    {
+
+        $name =  $request->session()->get("id");
+
+        $id = $name;
+
+        $page = DB::table('goods_comments')->where('userid',$id)->join('goods','goods_comments.goodsid','=','goods.goods_id')->paginate(10);
+//        dd($page);
+
+        $data = DB::table('goods_comments')->where('userid',$id)->join('goods','goods_comments.goodsid','=','goods.goods_id')->paginate(10);
+
+        return view("web/message",compact('data','page'));
+    }
+
+    //评论页修改
+    public function messageadd()
+    {
+
+        $update = DB::table('goods_comments')->where('id', $_POST['messageid'])->update(['message'=>$_POST['messageadd']]);
+
+        if ($update > 0)
+        {
+            $time = date('y-m-d h:i:s',time());
+            DB::table('goods_comments')->where('id', $_POST['messageid'])->update(['updated_at'=>$time,'content'=>0]);
+
+            exit("<script>alert('修改评论成功');window.location.href='message'</script>");
+
+        }else{
+
+            exit("<script>alert('修改评论失败');window.location.href='message'</script>");
+
+        }
+
     }
 }
 

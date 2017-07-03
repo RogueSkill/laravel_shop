@@ -49,9 +49,9 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="message">
                                     <span class="glyphicon glyphicon-comment"></span>
-                                    我的留言
+                                    我的评论
                                 </a>
                             </li>
                             <li>
@@ -79,7 +79,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{url('quit')}}">
                                     <span class="glyphicon glyphicon-lock"></span>
                                     退出
                                 </a>
@@ -120,20 +120,13 @@
                                                 <div class="form-group">
                                                     <label class="col-sm-2 control-label">地区选择</label>
                                                     <div class="col-sm-10">
-                                                        <select class="form-control" name="province" id="province" style="margin-left:0px;">
-                                                            <option>--请选择省份--</option>
-                                                            <option>广东省</option>
-                                                            <option>山东省</option>
-                                                            <option>湖南省</option>
-                                                        </select>
-                                                        <select class="form-control" name="city" id="city">
-                                                            <option>--请选择城市--</option>
-                                                            <option>市</option>
-                                                        </select>
-                                                        <select class="form-control" name="county" id="county">
-                                                            <option>--请选择所在县--</option>
-                                                            <option>县</option>
-                                                        </select>
+                                                        <div>
+                                                            <select id="s_province" name="province" class="form-control"></select>  
+                                                            <select id="s_city" name="city" class="form-control"></select>  
+                                                            <select id="s_county" name="county" class="form-control"></select>
+                                                            <script class="resources library" src="{{asset('js/area.js')}}" type="text/javascript"></script>
+                                                            <script type="text/javascript">_init_area();</script>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -195,20 +188,13 @@
                                                     <div class="form-group">
                                                         <label class="col-sm-2 control-label">地区选择</label>
                                                         <div class="col-sm-10">
-                                                            <select class="form-control" name="province" id="province" style="margin-left:0px;">
-                                                                <option>--请选择省份--</option>
-                                                                <option>广东省</option>
-                                                                <option>山东省</option>
-                                                                <option>湖南省</option>
-                                                            </select>
-                                                            <select class="form-control" name="city" id="city">
-                                                                <option value="">--请选择城市--</option>
-                                                                <option value="">市</option>
-                                                            </select>
-                                                            <select class="form-control" name="county" id="county">
-                                                                <option value="">--请选择所在县--</option>-*
-                                                                <option value="">县</option>
-                                                            </select>
+                                                            <div>
+                                                                <select id="s_province2" name="province" class="form-control"></select>  
+                                                                <select id="s_city2" name="city" class="form-control"></select>  
+                                                                <select id="s_county2" name="county" class="form-control"></select>
+                                                                <script class="resources library" src="{{asset('js/area2.js')}}" type="text/javascript"></script>
+                                                                <script type="text/javascript">_init_area2();</script>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
@@ -299,4 +285,26 @@
                 }
             }
 
+            var Gid  = document.getElementById;
+
+                var showArea = function(){
+
+                    Gid('show').innerHTML = "<h3>省" + Gid('s_province').value + " - 市" +
+
+                        Gid('s_city').value + " - 县/区" +
+
+                        Gid('s_county').value + "</h3>"
+
+            }
+
+            var showArea2 = function(){
+
+                Gid('show2').innerHTML = "<h3>省" + Gid('s_province2').value + " - 市" +
+
+                    Gid('s_city2').value + " - 县/区" +
+
+                    Gid('s_county2').value + "</h3>"
+
+            }
+//            Gid('s_county').setAttribute('onchange','showArea()');
     </script>

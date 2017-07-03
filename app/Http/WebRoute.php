@@ -42,6 +42,10 @@ Route::post("center", "WebController@ucenteradd");
 Route::get("addres", "WebController@addres");
 Route::post("addres", "WebController@addresadd");
 
+//评论管理
+Route::get("message", "WebController@message");
+Route::post("message", "WebController@messageadd");
+
 //注册页ajax请求地址
 Route::post("registerAjax", "WebController@registerAjax");
 
