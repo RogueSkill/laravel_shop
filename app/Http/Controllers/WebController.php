@@ -14,23 +14,38 @@ class WebController extends Controller
     //首页
     public function index(Request $request)
     {
-
         // //轮播图
         // $pic = Pic::paginate(3);
-
         // //最新商品
         // $user = Good::where('is_on_sale','1')->paginate(8);
-
         // //热卖商品
         // $hotsale = Good::where('is_hot','1')->paginate(8);
 
         //分类
         $bigType = Type::where('pid','0')->paginate(10);
-        // dd($bigType);
+        // dd($bigType[1]['id']);
+        $smallArr = array();
+        foreach($bigType as $v)
+        {
+             $smallType = DB::table('types')->where('pid',$v['id'])->paginate(10);
+             // dd($smallType);
+             foreach($smallType as $b)
+             {
+                
+                $newarray = array_push($smallArr, $b['name']);
+                
+             }
+        }
+        // var_dump($bigType);
+        // var_dump($smallArr);
+      
+        return view('web/lar_index',compact('bigType','smallArr'));
+
+
+        // $id = $bigType->id;
+        // dd($id);
+
         // return view('web/index',compact('pic','user','hotsale'));
-        return view('web/lar_index',compact('bigType'));
-
-
 
 
         // return view('web/index',compact('hotsale'));
