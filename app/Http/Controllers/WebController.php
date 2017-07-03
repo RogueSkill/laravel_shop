@@ -79,16 +79,16 @@ class WebController extends Controller
 //用户中心页
     public function ucenter(Request $request)
     {
-<<<<<<< HEAD
+
         $id = '1';
-=======
+
         if(!$request->session()->has("username")) {
             echo "<script>alert('请先登录!');window.location.href='login';</script>";
         }
         $name =  $request->session()->get("username");
 
         $id = $name;
->>>>>>> 5f5b6404008bec604d9a2dfc07eae5f206691f78
+
 
         $user_datas = DB::table('members')->where('username','=',$id)->get();
 
@@ -250,6 +250,8 @@ class WebController extends Controller
                $password = $val['pass'];
 
                $bool =  password_verify($pass,$password);
+
+               $id = $val['id'];
             }
 
         }
@@ -257,7 +259,8 @@ class WebController extends Controller
         if($bool){
 
             echo "1";
-            $request->session()->put("username",$username);
+            $request->session()->put("username", $username);
+            $request->session()->put("id", $id);
         }else {
 
             echo "0";
@@ -270,6 +273,7 @@ class WebController extends Controller
     public function quit(Request $request)
     {
         $request->session()->pull("username");
+        $request->session()->pull("id");
         echo "<script>alert(' 退出成功!');window.location.href='index';</script>";
     }
 }
