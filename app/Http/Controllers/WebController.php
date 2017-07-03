@@ -94,9 +94,14 @@ class WebController extends Controller
     }
 
 //用户中心页
-    public function ucenter()
+    public function ucenter(Request $request)
     {
-        $id = 'aa';
+        if(!$request->session()->has("username")) {
+            echo "<script>alert('请先登录!');window.location.href='login';</script>";
+        }
+        $name =  $request->session()->get("username");
+
+        $id = $name;
 
         $user_datas = DB::table('members')->where('username','=',$id)->get();
 
@@ -126,11 +131,13 @@ class WebController extends Controller
     }
 
     //地址删除设置默认
-    public function addres()
+    public function addres(Request $request)
     {
-        $uid = 1;
+        $name =  $request->session()->get("username");
 
-        $addres_data = DB::table('addresses')->where('userid',$uid)->paginate(10);
+        $uid = $name;
+
+        $addres_data = DB::table('addresses')->where('username',$uid)->paginate(10);
 
         if (isset($_GET['id']) == true && $_GET['perform'] == 'delete')
         {
@@ -236,7 +243,7 @@ class WebController extends Controller
     }
 
     //登录页Ajax请求处理
-    public function loginAjax()
+    public function loginAjax(Request $request)
     {
         $username = $_POST['username'];
         $pass = $_POST['pass'];
@@ -263,6 +270,7 @@ class WebController extends Controller
         if($bool){
 
             echo "1";
+            $request->session()->put("username",$username);
         }else {
 
             echo "0";
@@ -271,6 +279,12 @@ class WebController extends Controller
 
     }
 
+    //用户退出
+    public function quit(Request $request)
+    {
+        $request->session()->pull("username");
+        echo "<script>alert(' 退出成功!');window.location.href='index';</script>";
+    }
 }
 
 
