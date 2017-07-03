@@ -70,6 +70,11 @@
     <!-- <li><a href="{{url('admin/competence')}}" target="right"><span class="icon-caret-right"></span>权限管理</a></li>   -->
   </ul>    
   @endif
+
+  <h2><span class="icon-pencil-square-o"></span>评论管理</h2>
+  <ul>
+    <li><a href="{{url('admin/comments_list')}}" target="right"><span class="icon-caret-right"></span>评论列表</a></li>
+  </ul>
 </div>
 <script type="text/javascript">
 $(function(){

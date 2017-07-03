@@ -86,11 +86,13 @@
 					   <div class="long-title"><span class="all-goods">全部分类</span></div>
 					   <div class="nav-cont">
 							<ul>
-								<li class="index"><a href="{{url('/list')}}">首页</a></li>
-                                <li class="qc"><a href="{{url('/list')}}">闪购</a></li>
+								@foreach($bigType as $v)
+								<li class="index"><a href="{{url('/list/'.$v['id'])}}">{{$v['name']}}</a></li>
+                                <!-- <li class="qc"><a href="{{url('/list')}}">闪购</a></li>
                                 <li class="qc"><a href="{{url('/list')}}">限时抢</a></li>
                                 <li class="qc"><a href="{{url('/list')}}">团购</a></li>
-                                <li class="qc last"><a href="{{url('/list')}}">大包装</a></li>
+                                <li class="qc last"><a href="{{url('/list')}}">大包装</a></li> -->
+                                @endforeach
 							</ul>
 						    <div class="nav-extra">
 						    	<i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的福利
@@ -105,7 +107,8 @@
 									
 									<div class="category">
 										<ul class="category-list" id="js_climit_li">
-										@foreach($bigType as $v)
+										 @foreach($bigType as $v) 
+										 <!-- dd($v); -->
 											<li class="appliance js_toggle relative first">
 												<div class="category-info">
 													<h3 class="category-name b-category-name"><i><img src="web_style/images/cake.png"></i><a class="ml-22" title="点心">{{$v['name']}}</a></h3>
@@ -116,7 +119,7 @@
 															<div class="menu-srot">
 																<div class="sort-side">
 																	<dl class="dl-sort">
-																		<dt><span title="蛋糕">小分类1</span></dt>
+																		<dt><span title="蛋糕">{{$smallArr[1]}}</span></dt>
 																		<dd><a title="蒸蛋糕" href="{{url('/list')}}"><span>商品</span></a></dd>
 																		
 																		
@@ -141,8 +144,8 @@
 												</div>
 											<b class="arrow"></b>	
 											</li>
-										@endforeach
-											<li class="appliance js_toggle relative">
+										 @endforeach 
+<!-- 											<li class="appliance js_toggle relative">
 												<div class="category-info">
 													<h3 class="category-name b-category-name"><i><img src="web_style/images/cookies.png"></i><a class="ml-22" title="饼干、膨化">饼干/膨化</a></h3>
 													<em>&gt;</em></div>
@@ -449,7 +452,7 @@
 													</div>
 												</div>
 
-											</li>
+											</li> -->
 										</ul>
 									</div>
 								</div>

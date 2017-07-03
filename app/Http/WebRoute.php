@@ -29,7 +29,7 @@ Route::get("pay", "WebController@pay");
 Route::get("paysucceed", "WebController@paysucceed");
 
 //列表页
-Route::get("list", "WebController@lister");
+Route::get("list/{id}", "WebController@lister");
 
 //订单页
 Route::get("order", "WebController@order");

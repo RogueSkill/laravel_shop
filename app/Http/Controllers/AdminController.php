@@ -369,7 +369,52 @@ class AdminController extends BaseController
         
     }
 
+    /**
+     *
+     *********************************************评论模块****************************************
+     */
 
+    //评论列表
+    public function comments_list()
+    {
+
+        $page = DB::table('goods_comments')->join('goods','goods_comments.goodsid','=','goods.goods_id')->paginate(10);
+
+        $data = DB::table('goods_comments')->join('goods','goods_comments.goodsid','=','goods.goods_id')->paginate(10);
+
+        return view('admin/comments/index',compact('data','page'));
+
+    }
+
+    //评论审核
+    public function comments_add()
+    {
+        $add = DB::table('goods_comments')->where('id',$_GET['id'])->get();
+
+        $add = $add[0];
+
+        return view('admin/comments/add',compact('add'));
+
+    }
+
+    //评论审核修改
+    public function comments_submit()
+    {
+
+        $submit = DB::table('goods_comments')->where('id', $_POST['comments_id'])->update(['content'=>$_POST['state']]);
+
+        if ($submit > 0 )
+        {
+
+            exit("<script>alert('审核修改成功');window.location.href='comments_list'</script>");
+
+        }else{
+
+            echo "<script>alert('请修改后在提交');window.history.go(-1);</script>";
+
+        }
+
+    }
 }
 
 
