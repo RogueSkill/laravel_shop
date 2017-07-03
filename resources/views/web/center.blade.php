@@ -78,7 +78,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{url('quit')}}">
                                     <span class="glyphicon glyphicon-lock"></span>
                                     退出
                                 </a>

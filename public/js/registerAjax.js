@@ -316,6 +316,7 @@ $("button[name='register']").on("click", function() {
 
                 if(data > 0) {
                     alert("注册成功");
+                    window.location.href='login';
                 }
             }
         });

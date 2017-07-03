@@ -6,6 +6,7 @@
 
 //首页
 Route::get("/","WebController@index");
+Route::get("index","WebController@index");
 
 //登录页
 Route::get("login", "WebController@login");
@@ -46,3 +47,6 @@ Route::post("registerAjax", "WebController@registerAjax");
 
 //登录页ajax请求地址
 Route::post("loginAjax", "WebController@loginAjax");
+
+//用户退出
+Route::get("quit", "WebController@quit");
