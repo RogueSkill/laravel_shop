@@ -140,7 +140,7 @@
 												</span>
 											</dt>
 											@foreach($val['son'] as $v)
-											<dd><a title="{{$v['name']}}" href="#"><span>{{$v['name']}}</span></a></dd>
+											<dd><a title="{{$v['name']}}" href="list/{{$v['pid']}}"><span>{{$v['name']}}</span></a></dd>
 											@endforeach
 										</dl>
 										@endforeach
@@ -729,7 +729,7 @@
 							<div class="am-u-sm-4 am-u-lg-3 ">
 								<div class="info ">
 									<h3>{{$val['goods_name']}}</h3>
-									<h4>{{$val['goods_remake']}}</h4>
+									<h4>{!! $val['goods_remake'] !!}</h4>
 								</div>
 								<div class="recommendationMain ">
 									<img src="../{{$val['cover_img']}}"></img>
