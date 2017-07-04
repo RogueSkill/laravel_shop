@@ -37,21 +37,21 @@ class GoodController extends Controller
     {
         // dump($request->all());
 
-        // $this->validate($request, [
-        //     'goods_name' => 'required|min:1|max:30',
-        //     'typeid' => 'required',
-        //     'shop_price'=>'required',
-        //     'created_at' => 'required'
-        // ],[
-        //     'required' => ':attribute 是必填字段',
-        //     'min' => ':attribute 必须不少于3个字符',
-        //     'max' => ':attribute 必须少于30个字符',
-        // ],[
-        //     'goods_name' => '商品名称',
-        //     'typeid' => '分类名称',
-        //     'shop_price'=>'价格',
-        //     'created_at' => '发布时间',
-        // ]);
+        $this->validate($request, [
+            'goods_name' => 'required|min:1|max:30',
+            'typeid' => 'required',
+            // 'shop_price'=>'required',
+            // 'created_at' => 'required'
+        ],[
+            'required' => ':attribute 是必填字段',
+            'min' => ':attribute 必须不少于3个字符',
+            'max' => ':attribute 必须少于30个字符',
+        ],[
+            'goods_name' => '商品名称',
+            'typeid' => '分类名称',
+            // 'shop_price'=>'价格',
+            // 'created_at' => '发布时间',
+        ]);
 
         // dd(1);
 
