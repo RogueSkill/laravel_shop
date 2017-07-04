@@ -14,8 +14,18 @@ class WebController extends Controller
     //首页
     public function index(Request $request)
     {
-        
-        return view('web/lar_index');
+        //判断username是否存在session中,存在则赋值到首页
+       $bool =  $request->session()->has("username");
+
+       if($bool) {
+           $username =  $request->session()->get("username");
+
+           return view('web/lar_index', compact('username'));
+       } else {
+
+          return view('web/lar_index');
+       }
+
 
     }
 
