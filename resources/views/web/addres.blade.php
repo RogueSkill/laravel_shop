@@ -254,6 +254,13 @@
                 var uname_1 = document.getElementById('uname_1').value;
                 var uphone_1 = document.getElementById('uphone_1').value;
                 var code_1 = document.getElementById('code_1').value;
+                var s_province2 = document.getElementById('s_province2').value;
+                var s_city2 = document.getElementById('s_city2').value;
+                var s_county2 = document.getElementById('s_county2').value;
+                var s_province = document.getElementById('s_province').value;
+                var s_city = document.getElementById('s_city').value;
+                var s_county = document.getElementById('s_county').value;
+
 
                 if (button_1 == null || button_1 == "") {
                     alert("详细地址不能为空");
@@ -283,6 +290,8 @@
                     alert("请输入正确的邮政编码");
                     return false;
                 }
+
+
             }
 
             var Gid  = document.getElementById;

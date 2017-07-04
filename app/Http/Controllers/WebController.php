@@ -79,20 +79,13 @@ class WebController extends Controller
 //用户中心页
     public function ucenter(Request $request)
     {
-<<<<<<< HEAD
 
-=======
->>>>>>> 717675919b2973be6814de48db980238ca80f0de
         if(!$request->session()->has("username")) {
             echo "<script>alert('请先登录!');window.location.href='login';</script>";
         }
         $name =  $request->session()->get("username");
 
         $id = $name;
-<<<<<<< HEAD
-=======
-
->>>>>>> 717675919b2973be6814de48db980238ca80f0de
 
         $user_datas = DB::table('members')->where('username','=',$id)->get();
 
@@ -124,6 +117,9 @@ class WebController extends Controller
     //地址删除设置默认
     public function addres(Request $request)
     {
+        if(!$request->session()->has("username")) {
+            echo "<script>alert('请先登录!');window.location.href='login';</script>";
+        }
         $name =  $request->session()->get("id");
         $uid = $name;
 
@@ -284,7 +280,10 @@ class WebController extends Controller
     //评论页输出
     public function message(Request $request)
     {
-
+        if(!$request->session()->has("username")) {
+            echo "<script>alert('请先登录!');window.location.href='login';</script>";
+        }
+        
         $name =  $request->session()->get("id");
 
         $id = $name;
