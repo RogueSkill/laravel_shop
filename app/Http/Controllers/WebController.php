@@ -79,20 +79,12 @@ class WebController extends Controller
 //用户中心页
     public function ucenter(Request $request)
     {
-<<<<<<< HEAD
-
-=======
->>>>>>> 717675919b2973be6814de48db980238ca80f0de
         if(!$request->session()->has("username")) {
             echo "<script>alert('请先登录!');window.location.href='login';</script>";
         }
         $name =  $request->session()->get("username");
 
         $id = $name;
-<<<<<<< HEAD
-=======
-
->>>>>>> 717675919b2973be6814de48db980238ca80f0de
 
         $user_datas = DB::table('members')->where('username','=',$id)->get();
 

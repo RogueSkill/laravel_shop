@@ -27,7 +27,6 @@ class GoodController extends Controller
     public function add()
     {
 
-    
         $goodtypes = DB::table('types')->get();
         // var_dump($goodtypes);
     	return view('admin/goods/add' ,compact('goodtypes'));
@@ -173,11 +172,10 @@ class GoodController extends Controller
             return redirect('/admin/goods_list');
         }
     }
-
+    //新品
     public function changeNew(Request $req)
     {   
-        // var_dump($req->all());
-        // exit;
+        
         $id = $req->input('id');
         $is_new = $req->input('is_new');
 
@@ -191,7 +189,58 @@ class GoodController extends Controller
 
         $newNum = Good::where('goods_id',$id)->pluck('is_new');
         $newNum = $newNum[0];
-        dd($newNum);
+        
+        // echo $tt;
+        if($newNum ==1){
+            echo 1;
+        }elseif($newNum==0){
+            echo 0;
+        }
+    }
+    //热销
+    public function changeHot(Request $req)
+    {   
+        
+        $id = $req->input('id');
+        $is_hot = $req->input('is_hot');
+
+        if($is_hot == '1'){
+            $is_hot = '0';
+        }elseif($is_hot == '0'){
+            $is_hot = '1';
+        }
+
+        $boo = Good::where('goods_id',$id)->update(['is_hot'=>$is_hot]);
+
+        $newNum = Good::where('goods_id',$id)->pluck('is_hot');
+        $newNum = $newNum[0];
+        
+        // echo $tt;
+        if($newNum ==1){
+            echo 1;
+        }elseif($newNum==0){
+            echo 0;
+        }
+    }
+
+    //推荐
+    public function changeRecommend(Request $req)
+    {   
+        
+        $id = $req->input('id');
+        $is_recommend = $req->input('is_recommend');
+
+        if($is_recommend == '1'){
+            $is_recommend = '0';
+        }elseif($is_recommend == '0'){
+            $is_recommend = '1';
+        }
+
+        $boo = Good::where('goods_id',$id)->update(['is_recommend'=>$is_recommend]);
+
+        $newNum = Good::where('goods_id',$id)->pluck('is_recommend');
+        $newNum = $newNum[0];
+        
         // echo $tt;
         if($newNum ==1){
             echo 1;
@@ -260,12 +309,24 @@ class GoodController extends Controller
         $good->delete();
     }
 
-    // //前台列表页
+    //前台商品列表页
     public function lister($pid)
     {
-        $goodslist = Good::where('typeid',$pid)->orderBy('updated_at','desc')->get();
+        $goodslist = Good::where('typeid',$pid)->orderBy('updated_at','desc')->paginate(12);
         
         return  view('web/lar_list', compact('goodslist'));
     }
+
+    //前台商品详细页
+    public function webDetail($id)
+    {
+        $data = DB::table('goods')->where('goods_id',$id)->get();
+        $detail = $data[0];
+        $detail['original_img'] = explode(',',trim($detail['original_img'],','));
+        // dd($detail);
+        return view('web/lar_introduction', compact('detail'));
+    }
+
+
 
 }

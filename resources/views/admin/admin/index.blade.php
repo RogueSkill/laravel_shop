@@ -1,7 +1,6 @@
 <?php
 $level = [0=>'超级管理员',1=>'一般管理员',2=>'录入管理员',3=>'审核管理员'];
 
-
 ?>
 <!DOCTYPE html>
 <html lang="zh-cn">
@@ -56,7 +55,6 @@ $level = [0=>'超级管理员',1=>'一般管理员',2=>'录入管理员',3=>'审
   </table>
   
 </div>
-
 
 <script type="text/javascript">
 function del(id,mid){
