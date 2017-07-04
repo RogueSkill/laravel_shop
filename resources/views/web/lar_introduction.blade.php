@@ -140,24 +140,19 @@
 							</script>
 
 							<div class="tb-booth tb-pic tb-s310">
-								<a href="{{asset('web_style/images/01.jpg')}}"><img src="{{asset('web_style/images/01_mid.jpg')}}" alt="细节展示放大镜特效" rel="{{asset('web_style/images/01.jpg')}}" class="jqzoom" /></a>
+								<a href="{{asset('web_style/images/01.jpg')}}"><img src="../{{$detail['cover_img']}}" alt="细节展示放大镜特效" rel="../{{$detail['cover_img']}}" class="jqzoom" /></a>
 							</div>
 							<ul class="tb-thumb" id="thumblist">
-								<li class="tb-selected">
-									<div class="tb-pic tb-s40">
-										<a href="#"><img src="{{asset('web_style/images/01_small.jpg')}}" mid="{{asset('web_style/images/01_mid.jpg')}}" big="{{asset('web_style/images/01.jpg')}}"></a>
-									</div>
-								</li>
-								<li>
-									<div class="tb-pic tb-s40">
-										<a href="#"><img src="{{asset('web_style/images/02_small.jpg')}}" mid="{{asset('web_style/images/02_mid.jpg')}}" big="{{asset('web_style/images/02.jpg')}}"></a>
-									</div>
-								</li>
-								<li>
-									<div class="tb-pic tb-s40">
-										<a href="#"><img src="{{asset('web_style/images/03_small.jpg')}}" mid="{{asset('web_style/images/03_mid.jpg')}}" big="{{asset('web_style/images/03.jpg')}}"></a>
-									</div>
-								</li>
+								@if($detail['original_img'])
+									@foreach($detail['original_img'] as $val)
+									<li>
+										<div class="tb-pic tb-s40">
+											<a href="#"><img src="../../../upload/{{$val}}" mid="{{asset('web_style/images/03_mid.jpg')}}" big="{{asset('web_style/images/03.jpg')}}"></a>
+										</div>
+									</li>
+									@endforeach
+								@endif
+
 							</ul>
 						</div>
 
@@ -169,21 +164,30 @@
 						<!--规格属性-->
 						<!--名称-->
 						<div class="tb-detail-hd">
-							<h1>	
-				 良品铺子 手剥松子218g 坚果炒货 巴西松子
-	          </h1>
+							<h1>{{$detail['goods_name']}}</h1>
 						</div>
 						<div class="tb-detail-list">
 							<!--价格-->
 							<div class="tb-detail-price">
+							@if($detail['cost_price'])
 								<li class="price iteminfo_price">
 									<dt>促销价</dt>
-									<dd><em>¥</em><b class="sys_item_price">56.90</b>  </dd>                                 
+									<dd><em>¥</em>
+										<b class="sys_item_price">
+											{{$detail['cost_price']}}
+										</b>
+									</dd>                                 
 								</li>
+							@endif
+
+							@if($detail['shop_price'])
 								<li class="price iteminfo_mktprice">
 									<dt>原价</dt>
-									<dd><em>¥</em><b class="sys_item_mktprice">98.00</b></dd>									
+									<dd><em>¥</em>
+									<b class="sys_item_mktprice">{{$detail['shop_price']}}</b>
+									</dd>									
 								</li>
+							@endif
 								<div class="clear"></div>
 							</div>
 
@@ -466,7 +470,7 @@
 										<div class="attr-list-hd tm-clear">
 											<h4>产品参数：</h4></div>
 										<div class="clear"></div>
-										<ul id="J_AttrUL">
+										<!-- <ul id="J_AttrUL">
 											<li title="">产品类型:&nbsp;烘炒类</li>
 											<li title="">原料产地:&nbsp;巴基斯坦</li>
 											<li title="">产地:&nbsp;湖北省武汉市</li>
@@ -477,7 +481,8 @@
 											<li title="">生产许可证编号：&nbsp;QS4201 1801 0226</li>
 											<li title="">储存方法：&nbsp;请放置于常温、阴凉、通风、干燥处保存 </li>
 											<li title="">食用方法：&nbsp;开袋去壳即食</li>
-										</ul>
+										</ul> -->
+										{{$detail['goods_remake']}}
 										<div class="clear"></div>
 									</div>
 
@@ -486,13 +491,14 @@
 											<h4>商品细节</h4>
 										</div>
 										<div class="twlistNews">
-											<img src="{{asset('web_style/images/tw1.jpg')}}" />
+											<!-- <img src="{{asset('web_style/images/tw1.jpg')}}" />
 											<img src="{{asset('web_style/images/tw2.jpg')}}" />
 											<img src="{{asset('web_style/images/tw3.jpg')}}" />
 											<img src="{{asset('web_style/images/tw4.jpg')}}" />
 											<img src="{{asset('web_style/images/tw5.jpg')}}" />
 											<img src="{{asset('web_style/images/tw6.jpg')}}" />
-											<img src="{{asset('web_style/images/tw7.jpg')}}" />
+											<img src="{{asset('web_style/images/tw7.jpg')}}" /> -->
+											{{$detail['goods_content']}}
 										</div>
 									</div>
 									<div class="clear"></div>

@@ -55,8 +55,11 @@ Route::group(['middleware'=>['web','admin.login']],function(){
 
 	//商品模块
 	Route::get('/admin/goods_list', 'GoodController@index');
-	Route::post('/admin/goods_list', 'GoodController@changeNew');
 	
+	Route::post('/admin/goods_list', 'GoodController@changeNew');
+	Route::post('/admin/goods_list', 'GoodController@changeHot');
+	Route::post('/admin/goods_list', 'GoodController@changeRecommend');
+
 	Route::get('/admin/goods_edit/{id}', 'GoodController@edit');
 	Route::post('/admin/goods_edit', 'GoodController@doEdit');
 	// Route::post('/admin/goods_addimg', 'GoodController@addEditImg');
