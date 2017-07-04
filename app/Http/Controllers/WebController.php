@@ -79,6 +79,7 @@ class WebController extends Controller
 //用户中心页
     public function ucenter(Request $request)
     {
+
         if(!$request->session()->has("username")) {
             echo "<script>alert('请先登录!');window.location.href='login';</script>";
         }
@@ -116,11 +117,16 @@ class WebController extends Controller
     //地址删除设置默认
     public function addres(Request $request)
     {
-        $name =  $request->session()->get("id");
-        $uid = $name;
+        if(!$request->session()->has("username")) {
 
-        $addres_data = DB::table('addresses')->where('id',$uid)->paginate(10);
+            echo "<script>alert('请先登录!');window.location.href='login';</script>";
 
+        }
+
+        $uid =  $request->session()->get("id");
+
+        $addres_data = DB::table('addresses')->where('userid',$uid)->paginate(10);
+//        dd($uid);
         if (isset($_GET['id']) == true && $_GET['perform'] == 'delete')
         {
             $delete = DB::table('addresses')->where('id',$_GET['id'])->delete();
@@ -153,7 +159,7 @@ class WebController extends Controller
 
             }
         }
-
+//        dd($addres_data);
         return view("web/addres",compact('addres_data'));
 
     }
@@ -161,8 +167,7 @@ class WebController extends Controller
     //地址添加修改
     public function addresadd(Request $request)
     {
-        $name =  $request->session()->get("id");
-        $uid = $name;
+        $uid =  $request->session()->get("id");
 
         if (isset($_POST['created_at']) == true)
         {
@@ -276,15 +281,18 @@ class WebController extends Controller
     //评论页输出
     public function message(Request $request)
     {
+        if(!$request->session()->has("username")) {
 
-        $name =  $request->session()->get("id");
+            echo "<script>alert('请先登录!');window.location.href='login';</script>";
 
-        $id = $name;
+        }
 
-        $page = DB::table('goods_comments')->where('userid',$id)->join('goods','goods_comments.goodsid','=','goods.goods_id')->paginate(10);
+        $uid =  $request->session()->get("id");
+
+        $page = DB::table('goods_comments')->where('userid',$uid)->join('goods','goods_comments.goodsid','=','goods.goods_id')->paginate(10);
 //        dd($page);
 
-        $data = DB::table('goods_comments')->where('userid',$id)->join('goods','goods_comments.goodsid','=','goods.goods_id')->paginate(10);
+        $data = DB::table('goods_comments')->where('userid',$uid)->join('goods','goods_comments.goodsid','=','goods.goods_id')->paginate(10);
 
         return view("web/message",compact('data','page'));
     }

@@ -1,7 +1,9 @@
 @extends("web.master")
 @section("title", "地址管理页")
 @section("content")
-
+    {{--<script src="{{asset('js/Area1.js')}}" type="text/javascript"></script>--}}
+    {{--<script src="{{asset('js/AreaData_min.js')}}" type="text/javascript"></script>--}}
+    {{--<script src="{{asset('js/jquery-1.7.min.js')}}" type="text/javascript"></script>--}}
     <div style="display: block; margin-top:52px;"></div>
 
     <!-- 路径导航 -->
@@ -121,11 +123,7 @@
                                                     <label class="col-sm-2 control-label">地区选择</label>
                                                     <div class="col-sm-10">
                                                         <div>
-                                                            <select id="s_province" name="province" class="form-control"></select>  
-                                                            <select id="s_city" name="city" class="form-control"></select>  
-                                                            <select id="s_county" name="county" class="form-control"></select>
-                                                            <script class="resources library" src="{{asset('js/area.js')}}" type="text/javascript"></script>
-                                                            <script type="text/javascript">_init_area();</script>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -176,7 +174,7 @@
                                         @else
                                             <input type="radio" name="address-radio[]">
                                         @endif
-                                        <a class="panel-title" data-toggle="collapse" data-parent="#panel-937561" href="#panel-element-{{$addres['id']}}">{{$addres['province'].'省 '.$addres['city'].'市 '.$addres['county'].'县/区 '.$addres['detailed_address']}}</a>
+                                        <a class="panel-title" data-toggle="collapse" data-parent="#panel-937561" href="#panel-element-{{$addres['id']}}">{{$addres['province'].'&ensp;'.$addres['city'].'&ensp;'.$addres['county'].'&ensp;'.$addres['detailed_address']}}</a>
                                     </div>
                                     <div id="panel-element-{{$addres['id']}}" class="panel-collapse collapse">
                                         <div class="panel-body">
@@ -188,13 +186,7 @@
                                                     <div class="form-group">
                                                         <label class="col-sm-2 control-label">地区选择</label>
                                                         <div class="col-sm-10">
-                                                            <div>
-                                                                <select id="s_province2" name="province" class="form-control"></select>  
-                                                                <select id="s_city2" name="city" class="form-control"></select>  
-                                                                <select id="s_county2" name="county" class="form-control"></select>
-                                                                <script class="resources library" src="{{asset('js/area2.js')}}" type="text/javascript"></script>
-                                                                <script type="text/javascript">_init_area2();</script>
-                                                            </div>
+
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
@@ -284,27 +276,4 @@
                     return false;
                 }
             }
-
-            var Gid  = document.getElementById;
-
-                var showArea = function(){
-
-                    Gid('show').innerHTML = "<h3>省" + Gid('s_province').value + " - 市" +
-
-                        Gid('s_city').value + " - 县/区" +
-
-                        Gid('s_county').value + "</h3>"
-
-            }
-
-            var showArea2 = function(){
-
-                Gid('show2').innerHTML = "<h3>省" + Gid('s_province2').value + " - 市" +
-
-                    Gid('s_city2').value + " - 县/区" +
-
-                    Gid('s_county2').value + "</h3>"
-
-            }
-//            Gid('s_county').setAttribute('onchange','showArea()');
     </script>
