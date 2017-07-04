@@ -55,10 +55,28 @@ Route::group(['middleware'=>['web','admin.login']],function(){
 
 	//商品模块
 	Route::get('/admin/goods_list', 'GoodController@index');
-	
-	Route::post('/admin/goods_list', 'GoodController@changeNew');
-	Route::post('/admin/goods_list', 'GoodController@changeHot');
-	Route::post('/admin/goods_list', 'GoodController@changeRecommend');
+
+	 Route::get('/admin/edit/{id}',[
+ 		'as'=>'aedit',
+ 		'edit'=>'AdminController@edit'
+ 	]);
+
+	// Route::post('/admin/goods_list', [
+	// 	'as'=>'/admin/New',
+	// 	'changeNew'=>'GoodController@changeNew'
+	// ]);
+	Route::post('/admin/goods_list/{new}', 'GoodController@changeNew');
+	// Route::post('/admin/goods_list', [
+	// 	'as'=>'changeHot',
+	// 	'changeHot'=>'GoodController@changeHot'
+	// ]);
+	Route::post('/admin/goods_list/{hot}', 'GoodController@changeHot');
+
+	// 	Route::post('/admin/goods_list', [
+	// 	'as'=>'changeRecommend',
+	// 	'changeRecommend'=>'GoodController@changeRecommend'
+	// ]);
+	Route::post('/admin/goods_list/{recommend}', 'GoodController@changeRecommend');
 
 	Route::get('/admin/goods_edit/{id}', 'GoodController@edit');
 	Route::post('/admin/goods_edit', 'GoodController@doEdit');

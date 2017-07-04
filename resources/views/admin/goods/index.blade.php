@@ -352,7 +352,7 @@ $(function(){
 
 	//新品
 	$('img[name=is_new]').click(function(){
-
+		alert('new');
 		var that = $('img[name=is_new]');
 		var id = $(this).parent().parent().siblings('td').children('input[type=checkbox]').val();
 		var is_new = $(this).attr('value');
@@ -370,7 +370,7 @@ $(function(){
 
 		// alert(is_new);
 		$.ajax({
-			url:'/admin/goods_list',
+			url:'/admin/goods_list/{new}',
 		   data:{id:id,is_new:is_new},
 		   type:'POST',
 	   dataType:'JSON',
@@ -385,7 +385,7 @@ $(function(){
 
 	//热销
 	$('img[name=is_hot]').click(function(){
-
+		alert('hot');
 		var that = $('img[name=is_hot]');
 		var id = $(this).parent().parent().siblings('td').children('input[type=checkbox]').val();
 		var is_hot = $(this).attr('value');
@@ -403,7 +403,7 @@ $(function(){
 
 		// alert(is_hot);
 		$.ajax({
-			url:'/admin/goods_list',
+			url:'/admin/goods_list/{hot}',
 		   data:{id:id,is_hot:is_hot},
 		   type:'POST',
 	   dataType:'JSON',
@@ -419,7 +419,7 @@ $(function(){
 
 	//推荐
 	$('img[name=is_recommend]').click(function(){
-
+		alert('recommend');
 		var that = $('img[name=is_recommend]');
 		var id = $(this).parent().parent().siblings('td').children('input[type=checkbox]').val();
 		var is_recommend = $(this).attr('value');
@@ -437,7 +437,7 @@ $(function(){
 
 		// alert(is_recommend);
 		$.ajax({
-			url:'/admin/goods_list',
+			url:'/admin/goods_list/{recommend}',
 		   data:{id:id,is_recommend:is_recommend},
 		   type:'POST',
 	   dataType:'JSON',
@@ -449,6 +449,7 @@ $(function(){
 		});
 
 	});
+
 
 });
 
