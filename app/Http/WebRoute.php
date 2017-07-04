@@ -41,6 +41,8 @@ Route::post("center", "WebController@ucenteradd");
 //地址管理页
 Route::get("addres", "WebController@addres");
 Route::post("addres", "WebController@addresadd");
+Route::get("addresedat/{id}", "WebController@addresedit");
+Route::post("addresedat", "WebController@addreseditadd");
 
 //评论管理
 Route::get("message", "WebController@message");
