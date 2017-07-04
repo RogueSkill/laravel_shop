@@ -43,7 +43,6 @@
         <div class="field">
           <input type="text" class="input w50" value="" name="goods_name"  />
           <div class="tips">{{$errors->first('goods_name')? $errors->first('goods_name') : ''}}</div>
-
         </div>
       </div>
         
@@ -78,10 +77,10 @@
         </div>
         <div class="field">
           <input type="text" class="input w50" name="shop_price" value="" />
+          <div class="tips">{{$errors->first('shop_price')? $errors->first('shop_price') : ''}}</div>
         </div>
       </div>
-      <div class="tips">{{$errors->first('shop_price')? $errors->first('shop_price') : ''}}</div>
-
+      
       <div class="form-group">
         <div class="label">
           <label>市场价格：</label>
@@ -189,10 +188,10 @@
           <label>是否上架：</label>
         </div>
         <div class="field">
-          <input type="radio" class="" value="1" checked name="is_on_sale"/>是
-          <div class="tips"></div>
+          <input type="radio" class="" value="1" checked name="is_on_sale"/>是 
           <input type="radio" class="" value="0" name="is_on_sale"/>否
         </div>
+        <div class="tips"></div>
       </div>
 
       <div class="form-group">
@@ -200,10 +199,10 @@
           <label>是否推荐：</label>
         </div>
         <div class="field">
-          <input type="radio" class="" checked name="is_recommend" value="1" />是
-          <div class="tips"></div>
+          <input type="radio" class="" checked name="is_recommend" value="1" />是 
           <input type="radio" class="" name="is_recommend" value="0" />否
         </div>
+        <div class="tips"></div>
       </div>
 
       <div class="form-group">
@@ -212,9 +211,9 @@
         </div>
         <div class="field">
           <input type="radio" class="" checked name="is_new" value="1" />是
-          <div class="tips"></div>
           <input type="radio" class="" name="is_new" value="0" />否
         </div>
+        <div class="tips"></div>
       </div>
 
       <div class="form-group">
@@ -223,9 +222,9 @@
         </div>
         <div class="field">
           <input type="radio" class="" checked name="is_hot" value="1" />是
-          <div class="tips"></div>
           <input type="radio" class="" name="is_hot" value="0" />否
         </div>
+        <div class="tips"></div>
       </div>
 
       <div class="form-group">

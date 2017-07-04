@@ -48,9 +48,9 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="message">
                                     <span class="glyphicon glyphicon-comment"></span>
-                                    我的留言
+                                    我的评论
                                 </a>
                             </li>
                             <li>
