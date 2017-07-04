@@ -24,13 +24,13 @@
                     <div class="panel-body">
                         <ul class="nav nav-pills nav-stacked">
                             <li class="active">
-                                <a href="center">
+                                <a href="{{url("center")}}">
                                     <span class="glyphicon glyphicon-user"></span>
                                     我的资料
                                 </a>
                             </li>
                             <li>
-                                <a href="addres">
+                                <a href="{{url("addres")}}">
                                     <span class="glyphicon glyphicon-flag"></span>
                                     地址管理
                                 </a>
@@ -48,7 +48,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="message">
+                                <a href="{{url("message")}}">
                                     <span class="glyphicon glyphicon-comment"></span>
                                     我的评论
                                 </a>

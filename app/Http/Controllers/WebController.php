@@ -95,10 +95,10 @@ class WebController extends Controller
     public function ucenter(Request $request)
     {
 
-        if(!$request->session()->has("username")) {
+        if(!$request->session()->has("webusername")) {
             echo "<script>alert('请先登录!');window.location.href='login';</script>";
         }
-        $name =  $request->session()->get("username");
+        $name =  $request->session()->get("webusername");
 
         $id = $name;
 
@@ -132,13 +132,13 @@ class WebController extends Controller
     //地址删除设置默认
     public function addres(Request $request)
     {
-        if(!$request->session()->has("username")) {
+        if(!$request->session()->has("webusername")) {
 
             echo "<script>alert('请先登录!');window.location.href='login';</script>";
 
         }
 
-        $uid =  $request->session()->get("id");
+        $uid =  $request->session()->get("webid");
 
         $addres_data = DB::table('addresses')->where('userid',$uid)->paginate(10);
 //        dd($uid);
@@ -182,7 +182,7 @@ class WebController extends Controller
     //地址添加修改
     public function addresadd(Request $request)
     {
-        $uid =  $request->session()->get("id");
+        $uid =  $request->session()->get("webid");
 
         if (isset($_POST['created_at']) == true)
         {
@@ -200,24 +200,46 @@ class WebController extends Controller
             }
         }
 
-        if (isset($_POST['updated_at']) == true && isset($_POST['addresid']) == true) {
+    }
 
-             $update = DB::table('addresses')->where('id',$_POST['addresid'])->update(['updated_at'=>$_POST['updated_at'],'province'=>$_POST['province'],'city'=>$_POST['city'],'county'=>$_POST['county'],'detailed_address'=>$_POST['uaddress'],'consignee'=>$_POST['uname'],'phone'=>$_POST['uphone'],'code'=>$_POST['code']]);
+    //地址修改页输出
+    public function addresedit($id,Request $request)
+    {
+        if(!$request->session()->has("webusername")) {
 
-             if ($update > 0)
-             {
+            echo "<script>alert('请先登录!');window.location.href='login';</script>";
 
-                 exit("<script>alert('修改地址成功');window.location.href='addres'</script>");
-
-             }else{
-
-                 exit("<script>alert('修改地址失败');window.location.href='addres'</script>");
-
-             }
         }
 
+        $addres_data = DB::table('addresses')->where('id',$id)->paginate(10);
+
+        $addres_data = $addres_data[0];
+
+        return view("web/addresedat",compact('addres_data'));
 
     }
+
+    //修改页提交
+    public function addreseditadd()
+    {
+        $time = date('y-m-d h:i:s',time());
+
+        $update = DB::table('addresses')->where('id',$_POST['addresid'])->update(['updated_at'=>$time,'province'=>$_POST['province'],'city'=>$_POST['city'],'county'=>$_POST['county'],'detailed_address'=>$_POST['uaddress'],'consignee'=>$_POST['uname'],'phone'=>$_POST['uphone'],'code'=>$_POST['code']]);
+
+        if ($update > 0)
+        {
+
+            exit("<script>alert('修改地址成功');window.location.href='addres'</script>");
+
+        }else{
+
+            exit("<script>alert('修改地址失败');window.location.href='addres'</script>");
+
+        }
+
+    }
+
+
 
     //注册页Ajax请求处理
     public function registerAjax()
@@ -275,8 +297,8 @@ class WebController extends Controller
         if($bool){
 
             echo "1";
-            $request->session()->put("username", $username);
-            $request->session()->put("id", $id);
+            $request->session()->put("webusername", $username);
+            $request->session()->put("webid", $id);
         }else {
 
             echo "0";
@@ -288,21 +310,21 @@ class WebController extends Controller
     //用户退出
     public function quit(Request $request)
     {
-        $request->session()->pull("username");
-        $request->session()->pull("id");
+        $request->session()->pull("webusername");
+        $request->session()->pull("webid");
         echo "<script>alert(' 退出成功!');window.location.href='index';</script>";
     }
 
     //评论页输出
     public function message(Request $request)
     {
-        if(!$request->session()->has("username")) {
+        if(!$request->session()->has("webusername")) {
 
             echo "<script>alert('请先登录!');window.location.href='login';</script>";
 
         }
 
-        $uid =  $request->session()->get("id");
+        $uid =  $request->session()->get("webid");
 
         $page = DB::table('goods_comments')->where('userid',$uid)->join('goods','goods_comments.goodsid','=','goods.goods_id')->paginate(10);
 //        dd($page);
