@@ -23,12 +23,10 @@
         </div>
         <div class="navbar-collapse collapse" role="navigation">
             <ul class="nav navbar-nav">
-                <li class="hidden-sm hidden-md"><a href="{{url('#')}}" target="_blank">测试</a></li>
+                <li class="hidden-sm hidden-md">
 
-                <li><a href="{{url('#')}}" target="_blank">测试</a></li>
-                <li><a href="{{url('#')}}" target="_blank">测试</a></li>
-                <li><a href="{{url('#')}}" target="_blank">测试</a></li>
-                <li><a href="{{url('#')}}" target="_blank">测试</a></li>
+                <li><a href="{{url('index')}}" target="_blank">首页</a></li>
+                <li><a href="{{url('cart')}}" target="_blank">购物车</a></li>
                 <li><a href="{{url('center')}}" target="_blank">用户中心</a></li>
             </ul>
             <form class="navbar-form navbar-left">
@@ -38,8 +36,14 @@
                 <button type="submit" class="btn btn-default">搜索</button>
             </form>
             <ul class="nav navbar-nav navbar-right hidden-sm">
-                <li><a href="{{url('login')}}">登录</a></li>
-                <li><a href="{{url('register')}}">注册</a></li>
+
+                @if(session('webusername') == "")
+                    <li><a href="{{url('login')}}">登录</a></li>
+                    <li><a href="{{url('register')}}">注册</a></li>
+                    @else
+                    <li><a>欢迎您: {{session('webusername')}}</a></li>
+                   <li> <a href="{{url('quit')}}">退出</a></li>
+                @endif
             </ul>
         </div>
     </div>
