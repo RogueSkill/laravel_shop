@@ -26,7 +26,11 @@
             <option <?php echo $pid==0? 'selected':'' ?> value="0">顶级分类</option>
             @if($types)
               @foreach($types as $val)
-                <option <?php echo $pid==$val['id']? 'selected':'' ?> value="{{$val['id']}}">{{$val['name']}}</option>
+              <?php
+                $m = substr_count($val['path'],",")-1;
+                $nbsp = str_repeat("&nbsp;",$m*10);   
+              ?>
+                <option <?php echo $pid==$val['id']? 'selected':'' ?> value="{{$val['id']}}">{{$nbsp."|--".$val['name']}}</option>
               @endforeach
             @endif
           </select>

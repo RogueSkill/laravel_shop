@@ -41,11 +41,16 @@ class AdminController extends BaseController
     //商品分类
     public function cate_list()
     {
-        $types_page = DB::table('types')->paginate(10);
 
-        $types_data = DB::table('types')->paginate(10);
+        $types_data = DB::table('types')
+                ->select(DB::raw('*,concat(path,id) as map'))
+                ->orderBy('map','asc')
+                ->paginate(20);
 
-
+        $types_page = DB::table('types')
+                ->select(DB::raw('*,concat(path,id) as map'))
+                ->orderBy('map','asc')
+                ->paginate(20);
 
         return view('admin/cate/index', compact('types_data','types_page'));
     }
@@ -53,7 +58,10 @@ class AdminController extends BaseController
     //商品分类添加显示
     public function cate_add()
     {
-        $types = DB::table('types')->get();
+        $types = DB::table('types')
+             ->select(DB::raw('*,concat(path,id) as map'))
+             ->orderBy('map','asc')
+             ->get();
         return view('admin/cate/add',compact('types'));
     }
 
@@ -108,7 +116,10 @@ class AdminController extends BaseController
     {
 
         //分类列表
-        $types = DB::table('types')->get();
+        $types = DB::table('types')
+             ->select(DB::raw('*,concat(path,id) as map'))
+             ->orderBy('map','asc')
+             ->get();
         // var_dump($types);
         
         return view('admin/cate/edit',compact('types','id','pid','name'));

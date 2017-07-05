@@ -29,9 +29,13 @@
     </tr>
     @if($types_data)
     @foreach($types_data as $val)
+    <?php
+      $m = substr_count($val['path'],",")-1;
+      $nbsp = str_repeat("&nbsp;",$m*10);
+    ?>
     <tr>
       <td>{{$val['id']}}</td>
-      <td>{{$val['name']}}</td>
+      <td>{{$nbsp."|--".$val['name']}}</td>
       <td>{{$val['pid']}}</td>
       <td>{{$val['path']}}</td>
       <td><div class="button-group"> 
@@ -54,7 +58,7 @@
 <a href="">2</a>
 <a href="">3</a><a href="">下一页</a>
 <a href="">尾页</a>  -->
-{{$types_page->links()}}
+{{$types_data->links()}}
 </div>
 <script type="text/javascript">
 function del(id,mid){

@@ -54,8 +54,12 @@
           <div class="field">
             <select name="typeid" class="input w50">
               <!-- <option value="0">请选择分类</option> -->
-              @foreach($goodtypes as $val)     
-              <option value="{{$val['id']}}">{{$val['name']}}</option>
+              @foreach($goodtypes as $val)
+              <?php
+                $m = substr_count($val['path'],",")-1;
+                $nbsp = str_repeat("&nbsp;",$m*10);   
+              ?>
+              <option value="{{$val['id']}}">{{$nbsp."|--".$val['name']}}</option>
               @endforeach
             </select>
             <div class="tips">{{$errors->first('typeid')? $errors->first('typeid') : ''}}</div>

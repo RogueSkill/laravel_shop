@@ -29,9 +29,25 @@ class WebController extends Controller
 
        }
        //推荐
-       $recommend = DB::table('goods')->select('goods_id','goods_name','goods_remake','cover_img')->where('is_recommend',1)->orderBy('updated_at', 'desc')->limit(3)->get();
+       $recommend = DB::table('goods')->select('goods_id','goods_name','goods_remake','cover_img')->where(['is_on_sale'=>1,'is_recommend'=>1])->orderBy('updated_at', 'desc')->limit(3)->get();
 
-        return view('web/lar_index', compact('banner','typelist','recommend'));
+       //热销
+       $hot = DB::table('goods')->select('goods_id','typeid','goods_name','goods_remake','cover_img')->where(['is_on_sale'=>1,'is_hot'=>1])->orderBy('updated_at', 'desc')->limit(4)->get();
+       
+       //点心、蛋糕类
+       $candylist = [];
+
+       $candylist['name'] = DB::table('types')->where('id', 1)->pluck('name')[0];
+       $candylist['id'] = 1;
+       $candylist['child'] = DB::table('types')->where('pid', 1)->get();
+       $candylist['one'] = DB::table('goods as g')->leftjoin('types as t', 'g.typeid','=','t.id')->where('g.typeid', 1)->orderBy('g.created_at','desc')->limit(1)->get()[0];
+       $candylist['two'] = DB::table('goods as g')->leftjoin('types as t', 'g.typeid','=','t.id')->where('g.typeid', 1)->orderBy('g.created_at','desc')->limit(2)->get();
+       $candylist['four'] = DB::table('goods as g')->leftjoin('types as t', 'g.typeid','=','t.id')->where('g.typeid', 1)->orderBy('g.created_at','desc')->limit(4)->get();
+       // dump($candylist);
+
+       return view('web/lar_index', compact('banner','typelist','recommend','hot','candylist','candylist'));
+
+
     }
 
     //登录页
@@ -50,7 +66,7 @@ class WebController extends Controller
     public function goods($id)
     {
 
-           // dd($id);
+        // dd($id);
 
         // $info = Good::find($id);
         // dd($info);

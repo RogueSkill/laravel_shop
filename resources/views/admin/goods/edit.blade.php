@@ -50,8 +50,12 @@
           </div>
           <div class="field">
             <select name="typeid" class="input w50">
-              @foreach($goodtypes as $val)     
-              <option <?php echo $val['id']==$goodsrow['typeid']? 'selected':'' ?> value="{{$val['id']}}">{{$val['name']}}</option>
+              @foreach($goodtypes as $val)
+              <?php
+                $m = substr_count($val['path'],",")-1;
+                $nbsp = str_repeat("&nbsp;",$m*10);   
+              ?>     
+              <option <?php echo $val['id']==$goodsrow['typeid']? 'selected':'' ?> value="{{$val['id']}}">{{$nbsp."|--".$val['name']}}</option>
               @endforeach
             </select>
             <div class="tips"></div>

@@ -28,8 +28,12 @@ class GoodController extends Controller
     public function add()
     {
 
-        $goodtypes = DB::table('types')->get();
-        // var_dump($goodtypes);
+        $goodtypes = DB::table('types')
+            ->select(DB::raw('*,concat(path,id) as map'))
+             ->orderBy('map','asc')
+             ->get();
+        
+
     	return view('admin/goods/add' ,compact('goodtypes'));
     }
 
@@ -138,7 +142,10 @@ class GoodController extends Controller
     //产品编辑页面显示
     public function edit($id)
     {
-        $goodtypes = DB::table('types')->get();
+        $goodtypes = DB::table('types')
+            ->select(DB::raw('*,concat(path,id) as map'))
+             ->orderBy('map','asc')
+             ->get();
 
         $goodsrow = Good::find($id);
         // dd($goodsrow['goods_id']);

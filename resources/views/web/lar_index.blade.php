@@ -748,24 +748,28 @@
 						<div class="shopTitle ">
 							<h4>活动</h4>
 							<h3>每期活动 优惠享不停 </h3>
-							<span class="more ">
-                              <a class="more-link " href="# ">全部活动</a>
-                            </span>
+							<!-- <span class="more ">
+                              <a class="more-link " href="">全部活动</a>
+                            </span> -->
 						</div>
 					
 					  <div class="am-g am-g-fixed ">
-						<div class="am-u-sm-3 ">
-							<div class="icon-sale one "></div>	
-								<h4>秒杀</h4>							
-							<div class="activityMain ">
-								<img src="web_style/images/activity1.jpg "></img>
-							</div>
-							<div class="info ">
-								<h3>春节送礼优选</h3>
-							</div>														
-						</div>
-						
-						<div class="am-u-sm-3 ">
+					    @if($hot)
+						  	@foreach($hot as $val)
+						  		<a href="detail/{{$val['goods_id']}}">
+								<div class="am-u-sm-3 ">
+									<div class="icon-sale tree "></div>	
+										<h4>秒杀</h4>							
+									<div class="activityMain ">
+										<img src="../{{$val['cover_img']}}"></img>
+									</div>
+									<div class="info ">
+										<h3>{{$val['goods_name']}}</h3>
+									</div>														
+								</div>
+							@endforeach
+						@endif
+						<!-- <div class="am-u-sm-3 ">
 						  <div class="icon-sale two "></div>	
 							<h4>特惠</h4>
 							<div class="activityMain ">
@@ -796,7 +800,7 @@
 							<div class="info ">
 								<h3>春节送礼优选</h3>
 							</div>													
-						</div>
+						</div> -->
 
 					  </div>
 </div>
@@ -806,77 +810,72 @@
 @section('cat_one')
 	<div class="am-container ">
 		<div class="shopTitle ">
-			<h4>甜品</h4>
+			<h4>{{$candylist['name']}}</h4>
 			<h3>每一道甜品都有一个故事</h3>
 			<div class="today-brands ">
-				<a href="# ">桂花糕</a>
-				<a href="# ">奶皮酥</a>
-				<a href="# ">栗子糕 </a>
-				<a href="# ">马卡龙</a>
-				<a href="# ">铜锣烧</a>
-				<a href="# ">豌豆黄</a>
+				@foreach($candylist['child'] as $val)
+				<a href="list/{{$val['id']}}">{{$val['name']}}</a>
+				@endforeach
 			</div>
 			<span class="more ">
-    <a class="more-link " href="# ">更多美味</a>
+    <a class="more-link " href="list/{{$candylist['id']}}">更多美味</a>
         </span>
 		</div>
 	</div>
 	
 	<div class="am-g am-g-fixed floodOne ">
 		<div class="am-u-sm-5 am-u-md-3 am-u-lg-4 text-one ">
-			<a href="# ">
-				<div class="outer-con ">
-					<div class="title ">
-						零食大礼包开抢啦
-					</div>					
-					<div class="sub-title ">
-						当小鱼儿恋上软豆腐
-					</div>
-				</div>
-                  <img src="web_style/images/act1.png " />								
-			</a>
-		</div>
-		<div class="am-u-sm-7 am-u-md-5 am-u-lg-4">
-			<div class="text-two">
-				<div class="outer-con ">
-					<div class="title ">
-						雪之恋和风大福
-					</div>									
-					<div class="sub-title ">
-						仅售：¥13.8
-					</div>
-					
-				</div>
-				<a href="# "><img src="web_style/images/act2.png " /></a>
-			</div>
-			<div class="text-two last">
-				<div class="outer-con ">
-					<div class="title ">
-						雪之恋和风大福
-					</div>
-					<div class="sub-title ">
-						仅售：¥13.8
-					</div>
-					
-				</div>
-				<a href="# "><img src="web_style/images/act2.png " /></a>
-		    </div>
-		</div>
-     <div class="am-u-sm-12 am-u-md-4 ">
-		<div class="am-u-sm-3 am-u-md-6 text-three">
-			<div class="outer-con ">
-				<div class="title ">
-					小优布丁
-				</div>
-				
-				<div class="sub-title ">
-					尝鲜价：¥4.8
-				</div>
-			</div>
-			<a href="# "><img src="web_style/images/act3.png " /></a>
+			@if($candylist['one'])	
+					<a href="# ">
+						<div class="outer-con ">
+							<div class="title ">
+								{{$candylist['one']['goods_name']}}
+							</div>					
+							<div class="sub-title ">
+								{!! $candylist['one']['goods_remake'] !!}
+							</div>
+						</div>
+		                  <img src="../{{$candylist['one']['cover_img']}}" />
+					</a>
+			@endif
 		</div>
 
-		<div class="am-u-sm-3 am-u-md-6 text-three">
+		<div class="am-u-sm-7 am-u-md-5 am-u-lg-4">
+			@if($candylist['two'])
+				@foreach($candylist['two'] as $val)
+					<div class="text-two">
+						<div class="outer-con ">
+							<div class="title ">
+								{{$val['goods_name']}}
+							</div>									
+							<div class="sub-title ">
+								仅售：¥{{$val['shop_price']}}
+							</div>
+							
+						</div>
+						<a href="# "><img src="../{{$val['cover_img']}}" /></a>
+					</div>
+				@endforeach
+			@endif
+		</div>
+     <div class="am-u-sm-12 am-u-md-4 ">
+     	@if($candylist['four'])
+     		@foreach($candylist['four'] as $val)
+				<div class="am-u-sm-3 am-u-md-6 text-three">
+					<div class="outer-con ">
+						<div class="title ">
+							{{$val['goods_name']}}
+						</div>
+						
+						<div class="sub-title ">
+							尝鲜价：¥{{$val['shop_price']}}
+						</div>
+					</div>
+					<a href="# "><img src="../{{$val['cover_img']}}" /></a>
+				</div>
+			@endforeach
+		@endif
+		<!-- <div class="am-u-sm-3 am-u-md-6 text-three">
 			<div class="outer-con ">
 				<div class="title ">
 					小优布丁
@@ -913,7 +912,7 @@
 				</div>
 			</div>
 			<a href="# "><img src="web_style/images/act3.png " /></a>
-		</div>
+		</div> -->
 	</div>
 
 	</div>
@@ -955,6 +954,7 @@
 			</div>
 		</a>
 	</div>
+
 	<div class="am-u-sm-7 am-u-md-4 am-u-lg-2 text-two">
 			<div class="outer-con ">
 				<div class="title ">
@@ -971,7 +971,7 @@
 	<div class="am-u-md-4 am-u-lg-2 text-three">
 		<div class="outer-con ">
 			<div class="title ">
-				小优布丁
+				小优布丁@@
 			</div>
 			
 			<div class="sub-title ">
