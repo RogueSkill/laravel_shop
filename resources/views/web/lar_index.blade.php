@@ -826,7 +826,7 @@
 	<div class="am-g am-g-fixed floodOne ">
 		<div class="am-u-sm-5 am-u-md-3 am-u-lg-4 text-one ">
 			@if($candylist['one'])	
-					<a href="# ">
+					<a href="detail/{{$candylist['one']['goods_id']}}">
 						<div class="outer-con ">
 							<div class="title ">
 								{{$candylist['one']['goods_name']}}
@@ -843,6 +843,7 @@
 		<div class="am-u-sm-7 am-u-md-5 am-u-lg-4">
 			@if($candylist['two'])
 				@foreach($candylist['two'] as $val)
+					<a href="detail/{{$val['goods_id']}}">
 					<div class="text-two">
 						<div class="outer-con ">
 							<div class="title ">
@@ -853,14 +854,16 @@
 							</div>
 							
 						</div>
-						<a href="# "><img src="../{{$val['cover_img']}}" /></a>
+						<a href="detail/{{$val['goods_id']}}"><img src="../{{$val['cover_img']}}" /></a>
 					</div>
+					</a>
 				@endforeach
 			@endif
 		</div>
      <div class="am-u-sm-12 am-u-md-4 ">
      	@if($candylist['four'])
      		@foreach($candylist['four'] as $val)
+     			<a href="detail/{{$val['goods_id']}}">
 				<div class="am-u-sm-3 am-u-md-6 text-three">
 					<div class="outer-con ">
 						<div class="title ">
@@ -871,8 +874,9 @@
 							尝鲜价：¥{{$val['shop_price']}}
 						</div>
 					</div>
-					<a href="# "><img src="../{{$val['cover_img']}}" /></a>
+					<a href="detail/{{$val['goods_id']}}"><img src="../{{$val['cover_img']}}" /></a>
 				</div>
+				</a>
 			@endforeach
 		@endif
 		<!-- <div class="am-u-sm-3 am-u-md-6 text-three">
@@ -992,6 +996,7 @@
 		</div>
 		<a href="# "><img src="web_style/images/act3.png " /></a>
 	</div>
+
 	<div class="am-u-sm-6 am-u-md-4 am-u-lg-2 text-two ">
 			<div class="outer-con ">
 				<div class="title ">
@@ -1051,7 +1056,8 @@
 			
 		</div>
 		<a href="# "><img src="web_style/images/act2.png " /></a>
-	</div>							
+	</div>	
+
 </div>
 
 <div class="clear "></div>

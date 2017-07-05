@@ -45,7 +45,8 @@ class WebController extends Controller
        $candylist['two'] = DB::table('goods as g')->leftjoin('types as t', 'g.typeid','=','t.id')->where('g.typeid', 1)->orderBy('g.created_at','desc')->limit(2)->get();
        $candylist['four'] = DB::table('goods as g')->leftjoin('types as t', 'g.typeid','=','t.id')->where('g.typeid', 1)->orderBy('g.created_at','desc')->limit(4)->get();
        // dump($candylist);
-
+       //坚果、炒货
+       
        return view('web/lar_index', compact('banner','typelist','recommend','hot','candylist','candylist'));
 
 

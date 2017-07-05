@@ -101,9 +101,8 @@ class GoodController extends Controller
                     $ext = $val->getClientOriginalExtension();     // 扩展名
                     $fileName = date('Y-m-d_H-i-s').uniqid().'.'.$ext;
                     $val->move('./upload', $fileName);
-
-                    $file = $img->open($val->move('./upload', $fileName));
-                    dd($file);
+                    // $file = $img->open($val->move('./upload', $fileName));
+                    // dd($file);
                     $fileUrl[] = $fileName;   
                 }
 
