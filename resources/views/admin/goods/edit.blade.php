@@ -176,7 +176,7 @@
           <label>描述：</label>
         </div>
         <div class="field">
-          <script id="goods_remake" type="text/plain"  name="goods_remake" style="width:900px;height:200px;">{{$goodsrow['goods_remake']}}</script>
+          <script id="goods_remake" type="text/plain"  name="goods_remake" style="width:900px;height:200px;">{!! $goodsrow['goods_remake'] !!}</script>
           <!-- <textarea class="input" name="note" style=" height:90px;"></textarea> -->
           <div class="tips"></div>
         </div>
@@ -186,7 +186,7 @@
           <label>内容：</label>
         </div>
         <div class="field">
-        <script id="goods_content" type="text/plain"  name="goods_content" style="width:900px;height:300px;">{{$goodsrow['goods_content']}}</script>
+        <script id="goods_content" type="text/plain"  name="goods_content" style="width:900px;height:300px;">{!! $goodsrow['goods_content'] !!}</script>
           <!-- <textarea name="content" class="input" style="height:450px; border:1px solid #ddd;"></textarea> -->
           <div class="tips"></div>
         </div>

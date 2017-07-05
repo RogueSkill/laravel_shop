@@ -10,6 +10,7 @@ use App\Http\Requests;
 use DB;
 
 
+
 class GoodController extends Controller
 {
     //产品列表页
@@ -35,6 +36,7 @@ class GoodController extends Controller
     //产品处理页面
     public function doAdd(Request $request)
     {
+        
         // dump($request->all());
 
         $this->validate($request, [
@@ -95,6 +97,9 @@ class GoodController extends Controller
                     $ext = $val->getClientOriginalExtension();     // 扩展名
                     $fileName = date('Y-m-d_H-i-s').uniqid().'.'.$ext;
                     $val->move('./upload', $fileName);
+
+                    $file = $img->open($val->move('./upload', $fileName));
+                    dd($file);
                     $fileUrl[] = $fileName;   
                 }
 
@@ -145,6 +150,7 @@ class GoodController extends Controller
     //商品编辑处理页
     public function doEdit(Request $request)
     {
+        
         // var_dump($request->all());
         // exit;
         $data = $request->except('_token');
@@ -173,9 +179,9 @@ class GoodController extends Controller
         }
     }
     //新品
-    public function changeNew(Request $req)
+    public function changeNew(Request $req ,$new)
     {   
-        
+
         $id = $req->input('id');
         $is_new = $req->input('is_new');
 
@@ -198,7 +204,7 @@ class GoodController extends Controller
         }
     }
     //热销
-    public function changeHot(Request $req)
+    public function changeHot(Request $req, $hot)
     {   
         
         $id = $req->input('id');
@@ -224,7 +230,7 @@ class GoodController extends Controller
     }
 
     //推荐
-    public function changeRecommend(Request $req)
+    public function changeRecommend(Request $req, $recommend)
     {   
         
         $id = $req->input('id');

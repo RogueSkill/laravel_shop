@@ -15,9 +15,24 @@ class WebController extends Controller
     //首页
     public function index(Request $request)
     {
-        
-        return view('web/lar_index');
+        //前台广告
+        $banner = DB::table('pics')->pluck('name');
+        //右侧栏分类
+        $typelist = DB::table('types')->where('pid',0)->limit(10)->get();
+        foreach($typelist as $key=>$val){
+            $typelist[$key]['child'] = DB::table('types')->where('pid',$val['id'])->get();
+        }
+       foreach ($typelist as $key => $val) {
 
+            foreach($val['child'] as $k=>$v){
+                $typelist[$key]['child'][$k]['son'] = DB::table('types')->where('pid',$val['child'][$k]['id'])->get();
+            }
+
+       }
+       //推荐
+       $recommend = DB::table('goods')->select('goods_id','goods_name','goods_remake','cover_img')->where('is_recommend',1)->orderBy('updated_at', 'desc')->limit(3)->get();
+
+        return view('web/lar_index', compact('banner','typelist','recommend'));
     }
 
     //登录页
