@@ -408,6 +408,25 @@ class AdminController extends BaseController
         }
 
     }
+
+    /**
+     *
+     *********************************************友情链接****************************************
+     */
+
+    //友情链接列表url
+    public function link_list()
+    {
+        $list = DB::table('links')->paginate(10);
+        $page = DB::table('links')->paginate(10);
+        return view('admin/links/index',compact('list','page'));
+    }
+
+    //友情链接添加
+    public function link_add()
+    {
+        return view("admin/links/add");
+    }
 }
 
 
