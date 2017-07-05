@@ -22,7 +22,7 @@ Route::get("detail/{id}", "GoodController@webDetail");
 Route::get("cart", "WebController@cart");
 
 //结算页
-Route::get("pay", "WebController@pay");
+Route::get("pay/{id}", "WebController@pay");
 
 //结算成功页
 Route::get("paysucceed", "WebController@paysucceed");
@@ -56,6 +56,13 @@ Route::post("loginAjax", "WebController@loginAjax");
 //用户退出
 Route::get("quit", "WebController@quit");
 
+<<<<<<< HEAD
+//城市三级联动
+Route::get("cityModel", "WebController@cityModel");
+
+//支付页添加地址
+Route::post("payAddress", "WebController@payAddress");
+=======
 //邮箱
 Route::get("activation/{id}", "WebController@activation");
 
@@ -65,3 +72,4 @@ Route::post("Retrieve","WebController@Retrieveajax");
 Route::post("Retrievepass","WebController@Retrievepass");
 Route::get("changepass/{id}/{time}","WebController@changepass");
 Route::post("changepass","WebController@changepassword");
+>>>>>>> ff103a73892c809b69b3a1cf320c26aa8946988e
