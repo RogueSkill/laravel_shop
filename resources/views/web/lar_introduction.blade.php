@@ -154,7 +154,6 @@
 							</script>
 
 							<div class="tb-booth tb-pic tb-s310">
-<<<<<<< HEAD
 								<a href="{{asset($data['cover_img'])}}"><img src="{{asset($data['cover_img'])}}" alt="细节展示放大镜特效" rel="{{asset($data['cover_img'])}}" class="jqzoom" width="350" height="350"/></a>
 							</div>
 							<ul class="tb-thumb" id="thumblist">
@@ -167,21 +166,6 @@
 										</div>
 									</li>
 								@endforeach
-=======
-								<a href="{{asset('web_style/images/01.jpg')}}"><img src="../{{$detail['cover_img']}}" alt="细节展示放大镜特效" rel="../{{$detail['cover_img']}}" class="jqzoom" /></a>
-							</div>
-							<ul class="tb-thumb" id="thumblist">
-								@if($detail['original_img'])
-									@foreach($detail['original_img'] as $val)
-									<li>
-										<div class="tb-pic tb-s40">
-											<a href="#"><img src="../../../upload/{{$val}}" mid="{{asset('web_style/images/03_mid.jpg')}}" big="{{asset('web_style/images/03.jpg')}}"></a>
-										</div>
-									</li>
-									@endforeach
-								@endif
-
->>>>>>> ff103a73892c809b69b3a1cf320c26aa8946988e
 							</ul>
 						</div>
 
@@ -193,40 +177,24 @@
 						<!--规格属性-->
 						<!--名称-->
 						<div class="tb-detail-hd">
-<<<<<<< HEAD
 							<h1>{{$data['goods_name']}}</h1>
-=======
-							<h1>{{$detail['goods_name']}}</h1>
->>>>>>> ff103a73892c809b69b3a1cf320c26aa8946988e
+
 						</div>
 						<div class="tb-detail-list">
 							<!--价格-->
 							<div class="tb-detail-price">
-							@if($detail['cost_price'])
+							@if($data['cost_price'])
 								<li class="price iteminfo_price">
 									<dt>促销价</dt>
-<<<<<<< HEAD
 									<dd><em>¥</em><b class="sys_item_price">{{$data['shop_price']}}</b>  </dd>
-=======
-									<dd><em>¥</em>
-										<b class="sys_item_price">
-											{{$detail['cost_price']}}
-										</b>
-									</dd>                                 
->>>>>>> ff103a73892c809b69b3a1cf320c26aa8946988e
 								</li>
 							@endif
 
-							@if($detail['shop_price'])
+							@if($data['shop_price'])
 								<li class="price iteminfo_mktprice">
 									<dt>原价</dt>
-<<<<<<< HEAD
 									<dd><em>¥</em><b class="sys_item_mktprice">{{$data['mareket_price']}}</b></dd>
-=======
-									<dd><em>¥</em>
-									<b class="sys_item_mktprice">{{$detail['shop_price']}}</b>
-									</dd>									
->>>>>>> ff103a73892c809b69b3a1cf320c26aa8946988e
+
 								</li>
 							@endif
 								<div class="clear"></div>
@@ -455,28 +423,13 @@
 										<div class="attr-list-hd tm-clear">
 											<h4>产品参数：</h4></div>
 										<div class="clear"></div>
-<<<<<<< HEAD
 										<ul id="J_AttrUL">
 											<li title="">商品货号:&nbsp;{{$data['goods_sn']}}</li>
 											<li title="">产品规格:&nbsp;{{$data['weight']}}g</li>
 											<li title="">简单描述:&nbsp;{{$data['goods_remake']}}</li>
 
 										</ul>
-=======
-										<!-- <ul id="J_AttrUL">
-											<li title="">产品类型:&nbsp;烘炒类</li>
-											<li title="">原料产地:&nbsp;巴基斯坦</li>
-											<li title="">产地:&nbsp;湖北省武汉市</li>
-											<li title="">配料表:&nbsp;进口松子、食用盐</li>
-											<li title="">产品规格:&nbsp;210g</li>
-											<li title="">保质期:&nbsp;180天</li>
-											<li title="">产品标准号:&nbsp;GB/T 22165</li>
-											<li title="">生产许可证编号：&nbsp;QS4201 1801 0226</li>
-											<li title="">储存方法：&nbsp;请放置于常温、阴凉、通风、干燥处保存 </li>
-											<li title="">食用方法：&nbsp;开袋去壳即食</li>
-										</ul> -->
-										{{$detail['goods_remake']}}
->>>>>>> ff103a73892c809b69b3a1cf320c26aa8946988e
+
 										<div class="clear"></div>
 									</div>
 
@@ -492,7 +445,6 @@
 											<img src="{{asset('web_style/images/tw5.jpg')}}" />
 											<img src="{{asset('web_style/images/tw6.jpg')}}" />
 											<img src="{{asset('web_style/images/tw7.jpg')}}" /> -->
-											{{$detail['goods_content']}}
 										</div>
 									</div>
 									<div class="clear"></div>

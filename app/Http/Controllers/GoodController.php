@@ -321,6 +321,71 @@ class GoodController extends Controller
         $good->delete();
     }
 
+    //
+    public function web_index()
+    {
+        //前台广告
+        $banner = DB::table('pics')->pluck('name');
+        //右侧栏分类
+        $typelist = DB::table('types')->where('pid',0)->limit(10)->get();
+        foreach($typelist as $key=>$val){
+            $typelist[$key]['child'] = DB::table('types')->where('pid',$val['id'])->get();
+        }
+       foreach ($typelist as $key => $val) {
+
+            foreach($val['child'] as $k=>$v){
+                $typelist[$key]['child'][$k]['son'] = DB::table('types')->where('pid',$val['child'][$k]['id'])->get();
+            }
+
+       }
+       //推荐
+       $recommend = DB::table('goods')->select('goods_id','goods_name','goods_remake','cover_img')->where(['is_on_sale'=>1,'is_recommend'=>1])->orderBy('updated_at', 'desc')->limit(3)->get();
+
+       //热销
+       $hot = DB::table('goods')->select('goods_id','typeid','goods_name','goods_remake','cover_img')->where(['is_on_sale'=>1,'is_hot'=>1])->orderBy('updated_at', 'desc')->limit(4)->get();
+       
+       //点心、蛋糕类
+       $candylist = [];
+
+       $candylist['name'] = DB::table('types')->where('id', 1)->pluck('name')[0];
+       $candylist['id'] = 1;
+       $candylist['child'] = DB::table('types')->where('pid', 1)->get();
+       $candylist['one'] = DB::table('goods as g')->leftjoin('types as t', 'g.typeid','=','t.id')->where('g.typeid', 1)->orderBy('g.created_at','desc')->limit(1)->get()[0];
+       $candylist['two'] = DB::table('goods as g')->leftjoin('types as t', 'g.typeid','=','t.id')->where('g.typeid', 1)->orderBy('g.created_at','desc')->limit(2)->get();
+       $candylist['four'] = DB::table('goods as g')->leftjoin('types as t', 'g.typeid','=','t.id')->where('g.typeid', 1)->orderBy('g.created_at','desc')->limit(4)->get();
+       // dump($candylist);
+       //坚果、炒货
+       $pufflist = [];
+       $pufflist['name'] = DB::table('types')->where('id', 2)->pluck('name')[0];
+       $pufflist['id'] = 2;
+       $pufflist['child'] = DB::table('types')->where('pid', 2)->get();
+
+       $pufflist['one'] = DB::table('goods as g')->leftjoin('types as t', 'g.typeid','=','t.id')->where('g.typeid', 2)->orderBy('g.created_at','desc')->limit(1)->get()[0];
+
+       $pufflist['two'] = DB::table('goods as g')->leftjoin('types as t', 'g.typeid','=','t.id')->where('g.typeid', 2)->orderBy('g.created_at','desc')->limit(2)->get();
+
+
+       $pufflist['four'] = DB::table('goods as g')->leftjoin('types as t', 'g.typeid','=','t.id')->where('g.typeid', 2)->orderBy('g.created_at','desc')->limit(4)->get();
+
+
+       //熟食、肉类
+       $meatlist = [];
+       $meatlist['name'] = DB::table('types')->where('id', 3)->pluck('name')[0];
+       $meatlist['id'] = 3;
+       $meatlist['child'] = DB::table('types')->where('pid', 3)->get();
+       $meatlist['list'] = DB::table('goods as g')->leftjoin('types as t', 'g.typeid','=','t.id')->where('g.typeid', 3)->orderBy('g.created_at','desc')->limit(12)->get();
+       // dump($meatlist);
+
+       return view('web/lar_index', compact('banner','typelist','recommend','hot','candylist','candylist','pufflist','meatlist'));
+    }
+
+    //前台分类列表
+    public function cat_list($pid)
+    {
+        
+        return view('web/lar_cat_list');
+    }
+
     //前台商品列表页
     public function lister($pid)
     {
@@ -330,14 +395,14 @@ class GoodController extends Controller
     }
 
     //前台商品详细页
-    public function webDetail($id)
-    {
-        $data = DB::table('goods')->where('goods_id',$id)->get();
-        $detail = $data[0];
-        $detail['original_img'] = explode(',',trim($detail['original_img'],','));
-        // dd($detail);
-        return view('web/lar_introduction', compact('detail'));
-    }
+    // public function webDetail($id)
+    // {
+    //     $data = DB::table('goods')->where('goods_id',$id)->get();
+    //     $detail = $data[0];
+    //     $detail['original_img'] = explode(',',trim($detail['original_img'],','));
+    //     // dd($detail);
+    //     return view('web/lar_introduction', compact('detail'));
+    // }
 
 
 

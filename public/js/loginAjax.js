@@ -14,13 +14,6 @@ $("button[name='login']").on("click", function() {
         },
         success:function(data) {
 
-<<<<<<< HEAD
-            if(data > 0) {
-                history.go(-1);
-                alert("登录成功");
-
-            }else {
-=======
             if(data > 1) {
                 alert("登录成功");
                 window.location.href='center';
@@ -30,7 +23,6 @@ $("button[name='login']").on("click", function() {
                 alert("请激活您邮箱后在登录");
 
             }else{
->>>>>>> ff103a73892c809b69b3a1cf320c26aa8946988e
 
                 var that = $("input[name='pass']");
 

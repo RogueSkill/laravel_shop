@@ -15,59 +15,7 @@ class WebController extends Controller
     //首页
     public function index(Request $request)
     {
-<<<<<<< HEAD
-        //判断username是否存在session中,存在则赋值到首页
-        $bool =  $request->session()->has("webusername");
-
-        if($bool) {
-            $username =  $request->session()->get("webusername");
-
-            return view('web/lar_index', compact('username'));
-        } else {
-
-            return view('web/lar_index');
-        }
-
-=======
-        //前台广告
-        $banner = DB::table('pics')->pluck('name');
-        //右侧栏分类
-        $typelist = DB::table('types')->where('pid',0)->limit(10)->get();
-        foreach($typelist as $key=>$val){
-            $typelist[$key]['child'] = DB::table('types')->where('pid',$val['id'])->get();
-        }
-       foreach ($typelist as $key => $val) {
-
-            foreach($val['child'] as $k=>$v){
-                $typelist[$key]['child'][$k]['son'] = DB::table('types')->where('pid',$val['child'][$k]['id'])->get();
-            }
-
-       }
-       //推荐
-<<<<<<< HEAD
-       $recommend = DB::table('goods')->select('goods_id','goods_name','goods_remake','cover_img')->where(['is_on_sale'=>1,'is_recommend'=>1])->orderBy('updated_at', 'desc')->limit(3)->get();
-
-       //热销
-       $hot = DB::table('goods')->select('goods_id','typeid','goods_name','goods_remake','cover_img')->where(['is_on_sale'=>1,'is_hot'=>1])->orderBy('updated_at', 'desc')->limit(4)->get();
-       
-       //点心、蛋糕类
-       $candylist = [];
-
-       $candylist['name'] = DB::table('types')->where('id', 1)->pluck('name')[0];
-       $candylist['id'] = 1;
-       $candylist['child'] = DB::table('types')->where('pid', 1)->get();
-       $candylist['one'] = DB::table('goods as g')->leftjoin('types as t', 'g.typeid','=','t.id')->where('g.typeid', 1)->orderBy('g.created_at','desc')->limit(1)->get()[0];
-       $candylist['two'] = DB::table('goods as g')->leftjoin('types as t', 'g.typeid','=','t.id')->where('g.typeid', 1)->orderBy('g.created_at','desc')->limit(2)->get();
-       $candylist['four'] = DB::table('goods as g')->leftjoin('types as t', 'g.typeid','=','t.id')->where('g.typeid', 1)->orderBy('g.created_at','desc')->limit(4)->get();
-       // dump($candylist);
-       //坚果、炒货
-       
-       return view('web/lar_index', compact('banner','typelist','recommend','hot','candylist','candylist'));
-
-=======
-       $recommend = DB::table('goods')->select('goods_id','goods_name','goods_remake','cover_img')->where('is_recommend',1)->orderBy('updated_at', 'desc')->limit(3)->get();
->>>>>>> ff103a73892c809b69b3a1cf320c26aa8946988e
->>>>>>> 3452d14a9cf95c85625d151cee653a545be7e2c7
+        //
 
     }
 
@@ -83,15 +31,13 @@ class WebController extends Controller
         return view("web/register");
     }
 
-    //商品详情页
+   //商品详情页
     public function goods(Request $request, $id)
     {
+
         //查询商品表拿到商品详细信息
         $data = DB::table('goods')->where("goods_id", $id)->get();
 
-<<<<<<< HEAD
-        // dd($id);
-=======
         //返回的是二维数组所以得转成一维数组赋值到首页
         $data = $data[0];
 
@@ -106,10 +52,10 @@ class WebController extends Controller
 
             return view('web/lar_introduction', compact('data'));
         }
->>>>>>> 3452d14a9cf95c85625d151cee653a545be7e2c7
 
 
     }
+
 
     //购物车页
     public function cart()
@@ -135,7 +81,6 @@ class WebController extends Controller
         $addressData = DB::table("addresses")->where("userid", $userid)->get();
 
         return view("web/pay", compact("data", "addressData"));
-
 
 
     }
@@ -164,20 +109,12 @@ class WebController extends Controller
     public function ucenter(Request $request)
     {
 
-<<<<<<< HEAD
-
-=======
->>>>>>> ff103a73892c809b69b3a1cf320c26aa8946988e
         if(!$request->session()->has("webusername")) {
             echo "<script>alert('请先登录!');window.location.href='login';</script>";
         }
         $name =  $request->session()->get("webusername");
 
         $id = $name;
-<<<<<<< HEAD
-
-=======
->>>>>>> ff103a73892c809b69b3a1cf320c26aa8946988e
 
         $user_datas = DB::table('members')->where('username','=',$id)->get();
 
@@ -279,21 +216,6 @@ class WebController extends Controller
 
     }
 
-<<<<<<< HEAD
-            $update = DB::table('addresses')->where('id',$_POST['addresid'])->update(['updated_at'=>$_POST['updated_at'],'province'=>$_POST['province'],'city'=>$_POST['city'],'county'=>$_POST['county'],'detailed_address'=>$_POST['uaddress'],'consignee'=>$_POST['uname'],'phone'=>$_POST['uphone'],'code'=>$_POST['code']]);
-
-            if ($update > 0)
-            {
-
-                exit("<script>alert('修改地址成功');window.location.href='addres'</script>");
-
-            }else{
-
-                exit("<script>alert('修改地址失败');window.location.href='addres'</script>");
-
-            }
-        }
-=======
     //地址修改页输出
     public function addresedit($id,Request $request)
     {
@@ -308,7 +230,6 @@ class WebController extends Controller
         $addres_data = $addres_data[0];
 
         return view("web/addresedat",compact('addres_data'));
->>>>>>> ff103a73892c809b69b3a1cf320c26aa8946988e
 
     }
 
@@ -345,7 +266,6 @@ class WebController extends Controller
 
             echo count($data);
 
-<<<<<<< HEAD
         }else if(isset($_POST['pass']) == false) {
 
             $email = $_POST['email'];
@@ -354,16 +274,6 @@ class WebController extends Controller
 
             echo count($data);
 
-        } else {
-=======
-        }elseif (isset($_POST['pass']) == false ){
-
-            $email = $_POST['email'];
->>>>>>> ff103a73892c809b69b3a1cf320c26aa8946988e
-
-            $data = DB::table("members")->where("email","=",$email)->get();
-
-            echo count($data);
         } else {
             $time = date('y-m-d h:i:s',time());
             $data = DB::table("members")->insert([
@@ -419,13 +329,11 @@ class WebController extends Controller
 
                 $bool =  password_verify($pass,$password);
 
-<<<<<<< HEAD
-                $id = $val['id'];
-=======
+
                $id = $val['id'];
 
                $state = $val['state'];
->>>>>>> ff103a73892c809b69b3a1cf320c26aa8946988e
+
             }
 
         }
@@ -439,17 +347,11 @@ class WebController extends Controller
         }elseif($state == 0) {
 
             echo "1";
-<<<<<<< HEAD
             $request->session()->put("webusername", $username);
             $request->session()->put("webid", $id);
         }else {
-=======
-
-        }else{
->>>>>>> ff103a73892c809b69b3a1cf320c26aa8946988e
 
             echo "0";
-
         }
 
 
@@ -554,7 +456,7 @@ class WebController extends Controller
 
     }
 
-<<<<<<< HEAD
+
     //城市三级联动
     public function cityModel()
     {
@@ -614,7 +516,7 @@ class WebController extends Controller
 
     }
 
-=======
+
     //注册成功返回页
     public function activation($id)
     {
@@ -675,7 +577,7 @@ class WebController extends Controller
         exit();
 
     }
->>>>>>> ff103a73892c809b69b3a1cf320c26aa8946988e
+
 }
 
 

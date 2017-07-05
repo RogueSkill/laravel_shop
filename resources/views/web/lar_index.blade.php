@@ -39,16 +39,9 @@
 						<div class="menu-hd MyShangcheng"><a href="{{url('center')}}" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
 					</div>
 					<div class="topMessage mini-cart">
-<<<<<<< HEAD
 						<div class="menu-hd"><a id="mc-menu-hd" href="{{url('cart')}}" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
 					</div>
 
-=======
-						<div class="menu-hd"><a id="mc-menu-hd" href="#" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
-					</div>
-					<div class="topMessage favorite">
-						<div class="menu-hd"><a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
->>>>>>> ff103a73892c809b69b3a1cf320c26aa8946988e
 				</ul>
 				</div>
 
@@ -737,7 +730,7 @@
 						</div>
 						@if($recommend)
 							@foreach($recommend as $val)
-							<a href="/detail/{{$val['goods_id']}}">
+							<a href="/goods/{{$val['goods_id']}}">
 							<div class="am-u-sm-4 am-u-lg-3 ">
 								<div class="info ">
 									<h3>{{$val['goods_name']}}</h3>
@@ -768,12 +761,12 @@
 					  <div class="am-g am-g-fixed ">
 					    @if($hot)
 						  	@foreach($hot as $val)
-						  		<a href="detail/{{$val['goods_id']}}">
+						  		<a href="goods/{{$val['goods_id']}}">
 								<div class="am-u-sm-3 ">
 									<div class="icon-sale tree "></div>	
 										<h4>秒杀</h4>							
 									<div class="activityMain ">
-										<img src="../{{$val['cover_img']}}"></img>
+										<img width="296" height="314.02" src="../{{$val['cover_img']}}"></img>
 									</div>
 									<div class="info ">
 										<h3>{{$val['goods_name']}}</h3>
@@ -826,11 +819,11 @@
 			<h3>每一道甜品都有一个故事</h3>
 			<div class="today-brands ">
 				@foreach($candylist['child'] as $val)
-				<a href="list/{{$val['id']}}">{{$val['name']}}</a>
+				<a href="cat_list/{{$val['id']}}">{{$val['name']}}</a>
 				@endforeach
 			</div>
 			<span class="more ">
-    <a class="more-link " href="list/{{$candylist['id']}}">更多美味</a>
+    <a class="more-link " href="cat_list/{{$candylist['id']}}">更多美味</a>
         </span>
 		</div>
 	</div>
@@ -838,7 +831,7 @@
 	<div class="am-g am-g-fixed floodOne ">
 		<div class="am-u-sm-5 am-u-md-3 am-u-lg-4 text-one ">
 			@if($candylist['one'])	
-					<a href="detail/{{$candylist['one']['goods_id']}}">
+					<a href="goods/{{$candylist['one']['goods_id']}}">
 						<div class="outer-con ">
 							<div class="title ">
 								{{$candylist['one']['goods_name']}}
@@ -855,7 +848,7 @@
 		<div class="am-u-sm-7 am-u-md-5 am-u-lg-4">
 			@if($candylist['two'])
 				@foreach($candylist['two'] as $val)
-					<a href="detail/{{$val['goods_id']}}">
+					<a href="goods/{{$val['goods_id']}}">
 					<div class="text-two">
 						<div class="outer-con ">
 							<div class="title ">
@@ -866,7 +859,7 @@
 							</div>
 							
 						</div>
-						<a href="detail/{{$val['goods_id']}}"><img src="../{{$val['cover_img']}}" /></a>
+						<a href="goods/{{$val['goods_id']}}"><img src="../{{$val['cover_img']}}" /></a>
 					</div>
 					</a>
 				@endforeach
@@ -875,7 +868,7 @@
      <div class="am-u-sm-12 am-u-md-4 ">
      	@if($candylist['four'])
      		@foreach($candylist['four'] as $val)
-     			<a href="detail/{{$val['goods_id']}}">
+     			<a href="goods/{{$val['goods_id']}}">
 				<div class="am-u-sm-3 am-u-md-6 text-three">
 					<div class="outer-con ">
 						<div class="title ">
@@ -886,7 +879,7 @@
 							尝鲜价：¥{{$val['shop_price']}}
 						</div>
 					</div>
-					<a href="detail/{{$val['goods_id']}}"><img src="../{{$val['cover_img']}}" /></a>
+					<a href="goods/{{$val['goods_id']}}"><img src="../{{$val['cover_img']}}" /></a>
 				</div>
 				</a>
 			@endforeach
@@ -938,18 +931,17 @@
 @section('cat_two')
 <div class="am-container ">
 	<div class="shopTitle ">
-		<h4>坚果</h4>
+		<h4>{{$pufflist['name']}}</h4>
 		<h3>酥酥脆脆，回味无穷</h3>
 		<div class="today-brands ">
-			<a href="# ">腰果</a>
-			<a href="# ">松子</a>
-			<a href="# ">夏威夷果 </a>
-			<a href="# ">碧根果</a>
-			<a href="# ">开心果</a>
-			<a href="# ">核桃仁</a>
+			@if($pufflist['child'])
+				@foreach($pufflist['child'] as $val)
+				<a href="cat_list/{{$val['id']}}">{{$val['name']}}</a>
+				@endforeach
+			@endif
 		</div>
 		<span class="more ">
-<a class="more-link " href="# ">更多美味</a>
+<a class="more-link " href="cat_list/{{$pufflist['id']}}">更多美味</a>
     </span>
 	</div>
 </div>
@@ -957,34 +949,39 @@
 	
 	
 	<div class="am-u-sm-5 am-u-md-4 text-one ">
-		<a href="# ">
-			<img src="web_style/images/act1.png " />
+		@if($pufflist['one'])
+		<a href="goods/{{$pufflist['one']['goods_id']}}">
+			<img src="../{{$pufflist['one']['cover_img']}}" />
 			<div class="outer-con ">
 				<div class="title ">
-					零食大礼包开抢啦
+					{{$pufflist['one']['goods_name']}}
 				</div>
 				<div class="sub-title ">
-					当小鱼儿恋上软豆腐
+					{!! $pufflist['one']['goods_remake'] !!}
 				</div>
 				
 			</div>
 		</a>
+		@endif
 	</div>
-
-	<div class="am-u-sm-7 am-u-md-4 am-u-lg-2 text-two">
+	
+	@if($pufflist['four'])
+		@foreach($pufflist['four'] as $val)
+		<div class="am-u-sm-7 am-u-md-4 am-u-lg-2 text-two">
 			<div class="outer-con ">
 				<div class="title ">
-					雪之恋和风大福
+					{{$val['goods_name']}}
 				</div>
 				
 				<div class="sub-title ">
-					仅售：¥13.8
+					仅售：¥{{$val['shop_price']}}
 				</div>
 			</div>
-			<a href="# "><img src="web_style/images/5.jpg " /></a>						
-	</div>
-	
-	<div class="am-u-md-4 am-u-lg-2 text-three">
+			<a href="# "><img src="../{{$val['cover_img']}}" /></a>	
+		</div>
+		@endforeach
+	@endif
+	<!-- <div class="am-u-md-4 am-u-lg-2 text-three">
 		<div class="outer-con ">
 			<div class="title ">
 				小优布丁@@
@@ -1008,7 +1005,6 @@
 		</div>
 		<a href="# "><img src="web_style/images/act3.png " /></a>
 	</div>
-
 	<div class="am-u-sm-6 am-u-md-4 am-u-lg-2 text-two ">
 			<div class="outer-con ">
 				<div class="title ">
@@ -1020,32 +1016,42 @@
 				</div>
 			</div>
 			<a href="# "><img src="web_style/images/5.jpg " /></a>						
-	</div>						
-	<div class="am-u-sm-6 am-u-md-3 am-u-lg-2 text-four ">
-			<div class="outer-con ">
-				<div class="title ">
-					雪之恋和风大福
+	</div> -->
+	@if($pufflist['two'])
+		@foreach($pufflist['two'] as $val)
+		<div class="am-u-sm-6 am-u-md-3 am-u-lg-2 text-four ">
+				<div class="outer-con ">
+					<div class="title ">
+						{{$val['goods_name']}}
+					</div>
+					
+					<div class="sub-title ">
+						仅售：¥{{$val['shop_price']}}
+					</div>
 				</div>
-				
-				<div class="sub-title ">
-					仅售：¥13.8
-				</div>
-			</div>
-			<a href="# "><img src="web_style/images/5.jpg " /></a>						
-	</div>				
-	<div class="am-u-sm-4 am-u-md-3 am-u-lg-4 text-five">
-		<div class="outer-con ">
-			<div class="title ">
-				小优布丁
-			</div>								
-			<div class="sub-title ">
-				尝鲜价：¥4.8
-			</div>
-			
+				<a href="# "><img src="../{{$val['cover_img']}}" /></a>	
 		</div>
-		<a href="# "><img src="web_style/images/act2.png " /></a>
-	</div>	
-	<div class="am-u-sm-4 am-u-md-3 am-u-lg-2 text-six">
+		@endforeach
+	@endif
+
+	@if($pufflist['two'])
+		@foreach($pufflist['two'] as $val)
+			<div class="am-u-sm-4 am-u-md-3 am-u-lg-4 text-five">
+				<div class="outer-con ">
+					<div class="title ">
+						{{$val['goods_name']}}
+					</div>								
+					<div class="sub-title ">
+						尝鲜价：{{$val['shop_price']}}
+					</div>
+					
+				</div>
+				<a href="goods/{{$val['goods_id']}}"><img src="../{{$val['cover_img']}}" /></a>
+			</div>
+		@endforeach
+	@endif
+
+	<!-- <div class="am-u-sm-4 am-u-md-3 am-u-lg-2 text-six">
 		<div class="outer-con ">
 			<div class="title ">
 				小优布丁
@@ -1068,7 +1074,7 @@
 			
 		</div>
 		<a href="# "><img src="web_style/images/act2.png " /></a>
-	</div>	
+	</div>	 -->
 
 </div>
 
@@ -1078,49 +1084,37 @@
 @section('cat_tree')
 <div class="am-container ">
 	<div class="shopTitle ">
-		<h4>海味</h4>
+		<h4>{{$meatlist['name']}}</h4>
 		<h3>你是我的优乐美么？不，我是你小鱼干</h3>
 		<div class="today-brands ">
-			<a href="# ">小鱼干</a>
-			<a href="# ">海苔</a>
-			<a href="# ">鱿鱼丝</a>
-			<a href="# ">海带丝</a>
+			@if($meatlist['child'])
+				@foreach($meatlist['child'] as $val)
+					<a href="cat_list/{{$val['id']}}">{{$val['name']}}</a>
+				@endforeach
+			@endif
 		</div>
 		<span class="more ">
-<a class="more-link " href="# ">更多美味</a>
+<a class="more-link " href="cat_list/{{$meatlist['id']}}">更多美味</a>
     </span>
 	</div>
 </div>
 <div class="am-g am-g-fixed flood method3 ">
 	<ul class="am-thumbnails ">
-		<li>
-			<div class="list ">
-				<a href="# ">
-					<img src="web_style/images/cp.jpg " />
-					<div class="pro-title ">萨拉米 1+1小鸡腿</div>
-					<span class="e-price ">￥29.90</span>
-				</a>
-			</div>
-		</li>
-		<li>
-			<div class="list ">
-				<a href="# ">
-					<img src="web_style/images/cp2.jpg " />
-					<div class="pro-title ">ZEK 原味海苔</div>
-					<span class="e-price ">￥8.90</span>
-				</a>
-			</div>
-		</li>
-		<li>
-			<div class="list ">
-				<a href="# ">
-					<img src="web_style/images/cp.jpg " />
-					<div class="pro-title ">萨拉米 1+1小鸡腿</div>
-					<span class="e-price ">￥29.90</span>
-				</a>
-			</div>
-		</li>
-		<li>
+		@if($meatlist['list'])
+			@foreach($meatlist['list'] as $val)
+			<li>
+				<div class="list ">
+					<a href="goods/{{$val['goods_id']}}">
+						<img width="188" height="188" src="../{{$val['cover_img']}}" />
+						<div class="pro-title ">{{$val['goods_name']}}</div>
+						<span class="e-price ">￥{{$val['shop_price']}}</span>
+					</a>
+				</div>
+			</li>
+			@endforeach
+		@endif
+
+	<!-- 	<li>
 			<div class="list ">
 				<a href="# ">
 					<img src="web_style/images/cp2.jpg " />
@@ -1183,6 +1177,24 @@
 				</a>
 			</div>
 		</li>
+		<li>
+			<div class="list ">
+				<a href="# ">
+					<img src="web_style/images/cp.jpg " />
+					<div class="pro-title ">萨拉米 1+1小鸡腿</div>
+					<span class="e-price ">￥29.90</span>
+				</a>
+			</div>
+		</li>
+		<li>
+			<div class="list ">
+				<a href="# ">
+					<img src="web_style/images/cp2.jpg " />
+					<div class="pro-title ">ZEK 原味海苔</div>
+					<span class="e-price ">￥8.90</span>
+				</a>
+			</div>
+		</li> -->
 
 	</ul>
 </div>
