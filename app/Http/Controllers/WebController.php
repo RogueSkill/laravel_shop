@@ -8,6 +8,7 @@ use App\Pic;
 use App\Type;
 use App\Http\Requests;
 use DB;
+use Mail;
 
 class WebController extends Controller
 {
@@ -225,7 +226,6 @@ class WebController extends Controller
     }
 
 
-
     //注册页Ajax请求处理
     public function registerAjax()
     {
@@ -238,15 +238,40 @@ class WebController extends Controller
 
             echo count($data);
 
+        }elseif (isset($_POST['pass']) == false ){
+
+            $email = $_POST['email'];
+
+            $data = DB::table("members")->where("email","=",$email)->get();
+
+            echo count($data);
         } else {
 
             $data = DB::table("members")->insert([
 
                 "username"=>$_POST['username'],
                 "email"=>$_POST['email'],
+                "state"=>0,
                 "pass"=>password_hash($_POST['pass'],PASSWORD_DEFAULT)
 
             ]);
+
+            $data2 = DB::table("members")->where("username","=",$_POST['username'])->get();
+
+            $datamail = $data2[0];
+
+            $base64 = base64_encode($datamail['id']);
+
+            $url = 'http://'.$_SERVER['HTTP_HOST'].'/activation/'.$base64;
+
+            Mail::raw(  "激活地址：".$url,function ($message){
+
+                $message->subject('商城激活邮件');
+
+                $message->to($_POST['email']);
+
+            });
+
             echo $data;
         }
 
@@ -275,18 +300,26 @@ class WebController extends Controller
                $bool =  password_verify($pass,$password);
 
                $id = $val['id'];
+
+               $state = $val['state'];
             }
 
         }
 
-        if($bool){
+        if($bool && $state != 0){
 
-            echo "1";
+            echo "2";
             $request->session()->put("webusername", $username);
             $request->session()->put("webid", $id);
-        }else {
+
+        }elseif($state == 0) {
+
+            echo "1";
+
+        }else{
 
             echo "0";
+
         }
 
 
@@ -328,6 +361,7 @@ class WebController extends Controller
         if ($update > 0)
         {
             $time = date('y-m-d h:i:s',time());
+
             DB::table('goods_comments')->where('id', $_POST['messageid'])->update(['updated_at'=>$time,'content'=>0]);
 
             exit("<script>alert('修改评论成功');window.location.href='message'</script>");
@@ -335,6 +369,24 @@ class WebController extends Controller
         }else{
 
             exit("<script>alert('修改评论失败');window.location.href='message'</script>");
+
+        }
+
+    }
+
+    public function activation($id)
+    {
+        $base64 = base64_decode($id);
+
+        $update = DB::table('members')->where('id',$base64)->update(['state'=>1]);
+
+        if ($update > 0 )
+        {
+            return view("web/activation");
+
+        }else{
+
+            return view("web/activation2");
 
         }
 

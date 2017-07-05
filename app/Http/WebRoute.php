@@ -55,3 +55,6 @@ Route::post("loginAjax", "WebController@loginAjax");
 
 //用户退出
 Route::get("quit", "WebController@quit");
+
+//邮箱
+Route::get("activation/{id}", "WebController@activation");
