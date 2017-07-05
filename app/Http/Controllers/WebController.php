@@ -475,7 +475,7 @@ class WebController extends Controller
 
             $url = 'http://'.$_SERVER['HTTP_HOST'];
 
-            echo "<script>alert('禁止访问');window.location.href='$url'</script>";
+            echo "<script>alert('链接已失效');window.location.href='$url'</script>";
 
         }
     }
