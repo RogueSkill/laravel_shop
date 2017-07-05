@@ -1,7 +1,9 @@
 @extends("web.master")
 @section("title", "地址管理页")
 @section("content")
-
+    {{--<script src="{{asset('js/Area1.js')}}" type="text/javascript"></script>--}}
+    {{--<script src="{{asset('js/AreaData_min.js')}}" type="text/javascript"></script>--}}
+    {{--<script src="{{asset('js/jquery-1.7.min.js')}}" type="text/javascript"></script>--}}
     <div style="display: block; margin-top:52px;"></div>
 
     <!-- 路径导航 -->
@@ -25,13 +27,13 @@
                     <div class="panel-body">
                         <ul class="nav nav-pills nav-stacked">
                             <li>
-                                <a href="center">
+                                <a href="{{url("center")}}">
                                     <span class="glyphicon glyphicon-user"></span>
                                     我的资料
                                 </a>
                             </li>
                             <li class="active">
-                                <a href="addres">
+                                <a href="{{url("addres")}}">
                                     <span class="glyphicon glyphicon-flag"></span>
                                     地址管理
                                 </a>
@@ -49,7 +51,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="message">
+                                <a href="{{url("message")}}">
                                     <span class="glyphicon glyphicon-comment"></span>
                                     我的评论
                                 </a>
@@ -121,9 +123,9 @@
                                                     <label class="col-sm-2 control-label">地区选择</label>
                                                     <div class="col-sm-10">
                                                         <div>
-                                                            <select id="s_province" name="province" class="form-control"></select>  
-                                                            <select id="s_city" name="city" class="form-control"></select>  
-                                                            <select id="s_county" name="county" class="form-control"></select>
+                                                            <select id="s_province" name="province" class="form-control"><select>  
+                                                            <select id="s_city" name="city" class="form-control"><select>  
+                                                            <select id="s_county" name="county" class="form-control"><select>
                                                             <script class="resources library" src="{{asset('js/area.js')}}" type="text/javascript"></script>
                                                             <script type="text/javascript">_init_area();</script>
                                                         </div>
@@ -165,81 +167,37 @@
                         </div>
 
                         <div class="box box-element ui-draggable" style="display: block; margin-top:10px;"></div>
-                        @foreach ($addres_data as $addres)
-                        <!-- 手风琴 -->
-                        <div class="row clearfix">
-                            <div class="col-md-12 column">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        @if($addres['status'] == 1)
-                                            <input type="radio" name="address-radio[]" checked="checked">
-                                        @else
-                                            <input type="radio" name="address-radio[]">
-                                        @endif
-                                        <a class="panel-title" data-toggle="collapse" data-parent="#panel-937561" href="#panel-element-{{$addres['id']}}">{{$addres['province'].'省 '.$addres['city'].'市 '.$addres['county'].'县/区 '.$addres['detailed_address']}}</a>
-                                    </div>
-                                    <div id="panel-element-{{$addres['id']}}" class="panel-collapse collapse">
-                                        <div class="panel-body">
-                                            <div class="address-panel">
-                                                <form class="form-horizontal" method="post">
-                                                    <?php echo csrf_field(); ?>
-                                                        <input type="hidden" name="updated_at" value="{{date('y-m-d h:i:s',time())}}">
-                                                        <input type="hidden" name="addresid" value="{{$addres['id']}}">
-                                                    <div class="form-group">
-                                                        <label class="col-sm-2 control-label">地区选择</label>
-                                                        <div class="col-sm-10">
-                                                            <div>
-                                                                <select id="s_province2" name="province" class="form-control"></select>  
-                                                                <select id="s_city2" name="city" class="form-control"></select>  
-                                                                <select id="s_county2" name="county" class="form-control"></select>
-                                                                <script class="resources library" src="{{asset('js/area2.js')}}" type="text/javascript"></script>
-                                                                <script type="text/javascript">_init_area2();</script>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="col-sm-2 control-label">详细地址</label>
-                                                        <div class="col-sm-10">
-                                                            <input type="text" class="form-control" name="uaddress" value="{{$addres['detailed_address']}}" id="uaddress_2">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="col-sm-2 control-label">收货人姓名</label>
-                                                        <div class="col-sm-10">
-                                                            <input type="text" class="form-control" name="uname" value="{{$addres['consignee']}}" id="uname_2">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="col-sm-2 control-label">手机</label>
-                                                        <div class="col-sm-10">
-                                                            <input type="text" class="form-control" name="uphone" value="{{$addres['phone']}}" onkeyup="value=value.replace(/[^\d]/g,'')" id="uphone_2">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="col-sm-2 control-label">邮编</label>
-                                                        <div class="col-sm-10">
-                                                            <input type="code" class="form-control" name="code" value="{{$addres['code']}}" onkeyup="value=value.replace(/[^\d]/g,'')" id="code_2">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-offset-2 col-sm-10">
-                                                            <button type="submit" class="btn btn-success" id="button_2">确认编辑</button>
-                                                            <a href="addres?id={{$addres['id']}}&perform=delete"><button type="button" class="btn btn-danger">删除</button></a>
-                                                            <a href="addres?id={{$addres['id']}}&perform={{$addres['userid']}}"><button type="button" class="btn btn-info">设置为默认地址</button></a>
-                                                        </div>
-                                                    </div>
 
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                            @endforeach
+                        <table class = "table table-bordered table-hover">
+                            <tbody>
+                            <tr>
+                                <th>编号</th>
+                                <th>收货人姓名</th>
+                                <th>手机号码</th>
+                                <th>邮编</th>
+                                <th>地址</th>
+                                <th>操作</th>
+                            </tr>
+                            @foreach($addres_data as $v)
+                            <tr>
+                                <td>{{$v['id']}}</td>
+                                <td>{{$v['consignee']}}</td>
+                                <td>{{$v['phone']}}</td>
+                                <td>{{$v['code']}}</td>
+                                <td>{{$v['detailed_address']}}</td>
+                                <td>
+                                    <a href="addresedat/{{$v['id']}}" class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span>编辑</a>
+                                    @if($v['status'] != 1)
+                                        <a href="addres?id={{$v['id']}}&perform={{$v['userid']}}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span>默认</a>
+                                    @endif
+                                    <a href="addres?id={{$v['id']}}&perform=delete" class="btn btn-danger"><span class="glyphicon glyphicon-pencil"></span>删除</a>
+                                </td>
+                            </tr>
+                             @endforeach
+                            </tbody>
+                        </table>
+
                     </div>
-                    <!-- 手风琴结束 -->
-
                 </div>
             </div>
         </div>
@@ -250,10 +208,29 @@
             var button_1 = document.getElementById('button_1');
             button_1.onclick = function () {
 
+                var s_province = document.getElementById('s_province').value;
+                var s_city = document.getElementById('s_city').value;
+                var s_county = document.getElementById('s_county').value;
                 var button_1 = document.getElementById('uaddress_1').value;
                 var uname_1 = document.getElementById('uname_1').value;
                 var uphone_1 = document.getElementById('uphone_1').value;
                 var code_1 = document.getElementById('code_1').value;
+
+
+                if (s_province == null || s_province == "" || s_province == "省份") {
+                    alert("请修改省份");
+                    return false;
+                }
+
+                if (s_city == null || s_city == "" || s_city == "地级市") {
+                    alert("请修改地级市");
+                    return false;
+                }
+
+                if (s_county == null || s_county == "" || s_county == "市、县级市") {
+                    alert("请修改市、县级市");
+                    return false;
+                }
 
                 if (button_1 == null || button_1 == "") {
                     alert("详细地址不能为空");
@@ -284,27 +261,4 @@
                     return false;
                 }
             }
-
-            var Gid  = document.getElementById;
-
-                var showArea = function(){
-
-                    Gid('show').innerHTML = "<h3>省" + Gid('s_province').value + " - 市" +
-
-                        Gid('s_city').value + " - 县/区" +
-
-                        Gid('s_county').value + "</h3>"
-
-            }
-
-            var showArea2 = function(){
-
-                Gid('show2').innerHTML = "<h3>省" + Gid('s_province2').value + " - 市" +
-
-                    Gid('s_city2').value + " - 县/区" +
-
-                    Gid('s_county2').value + "</h3>"
-
-            }
-//            Gid('s_county').setAttribute('onchange','showArea()');
     </script>

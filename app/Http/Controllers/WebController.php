@@ -8,12 +8,14 @@ use App\Pic;
 use App\Type;
 use App\Http\Requests;
 use DB;
+use Mail;
 
 class WebController extends Controller
 {
     //首页
     public function index(Request $request)
     {
+<<<<<<< HEAD
         //判断username是否存在session中,存在则赋值到首页
         $bool =  $request->session()->has("webusername");
 
@@ -26,7 +28,26 @@ class WebController extends Controller
             return view('web/lar_index');
         }
 
+=======
+        //前台广告
+        $banner = DB::table('pics')->pluck('name');
+        //右侧栏分类
+        $typelist = DB::table('types')->where('pid',0)->limit(10)->get();
+        foreach($typelist as $key=>$val){
+            $typelist[$key]['child'] = DB::table('types')->where('pid',$val['id'])->get();
+        }
+       foreach ($typelist as $key => $val) {
 
+            foreach($val['child'] as $k=>$v){
+                $typelist[$key]['child'][$k]['son'] = DB::table('types')->where('pid',$val['child'][$k]['id'])->get();
+            }
+
+       }
+       //推荐
+       $recommend = DB::table('goods')->select('goods_id','goods_name','goods_remake','cover_img')->where('is_recommend',1)->orderBy('updated_at', 'desc')->limit(3)->get();
+>>>>>>> ff103a73892c809b69b3a1cf320c26aa8946988e
+
+        return view('web/lar_index', compact('banner','typelist','recommend'));
     }
 
     //登录页
@@ -118,14 +139,20 @@ class WebController extends Controller
     public function ucenter(Request $request)
     {
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> ff103a73892c809b69b3a1cf320c26aa8946988e
         if(!$request->session()->has("webusername")) {
             echo "<script>alert('请先登录!');window.location.href='login';</script>";
         }
         $name =  $request->session()->get("webusername");
 
         $id = $name;
+<<<<<<< HEAD
 
+=======
+>>>>>>> ff103a73892c809b69b3a1cf320c26aa8946988e
 
         $user_datas = DB::table('members')->where('username','=',$id)->get();
 
@@ -157,11 +184,16 @@ class WebController extends Controller
     //地址删除设置默认
     public function addres(Request $request)
     {
-        $name =  $request->session()->get("id");
-        $uid = $name;
+        if(!$request->session()->has("webusername")) {
 
-        $addres_data = DB::table('addresses')->where('id',$uid)->paginate(10);
+            echo "<script>alert('请先登录!');window.location.href='login';</script>";
 
+        }
+
+        $uid =  $request->session()->get("webid");
+
+        $addres_data = DB::table('addresses')->where('userid',$uid)->paginate(10);
+//        dd($uid);
         if (isset($_GET['id']) == true && $_GET['perform'] == 'delete')
         {
             $delete = DB::table('addresses')->where('id',$_GET['id'])->delete();
@@ -194,7 +226,7 @@ class WebController extends Controller
 
             }
         }
-
+//        dd($addres_data);
         return view("web/addres",compact('addres_data'));
 
     }
@@ -202,8 +234,7 @@ class WebController extends Controller
     //地址添加修改
     public function addresadd(Request $request)
     {
-        $name =  $request->session()->get("id");
-        $uid = $name;
+        $uid =  $request->session()->get("webid");
 
         if (isset($_POST['created_at']) == true)
         {
@@ -221,8 +252,9 @@ class WebController extends Controller
             }
         }
 
-        if (isset($_POST['updated_at']) == true && isset($_POST['addresid']) == true) {
+    }
 
+<<<<<<< HEAD
             $update = DB::table('addresses')->where('id',$_POST['addresid'])->update(['updated_at'=>$_POST['updated_at'],'province'=>$_POST['province'],'city'=>$_POST['city'],'county'=>$_POST['county'],'detailed_address'=>$_POST['uaddress'],'consignee'=>$_POST['uname'],'phone'=>$_POST['uphone'],'code'=>$_POST['code']]);
 
             if ($update > 0)
@@ -236,9 +268,45 @@ class WebController extends Controller
 
             }
         }
+=======
+    //地址修改页输出
+    public function addresedit($id,Request $request)
+    {
+        if(!$request->session()->has("webusername")) {
 
+            echo "<script>alert('请先登录!');window.location.href='login';</script>";
+
+        }
+
+        $addres_data = DB::table('addresses')->where('id',$id)->paginate(10);
+
+        $addres_data = $addres_data[0];
+
+        return view("web/addresedat",compact('addres_data'));
+>>>>>>> ff103a73892c809b69b3a1cf320c26aa8946988e
 
     }
+
+    //修改页提交
+    public function addreseditadd()
+    {
+        $time = date('y-m-d h:i:s',time());
+
+        $update = DB::table('addresses')->where('id',$_POST['addresid'])->update(['updated_at'=>$time,'province'=>$_POST['province'],'city'=>$_POST['city'],'county'=>$_POST['county'],'detailed_address'=>$_POST['uaddress'],'consignee'=>$_POST['uname'],'phone'=>$_POST['uphone'],'code'=>$_POST['code']]);
+
+        if ($update > 0)
+        {
+
+            exit("<script>alert('修改地址成功');window.location.href='addres'</script>");
+
+        }else{
+
+            exit("<script>alert('修改地址失败');window.location.href='addres'</script>");
+
+        }
+
+    }
+
 
     //注册页Ajax请求处理
     public function registerAjax()
@@ -252,6 +320,7 @@ class WebController extends Controller
 
             echo count($data);
 
+<<<<<<< HEAD
         }else if(isset($_POST['pass']) == false) {
 
             $email = $_POST['email'];
@@ -261,14 +330,43 @@ class WebController extends Controller
             echo count($data);
 
         } else {
+=======
+        }elseif (isset($_POST['pass']) == false ){
 
+            $email = $_POST['email'];
+>>>>>>> ff103a73892c809b69b3a1cf320c26aa8946988e
+
+            $data = DB::table("members")->where("email","=",$email)->get();
+
+            echo count($data);
+        } else {
+            $time = date('y-m-d h:i:s',time());
             $data = DB::table("members")->insert([
 
                 "username"=>$_POST['username'],
                 "email"=>$_POST['email'],
-                "pass"=>password_hash($_POST['pass'],PASSWORD_DEFAULT)
+                "state"=>0,
+                "pass"=>password_hash($_POST['pass'],PASSWORD_DEFAULT),
+                "updated_at"=>$time
 
             ]);
+
+            $data2 = DB::table("members")->where("username","=",$_POST['username'])->get();
+
+            $datamail = $data2[0];
+
+            $base64 = base64_encode($datamail['id']);
+
+            $url = 'http://'.$_SERVER['HTTP_HOST'].'/activation/'.$base64;
+
+            Mail::raw(  "激活地址：".$url,function ($message){
+
+                $message->subject('商城激活邮件');
+
+                $message->to($_POST['email']);
+
+            });
+
             echo $data;
         }
 
@@ -296,22 +394,90 @@ class WebController extends Controller
 
                 $bool =  password_verify($pass,$password);
 
+<<<<<<< HEAD
                 $id = $val['id'];
+=======
+               $id = $val['id'];
+
+               $state = $val['state'];
+>>>>>>> ff103a73892c809b69b3a1cf320c26aa8946988e
             }
 
         }
 
-        if($bool){
+        if($bool && $state != 0){
+
+            echo "2";
+            $request->session()->put("webusername", $username);
+            $request->session()->put("webid", $id);
+
+        }elseif($state == 0) {
 
             echo "1";
+<<<<<<< HEAD
             $request->session()->put("webusername", $username);
             $request->session()->put("webid", $id);
         }else {
+=======
+
+        }else{
+>>>>>>> ff103a73892c809b69b3a1cf320c26aa8946988e
 
             echo "0";
+
         }
 
 
+    }
+
+    //找回密码
+    public function Retrieve()
+    {
+        return view("web/Retrieve");
+    }
+
+    //找回密码 ajax
+    public function Retrieveajax()
+    {
+        $email = $_POST['email'];
+
+        $data = DB::table("members")->where("email","=",$email)->get();
+
+        echo count($data);
+    }
+
+    //找回密码修改页面 ajax
+    public function Retrievepass()
+    {
+
+        $data = DB::table("members")->where("email","=",$_POST['email'])->get();
+
+        $bool =  count($data);
+
+        if ($data >0 )
+        {
+            $datamail = $data[0];
+
+            $base64 = base64_encode($datamail['username']);
+            $base642 =  base64_encode($datamail['updated_at']);
+            $url = 'http://'.$_SERVER['HTTP_HOST'].'/changepass/'.$base64.'/'.$base642;
+
+            Mail::raw(  "激活地址：".$url,function ($message){
+
+                $message->subject('商城激活邮件');
+
+                $message->to($_POST['email']);
+
+            });
+        }
+
+        if ($bool)
+        {
+            echo "1";
+        }else
+        {
+            echo "2";
+        }
     }
 
     //用户退出
@@ -325,15 +491,18 @@ class WebController extends Controller
     //评论页输出
     public function message(Request $request)
     {
+        if(!$request->session()->has("webusername")) {
 
-        $name =  $request->session()->get("id");
+            echo "<script>alert('请先登录!');window.location.href='login';</script>";
 
-        $id = $name;
+        }
 
-        $page = DB::table('goods_comments')->where('userid',$id)->join('goods','goods_comments.goodsid','=','goods.goods_id')->paginate(10);
+        $uid =  $request->session()->get("webid");
+
+        $page = DB::table('goods_comments')->where('userid',$uid)->join('goods','goods_comments.goodsid','=','goods.goods_id')->paginate(10);
 //        dd($page);
 
-        $data = DB::table('goods_comments')->where('userid',$id)->join('goods','goods_comments.goodsid','=','goods.goods_id')->paginate(10);
+        $data = DB::table('goods_comments')->where('userid',$uid)->join('goods','goods_comments.goodsid','=','goods.goods_id')->paginate(10);
 
         return view("web/message",compact('data','page'));
     }
@@ -347,6 +516,7 @@ class WebController extends Controller
         if ($update > 0)
         {
             $time = date('y-m-d h:i:s',time());
+
             DB::table('goods_comments')->where('id', $_POST['messageid'])->update(['updated_at'=>$time,'content'=>0]);
 
             exit("<script>alert('修改评论成功');window.location.href='message'</script>");
@@ -359,6 +529,7 @@ class WebController extends Controller
 
     }
 
+<<<<<<< HEAD
     //城市三级联动
     public function cityModel()
     {
@@ -418,6 +589,70 @@ class WebController extends Controller
 
     }
 
+=======
+    //注册成功返回页
+    public function activation($id)
+    {
+        $base64 = base64_decode($id);
+
+        $update = DB::table('members')->where('id',$base64)->update(['state'=>1]);
+
+        if ($update > 0 )
+        {
+            return view("web/activation");
+
+        }else{
+
+            return view("web/activation2");
+
+        }
+
+    }
+
+    //修改密码页面
+    public function changepass($id,$time)
+    {
+        $base64 = base64_decode($id);
+        $base642 = base64_decode($time);
+
+        $data  = DB::table('members')->where('username',$base64)->get();
+
+        if ($data[0]['username'] == $base64 && $data[0]['updated_at'] == $base642){
+//            dd($id);
+            return view("web/changepass",compact('id'));
+
+        }else{
+
+            $url = 'http://'.$_SERVER['HTTP_HOST'];
+
+            echo "<script>alert('链接已失效');window.location.href='$url'</script>";
+
+        }
+    }
+
+    public function changepassword()
+    {
+        $time = date('y-m-d h:i:s',time());
+        $base64 = base64_decode($_POST['changepass']);
+        $update = DB::table('members')->where('username',$base64)->update([
+        "pass"=>password_hash($_POST['pass'],PASSWORD_DEFAULT),
+        'state'=>1,
+        'updated_at'=>$time
+    ]);
+
+        if ($update)
+        {
+            echo "1";
+        }else
+        {
+            echo "0";
+        }
+        exit();
+
+    }
+>>>>>>> ff103a73892c809b69b3a1cf320c26aa8946988e
 }
+
+
 
 

@@ -10,6 +10,7 @@ use App\Http\Requests;
 use DB;
 
 
+
 class GoodController extends Controller
 {
     //产品列表页
@@ -27,7 +28,6 @@ class GoodController extends Controller
     public function add()
     {
 
-    
         $goodtypes = DB::table('types')->get();
         // var_dump($goodtypes);
     	return view('admin/goods/add' ,compact('goodtypes'));
@@ -36,23 +36,24 @@ class GoodController extends Controller
     //产品处理页面
     public function doAdd(Request $request)
     {
+        
         // dump($request->all());
 
-        // $this->validate($request, [
-        //     'goods_name' => 'required|min:1|max:30',
-        //     'typeid' => 'required',
-        //     'shop_price'=>'required',
-        //     'created_at' => 'required'
-        // ],[
-        //     'required' => ':attribute 是必填字段',
-        //     'min' => ':attribute 必须不少于3个字符',
-        //     'max' => ':attribute 必须少于30个字符',
-        // ],[
-        //     'goods_name' => '商品名称',
-        //     'typeid' => '分类名称',
-        //     'shop_price'=>'价格',
-        //     'created_at' => '发布时间',
-        // ]);
+        $this->validate($request, [
+            'goods_name' => 'required|min:1|max:30',
+            'typeid' => 'required',
+            // 'shop_price'=>'required',
+            // 'created_at' => 'required'
+        ],[
+            'required' => ':attribute 是必填字段',
+            'min' => ':attribute 必须不少于3个字符',
+            'max' => ':attribute 必须少于30个字符',
+        ],[
+            'goods_name' => '商品名称',
+            'typeid' => '分类名称',
+            // 'shop_price'=>'价格',
+            // 'created_at' => '发布时间',
+        ]);
 
         // dd(1);
 
@@ -96,6 +97,9 @@ class GoodController extends Controller
                     $ext = $val->getClientOriginalExtension();     // 扩展名
                     $fileName = date('Y-m-d_H-i-s').uniqid().'.'.$ext;
                     $val->move('./upload', $fileName);
+
+                    $file = $img->open($val->move('./upload', $fileName));
+                    dd($file);
                     $fileUrl[] = $fileName;   
                 }
 
@@ -146,6 +150,7 @@ class GoodController extends Controller
     //商品编辑处理页
     public function doEdit(Request $request)
     {
+        
         // var_dump($request->all());
         // exit;
         $data = $request->except('_token');
@@ -173,11 +178,10 @@ class GoodController extends Controller
             return redirect('/admin/goods_list');
         }
     }
-
-    public function changeNew(Request $req)
+    //新品
+    public function changeNew(Request $req ,$new)
     {   
-        // var_dump($req->all());
-        // exit;
+
         $id = $req->input('id');
         $is_new = $req->input('is_new');
 
@@ -191,7 +195,58 @@ class GoodController extends Controller
 
         $newNum = Good::where('goods_id',$id)->pluck('is_new');
         $newNum = $newNum[0];
-        dd($newNum);
+        
+        // echo $tt;
+        if($newNum ==1){
+            echo 1;
+        }elseif($newNum==0){
+            echo 0;
+        }
+    }
+    //热销
+    public function changeHot(Request $req, $hot)
+    {   
+        
+        $id = $req->input('id');
+        $is_hot = $req->input('is_hot');
+
+        if($is_hot == '1'){
+            $is_hot = '0';
+        }elseif($is_hot == '0'){
+            $is_hot = '1';
+        }
+
+        $boo = Good::where('goods_id',$id)->update(['is_hot'=>$is_hot]);
+
+        $newNum = Good::where('goods_id',$id)->pluck('is_hot');
+        $newNum = $newNum[0];
+        
+        // echo $tt;
+        if($newNum ==1){
+            echo 1;
+        }elseif($newNum==0){
+            echo 0;
+        }
+    }
+
+    //推荐
+    public function changeRecommend(Request $req, $recommend)
+    {   
+        
+        $id = $req->input('id');
+        $is_recommend = $req->input('is_recommend');
+
+        if($is_recommend == '1'){
+            $is_recommend = '0';
+        }elseif($is_recommend == '0'){
+            $is_recommend = '1';
+        }
+
+        $boo = Good::where('goods_id',$id)->update(['is_recommend'=>$is_recommend]);
+
+        $newNum = Good::where('goods_id',$id)->pluck('is_recommend');
+        $newNum = $newNum[0];
+        
         // echo $tt;
         if($newNum ==1){
             echo 1;
@@ -260,12 +315,24 @@ class GoodController extends Controller
         $good->delete();
     }
 
-    // //前台列表页
+    //前台商品列表页
     public function lister($pid)
     {
-        $goodslist = Good::where('typeid',$pid)->orderBy('updated_at','desc')->get();
+        $goodslist = Good::where('typeid',$pid)->orderBy('updated_at','desc')->paginate(12);
         
         return  view('web/lar_list', compact('goodslist'));
     }
+
+    //前台商品详细页
+    public function webDetail($id)
+    {
+        $data = DB::table('goods')->where('goods_id',$id)->get();
+        $detail = $data[0];
+        $detail['original_img'] = explode(',',trim($detail['original_img'],','));
+        // dd($detail);
+        return view('web/lar_introduction', compact('detail'));
+    }
+
+
 
 }

@@ -16,8 +16,7 @@ Route::get("register", "WebController@register");
 
 //商品详情页
 // Route::get("goods/{goods_id}", "WebController@goods");
-Route::get("goods/{id}", "WebController@goods");
-
+Route::get("detail/{id}", "GoodController@webDetail");
 
 //购物车页
 Route::get("cart", "WebController@cart");
@@ -41,6 +40,8 @@ Route::post("center", "WebController@ucenteradd");
 //地址管理页
 Route::get("addres", "WebController@addres");
 Route::post("addres", "WebController@addresadd");
+Route::get("addresedat/{id}", "WebController@addresedit");
+Route::post("addresedat", "WebController@addreseditadd");
 
 //评论管理
 Route::get("message", "WebController@message");
@@ -55,8 +56,20 @@ Route::post("loginAjax", "WebController@loginAjax");
 //用户退出
 Route::get("quit", "WebController@quit");
 
+<<<<<<< HEAD
 //城市三级联动
 Route::get("cityModel", "WebController@cityModel");
 
 //支付页添加地址
 Route::post("payAddress", "WebController@payAddress");
+=======
+//邮箱
+Route::get("activation/{id}", "WebController@activation");
+
+//找回密码
+Route::get("Retrieve","WebController@Retrieve");
+Route::post("Retrieve","WebController@Retrieveajax");
+Route::post("Retrievepass","WebController@Retrievepass");
+Route::get("changepass/{id}/{time}","WebController@changepass");
+Route::post("changepass","WebController@changepassword");
+>>>>>>> ff103a73892c809b69b3a1cf320c26aa8946988e

@@ -84,19 +84,41 @@
 	            <td width="10%"><img src="../style/images/lietu.png" alt="" width="70" height="50" /></td>
 	          @endif
 	          <td>{{$val['goods_name']}}</td>
+	          <!-- 新品 -->
 	          <td>
-	          @if($val['is_new']==1)
+	          @if($val['is_new']==0)
 		          <a href="javascript:;">
 		          	<img name="is_new" value="{{$val['is_new']}}" src="../style/images/icon_right_s.png" />
 		          </a>
-		      @elseif($val['is_new']==0)
+		      @elseif($val['is_new']==1)
 		      		<a href="javascript:;">
-		          	<img name="is_new" value="{{$val['is_new']}}" src="../style/images/icon_right_s.png" />
+		          	<img name="is_new" value="{{$val['is_new']}}" src="../style/images/icon_error_s.png" />
 		          </a>
 		      @endif
-	          </td><!--aa-->
-	          <td><a href="#"></a></td>
-	          <td><a href="#"></a></td>
+	          </td>
+	          <!--热销-->
+	          <td>
+	          @if($val['is_hot']==0)
+		          <a href="javascript:;">
+		          	<img name="is_hot" value="{{$val['is_hot']}}" src="../style/images/icon_right_s.png" />
+		          </a>
+		      @elseif($val['is_hot']==1)
+		      		<a href="javascript:;">
+		          	<img name="is_hot" value="{{$val['is_hot']}}" src="../style/images/icon_error_s.png" />
+		          </a>
+		      @endif
+		      </td>
+	          <td>
+	          @if($val['is_recommend']==0)
+		          <a href="javascript:;">
+		          	<img name="is_recommend" value="{{$val['is_recommend']}}" src="../style/images/icon_right_s.png" />
+		          </a>
+		      @elseif($val['is_recommend']==1)
+		      		<a href="javascript:;">
+		          	<img name="is_recommend" value="{{$val['is_recommend']}}" src="../style/images/icon_error_s.png" />
+		          </a>
+		      @endif
+	          </td>
 	          <td>{{$val['name']}}</td>
 	          <td>{{$val['updated_at']}}</td>
 	          <td><div class="button-group"> <a class="button border-main" href="{{url('/admin/goods_edit')}}/{{$val['goods_id']}}"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="{{url('/admin/goods_del')}}/{{$val['goods_id']}}" onclick="return del(1,1,1)"><span class="icon-trash-o"></span> 删除</a> </div></td>
@@ -328,19 +350,18 @@ $(function(){
       });
 
 
-	//新品aa
+	//新品
 	$('img[name=is_new]').click(function(){
-
+		alert('new');
+		var that = $('img[name=is_new]');
 		var id = $(this).parent().parent().siblings('td').children('input[type=checkbox]').val();
 		var is_new = $(this).attr('value');
+
 		if(is_new==1){
-			
 			var url = '../style/images/icon_right_s.png';
 			$(this).attr('value',0);
 			$(this).attr('src',url);
-			
 		}else if(is_new==0){
-			
 			var url = '../style/images/icon_error_s.png';
 			$(this).attr('value',1);
 			$(this).attr('src',url);
@@ -349,34 +370,83 @@ $(function(){
 
 		// alert(is_new);
 		$.ajax({
-			url:'/admin/goods_list',
+			url:'/admin/goods_list/{new}',
 		   data:{id:id,is_new:is_new},
 		   type:'POST',
 	   dataType:'JSON',
 
 	   		susscee:function(data){
-	   			console.log(data);
-	   			var url = null;
-	   			if(data==1){
-
-	   				url = '../style/images/icon_right_s.png';
-	   				$('img[name=is_new[]]').attr('value',data);
-	   				$('img[name=is_new[]]').attr('src',url);
-
-	   			}else if(data==0){
-
-	   				url = '../style/images/icon_error_s.png';
-	   				$('img[name=is_new[]]').attr('value',data);
-	   				$('img[name=is_new[]]').attr('src',url);
-
-	   			}
-
-	   			
 
 	   		}
 
 		});
 
+	});
+
+	//热销
+	$('img[name=is_hot]').click(function(){
+		alert('hot');
+		var that = $('img[name=is_hot]');
+		var id = $(this).parent().parent().siblings('td').children('input[type=checkbox]').val();
+		var is_hot = $(this).attr('value');
+
+		if(is_hot==1){
+			var url = '../style/images/icon_right_s.png';
+			$(this).attr('value',0);
+			$(this).attr('src',url);
+		}else if(is_hot==0){
+			var url = '../style/images/icon_error_s.png';
+			$(this).attr('value',1);
+			$(this).attr('src',url);
+		}
+
+
+		// alert(is_hot);
+		$.ajax({
+			url:'/admin/goods_list/{hot}',
+		   data:{id:id,is_hot:is_hot},
+		   type:'POST',
+	   dataType:'JSON',
+
+	   		susscee:function(data){
+
+	   		}
+
+		});
+
+	});
+
+
+	//推荐
+	$('img[name=is_recommend]').click(function(){
+		alert('recommend');
+		var that = $('img[name=is_recommend]');
+		var id = $(this).parent().parent().siblings('td').children('input[type=checkbox]').val();
+		var is_recommend = $(this).attr('value');
+
+		if(is_recommend==1){
+			var url = '../style/images/icon_right_s.png';
+			$(this).attr('value',0);
+			$(this).attr('src',url);
+		}else if(is_recommend==0){
+			var url = '../style/images/icon_error_s.png';
+			$(this).attr('value',1);
+			$(this).attr('src',url);
+		}
+
+
+		// alert(is_recommend);
+		$.ajax({
+			url:'/admin/goods_list/{recommend}',
+		   data:{id:id,is_recommend:is_recommend},
+		   type:'POST',
+	   dataType:'JSON',
+
+	   		susscee:function(data){
+
+	   		}
+
+		});
 
 	});
 

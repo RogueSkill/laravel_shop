@@ -79,8 +79,7 @@ $("input[name='username']").on("blur",function() {
                 if(data == 0) {
 
                     //改变提示图标和提示文本
-                    that.next().css({color:"green"}).find('i').removeClass().addClass("glyphicon glyphicon-ok").next()
-                        .html("用户名可以使用");
+                    that.next().css({"display":"none"});
 
                     usernameState = true;
 
@@ -143,6 +142,7 @@ $("input[name='email']").on('blur', function() {
 
     } else {
 
+<<<<<<< HEAD
 
         // that.next().css({"display":"none"});
         //
@@ -162,6 +162,22 @@ $("input[name='email']").on('blur', function() {
                     //改变提示图标和提示文本
                     that.next().css({color:"green"}).find('i').removeClass().addClass("glyphicon glyphicon-ok").next()
                         .html("邮箱可以使用");
+=======
+        $.ajax({
+
+            type:"POST",
+            url:"registerAjax",
+            data:"email="+that.val(),
+            headers:{
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+            success:function(data) {
+
+                if(data == 0) {
+
+                    //改变提示图标和提示文本
+                    that.next().css({"display":"none"});
+>>>>>>> ff103a73892c809b69b3a1cf320c26aa8946988e
 
                     emailState = true;
 
@@ -169,7 +185,11 @@ $("input[name='email']").on('blur', function() {
 
                     //改变提示图标和提示文本
                     that.next().css({color:"red"}).find('i').removeClass().addClass("glyphicon glyphicon-remove").next()
+<<<<<<< HEAD
                         .html("邮箱已存在");
+=======
+                        .html("email已存在");
+>>>>>>> ff103a73892c809b69b3a1cf320c26aa8946988e
 
                     emailState = false;
                 }
@@ -344,7 +364,7 @@ $("button[name='register']").on("click", function() {
             success:function(data) {
 
                 if(data > 0) {
-                    alert("注册成功");
+                    alert("注册成功,请打开您的邮箱进行激活");
                     window.location.href='login';
                 }
             }

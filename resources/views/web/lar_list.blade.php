@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 		<title>搜索页面</title>
-
+		<link href="{{asset('style/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
 		<link href="{{asset('web_style/AmazeUI-2.4.2/assets/css/amazeui.css')}}" rel="stylesheet" type="text/css" />
 		<link href="{{asset('web_style/AmazeUI-2.4.2/assets/css/admin.css')}}" rel="stylesheet" type="text/css" />
 
@@ -169,7 +169,7 @@
 									<li>
 										<div class="i-pic limit">
 											@if($val['cover_img'])
-												<a href="{{url('goods')}}/{{$val['goods_id']}}"><img width="218" height="218" src="../{{$val['cover_img']}}" /></a>
+												<a href="{{url('./detail')}}/{{$val['goods_id']}}"><img width="218" height="218" src="../{{$val['cover_img']}}" /></a>
 											@else
 												<img width="218" height="218" src="{{asset('style/images/image.png')}}" />
 											@endif
@@ -241,15 +241,17 @@
 							<div class="clear"></div>
 							<!--分页 -->
 							<ul class="am-pagination am-pagination-right">
-								<li class="am-disabled"><a href="{{url('/goods/id')}}">&laquo;</a></li>
+
+								<!-- <li class="am-disabled"><a href="{{url('/goods/id')}}">&laquo;</a></li>
 								<li class="am-active"><a href="{{url('/goods/id')}}">1</a></li>
 								<li><a href="{{url('/goods/id')}}">2</a></li>
 								<li><a href="{{url('/goods/id')}}">3</a></li>
 								<li><a href="{{url('/goods/id')}}">4</a></li>
 								<li><a href="{{url('/goods/id')}}">5</a></li>
-								<li><a href="{{url('/goods/id')}}">&raquo;</a></li>
+								<li><a href="{{url('/goods/id')}}">&raquo;</a></li> -->
+								{{$goodslist->links()}}
 							</ul>
-
+							
 						</div>
 					</div>
 					<div class="footer">
