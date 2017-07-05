@@ -13,6 +13,7 @@
 		<link type="text/css" href="{{asset('web_style/css/optstyle.css')}}" rel="stylesheet" />
 		<link type="text/css" href="{{asset('web_style/css/style.css')}}" rel="stylesheet" />
 
+
 		<script type="text/javascript" src="{{asset('web_style/basic/js/jquery-1.7.min.js')}}"></script>
 		<script type="text/javascript" src="{{asset('web_style/basic/js/quick_links.js')}}"></script>
 
@@ -20,7 +21,32 @@
 		<script type="text/javascript" src="{{asset('web_style/js/jquery.imagezoom.min.js')}}"></script>
 		<script type="text/javascript" src="{{asset('web_style/js/jquery.flexslider.js')}}"></script>
 		<script type="text/javascript" src="{{asset('web_style/js/list.js')}}"></script>
-
+		<style>
+			.address{
+				margin-right: 0px;
+			}
+			.address select{
+				width:30%;
+			}
+			.form-control{
+				display:block;
+				width:100%;
+				height:34px;
+				padding:6px 12px;
+				font-size:14px;
+				line-height:1.42857143;
+				color:#555;
+				background-color:#fff;
+				background-image:none;
+				border:1px solid #ccc;
+				border-radius:4px;
+				-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075);
+				box-shadow:inset 0 1px 1px rgba(0,0,0,.075);
+				-webkit-transition:border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+				-o-transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+				transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s
+			}
+		</style>
 	</head>
 
 	<body>
@@ -31,23 +57,27 @@
 			<ul class="message-l">
 				<div class="topMessage">
 					<div class="menu-hd">
-						<a href="#" target="_top" class="h">亲，请登录</a>
-						<a href="#" target="_top">免费注册</a>
+						@if(isset($username))
+							欢迎您:{{$username}}
+							<a href="{{url('quit')}}">退出</a>
+						@else
+							<a href="{{url('login')}}" target="_top" class="h">亲，请登录</a>
+							<a href="{{url('register')}}" target="_top">免费注册</a>
+						@endif
 					</div>
 				</div>
 			</ul>
 			<ul class="message-r">
 				<div class="topMessage home">
-					<div class="menu-hd"><a href="#" target="_top" class="h">商城首页</a></div>
+					<div class="menu-hd"><a href="{{url('index')}}" target="_top" class="h">商城首页</a></div>
 				</div>
 				<div class="topMessage my-shangcheng">
-					<div class="menu-hd MyShangcheng"><a href="#" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
+					<div class="menu-hd MyShangcheng"><a href="{{url('center')}}" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
 				</div>
 				<div class="topMessage mini-cart">
-					<div class="menu-hd"><a id="mc-menu-hd" href="#" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
+					<div class="menu-hd"><a id="mc-menu-hd" href="{{url('cart')}}" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
 				</div>
-				<div class="topMessage favorite">
-					<div class="menu-hd"><a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
+
 			</ul>
 			</div>
 
@@ -104,23 +134,7 @@
 						});
 					});
 				</script>
-				<div class="scoll">
-					<section class="slider">
-						<div class="flexslider">
-							<ul class="slides">
-								<li>
-									<img src="{{asset('web_style/images/01.jpg')}}" title="pic" />
-								</li>
-								<li>
-									<img src="{{asset('web_style/images/02.jpg')}}" />
-								</li>
-								<li>
-									<img src="{{asset('web_style/images/03.jpg')}}" />
-								</li>
-							</ul>
-						</div>
-					</section>
-				</div>
+
 
 				<!--放大镜-->
 
@@ -140,24 +154,18 @@
 							</script>
 
 							<div class="tb-booth tb-pic tb-s310">
-								<a href="{{asset('web_style/images/01.jpg')}}"><img src="{{asset('web_style/images/01_mid.jpg')}}" alt="细节展示放大镜特效" rel="{{asset('web_style/images/01.jpg')}}" class="jqzoom" /></a>
+								<a href="{{asset($data['cover_img'])}}"><img src="{{asset($data['cover_img'])}}" alt="细节展示放大镜特效" rel="{{asset($data['cover_img'])}}" class="jqzoom" width="350" height="350"/></a>
 							</div>
 							<ul class="tb-thumb" id="thumblist">
-								<li class="tb-selected">
-									<div class="tb-pic tb-s40">
-										<a href="#"><img src="{{asset('web_style/images/01_small.jpg')}}" mid="{{asset('web_style/images/01_mid.jpg')}}" big="{{asset('web_style/images/01.jpg')}}"></a>
-									</div>
-								</li>
-								<li>
-									<div class="tb-pic tb-s40">
-										<a href="#"><img src="{{asset('web_style/images/02_small.jpg')}}" mid="{{asset('web_style/images/02_mid.jpg')}}" big="{{asset('web_style/images/02.jpg')}}"></a>
-									</div>
-								</li>
-								<li>
-									<div class="tb-pic tb-s40">
-										<a href="#"><img src="{{asset('web_style/images/03_small.jpg')}}" mid="{{asset('web_style/images/03_mid.jpg')}}" big="{{asset('web_style/images/03.jpg')}}"></a>
-									</div>
-								</li>
+
+								@foreach(explode(",", $data['original_img']) as $val)
+
+									<li class="tb-selected">
+										<div class="tb-pic tb-s40">
+											<a href="#"><img src="{{asset('upload/'.$val)}}" mid="{{asset('upload/'.$val)}}" big="{{asset('upload/'.$val)}}" width="60" height="60"></a>
+										</div>
+									</li>
+								@endforeach
 							</ul>
 						</div>
 
@@ -169,20 +177,18 @@
 						<!--规格属性-->
 						<!--名称-->
 						<div class="tb-detail-hd">
-							<h1>	
-				 良品铺子 手剥松子218g 坚果炒货 巴西松子
-	          </h1>
+							<h1>{{$data['goods_name']}}</h1>
 						</div>
 						<div class="tb-detail-list">
 							<!--价格-->
 							<div class="tb-detail-price">
 								<li class="price iteminfo_price">
 									<dt>促销价</dt>
-									<dd><em>¥</em><b class="sys_item_price">56.90</b>  </dd>                                 
+									<dd><em>¥</em><b class="sys_item_price">{{$data['shop_price']}}</b>  </dd>
 								</li>
 								<li class="price iteminfo_mktprice">
 									<dt>原价</dt>
-									<dd><em>¥</em><b class="sys_item_mktprice">98.00</b></dd>									
+									<dd><em>¥</em><b class="sys_item_mktprice">{{$data['mareket_price']}}</b></dd>
 								</li>
 								<div class="clear"></div>
 							</div>
@@ -192,37 +198,25 @@
 								<dt>配送至</dt>
 								<div class="iteminfo_freprice">
 									<div class="am-form-content address">
-										<select data-am-selected>
-											<option value="a">浙江省</option>
-											<option value="b">湖北省</option>
-										</select>
-										<select data-am-selected>
-											<option value="a">温州市</option>
-											<option value="b">武汉市</option>
-										</select>
-										<select data-am-selected>
-											<option value="a">瑞安区</option>
-											<option value="b">洪山区</option>
-										</select>
+
+										<select id="s_province" name="province" class="form-control"></select>  
+										<select id="s_city" name="city" class="form-control"></select>  
+										<select id="s_county" name="county" class="form-control"></select>
+										<script class="resources library" src="{{asset('js/area.js')}}" type="text/javascript"></script>
+										<script type="text/javascript">_init_area();</script>
 									</div>
-									<div class="pay-logis">
-										快递<b class="sys_item_freprice">10</b>元
-									</div>
+
 								</div>
 							</dl>
 							<div class="clear"></div>
 
 							<!--销量-->
 							<ul class="tm-ind-panel">
-								<li class="tm-ind-item tm-ind-sellCount canClick">
-									<div class="tm-indcon"><span class="tm-label">月销量</span><span class="tm-count">1015</span></div>
-								</li>
+
 								<li class="tm-ind-item tm-ind-sumCount canClick">
-									<div class="tm-indcon"><span class="tm-label">累计销量</span><span class="tm-count">6015</span></div>
+									<div class="tm-indcon"><span class="tm-label">累计销量</span><span class="tm-count">{{$data['sales_num']}}</span></div>
 								</li>
-								<li class="tm-ind-item tm-ind-reviewCount canClick tm-line3">
-									<div class="tm-indcon"><span class="tm-label">累计评价</span><span class="tm-count">640</span></div>
-								</li>
+
 							</ul>
 							<div class="clear"></div>
 
@@ -245,29 +239,13 @@
 												<div class="theme-signin-left">
 
 													<div class="theme-options">
-														<div class="cart-title">口味</div>
-														<ul>
-															<li class="sku-line selected">原味<i></i></li>
-															<li class="sku-line">奶油<i></i></li>
-															<li class="sku-line">炭烧<i></i></li>
-															<li class="sku-line">咸香<i></i></li>
-														</ul>
-													</div>
-													<div class="theme-options">
-														<div class="cart-title">包装</div>
-														<ul>
-															<li class="sku-line selected">手袋单人份<i></i></li>
-															<li class="sku-line">礼盒双人份<i></i></li>
-															<li class="sku-line">全家福礼包<i></i></li>
-														</ul>
-													</div>
-													<div class="theme-options">
 														<div class="cart-title number">数量</div>
 														<dd>
+
 															<input id="min" class="am-btn am-btn-default" name="" type="button" value="-" />
 															<input id="text_box" name="" type="text" value="1" style="width:30px;" />
 															<input id="add" class="am-btn am-btn-default" name="" type="button" value="+" />
-															<span id="Stock" class="tb-hidden">库存<span class="stock">1000</span>件</span>
+															<span id="Stock" class="tb-hidden">库存<span class="stock">{{$data['store_count']}}</span>件</span>
 														</dd>
 
 													</div>
@@ -325,7 +303,7 @@
 							</div>
 							<li>
 								<div class="clearfix tb-btn tb-btn-buy theme-login">
-									<a id="LikBuy" title="点此按钮到下一步确认购买信息" href="#">立即购买</a>
+									<a id="LikBuy" title="点此按钮到下一步确认购买信息" href="{{url('pay/'.$data['goods_id'])}}">立即购买</a>
 								</div>
 							</li>
 							<li>
@@ -341,35 +319,7 @@
 
 				</div>
 
-				<!--优惠套装-->
-				<div class="match">
-					<div class="match-title">优惠套装</div>
-					<div class="match-comment">
-						<ul class="like_list">
-							<li>
-								<div class="s_picBox">
-									<a class="s_pic" href="#"><img src="{{asset('web_style/images/cp.jpg')}}"></a>
-								</div> <a class="txt" target="_blank" href="#">萨拉米 1+1小鸡腿</a>
-								<div class="info-box"> <span class="info-box-price">¥ 29.90</span> <span class="info-original-price">￥ 199.00</span> </div>
-							</li>
-							<li class="plus_icon"><i>+</i></li>
-							<li>
-								<div class="s_picBox">
-									<a class="s_pic" href="#"><img src="{{asset('web_style/images/cp2.jpg')}}"></a>
-								</div> <a class="txt" target="_blank" href="#">ZEK 原味海苔</a>
-								<div class="info-box"> <span class="info-box-price">¥ 8.90</span> <span class="info-original-price">￥ 299.00</span> </div>
-							</li>
-							<li class="plus_icon"><i>=</i></li>
-							<li class="total_price">
-								<p class="combo_price"><span class="c-title">套餐价:</span><span>￥35.00</span> </p>
-								<p class="save_all">共省:<span>￥463.00</span></p> <a href="#" class="buy_now">立即购买</a> </li>
-							<li class="plus_icon"><i class="am-icon-angle-right"></i></li>
-						</ul>
-					</div>
-				</div>
-				<div class="clear"></div>
-				
-							
+
 				<!-- introduce-->
 
 				<div class="introduce">
@@ -467,16 +417,10 @@
 											<h4>产品参数：</h4></div>
 										<div class="clear"></div>
 										<ul id="J_AttrUL">
-											<li title="">产品类型:&nbsp;烘炒类</li>
-											<li title="">原料产地:&nbsp;巴基斯坦</li>
-											<li title="">产地:&nbsp;湖北省武汉市</li>
-											<li title="">配料表:&nbsp;进口松子、食用盐</li>
-											<li title="">产品规格:&nbsp;210g</li>
-											<li title="">保质期:&nbsp;180天</li>
-											<li title="">产品标准号:&nbsp;GB/T 22165</li>
-											<li title="">生产许可证编号：&nbsp;QS4201 1801 0226</li>
-											<li title="">储存方法：&nbsp;请放置于常温、阴凉、通风、干燥处保存 </li>
-											<li title="">食用方法：&nbsp;开袋去壳即食</li>
+											<li title="">商品货号:&nbsp;{{$data['goods_sn']}}</li>
+											<li title="">产品规格:&nbsp;{{$data['weight']}}g</li>
+											<li title="">简单描述:&nbsp;{{$data['goods_remake']}}</li>
+
 										</ul>
 										<div class="clear"></div>
 									</div>

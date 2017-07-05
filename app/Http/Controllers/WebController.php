@@ -15,16 +15,16 @@ class WebController extends Controller
     public function index(Request $request)
     {
         //判断username是否存在session中,存在则赋值到首页
-       $bool =  $request->session()->has("username");
+        $bool =  $request->session()->has("webusername");
 
-       if($bool) {
-           $username =  $request->session()->get("username");
+        if($bool) {
+            $username =  $request->session()->get("webusername");
 
-           return view('web/lar_index', compact('username'));
-       } else {
+            return view('web/lar_index', compact('username'));
+        } else {
 
-          return view('web/lar_index');
-       }
+            return view('web/lar_index');
+        }
 
 
     }
@@ -42,15 +42,26 @@ class WebController extends Controller
     }
 
     //商品详情页
-    public function goods($id)
+    public function goods(Request $request, $id)
     {
+        //查询商品表拿到商品详细信息
+        $data = DB::table('goods')->where("goods_id", $id)->get();
 
-           // dd($id);
+        //返回的是二维数组所以得转成一维数组赋值到首页
+        $data = $data[0];
 
-        // $info = Good::find($id);
-        // dd($info);
-        // return view('web/goods',compact('info'));
-        return view("web/lar_introduction");
+        //判断username是否存在session中,存在则赋值到首页
+        $bool =  $request->session()->has("username");
+
+        if($bool) {
+            $username =  $request->session()->get("username");
+
+            return view('web/lar_introduction', compact('username', 'data'));
+        } else {
+
+            return view('web/lar_introduction', compact('data'));
+        }
+
 
     }
 
@@ -61,9 +72,26 @@ class WebController extends Controller
     }
 
     //结算页
-    public function pay()
+    public function pay(Request $request, $id)
     {
-        return view("web/pay");
+        if(!$request->session()->has("webusername")) {
+            echo "<script>alert('请先登录!');window.location.href='http://localhost/Laravel/ShopCenter/public/login'</script>";
+
+        }
+
+        //商品数据
+        $data = DB::table('goods')->where('goods_id', $id)->get();
+
+        //拿到当前用户的ID
+       $userid =  $request->session()->get("webid");
+
+        //地址数据
+        $addressData = DB::table("addresses")->where("userid", $userid)->get();
+
+        return view("web/pay", compact("data", "addressData"));
+
+
+
     }
 
     //结算成功页
@@ -89,20 +117,15 @@ class WebController extends Controller
 //用户中心页
     public function ucenter(Request $request)
     {
-<<<<<<< HEAD
 
-=======
->>>>>>> 717675919b2973be6814de48db980238ca80f0de
-        if(!$request->session()->has("username")) {
+
+        if(!$request->session()->has("webusername")) {
             echo "<script>alert('请先登录!');window.location.href='login';</script>";
         }
-        $name =  $request->session()->get("username");
+        $name =  $request->session()->get("webusername");
 
         $id = $name;
-<<<<<<< HEAD
-=======
 
->>>>>>> 717675919b2973be6814de48db980238ca80f0de
 
         $user_datas = DB::table('members')->where('username','=',$id)->get();
 
@@ -200,18 +223,18 @@ class WebController extends Controller
 
         if (isset($_POST['updated_at']) == true && isset($_POST['addresid']) == true) {
 
-             $update = DB::table('addresses')->where('id',$_POST['addresid'])->update(['updated_at'=>$_POST['updated_at'],'province'=>$_POST['province'],'city'=>$_POST['city'],'county'=>$_POST['county'],'detailed_address'=>$_POST['uaddress'],'consignee'=>$_POST['uname'],'phone'=>$_POST['uphone'],'code'=>$_POST['code']]);
+            $update = DB::table('addresses')->where('id',$_POST['addresid'])->update(['updated_at'=>$_POST['updated_at'],'province'=>$_POST['province'],'city'=>$_POST['city'],'county'=>$_POST['county'],'detailed_address'=>$_POST['uaddress'],'consignee'=>$_POST['uname'],'phone'=>$_POST['uphone'],'code'=>$_POST['code']]);
 
-             if ($update > 0)
-             {
+            if ($update > 0)
+            {
 
-                 exit("<script>alert('修改地址成功');window.location.href='addres'</script>");
+                exit("<script>alert('修改地址成功');window.location.href='addres'</script>");
 
-             }else{
+            }else{
 
-                 exit("<script>alert('修改地址失败');window.location.href='addres'</script>");
+                exit("<script>alert('修改地址失败');window.location.href='addres'</script>");
 
-             }
+            }
         }
 
 
@@ -226,6 +249,14 @@ class WebController extends Controller
             $username = $_POST['username'];
 
             $data = DB::table("members")->where("username","=",$username)->get();
+
+            echo count($data);
+
+        }else if(isset($_POST['pass']) == false) {
+
+            $email = $_POST['email'];
+
+            $data = DB::table('members')->where('email',$email)->get();
 
             echo count($data);
 
@@ -257,15 +288,15 @@ class WebController extends Controller
         //大于0则存在
         if($bool > 0) {
 
-          $data = DB::table('members')->where('username', '=', $username)->get();
+            $data = DB::table('members')->where('username', '=', $username)->get();
 
             foreach($data as $val) {
 
-               $password = $val['pass'];
+                $password = $val['pass'];
 
-               $bool =  password_verify($pass,$password);
+                $bool =  password_verify($pass,$password);
 
-               $id = $val['id'];
+                $id = $val['id'];
             }
 
         }
@@ -273,8 +304,8 @@ class WebController extends Controller
         if($bool){
 
             echo "1";
-            $request->session()->put("username", $username);
-            $request->session()->put("id", $id);
+            $request->session()->put("webusername", $username);
+            $request->session()->put("webid", $id);
         }else {
 
             echo "0";
@@ -286,8 +317,8 @@ class WebController extends Controller
     //用户退出
     public function quit(Request $request)
     {
-        $request->session()->pull("username");
-        $request->session()->pull("id");
+        $request->session()->pull("webusername");
+        $request->session()->pull("webid");
         echo "<script>alert(' 退出成功!');window.location.href='index';</script>";
     }
 
@@ -327,6 +358,66 @@ class WebController extends Controller
         }
 
     }
+
+    //城市三级联动
+    public function cityModel()
+    {
+        $upid = $_GET['upid'];
+
+        $data = DB::table('district')->where('upid', $upid)->get();
+
+        echo json_encode($data);
+    }
+
+    //支付页添加地址
+    public function payAddress(Request $request)
+    {
+       $consignee = $_POST['consignee'];
+       $phone = $_POST['phone'];
+       $province = $_POST['province'];
+       $city = $_POST['city'];
+       $county = $_POST['county'];
+       $detailed_address = $_POST['detailed_address'];
+       $code = $_POST['code'];
+
+       //拿到存在session里面的用户id
+       $userid =  $request->session()->get("webid");
+
+       //判断收货人,用户ID,收货地址,手机号码,地区是否存在,存在则不添加(禁止添加同样的数据)
+        $formerly = DB::table("addresses")->where([
+            "userid"=>$userid,
+            "consignee"=>$consignee,
+            "phone"=>$phone,
+            "province"=>$province,
+            "city"=>$city,
+            "county"=>$county,
+            "detailed_address"=>$detailed_address
+            ])->get();
+
+        if(count($formerly) > 0) {
+
+            echo "2";
+        } else {
+
+            //写入数据库
+            $data = DB::table("addresses")->insert([
+
+                "userid"=>$userid,
+                "consignee"=>$consignee,
+                "phone"=>$phone,
+                "province"=>$province,
+                "city"=>$city,
+                "county"=>$county,
+                "detailed_address"=>$detailed_address,
+                "code"=>$code,
+                "status"=>0
+            ]);
+            echo $data;
+        }
+
+
+    }
+
 }
 
 

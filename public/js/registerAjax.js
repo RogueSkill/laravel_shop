@@ -143,9 +143,38 @@ $("input[name='email']").on('blur', function() {
 
     } else {
 
-        that.next().css({"display":"none"});
 
-        emailState = true;
+        // that.next().css({"display":"none"});
+        //
+        // emailState = true;
+        $.ajax({
+
+            type:"POST",
+            url:"registerAjax",
+            data:"email="+that.val(),
+            headers:{
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+            success:function(data) {
+
+                if(data == 0) {
+
+                    //改变提示图标和提示文本
+                    that.next().css({color:"green"}).find('i').removeClass().addClass("glyphicon glyphicon-ok").next()
+                        .html("邮箱可以使用");
+
+                    emailState = true;
+
+                }else{
+
+                    //改变提示图标和提示文本
+                    that.next().css({color:"red"}).find('i').removeClass().addClass("glyphicon glyphicon-remove").next()
+                        .html("邮箱已存在");
+
+                    emailState = false;
+                }
+            }
+        });
     }
 });
 

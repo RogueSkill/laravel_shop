@@ -23,7 +23,7 @@ Route::get("goods/{id}", "WebController@goods");
 Route::get("cart", "WebController@cart");
 
 //结算页
-Route::get("pay", "WebController@pay");
+Route::get("pay/{id}", "WebController@pay");
 
 //结算成功页
 Route::get("paysucceed", "WebController@paysucceed");
@@ -54,3 +54,9 @@ Route::post("loginAjax", "WebController@loginAjax");
 
 //用户退出
 Route::get("quit", "WebController@quit");
+
+//城市三级联动
+Route::get("cityModel", "WebController@cityModel");
+
+//支付页添加地址
+Route::post("payAddress", "WebController@payAddress");

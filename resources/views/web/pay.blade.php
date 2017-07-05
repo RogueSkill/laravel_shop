@@ -1,5 +1,8 @@
 @extends("web.master")
 @section("title", "支付页")
+@section("meta")
+    <meta name="_token" content="{{ csrf_token() }}">
+@endsection
 @section("content")
     <div style="display: block; margin-top:52px;"></div>
     <!-- 路径导航 -->
@@ -32,24 +35,24 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="address-panel">
-                                            <form class="form-horizontal" method="post">
+                                            <form class="form-horizontal">
+
                                                 <div class="form-group">
                                                     <label class="col-sm-2 control-label">地区选择</label>
                                                     <div class="col-sm-10">
                                                         <select class="form-control" name="province" id="province" style="margin-left:0px;">
-                                                            <option>--请选择省份--</option>
-                                                            <option>广东省</option>
-                                                            <option>山东省</option>
-                                                            <option>湖南省</option>
+                                                            <option value="-1">--请选择省份--</option>
+
                                                         </select>
                                                         <select class="form-control" name="city" id="city">
-                                                            <option value="">--请选择城市--</option>
-                                                            <option value="">市</option>
+                                                            <option value="-1">--请选择城市--</option>
+
                                                         </select>
                                                         <select class="form-control" name="county" id="county">
-                                                            <option value="">--请选择所在县--</option>
-                                                            <option value="">县</option>
+                                                            <option value="-1">--请选择所在县--</option>
+
                                                         </select>
+
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -58,29 +61,30 @@
                                                         <input type="text" class="form-control" name="uname" placeholder="收货人姓名">
                                                     </div>
                                                 </div>
+
                                                 <div class="form-group">
-                                                    <label class="col-sm-2 control-label">电子邮件</label>
+                                                    <label class="col-sm-2 control-label">详细地址</label>
                                                     <div class="col-sm-10">
-                                                        <input type="email" class="form-control" name="uemail" placeholder="电子邮件">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-2 control-label">地址</label>
-                                                    <div class="col-sm-10">
-                                                        <input type="text" class="form-control" name="uaddress" placeholder="地址">
+                                                        <input type="text" class="form-control" name="uaddress" placeholder="详细地址">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="col-sm-2 control-label">手机</label>
                                                     <div class="col-sm-10">
-                                                        <input type="number" class="form-control" name="uphone" placeholder="手机">
+                                                        <input type="text" class="form-control" name="uphone" placeholder="手机">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">邮编</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" name="postcode" placeholder="邮编">
                                                     </div>
                                                 </div>
                                             </form>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> <button type="button" class="btn btn-primary">添加</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> <button type="button" class="btn btn-primary" name="addaddress">添加</button>
                                     </div>
                                 </div>
                             </div>
@@ -90,78 +94,14 @@
                 <!-- end -->
             </div>
             <div class="address-display">
-                <!-- 手风琴 -->
-                <div class="row clearfix">
-                    <div class="col-md-12 column">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <input type="radio" name="address-radio[]">
-                                <a class="panel-title" data-toggle="collapse" data-parent="#panel-937561" href="#panel-element-1">广州天河兄弟连</a>
-                            </div>
-                            <div id="panel-element-1" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <div class="address-panel">
-                                        <form class="form-horizontal" method="post">
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label">地区选择</label>
-                                                <div class="col-sm-10">
-                                                    <select class="form-control" name="province" id="province" style="margin-left:0px;">
-                                                        <option>--请选择省份--</option>
-                                                        <option>广东省</option>
-                                                        <option>山东省</option>
-                                                        <option>湖南省</option>
-                                                    </select>
-                                                    <select class="form-control" name="city" id="city">
-                                                        <option value="">--请选择城市--</option>
-                                                        <option value="">市</option>
-                                                    </select>
-                                                    <select class="form-control" name="county" id="county">
-                                                        <option value="">--请选择所在县--</option>
-                                                        <option value="">县</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label">收货人姓名</label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" class="form-control" name="uname" placeholder="收货人姓名">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label">电子邮件</label>
-                                                <div class="col-sm-10">
-                                                    <input type="email" class="form-control" name="uemail" placeholder="电子邮件">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label">地址</label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" class="form-control" name="uaddress" placeholder="地址">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label">手机</label>
-                                                <div class="col-sm-10">
-                                                    <input type="number" class="form-control" name="uphone" placeholder="手机">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-sm-offset-2 col-sm-10">
-                                                    <button type="button" class="btn btn-success">确认编辑</button>
-                                                    <button type="button" class="btn btn-danger">删除</button>
-                                                    <button type="button" class="btn btn-info">设置为默认地址</button>
-                                                </div>
-                                            </div>
 
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                @foreach($addressData as $addval)
+                    <div class="panel-heading">
+                        <input type="radio" name="address-radio[]">
+                        <a class="panel-title"  href="#">{{$addval['province'].$addval['city'].$addval['county'].$addval['detailed_address']}}
+                            {{$addval['consignee']}} {{$addval['phone']}}</a>
                     </div>
-                </div>
-            </div>
-            <!-- 手风琴结束 -->
+                @endforeach
         </div>
     </div>
     </div>
@@ -199,18 +139,19 @@
                     <table class="table table-hover table-bordered order-table">
                         <th>缩略图</th>
                         <th>商品名称</th>
-                        <th>商品属性</th>
                         <th>商品价格</th>
                         <th>数量</th>
                         <th>总计</th>
-                        <tr>
-                            <td class="order-img"><img src="./images/1.jpg" alt="商品缩略图" class="img-rounded"></td>
-                            <td>saber模型</td>
-                            <td>蓝白色</td>
-                            <td>120.00</td>
-                            <td>1</td>
-                            <td class="order-price">120.00</td>
-                        </tr>
+
+                        @foreach($data as $val)
+                            <tr>
+                                <td class="order-img"><img src="{{asset($val['cover_img'])}}" alt="商品缩略图" class="img-rounded"></td>
+                                <td>{{$val['goods_name']}}</td>
+                                <td>{{$val['shop_price']}}</td>
+                                <td>1</td>
+                                <td class="order-price">120.00</td>
+                            </tr>
+                        @endforeach
                     </table>
                 </div>
                 <!-- start -->
@@ -233,4 +174,11 @@
         </div>
     </div>
     <!-- end -->
+@endsection
+
+@section("javaScript")
+
+    <!--引入JS文件-->
+    <script src="{{asset('js/cityModel.js')}}"></script>
+    <script src="{{asset('js/payAddAddress.js')}}"></script>
 @endsection

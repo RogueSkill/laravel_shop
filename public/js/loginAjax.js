@@ -15,8 +15,9 @@ $("button[name='login']").on("click", function() {
         success:function(data) {
 
             if(data > 0) {
+                history.go(-1);
                 alert("登录成功");
-                window.location.href='center';
+
             }else {
 
                 var that = $("input[name='pass']");
