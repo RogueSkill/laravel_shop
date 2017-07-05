@@ -95,6 +95,11 @@ Route::group(['middleware'=>['web','admin.login']],function(){
     Route::get('/admin/comments_list', 'AdminController@comments_list');
     Route::get('/admin/comments_add', 'AdminController@comments_add');
     Route::post('/admin/comments_add', 'AdminController@comments_submit');
+
+    //友情链接
+    Route::get('/admin/link_list', 'AdminController@link_list');
+    Route::get('/admin/link_add', 'AdminController@link_add');
+    Route::post('/admin/link_add', 'AdminController@link_submit');
 });
 
 Route::group(['middleware'=>['web','admin.login','level']],function(){
