@@ -8,6 +8,7 @@ use App\Pic;
 use App\Type;
 use App\Http\Requests;
 use DB;
+use Mail;
 
 class WebController extends Controller
 {
@@ -256,7 +257,6 @@ class WebController extends Controller
     }
 
 
-
     //注册页Ajax请求处理
     public function registerAjax()
     {
@@ -269,15 +269,41 @@ class WebController extends Controller
 
             echo count($data);
 
-        } else {
+        }elseif (isset($_POST['pass']) == false ){
 
+            $email = $_POST['email'];
+
+            $data = DB::table("members")->where("email","=",$email)->get();
+
+            echo count($data);
+        } else {
+            $time = date('y-m-d h:i:s',time());
             $data = DB::table("members")->insert([
 
                 "username"=>$_POST['username'],
                 "email"=>$_POST['email'],
-                "pass"=>password_hash($_POST['pass'],PASSWORD_DEFAULT)
+                "state"=>0,
+                "pass"=>password_hash($_POST['pass'],PASSWORD_DEFAULT),
+                "updated_at"=>$time
 
             ]);
+
+            $data2 = DB::table("members")->where("username","=",$_POST['username'])->get();
+
+            $datamail = $data2[0];
+
+            $base64 = base64_encode($datamail['id']);
+
+            $url = 'http://'.$_SERVER['HTTP_HOST'].'/activation/'.$base64;
+
+            Mail::raw(  "激活地址：".$url,function ($message){
+
+                $message->subject('商城激活邮件');
+
+                $message->to($_POST['email']);
+
+            });
+
             echo $data;
         }
 
@@ -306,21 +332,79 @@ class WebController extends Controller
                $bool =  password_verify($pass,$password);
 
                $id = $val['id'];
+
+               $state = $val['state'];
             }
 
         }
 
-        if($bool){
+        if($bool && $state != 0){
 
-            echo "1";
+            echo "2";
             $request->session()->put("webusername", $username);
             $request->session()->put("webid", $id);
-        }else {
+
+        }elseif($state == 0) {
+
+            echo "1";
+
+        }else{
 
             echo "0";
+
         }
 
 
+    }
+
+    //找回密码
+    public function Retrieve()
+    {
+        return view("web/Retrieve");
+    }
+
+    //找回密码 ajax
+    public function Retrieveajax()
+    {
+        $email = $_POST['email'];
+
+        $data = DB::table("members")->where("email","=",$email)->get();
+
+        echo count($data);
+    }
+
+    //找回密码修改页面 ajax
+    public function Retrievepass()
+    {
+
+        $data = DB::table("members")->where("email","=",$_POST['email'])->get();
+
+        $bool =  count($data);
+
+        if ($data >0 )
+        {
+            $datamail = $data[0];
+
+            $base64 = base64_encode($datamail['username']);
+            $base642 =  base64_encode($datamail['updated_at']);
+            $url = 'http://'.$_SERVER['HTTP_HOST'].'/changepass/'.$base64.'/'.$base642;
+
+            Mail::raw(  "激活地址：".$url,function ($message){
+
+                $message->subject('商城激活邮件');
+
+                $message->to($_POST['email']);
+
+            });
+        }
+
+        if ($bool)
+        {
+            echo "1";
+        }else
+        {
+            echo "2";
+        }
     }
 
     //用户退出
@@ -359,6 +443,7 @@ class WebController extends Controller
         if ($update > 0)
         {
             $time = date('y-m-d h:i:s',time());
+
             DB::table('goods_comments')->where('id', $_POST['messageid'])->update(['updated_at'=>$time,'content'=>0]);
 
             exit("<script>alert('修改评论成功');window.location.href='message'</script>");
@@ -370,6 +455,69 @@ class WebController extends Controller
         }
 
     }
+
+    //注册成功返回页
+    public function activation($id)
+    {
+        $base64 = base64_decode($id);
+
+        $update = DB::table('members')->where('id',$base64)->update(['state'=>1]);
+
+        if ($update > 0 )
+        {
+            return view("web/activation");
+
+        }else{
+
+            return view("web/activation2");
+
+        }
+
+    }
+
+    //修改密码页面
+    public function changepass($id,$time)
+    {
+        $base64 = base64_decode($id);
+        $base642 = base64_decode($time);
+
+        $data  = DB::table('members')->where('username',$base64)->get();
+
+        if ($data[0]['username'] == $base64 && $data[0]['updated_at'] == $base642){
+//            dd($id);
+            return view("web/changepass",compact('id'));
+
+        }else{
+
+            $url = 'http://'.$_SERVER['HTTP_HOST'];
+
+            echo "<script>alert('链接已失效');window.location.href='$url'</script>";
+
+        }
+    }
+
+    public function changepassword()
+    {
+        $time = date('y-m-d h:i:s',time());
+        $base64 = base64_decode($_POST['changepass']);
+        $update = DB::table('members')->where('username',$base64)->update([
+        "pass"=>password_hash($_POST['pass'],PASSWORD_DEFAULT),
+        'state'=>1,
+        'updated_at'=>$time
+    ]);
+
+        if ($update)
+        {
+            echo "1";
+        }else
+        {
+            echo "0";
+        }
+        exit();
+
+    }
 }
+
+
 
 

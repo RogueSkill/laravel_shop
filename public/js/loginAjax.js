@@ -14,10 +14,15 @@ $("button[name='login']").on("click", function() {
         },
         success:function(data) {
 
-            if(data > 0) {
+            if(data > 1) {
                 alert("登录成功");
                 window.location.href='center';
-            }else {
+
+            }else if (data == 1){
+
+                alert("请激活您邮箱后在登录");
+
+            }else{
 
                 var that = $("input[name='pass']");
 

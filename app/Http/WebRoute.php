@@ -55,3 +55,13 @@ Route::post("loginAjax", "WebController@loginAjax");
 
 //用户退出
 Route::get("quit", "WebController@quit");
+
+//邮箱
+Route::get("activation/{id}", "WebController@activation");
+
+//找回密码
+Route::get("Retrieve","WebController@Retrieve");
+Route::post("Retrieve","WebController@Retrieveajax");
+Route::post("Retrievepass","WebController@Retrievepass");
+Route::get("changepass/{id}/{time}","WebController@changepass");
+Route::post("changepass","WebController@changepassword");

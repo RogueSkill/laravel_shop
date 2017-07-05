@@ -219,7 +219,7 @@
                                                     <div class="form-group">
                                                         <label class="col-sm-2 control-label">电子邮件</label>
                                                         <div class="col-sm-10">
-                                                            <input type="email" class="form-control" name="uemail" value="{{$user_datas['email']}}" id="email">
+                                                            <input type="email" class="form-control" name="uemail" value="{{$user_datas['email']}}" id="email" readonly>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
