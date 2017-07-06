@@ -29,8 +29,8 @@ Route::get("paysucceed", "WebController@paysucceed");
 
 //分类列表页
 Route::get("cat_list/{pid}", "GoodController@cat_list");
-//产品列表页
-Route::get("list/{id}", "GoodController@lister");
+//商品列表页
+Route::get("cat_list/list/{pid}", "GoodController@lister");
 
 //订单页
 Route::get("order", "WebController@order");

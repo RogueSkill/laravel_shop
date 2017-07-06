@@ -382,8 +382,21 @@ class GoodController extends Controller
     //前台分类列表
     public function cat_list($pid)
     {
-        
-        return view('web/lar_cat_list');
+        // $pid = $id
+        $typelist = DB::table('types')->where('pid',0)->limit(10)->get();
+        foreach($typelist as $key=>$val){
+            $typelist[$key]['child'] = DB::table('types')->where('pid',$val['id'])->get();
+        }
+       foreach ($typelist as $key => $val) {
+
+            foreach($val['child'] as $k=>$v){
+                $typelist[$key]['child'][$k]['son'] = DB::table('types')->where('pid',$val['child'][$k]['id'])->get();
+            }
+
+       }
+
+        dump($typelist);
+        return view('web/lar_cat_list',compact('typelist','pid'));
     }
 
     //前台商品列表页
@@ -403,7 +416,5 @@ class GoodController extends Controller
     //     // dd($detail);
     //     return view('web/lar_introduction', compact('detail'));
     // }
-
-
 
 }
