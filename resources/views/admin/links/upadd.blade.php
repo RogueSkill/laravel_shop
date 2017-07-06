@@ -15,14 +15,15 @@
 <div class="panel admin-panel margin-top">
     <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>添加内容</strong></div>
     <div class="body-content">
-        <form method="post" class="form-x" action="{{url('admin/link_add')}}" id="link_add">
+        <form method="post" class="form-x" action="{{url('admin/link_upadds')}}" id="link_add">
             {!! csrf_field() !!}
+            <input type="hidden" name="linkid" value="{{$upadd['id']}}">
             <div class="form-group">
                 <div class="label">
                     <label>友链名称：</label>
                 </div>
                 <div class="field">
-                    <input type="text" class="input w50" name="linkname" id="linkname" />
+                    <input type="text" class="input w50" name="linkname" id="linkname" value="{{$upadd['name']}}"/>
                     <div class="tips"></div>
                 </div>
             </div>
@@ -31,7 +32,7 @@
                     <label>友链地址：</label>
                 </div>
                 <div class="field">
-                    <input type="text" class="input w50" name="link" id="link" />
+                    <input type="text" class="input w50" name="link" id="link" value="{{$upadd['url']}}"/>
                     <div class="tips"></div>
                 </div>
             </div>

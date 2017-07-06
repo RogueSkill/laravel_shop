@@ -100,6 +100,9 @@ Route::group(['middleware'=>['web','admin.login']],function(){
     Route::get('/admin/link_list', 'AdminController@link_list');
     Route::get('/admin/link_add', 'AdminController@link_add');
     Route::post('/admin/link_add', 'AdminController@link_submit');
+    Route::get('/admin/link_updata', 'AdminController@link_updata');
+    Route::get('/admin/link_upadd', 'AdminController@link_upadd');
+    Route::post('/admin/link_upadds', 'AdminController@link_upadds');
 });
 
 Route::group(['middleware'=>['web','admin.login','level']],function(){

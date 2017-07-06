@@ -436,7 +436,66 @@ class AdminController extends BaseController
     //友情链接添加
     public function link_add()
     {
-        return view("admin/links/add");
+
+            return view("admin/links/add");
+
+    }
+
+    //友链添加处理页面
+    public function link_submit()
+    {
+
+            $submit = DB::table('links')->insert(['name'=>$_POST['linkname'], 'url'=>$_POST['link']]);
+
+            if ($submit)
+            {
+                exit("<script>alert('添加成功');window.location.href='link_list'</script>");
+            }
+
+    }
+
+    //友链删除
+    public function link_updata()
+    {
+
+        $add = DB::table('links')->where('id',$_GET['id'])->delete();
+
+        if ($add > 0)
+        {
+
+            exit("<script>alert('删除成功');window.location.href='link_list'</script>");
+
+        }
+
+    }
+
+    //友链编辑
+    public function link_upadd()
+    {
+        $upadd = DB::table('links')->where('id',$_GET['id'])->get();
+
+        $upadd = $upadd[0];
+
+        return view("admin/links/upadd",compact('upadd'));
+    }
+
+    //友链编辑成功
+    public function link_upadds()
+    {
+
+        $upadd = DB::table('links')->where('id', $_POST['linkid'])->update(['name'=>$_POST['linkname'], 'url'=>$_POST['link']]);
+
+        if ($upadd > 0 )
+        {
+
+            exit("<script>alert('修改成功');window.location.href='link_list'</script>");
+
+        }else{
+
+            exit("<script>alert('修改失败');history.go(-1);</script>");
+
+        }
+
     }
 }
 
