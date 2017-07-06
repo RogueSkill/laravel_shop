@@ -210,7 +210,7 @@ class GoodController extends Controller
         }
     }
     //热销
-    public function changeHot(Request $req, $hot)
+    public function changeHot(Request $req, $hot,$tid)
     {   
         
         $id = $req->input('id');
@@ -236,7 +236,7 @@ class GoodController extends Controller
     }
 
     //推荐
-    public function changeRecommend(Request $req, $recommend)
+    public function changeRecommend(Request $req, $recommend,$pid,$tid)
     {   
         
         $id = $req->input('id');

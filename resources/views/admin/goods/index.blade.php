@@ -86,11 +86,11 @@
 	          <td>{{$val['goods_name']}}</td>
 	          <!-- 新品 -->
 	          <td>
-	          @if($val['is_new']==1)
+	          @if($val['is_new']==0)
 		          <a href="javascript:;">
 		          	<img name="is_new" value="{{$val['is_new']}}" src="../style/images/icon_right_s.png" />
 		          </a>
-		      @elseif($val['is_new']==0)
+		      @elseif($val['is_new']==1)
 		      		<a href="javascript:;">
 		          	<img name="is_new" value="{{$val['is_new']}}" src="../style/images/icon_error_s.png" />
 		          </a>
@@ -98,22 +98,22 @@
 	          </td>
 	          <!--热销-->
 	          <td>
-	          @if($val['is_hot']==1)
+	          @if($val['is_hot']==0)
 		          <a href="javascript:;">
 		          	<img name="is_hot" value="{{$val['is_hot']}}" src="../style/images/icon_right_s.png" />
 		          </a>
-		      @elseif($val['is_hot']==0)
+		      @elseif($val['is_hot']==1)
 		      		<a href="javascript:;">
 		          	<img name="is_hot" value="{{$val['is_hot']}}" src="../style/images/icon_error_s.png" />
 		          </a>
 		      @endif
 		      </td>
 	          <td>
-	          @if($val['is_recommend']==1)
+	          @if($val['is_recommend']==0)
 		          <a href="javascript:;">
 		          	<img name="is_recommend" value="{{$val['is_recommend']}}" src="../style/images/icon_right_s.png" />
 		          </a>
-		      @elseif($val['is_recommend']==0)
+		      @elseif($val['is_recommend']==1)
 		      		<a href="javascript:;">
 		          	<img name="is_recommend" value="{{$val['is_recommend']}}" src="../style/images/icon_error_s.png" />
 		          </a>
@@ -403,7 +403,7 @@ $(function(){
 
 		// alert(is_hot);
 		$.ajax({
-			url:'/admin/goods_list/{hot}',
+			url:'/admin/goods_list/{hot}/1',
 		   data:{id:id,is_hot:is_hot},
 		   type:'POST',
 	   dataType:'JSON',
@@ -437,7 +437,7 @@ $(function(){
 
 		// alert(is_recommend);
 		$.ajax({
-			url:'/admin/goods_list/{recommend}',
+			url:'/admin/goods_list/{recommend}/1/2',
 		   data:{id:id,is_recommend:is_recommend},
 		   type:'POST',
 	   dataType:'JSON',

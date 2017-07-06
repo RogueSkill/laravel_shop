@@ -70,13 +70,13 @@ Route::group(['middleware'=>['web','admin.login']],function(){
 	// 	'as'=>'changeHot',
 	// 	'changeHot'=>'GoodController@changeHot'
 	// ]);
-	Route::post('/admin/goods_list/{hot}', 'GoodController@changeHot');
+	Route::post('/admin/goods_list/{hot}/{tid}', 'GoodController@changeHot');
 
 	// 	Route::post('/admin/goods_list', [
 	// 	'as'=>'changeRecommend',
 	// 	'changeRecommend'=>'GoodController@changeRecommend'
 	// ]);
-	Route::post('/admin/goods_list/{recommend}', 'GoodController@changeRecommend');
+	Route::post('/admin/goods_list/{recommend}/{pid}/{tid}', 'GoodController@changeRecommend');
 
 	Route::get('/admin/goods_edit/{id}', 'GoodController@edit');
 	Route::post('/admin/goods_edit', 'GoodController@doEdit');
