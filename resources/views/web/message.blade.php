@@ -122,10 +122,13 @@
                                     @endif
                                 </td>
                                 <td>
-                                <span class="btn btn-success add-address-btn" id="modal-{{$v['id']}}" href="#modal-container-{{$v['id']}}" data-toggle="modal">
-                                    修改评论
-                                </span>
-                                    <button type="button" class="btn btn-default btn-danger">删除评论</button>
+                                    @if($v['content'] == 0)
+                                        <span class="btn btn-success add-address-btn" id="modal-{{$v['id']}}" href="#modal-container-{{$v['id']}}" data-toggle="modal">修改评论</span>
+                                    @elseif($v['content'] == 1)
+                                        <span class="btn btn-warning add-address-btn">禁止操作</span>
+                                    @else
+                                        <span class="btn btn-success add-address-btn" id="modal-{{$v['id']}}" href="#modal-container-{{$v['id']}}" data-toggle="modal">修改评论</span>
+                                    @endif
                                 </td>
                             </tr>
                             <!-- 遮罩体 -->
