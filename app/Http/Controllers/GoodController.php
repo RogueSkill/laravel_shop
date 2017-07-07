@@ -204,9 +204,9 @@ class GoodController extends Controller
         
         // echo $tt;
         if($newNum ==1){
-            echo 1;
-        }elseif($newNum==0){
             echo 0;
+        }elseif($newNum==0){
+            echo 1;
         }
     }
     //热销
@@ -229,9 +229,9 @@ class GoodController extends Controller
         
         // echo $tt;
         if($newNum ==1){
-            echo 1;
-        }elseif($newNum==0){
             echo 0;
+        }elseif($newNum==0){
+            echo 1;
         }
     }
 
@@ -255,9 +255,9 @@ class GoodController extends Controller
         
         // echo $tt;
         if($newNum ==1){
-            echo 1;
-        }elseif($newNum==0){
             echo 0;
+        }elseif($newNum==0){
+            echo 1;
         }
     }
     // 商品编辑添加
