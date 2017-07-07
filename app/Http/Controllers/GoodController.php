@@ -17,7 +17,7 @@ class GoodController extends Controller
     public function index()
     {
 
-        $goods = DB::table('goods as g')->join('types as t','t.id','=','g.typeid')->select('g.goods_id','g.goods_name','g.is_new','g.is_hot','g.is_recommend','g.sort','cover_img','t.name','g.updated_at');
+        $goods = DB::table('goods as g')->join('types as t','t.id','=','g.typeid')->select('g.goods_id','g.goods_name','g.is_new','g.is_hot','g.is_recommend','is_on_sale','g.sort','cover_img','t.name','g.updated_at');
 
         $goods = $goods->get();
         // dd($goods);
@@ -180,9 +180,10 @@ class GoodController extends Controller
 
         // dd($data);
         $boo = Good::where('goods_id',$id)->update($data);
-        if($boo){
+        // if($boo){
+            // exit();
             return redirect('/admin/goods_list');
-        }
+        // }
     }
     //新品
     public function changeNew(Request $req ,$new)
@@ -251,6 +252,32 @@ class GoodController extends Controller
         $boo = Good::where('goods_id',$id)->update(['is_recommend'=>$is_recommend]);
 
         $newNum = Good::where('goods_id',$id)->pluck('is_recommend');
+        $newNum = $newNum[0];
+        
+        // echo $tt;
+        if($newNum ==1){
+            echo 0;
+        }elseif($newNum==0){
+            echo 1;
+        }
+    }
+
+    //是否上架
+    public function changeSale(Request $req, $sale,$pid,$tid,$kid)
+    {   
+        
+        $id = $req->input('id');
+        $is_on_sale = $req->input('is_on_sale');
+
+        if($is_on_sale == '1'){
+            $is_on_sale = '0';
+        }elseif($is_on_sale == '0'){
+            $is_on_sale = '1';
+        }
+
+        $boo = Good::where('goods_id',$id)->update(['is_on_sale'=>$is_on_sale]);
+
+        $newNum = Good::where('goods_id',$id)->pluck('is_on_sale');
         $newNum = $newNum[0];
         
         // echo $tt;

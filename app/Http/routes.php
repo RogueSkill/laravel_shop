@@ -78,6 +78,8 @@ Route::group(['middleware'=>['web','admin.login']],function(){
 	// ]);
 	Route::post('/admin/goods_list/{recommend}/{pid}/{tid}', 'GoodController@changeRecommend');
 
+	Route::post('/admin/goods_list/{sale}/{pid}/{tid}/{kid}', 'GoodController@changeSale');
+
 	Route::get('/admin/goods_edit/{id}', 'GoodController@edit');
 	Route::post('/admin/goods_edit', 'GoodController@doEdit');
 	// Route::post('/admin/goods_addimg', 'GoodController@addEditImg');

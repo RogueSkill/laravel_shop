@@ -67,6 +67,7 @@
         <th>新品</th>
         <th>热销</th>
         <th>推荐</th>
+        <th>是否上架</th>
         <th>分类名称</th>
         <th width="10%">更新时间</th>
         <th width="310">操作</th>
@@ -119,6 +120,19 @@
 		          </a>
 		      @endif
 	          </td>
+			  
+			  <td>
+	          @if($val['is_on_sale']==1)
+		          <a href="javascript:;">
+		          	<img name="is_on_sale" value="{{$val['is_on_sale']}}" src="../style/images/icon_right_s.png" />
+		          </a>
+		      @elseif($val['is_on_sale']==0)
+		      		<a href="javascript:;">
+		          	<img name="is_on_sale" value="{{$val['is_on_sale']}}" src="../style/images/icon_error_s.png" />
+		          </a>
+		      @endif
+	          </td>
+
 	          <td>{{$val['name']}}</td>
 	          <td>{{$val['updated_at']}}</td>
 	          <td><div class="button-group"> <a class="button border-main" href="{{url('/admin/goods_edit')}}/{{$val['goods_id']}}"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="{{url('/admin/goods_del')}}/{{$val['goods_id']}}" onclick="return del(1,1,1)"><span class="icon-trash-o"></span> 删除</a> </div></td>
@@ -147,7 +161,7 @@
           </select>
           &nbsp;&nbsp;&nbsp;
           
-          移动到：
+          <!-- 移动到：
           <select name="movecid" style="padding:5px 15px; border:1px solid #ddd;" onchange="changecate(this)">
             <option value="">请选择分类</option>
             <option value="">产品分类</option>
@@ -161,7 +175,9 @@
             <option value="10">复制10条</option>
             <option value="15">复制15条</option>
             <option value="20">复制20条</option>
-          </select></td>
+          </select> -->
+
+          </td>
       </tr>
       <tr>
         <td colspan="8"><div class="pagelist"> <a href="">上一页</a> <span class="current">1</span><a href="">2</a><a href="">3</a><a href="">下一页</a><a href="">尾页</a> </div></td>
@@ -352,7 +368,7 @@ $(function(){
 
 	//新品
 	$('img[name=is_new]').click(function(){
-		alert('new');
+		// alert('new');
 		var that = $('img[name=is_new]');
 		var id = $(this).parent().parent().siblings('td').children('input[type=checkbox]').val();
 		var is_new = $(this).attr('value');
@@ -385,7 +401,7 @@ $(function(){
 
 	//热销
 	$('img[name=is_hot]').click(function(){
-		alert('hot');
+		// alert('hot');
 		var that = $('img[name=is_hot]');
 		var id = $(this).parent().parent().siblings('td').children('input[type=checkbox]').val();
 		var is_hot = $(this).attr('value');
@@ -419,7 +435,7 @@ $(function(){
 
 	//推荐
 	$('img[name=is_recommend]').click(function(){
-		alert('recommend');
+		// alert('recommend');
 		var that = $('img[name=is_recommend]');
 		var id = $(this).parent().parent().siblings('td').children('input[type=checkbox]').val();
 		var is_recommend = $(this).attr('value');
@@ -439,6 +455,39 @@ $(function(){
 		$.ajax({
 			url:'/admin/goods_list/{recommend}/1/2',
 		   data:{id:id,is_recommend:is_recommend},
+		   type:'POST',
+	   dataType:'JSON',
+
+	   		susscee:function(data){
+
+	   		}
+
+		});
+
+	});
+
+	//是否上架
+	$('img[name=is_on_sale]').click(function(){
+		// alert('recommend');
+		var that = $('img[name=is_on_sale]');
+		var id = $(this).parent().parent().siblings('td').children('input[type=checkbox]').val();
+		var is_on_sale = $(this).attr('value');
+
+		if(is_on_sale==1){
+			var url = '../style/images/icon_error_s.png';
+			$(this).attr('value',0);
+			$(this).attr('src',url);
+		}else if(is_on_sale==0){
+			var url = '../style/images/icon_right_s.png';
+			$(this).attr('value',1);
+			$(this).attr('src',url);
+		}
+
+
+		// alert(is_recommend);
+		$.ajax({
+			url:'/admin/goods_list/{is_on_sale}/1/2/3',
+		   data:{id:id,is_on_sale:is_on_sale},
 		   type:'POST',
 	   dataType:'JSON',
 
