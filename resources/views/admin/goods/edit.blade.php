@@ -50,9 +50,12 @@
           </div>
           <div class="field">
             <select name="typeid" class="input w50">
-              <option value="">请选择分类</option>
-              @foreach($goodtypes as $val)     
-              <option <?php echo $val['id']==$goodsrow['typeid']? 'selected':'' ?> value="{{$val['id']}}">{{$val['name']}}</option>
+              @foreach($goodtypes as $val)
+              <?php
+                $m = substr_count($val['path'],",")-1;
+                $nbsp = str_repeat("&nbsp;",$m*10);   
+              ?>     
+              <option <?php echo $val['id']==$goodsrow['typeid']? 'selected':'' ?> value="{{$val['id']}}">{{$nbsp."|--".$val['name']}}</option>
               @endforeach
             </select>
             <div class="tips"></div>
@@ -177,7 +180,7 @@
           <label>描述：</label>
         </div>
         <div class="field">
-          <script id="goods_remake" type="text/plain"  name="goods_remake" style="width:900px;height:200px;">{{$goodsrow['goods_remake']}}</script>
+          <script id="goods_remake" type="text/plain"  name="goods_remake" style="width:900px;height:200px;">{!! $goodsrow['goods_remake'] !!}</script>
           <!-- <textarea class="input" name="note" style=" height:90px;"></textarea> -->
           <div class="tips"></div>
         </div>
@@ -187,7 +190,7 @@
           <label>内容：</label>
         </div>
         <div class="field">
-        <script id="goods_content" type="text/plain"  name="goods_content" style="width:900px;height:300px;">{{$goodsrow['goods_content']}}</script>
+        <script id="goods_content" type="text/plain"  name="goods_content" style="width:900px;height:300px;">{!! $goodsrow['goods_content'] !!}</script>
           <!-- <textarea name="content" class="input" style="height:450px; border:1px solid #ddd;"></textarea> -->
           <div class="tips"></div>
         </div>
@@ -212,9 +215,10 @@
         </div>
         <div class="field">
           <input type="radio" class="" <?php echo $goodsrow['is_on_sale']==1? 'checked':'' ?> value="1" name="is_on_sale"/>是
-          <div class="tips"></div>
+          
           <input type="radio" class="" <?php echo $goodsrow['is_on_sale']==0? 'checked':'' ?> value="0" name="is_on_sale"/>否
         </div>
+        <div class="tips"></div>
       </div>
 
       <div class="form-group">
@@ -223,9 +227,9 @@
         </div>
         <div class="field">
           <input type="radio" class="" <?php echo $goodsrow['is_recommend']==1? 'checked':'' ?> name="is_recommend" value="1" />是
-          <div class="tips"></div>
           <input type="radio" class="" <?php echo $goodsrow['is_recommend']==0? 'checked':'' ?> name="is_recommend" value="0" />否
         </div>
+          <div class="tips"></div>
       </div>
 
       <div class="form-group">
@@ -234,9 +238,10 @@
         </div>
         <div class="field">
           <input type="radio" class="" <?php echo $goodsrow['is_new']==1? 'checked':'' ?> name="is_new" value="1" />是
-          <div class="tips"></div>
+          
           <input type="radio" class="" <?php echo $goodsrow['is_new']==0? 'checked':'' ?> name="is_new" value="0" />否
         </div>
+        <div class="tips"></div>
       </div>
 
       <div class="form-group">
@@ -245,9 +250,10 @@
         </div>
         <div class="field">
           <input type="radio" class="" <?php echo  $goodsrow['is_hot']==1? 'checked':'' ?> name="is_hot" value="1" />是
-          <div class="tips"></div>
+          
           <input type="radio" class="" <?php echo $goodsrow['is_hot']==0? 'checked':'' ?> name="is_hot" value="0" />否
         </div>
+        <div class="tips"></div>
       </div>
 
       <div class="form-group">

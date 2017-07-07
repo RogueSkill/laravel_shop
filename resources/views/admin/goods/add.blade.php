@@ -13,9 +13,23 @@
 <!-- ueditor -->
 <script src="{{asset('./editor/ueditor.config.js')}}"></script>
 <script src="{{asset('./editor/ueditor.all.min.js')}}"></script>
+
 <!-- //ueditor -->
+<style>
+  .tips{ width: auto; height: 40px; line-height: 40px; font-size: 14px; color:red; font-style: '微软雅黑'}
+</style>
 </head>
 <body>
+<!-- @if (count(session('errors')) > 0)
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif -->
+<!-- {{dump(session())}} -->
 <div class="panel admin-panel">
   <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>增加内容</strong></div>
   <div class="body-content">
@@ -27,8 +41,8 @@
           <label>标题：</label>
         </div>
         <div class="field">
-          <input type="text" class="input w50" value="" name="goods_name" data-validate="required:请输入标题" />
-          <div class="tips"></div>
+          <input type="text" class="input w50" value="" name="goods_name"  />
+          <div class="tips">{{$errors->first('goods_name')? $errors->first('goods_name') : ''}}</div>
         </div>
       </div>
         
@@ -40,11 +54,15 @@
           <div class="field">
             <select name="typeid" class="input w50">
               <!-- <option value="0">请选择分类</option> -->
-              @foreach($goodtypes as $val)     
-              <option value="{{$val['id']}}">{{$val['name']}}</option>
+              @foreach($goodtypes as $val)
+              <?php
+                $m = substr_count($val['path'],",")-1;
+                $nbsp = str_repeat("&nbsp;",$m*10);   
+              ?>
+              <option value="{{$val['id']}}">{{$nbsp."|--".$val['name']}}</option>
               @endforeach
             </select>
-            <div class="tips"></div>
+            <div class="tips">{{$errors->first('typeid')? $errors->first('typeid') : ''}}</div>
           </div>
         </div>
         
@@ -63,9 +81,10 @@
         </div>
         <div class="field">
           <input type="text" class="input w50" name="shop_price" value="" />
+          <div class="tips">{{$errors->first('shop_price')? $errors->first('shop_price') : ''}}</div>
         </div>
       </div>
-
+      
       <div class="form-group">
         <div class="label">
           <label>市场价格：</label>
@@ -90,9 +109,9 @@
             <label>图片：</label>
           </div>
           <div class="field">
-            <input type="file" multiple="multiple" id="original_img" name="original_img[]" class="input tips" style="width:25%; float:left;"   data-toggle="hover" data-place="right" data-image="" />
+            <input type="file" multiple="multiple" id="original_img" name="original_img[]" class="input " style="width:25%; float:left;"   data-toggle="hover" data-place="right" data-image="" />
             <input type="button" class="button bg-blue margin-left" name="add" value="+"  style="float:left;">
-            <div class="tipss">图片尺寸：500*500</div>   
+            <!-- <div class="tips">图片尺寸：500*500</div>   --> 
           </div>
         </div>
       </div>
@@ -173,10 +192,10 @@
           <label>是否上架：</label>
         </div>
         <div class="field">
-          <input type="radio" class="" value="1" checked name="is_on_sale"/>是
-          <div class="tips"></div>
+          <input type="radio" class="" value="1" checked name="is_on_sale"/>是 
           <input type="radio" class="" value="0" name="is_on_sale"/>否
         </div>
+        <div class="tips"></div>
       </div>
 
       <div class="form-group">
@@ -184,10 +203,10 @@
           <label>是否推荐：</label>
         </div>
         <div class="field">
-          <input type="radio" class="" checked name="is_recommend" value="1" />是
-          <div class="tips"></div>
+          <input type="radio" class="" checked name="is_recommend" value="1" />是 
           <input type="radio" class="" name="is_recommend" value="0" />否
         </div>
+        <div class="tips"></div>
       </div>
 
       <div class="form-group">
@@ -196,9 +215,9 @@
         </div>
         <div class="field">
           <input type="radio" class="" checked name="is_new" value="1" />是
-          <div class="tips"></div>
           <input type="radio" class="" name="is_new" value="0" />否
         </div>
+        <div class="tips"></div>
       </div>
 
       <div class="form-group">
@@ -207,9 +226,9 @@
         </div>
         <div class="field">
           <input type="radio" class="" checked name="is_hot" value="1" />是
-          <div class="tips"></div>
           <input type="radio" class="" name="is_hot" value="0" />否
         </div>
+        <div class="tips"></div>
       </div>
 
       <div class="form-group">
@@ -218,8 +237,8 @@
         </div>
         <div class="field"> 
           <script src="{{asset('js/datejs/laydate.dev.js')}}"></script>
-          <input type="text" class="laydate-icon input w50" id="datetime" name="datetime" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" value=""  data-validate="required:日期不能为空" style="padding:10px!important; height:auto!important;border:1px solid #ddd!important;" />
-          <div class="tips"></div>
+          <input type="text" class="laydate-icon input w50" id="datetime" name="datetime" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" value=""  style="padding:10px!important; height:auto!important;border:1px solid #ddd!important;" />
+          <div class="tips">{{$errors->first('created_at')? $errors->first('created_at') : ''}}</div>
         </div>
       </div>
       <div class="form-group">

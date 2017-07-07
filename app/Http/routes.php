@@ -28,6 +28,8 @@
 //######################前台#################################
 
 //######################后台#################################
+Route::get('/admin/goods_add', 'GoodController@add');
+Route::post('/admin/goods_add','GoodController@doAdd');
 
 Route::group(['middleware'=>['web','admin.login']],function(){
 
@@ -52,15 +54,37 @@ Route::group(['middleware'=>['web','admin.login']],function(){
 
 	//商品模块
 	Route::get('/admin/goods_list', 'GoodController@index');
-	Route::get('/admin/goods_add', 'GoodController@add');
 
-	Route::post('/admin/goods_add','GoodController@doAdd');
-	
+	 Route::get('/admin/edit/{id}',[
+ 		'as'=>'aedit',
+ 		'edit'=>'AdminController@edit'
+ 	]);
+
+	// Route::post('/admin/goods_list', [
+	// 	'as'=>'/admin/New',
+	// 	'changeNew'=>'GoodController@changeNew'
+	// ]);
+	Route::post('/admin/goods_list/{new}', 'GoodController@changeNew');
+	// Route::post('/admin/goods_list', [
+	// 	'as'=>'changeHot',
+	// 	'changeHot'=>'GoodController@changeHot'
+	// ]);
+	Route::post('/admin/goods_list/{hot}/{tid}', 'GoodController@changeHot');
+
+	// 	Route::post('/admin/goods_list', [
+	// 	'as'=>'changeRecommend',
+	// 	'changeRecommend'=>'GoodController@changeRecommend'
+	// ]);
+	Route::post('/admin/goods_list/{recommend}/{pid}/{tid}', 'GoodController@changeRecommend');
+
+	Route::post('/admin/goods_list/{sale}/{pid}/{tid}/{kid}', 'GoodController@changeSale');
+
 	Route::get('/admin/goods_edit/{id}', 'GoodController@edit');
 	Route::post('/admin/goods_edit', 'GoodController@doEdit');
 	// Route::post('/admin/goods_addimg', 'GoodController@addEditImg');
 	Route::post('/admin/goods_delimg', 'GoodController@delEditImg');
 	Route::get('/admin/goods_del/{id}', 'GoodController@del');
+
 	//订单模块
 	Route::get('/admin/order_list', 'AdminController@order_list');
 	Route::post('/admin/order_update', 'AdminController@order_update');
@@ -72,6 +96,14 @@ Route::group(['middleware'=>['web','admin.login']],function(){
     Route::get('/admin/comments_list', 'AdminController@comments_list');
     Route::get('/admin/comments_add', 'AdminController@comments_add');
     Route::post('/admin/comments_add', 'AdminController@comments_submit');
+
+    //友情链接
+    Route::get('/admin/link_list', 'AdminController@link_list');
+    Route::get('/admin/link_add', 'AdminController@link_add');
+    Route::post('/admin/link_add', 'AdminController@link_submit');
+    Route::get('/admin/link_updata', 'AdminController@link_updata');
+    Route::get('/admin/link_upadd', 'AdminController@link_upadd');
+    Route::post('/admin/link_upadds', 'AdminController@link_upadds');
 });
 
 Route::group(['middleware'=>['web','admin.login','level']],function(){

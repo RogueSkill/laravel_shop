@@ -1,48 +1,47 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+@extends("web.lar_index_master")
 
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
- 	    <meta name="csrf-token" content="{{ csrf_token() }}">
-		
-		<title>首页</title>
+@section("head")
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link href="web_style/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css" />
-		<link href="web_style/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css" />
+	<link href="web_style/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css" />
+	<link href="web_style/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css" />
 
-		<link href="web_style/basic/css/demo.css" rel="stylesheet" type="text/css" />
+	<link href="web_style/basic/css/demo.css" rel="stylesheet" type="text/css" />
 
-		<link href="web_style/css/hmstyle.css" rel="stylesheet" type="text/css" />
-		<script src="web_style/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
-		<script src="web_style/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
+	<link href="web_style/css/hmstyle.css" rel="stylesheet" type="text/css" />
+	<script src="web_style/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
+	<script src="web_style/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
+@endsection
 
-	</head>
-
-	<body>
-		<div class="hmtop">
-			<!--顶部导航条 -->
-			<div class="am-container header">
+<!-- 顶部导航 -->
+@section("top_nav")
+<div class="am-container header">
 				<ul class="message-l">
 					<div class="topMessage">
 						<div class="menu-hd">
-							<a href="{{url('/list')}}" target="_top" class="h">亲，请登录</a>
-							<a href="{{url('/list')}}" target="_top">免费注册</a>
+							@if(isset($username))
+								欢迎您:{{$username}}
+								<a href="{{url('quit')}}">退出</a>
+							@else
+								<a href="{{url('login')}}" target="_top" class="h">亲，请登录</a>
+								<a href="{{url('register')}}" target="_top">免费注册</a>
+							@endif
+
 						</div>
 					</div>
 				</ul>
 				<ul class="message-r">
 					<div class="topMessage home">
-						<div class="menu-hd"><a href="{{url('/list')}}" target="_top" class="h">商城首页</a></div>
+						<div class="menu-hd"><a href="{{url('index')}}" target="_top" class="h">商城首页</a></div>
 					</div>
 					<div class="topMessage my-shangcheng">
-						<div class="menu-hd MyShangcheng"><a href="{{url('/list')}}" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
+						<div class="menu-hd MyShangcheng"><a href="{{url('center')}}" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
 					</div>
 					<div class="topMessage mini-cart">
-						<div class="menu-hd"><a id="mc-menu-hd" href="{{url('/list')}}" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
+						<div class="menu-hd"><a id="mc-menu-hd" href="{{url('cart')}}" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
 					</div>
-					<div class="topMessage favorite">
-						<div class="menu-hd"><a href="{{url('/list')}}" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
+
 				</ul>
 				</div>
 
@@ -55,7 +54,7 @@
 					</div>
 
 					<div class="search-bar pr">
-						<a name="index_none_header_sysc" href="{{url('/list')}}"></a>
+						<a name="index_none_header_sysc" href="#"></a>
 						<form>
 							<input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">
 							<input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
@@ -65,130 +64,127 @@
 
 				<div class="clear"></div>
 			</div>
-			
-			
-			<div class="banner">
-                      <!--轮播 -->
-						<div class="am-slider am-slider-default scoll" data-am-flexslider id="demo-slider-0">
-							<ul class="am-slides">
-								<li class="banner1"><a href="introduction.html"><img src="web_style/images/ad1.jpg" /></a></li>
-								<li class="banner2"><a><img src="web_style/images/ad2.jpg" /></a></li>
-								<li class="banner3"><a><img src="web_style/images/ad3.jpg" /></a></li>
-								<li class="banner4"><a><img src="web_style/images/ad4.jpg" /></a></li>
+@endsection
 
-							</ul>
-						</div>
-						<div class="clear"></div>	
-			</div>						
-			
-			<div class="shopNav">
-				<div class="slideall">
-			        
-					   <div class="long-title"><span class="all-goods">全部分类</span></div>
-					   <div class="nav-cont">
-							<ul>
-								@foreach($bigType as $v)
-								<li class="index"><a href="{{url('/list/'.$v['id'])}}">{{$v['name']}}</a></li>
-                                @endforeach
-							</ul>
-						    <div class="nav-extra">
-						    	<i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的福利
-						    	<i class="am-icon-angle-right" style="padding-left: 10px;"></i>
-						    </div>
-						</div>
-		        				
-						<!--侧边导航 -->
-						<div id="nav" class="navfull">
-							<div class="area clearfix">
-								<div class="category-content" id="guide_2">
-									<div class="category">
-										<ul class="category-list" id="js_climit_li">
-										 @foreach($bigType as $v) 
-											<li class="appliance js_toggle relative first">
-												<div class="category-info">
-													<h3 class="category-name b-category-name"><i><img src="web_style/images/cake.png"></i><a href="javascript:void(0)" onmouseover="return info({{$v['id']}})" class="ml-22" title="点心">{{$v['name']}}</a></h3>
-													<em>&gt;</em></div>
-												<div class="menu-item menu-in top">
-													<div class="area-in">
-														<div class="area-bg">
-															<div class="menu-srot">
-																<div class="sort-side">
-																
-																		<dl class="dl-sort">
-																		<dt><span class='smallType'  title="蛋糕"></span></dt>
-																		</dl>
-																		<dd><a class='minType' title="蒸蛋糕" href="{{url('/list')}}"><span>商品</span></a></dd>
-																	
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											<b class="arrow"></b>	
-											</li>
-										 @endforeach 
+<!-- banner -->
+@section('banner')
+<div class="banner">
+<!--轮播 -->
+<div class="am-slider am-slider-default scoll" data-am-flexslider id="demo-slider-0">
+	<ul class="am-slides">
+		@if($banner)
+			@foreach($banner as $val)
+				<li class="banner1"><a><img src="./upload/{{$val}}" /></a></li>
+			@endforeach
+		@endif
+	</ul>
+</div>
+<div class="clear"></div>	
+</div>
 
-										</ul>
+<!--轮播 -->
+<script type="text/javascript">
+	(function() {
+		$('.am-slider').flexslider();
+	});
+	$(document).ready(function() {
+		$("li").hover(function() {
+			$(".category-content .category-list li.first .menu-in").css("display", "none");
+			$(".category-content .category-list li.first").removeClass("hover");
+			$(this).addClass("hover");
+			$(this).children("div.menu-in").css("display", "block")
+		}, function() {
+			$(this).removeClass("hover")
+			$(this).children("div.menu-in").css("display", "none")
+		});
+	})
+</script>
+@endsection
+
+<!-- 中部导航 -->
+@section('mid_nav')
+<div class="long-title">
+	<span class="all-goods">全部分类</span>
+</div>
+<div class="nav-cont">
+	<ul>
+		<li class="index"><a href="#">首页</a></li>
+		<li class="qc"><a href="#">闪购</a></li>
+		<li class="qc"><a href="#">限时抢</a></li>
+		<li class="qc"><a href="#">团购</a></li>
+		<li class="qc last"><a href="#">大包装</a></li>
+	</ul>
+	<div class="nav-extra">
+		<i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的福利
+		<i class="am-icon-angle-right" style="padding-left: 10px;"></i>
+	</div>
+</div>
+@endsection
+
+
+@section('left_nav')
+<div id="nav" class="navfull">
+	<div class="area clearfix">
+	<div class="category-content" id="guide_2">
+		
+		<div class="category">
+			<ul class="category-list" id="js_climit_li">
+				@foreach($typelist as $key=>$value)
+				<li class="appliance js_toggle relative first">
+					<div class="category-info">
+						<h3 class="category-name b-category-name"><i><img src="web_style/images/cake.png"></i><a class="ml-22" title="<?php echo $value['name'] ?>">{{$value['name']}}</a></h3>
+						<em>&gt;</em>
+					</div>
+					<div class="menu-item menu-in top">
+						<div class="area-in">
+							<div class="area-bg">
+								<div class="menu-srot">
+									<div class="sort-side">
+										@foreach($value['child'] as $val)
+										<dl class="dl-sort">
+											<dt>
+												<a href="cat_list/{{$val['id']}}">
+												<span title="{{$val['name']}}">{{$val['name']}}
+												</span>
+												</a>
+											</dt>
+											@foreach($val['son'] as $v)
+											<dd><a title="{{$v['name']}}" href="cat_list/list/{{$v['id']}}"><span>{{$v['name']}}</span></a></dd>
+											@endforeach
+										</dl>
+										@endforeach
 									</div>
+									
 								</div>
-
 							</div>
 						</div>
-						<!--轮播 -->
-						<script type="text/javascript">
-							(function() {
-								$('.am-slider').flexslider();
-							});
-							$(document).ready(function() {
-								$("li").hover(function() {
-									$(".category-content .category-list li.first .menu-in").css("display", "none");
-									$(".category-content .category-list li.first").removeClass("hover");
-									$(this).addClass("hover");
-									$(this).children("div.menu-in").css("display", "block")
-								}, function() {
-									$(this).removeClass("hover")
-									$(this).children("div.menu-in").css("display", "none")
-								});
-							})
-						</script>
-
-
-					<!--小导航 -->
-					<div class="am-g am-g-fixed smallnav">
-						<div class="am-u-sm-3">
-							<a href="sort.html"><img src="web_style/images/navsmall.jpg" />
-								<div class="title">商品分类</div>
-							</a>
-						</div>
-						<div class="am-u-sm-3">
-							<a href="{{url('/list')}}"><img src="web_style/images/huismall.jpg" />
-								<div class="title">大聚惠</div>
-							</a>
-						</div>
-						<div class="am-u-sm-3">
-							<a href="{{url('/list')}}"><img src="web_style/images/mansmall.jpg" />
-								<div class="title">个人中心</div>
-							</a>
-						</div>
-						<div class="am-u-sm-3">
-							<a href="{{url('/list')}}"><img src="web_style/images/moneysmall.jpg" />
-								<div class="title">投资理财</div>
-							</a>
-						</div>
 					</div>
+				<b class="arrow"></b>	
+				</li>
+				@endforeach
+			</ul>
+		</div>
+	</div>
 
-					<!--走马灯 -->
+	</div>
+</div>
+@endsection
 
-					<div class="marqueen">
+@section('right_box')
+<div class="marqueen">
 						<span class="marqueen-title">商城头条</span>
 						<div class="demo">
 
 							<ul>
-								<li class="title-first"><a target="_blank" href="{{url('/list')}}">
+								<li class="title-first"><a target="_blank" href="#">
 									<img src="web_style/images/TJ2.jpg"></img>
 									<span>[特惠]</span>商城爆品1分秒								
 								</a></li>
-
+								<li class="title-first"><a target="_blank" href="#">
+									<span>[公告]</span>商城与广州市签署战略合作协议
+								     <img src="web_style/images/TJ.jpg"></img>
+								     <p>XXXXXXXXXXXXXXXXXX</p>
+							    </a></li>
 							    
 						<div class="mod-vip">
 							<div class="m-baseinfo">
@@ -197,7 +193,7 @@
 								</a>
 								<em>
 									Hi,<span class="s-name">小叮当</span>
-									<a href="{{url('/list')}}"><p>点击更多优惠活动</p></a>									
+									<a href="#"><p>点击更多优惠活动</p></a>									
 								</em>
 							</div>
 							<div class="member-logout">
@@ -205,20 +201,22 @@
 								<a class="am-btn-warning btn" href="register.html">注册</a>
 							</div>
 							<div class="member-login">
-								<a href="{{url('/list')}}"><strong>0</strong>待收货</a>
-								<a href="{{url('/list')}}"><strong>0</strong>待发货</a>
-								<a href="{{url('/list')}}"><strong>0</strong>待付款</a>
-								<a href="{{url('/list')}}"><strong>0</strong>待评价</a>
+								<a href="#"><strong>0</strong>待收货</a>
+								<a href="#"><strong>0</strong>待发货</a>
+								<a href="#"><strong>0</strong>待付款</a>
+								<a href="#"><strong>0</strong>待评价</a>
 							</div>
 							<div class="clear"></div>	
 						</div>																	    
 							    
-								<li><a target="_blank" href="{{url('/list')}}"><span>[特惠]</span>洋河年末大促，低至两件五折</a></li>
+								<li><a target="_blank" href="#"><span>[特惠]</span>洋河年末大促，低至两件五折</a></li>
+								<li><a target="_blank" href="#"><span>[公告]</span>华北、华中部分地区配送延迟</a></li>
+								<li><a target="_blank" href="#"><span>[特惠]</span>家电狂欢千亿礼券 买1送1！</a></li>
 								
 							</ul>
-                        <div class="advTip"><img src="web_style/images/advTip.jpg"/></div>
+                        <div class="advTip"><img src="web_styleimages/advTip.jpg"/></div>
 						</div>
-					</div>
+</div>
 					<div class="clear"></div>
 				</div>
 				<script type="text/javascript">
@@ -237,285 +235,497 @@
 						})
 					}
 				</script>
-			</div>
-			<div class="shopMainbg">
-				<div class="shopMain" id="shopmain">
+@endsection
 
-					<!--今日推荐 -->
 
-					<div class="am-g am-g-fixed recommendation">
-						<div class="clock am-u-sm-3" >
-							<img src="web_style/images/2016.png "></img>
+@section('recommend')
+<div class="am-g am-g-fixed recommendation">
+						<div class="clock am-u-sm-3">
+							<img src="web_style/images/2016.png"></img>
 							<p>今日<br>推荐</p>
 						</div>
-						<div class="am-u-sm-4 am-u-lg-3 ">
-							<div class="info ">
-								<h3>真的有鱼</h3>
-								<h4>开年福利篇</h4>
+						@if($recommend)
+							@foreach($recommend as $val)
+							<a href="/goods/{{$val['goods_id']}}">
+							<div class="am-u-sm-4 am-u-lg-3 ">
+								<div class="info ">
+									<h3>{{$val['goods_name']}}</h3>
+									<h4>{!! $val['goods_remake'] !!}</h4>
+								</div>
+								<div class="recommendationMain ">
+									<img src="../{{$val['cover_img']}}"></img>
+								</div>
 							</div>
-							<div class="recommendationMain ">
-								<img src="web_style/images/tj.png "></img>
-							</div>
-						</div>						
-						<div class="am-u-sm-4 am-u-lg-3 ">
-							<div class="info ">
-								<h3>囤货过冬</h3>
-								<h4>让爱早回家</h4>
-							</div>
-							<div class="recommendationMain ">
-								<img src="web_style/images/tj1.png "></img>
-							</div>
-						</div>
-						<div class="am-u-sm-4 am-u-lg-3 ">
-							<div class="info ">
-								<h3>浪漫情人节</h3>
-								<h4>甜甜蜜蜜</h4>
-							</div>
-							<div class="recommendationMain ">
-								<img src="web_style/images/tj2.png "></img>
-							</div>
-						</div>
+							</a>
+							@endforeach						
+						@endif
+</div>
+<div class="clear "></div>
+@endsection
 
-					</div>
-					<div class="clear "></div>
-					<!--热门活动 -->
 
-					<div class="am-container activity ">
+@section('hot')
+<div class="am-container activity ">
 						<div class="shopTitle ">
 							<h4>活动</h4>
 							<h3>每期活动 优惠享不停 </h3>
-							<span class="more ">
-                              <a class="more-link " href="{{url('/list')}} ">全部活动</a>
-                            </span>
+							<!-- <span class="more ">
+                              <a class="more-link " href="">全部活动</a>
+                            </span> -->
 						</div>
 					
 					  <div class="am-g am-g-fixed ">
-						<div class="am-u-sm-3 ">
-							<div class="icon-sale one "></div>	
-								<h4>秒杀</h4>							
-							<div class="activityMain ">
-								<img src="web_style/images/activity1.jpg "></img>
-							</div>
-							<div class="info ">
-								<h3>春节送礼优选</h3>
-							</div>														
-						</div>
+					    @if($hot)
+						  	@foreach($hot as $val)
+						  		<a href="goods/{{$val['goods_id']}}">
+								<div class="am-u-sm-3 ">
+									<div class="icon-sale tree "></div>	
+										<h4>秒杀</h4>							
+									<div class="activityMain ">
+										<img width="296" height="314.02" src="../{{$val['cover_img']}}"></img>
+									</div>
+									<div class="info ">
+										<h3>{{$val['goods_name']}}</h3>
+									</div>														
+								</div>
+							@endforeach
+						@endif
 						
-						<div class="am-u-sm-3 ">
-						  <div class="icon-sale two "></div>	
-							<h4>特惠</h4>
-							<div class="activityMain ">
-								<img src="web_style/images/activity2.jpg "></img>
-							</div>
-							<div class="info ">
-								<h3>春节送礼优选</h3>								
-							</div>							
-						</div>						
-						
-						<div class="am-u-sm-3 ">
-							<div class="icon-sale three "></div>
-							<h4>团购</h4>
-							<div class="activityMain ">
-								<img src="web_style/images/activity3.jpg "></img>
-							</div>
-							<div class="info ">
-								<h3>春节送礼优选</h3>
-							</div>							
-						</div>						
-
-						<div class="am-u-sm-3 last ">
-							<div class="icon-sale "></div>
-							<h4>超值</h4>
-							<div class="activityMain ">
-								<img src="web_style/images/activity.jpg "></img>
-							</div>
-							<div class="info ">
-								<h3>春节送礼优选</h3>
-							</div>													
-						</div>
-
 					  </div>
-                   </div>
-					<div class="clear "></div>
+</div>
+<div class="clear "></div>
+@endsection
 
-					<!--甜点-->
-					@foreach($bigType as $k=>$v)
-					<!-- {{var_dump($a = json_decode($v))}} -->
-						<!-- type表id -->
-						<!-- {{$a->id}} -->
-					
-						
+@section('cat_one')
+	<div class="am-container ">
+		<div class="shopTitle ">
+			<h4>{{$candylist['name']}}</h4>
+			<h3>每一道甜品都有一个故事</h3>
 			
-					<div class="am-container ">
-						<div class="shopTitle ">
-							<h4>{{$a->name}}</h4>
-							<h3>每一道甜品都有一个故事</h3>
-							<div class="today-brands ">
-								@foreach($info as $vv)<a href="{{url('/list')}} ">@if($vv['pid']==$a->id){{$vv['name']}}@endif</a>@endforeach
+			<div class="today-brands ">
+				@foreach($candylist['child'] as $val)
+				<a href="javascript:;">{{$val['name']}}</a>
+				@endforeach
+			</div>
+
+			<span class="more">
+    		<a class="more-link " href="cat_list/{{$candylist['id']}}">更多美味</a>
+        </span>
+		</div>
+	</div>
+	
+	<div class="am-g am-g-fixed floodOne ">
+		<div class="am-u-sm-5 am-u-md-3 am-u-lg-4 text-one ">
+			@if($candylist['one'])	
+					<a href="goods/{{$candylist['one']['goods_id']}}">
+						<div class="outer-con ">
+							<div class="title ">
+								{{$candylist['one']['goods_name']}}
+							</div>					
+							<div class="sub-title ">
+								{!! $candylist['one']['goods_remake'] !!}
 							</div>
-							<span class="more ">
-                    <a class="more-link " href="{{url('/list')}} ">更多商品</a>
-                        </span>
 						</div>
+		                  <img src="../{{$candylist['one']['cover_img']}}" />
+					</a>
+			@endif
+		</div>
+
+		<div class="am-u-sm-7 am-u-md-5 am-u-lg-4">
+			@if($candylist['two'])
+				@foreach($candylist['two'] as $val)
+					<a href="goods/{{$val['goods_id']}}">
+					<div class="text-two">
+						<div class="outer-con ">
+							<div class="title ">
+								{{$val['goods_name']}}
+							</div>									
+							<div class="sub-title ">
+								仅售：¥{{$val['shop_price']}}
+							</div>
+							
+						</div>
+						<a href="goods/{{$val['goods_id']}}"><img src="../{{$val['cover_img']}}" /></a>
 					</div>
-					
+					</a>
+				@endforeach
+			@endif
+		</div>
+     <div class="am-u-sm-12 am-u-md-4 ">
+     	@if($candylist['four'])
+     		@foreach($candylist['four'] as $val)
+     			<a href="goods/{{$val['goods_id']}}">
+				<div class="am-u-sm-3 am-u-md-6 text-three">
+					<div class="outer-con ">
+						<div class="title ">
+							{{$val['goods_name']}}
+						</div>
 						
-					<div class="am-g am-g-fixed floodOne ">
-						<div class="am-u-sm-5 am-u-md-3 am-u-lg-4 text-one ">
-							<a href="{{url('/list')}} ">
-								<div class="outer-con ">
-									<div class="title ">
-
-									@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[0]['goods_name']}} @endif @endforeach
-										
-									</div>					
-									<div class="sub-title ">
-										当小鱼儿恋上软豆腐
-									</div>
-								</div>
-                                  <img src="@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[0]['cover_img']}} @endif @endforeach" />								
-							</a>
-						</div>
-						<div class="am-u-sm-7 am-u-md-5 am-u-lg-4">
-							<div class="text-two">
-								<div class="outer-con ">
-									<div class="title ">
-									@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[1]['goods_name']}} @endif @endforeach
-								
-										
-									</div>									
-									<div class="sub-title ">
-										仅售:
-									@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[1]['shop_price']}} @endif @endforeach
-
-									</div>
-									
-								</div>
-								<a href="{{url('/list')}} "><img src="@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[1]['cover_img']}} @endif @endforeach" width="319"/></a>
-							</div>
-							<div class="text-two last">
-								<div class="outer-con ">
-									<div class="title ">
-									@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[2]['goods_name']}} @endif @endforeach
-									
-										
-									</div>
-									<div class="sub-title ">仅售:
-										@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[2]['shop_price']}} @endif @endforeach
-									</div>
-									
-								</div>
-								<a href="{{url('/list')}} "><img src="@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[2]['cover_img']}} @endif @endforeach" width="199"/></a>
-						    </div>
-						</div> 
-
-
-
-		             <div class="am-u-sm-12 am-u-md-4 ">
-						<div class="am-u-sm-3 am-u-md-6 text-three">
-							<div class="outer-con ">
-								<div class="title ">
-									@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[3]['goods_name']}} @endif @endforeach
-								
-									
-								</div>
-								
-								<div class="sub-title ">仅售:
-									@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[3]['shop_price']}} @endif @endforeach
-								</div>
-							</div>
-							<a href="{{url('/list')}} "><img src="@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[3]['cover_img']}} @endif @endforeach" height="139"/></a>
-						</div>
-
-						<div class="am-u-sm-3 am-u-md-6 text-three">
-							<div class="outer-con ">
-								<div class="title ">
-									@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[4]['goods_name']}} @endif @endforeach
-								
-									
-								</div>
-								
-								<div class="sub-title ">仅售:
-									@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[4]['shop_price']}} @endif @endforeach
-								</div>
-							</div>
-							<a href="{{url('/list')}} "><img src="@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[4]['cover_img']}} @endif @endforeach" /></a>
-						</div>
-
-						<div class="am-u-sm-3 am-u-md-6 text-three">
-							<div class="outer-con ">
-								<div class="title ">
-									@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[5]['goods_name']}} @endif @endforeach
-									
-								</div>
-								
-								<div class="sub-title ">仅售:
-									@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[5]['shop_price']}} @endif @endforeach
-								</div>
-							</div>
-							<a href="{{url('/list')}} "><img src="@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[5]['cover_img']}} @endif @endforeach" /></a>
-						</div>
-
-						<div class="am-u-sm-3 am-u-md-6 text-three last ">
-							<div class="outer-con ">
-								<div class="title ">
-									@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[6]['goods_name']}} @endif @endforeach
-									
-								</div>
-								
-								<div class="sub-title ">仅售:
-									@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[6]['shop_price']}} @endif @endforeach
-								</div>
-							</div>
-							<a href="{{url('/list')}} "><img src="@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[6]['cover_img']}} @endif @endforeach" /></a>
-						</div> 
-					</div>
-					</div>
-						
-					@endforeach
-                 <div class="clear "></div>
-
-
-					<div class="footer ">
-						<div class="footer-hd ">
-							<p>
-								<a href="{{url('/list')}} ">恒望科技</a>
-								<b>|</b>
-								<a href="{{url('/list')}} ">商城首页</a>
-								<b>|</b>
-								<a href="{{url('/list')}} ">支付宝</a>
-								<b>|</b>
-								<a href="{{url('/list')}} ">物流</a>
-							</p>
-						</div>
-						<div class="footer-bd ">
-							<p>
-								<a href="{{url('/list')}} ">关于恒望</a>
-								<a href="{{url('/list')}} ">合作伙伴</a>
-								<a href="{{url('/list')}} ">联系我们</a>
-								<a href="{{url('/list')}} ">网站地图</a>
-								<em>© 2015-2025 Hengwang.com 版权所有. 更多模板 <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></em>
-							</p>
+						<div class="sub-title ">
+							尝鲜价：¥{{$val['shop_price']}}
 						</div>
 					</div>
+					<a href="goods/{{$val['goods_id']}}"><img src="../{{$val['cover_img']}}" /></a>
+				</div>
+				</a>
+			@endforeach
+		@endif
+		<!-- <div class="am-u-sm-3 am-u-md-6 text-three">
+			<div class="outer-con ">
+				<div class="title ">
+					小优布丁
+				</div>
+				
+				<div class="sub-title ">
+					尝鲜价：¥4.8
 				</div>
 			</div>
+			<a href="# "><img src="web_style/images/act3.png " /></a>
 		</div>
-		</div>
-		<!--引导 -->
 
-		<div class="navCir">
-			<li class="active"><a href="home3.html"><i class="am-icon-home "></i>首页</a></li>
-			<li><a href="sort.html"><i class="am-icon-list"></i>分类</a></li>
-			<li><a href="shopcart.html"><i class="am-icon-shopping-basket"></i>购物车</a></li>	
-			<li><a href="web_style/person/index.html"><i class="am-icon-user"></i>我的</a></li>					
+		<div class="am-u-sm-3 am-u-md-6 text-three">
+			<div class="outer-con ">
+				<div class="title ">
+					小优布丁
+				</div>
+				
+				<div class="sub-title ">
+					尝鲜价：¥4.8
+				</div>
+			</div>
+			<a href="# "><img src="web_style/images/act3.png " /></a>
 		</div>
-		<!--菜单 -->
-		<div class=tip>
+
+		<div class="am-u-sm-3 am-u-md-6 text-three last ">
+			<div class="outer-con ">
+				<div class="title ">
+					小优布丁
+				</div>
+				
+				<div class="sub-title ">
+					尝鲜价：¥4.8
+				</div>
+			</div>
+			<a href="# "><img src="web_style/images/act3.png " /></a>
+		</div> -->
+	</div>
+
+	</div>
+ <div class="clear "></div>
+@endsection
+
+@section('cat_two')
+<div class="am-container ">
+	<div class="shopTitle ">
+		<h4>{{$pufflist['name']}}</h4>
+		<h3>酥酥脆脆，回味无穷</h3>
+		<div class="today-brands ">
+			@if($pufflist['child'])
+				@foreach($pufflist['child'] as $val)
+				<a href="javascript:;">{{$val['name']}}</a>
+				@endforeach
+			@endif
+		</div>
+		<span class="more ">
+<a class="more-link " href="cat_list/{{$pufflist['id']}}">更多美味</a>
+    </span>
+	</div>
+</div>
+<div class="am-g am-g-fixed floodTwo ">
+	
+	
+	<div class="am-u-sm-5 am-u-md-4 text-one ">
+		@if($pufflist['one'])
+		<a href="goods/{{$pufflist['one']['goods_id']}}">
+			<img src="../{{$pufflist['one']['cover_img']}}" />
+			<div class="outer-con ">
+				<div class="title ">
+					{{$pufflist['one']['goods_name']}}
+				</div>
+				<div class="sub-title ">
+					{!! $pufflist['one']['goods_remake'] !!}
+				</div>
+				
+			</div>
+		</a>
+		@endif
+	</div>
+	
+	@if($pufflist['four'])
+		@foreach($pufflist['four'] as $val)
+		<div class="am-u-sm-7 am-u-md-4 am-u-lg-2 text-two">
+			<div class="outer-con ">
+				<div class="title ">
+					{{$val['goods_name']}}
+				</div>
+				
+				<div class="sub-title ">
+					仅售：¥{{$val['shop_price']}}
+				</div>
+			</div>
+			<a href="# "><img src="../{{$val['cover_img']}}" /></a>	
+		</div>
+		@endforeach
+	@endif
+	<!-- <div class="am-u-md-4 am-u-lg-2 text-three">
+		<div class="outer-con ">
+			<div class="title ">
+				小优布丁@@
+			</div>
+			
+			<div class="sub-title ">
+				尝鲜价：¥4.8
+			</div>
+		</div>
+		<a href="# "><img src="web_style/images/act3.png " /></a>
+	</div>
+	<div class="am-u-md-4 am-u-lg-2 text-three">
+		<div class="outer-con ">
+			<div class="title ">
+				小优布丁
+			</div>
+			
+			<div class="sub-title ">
+				尝鲜价：¥4.8
+			</div>
+		</div>
+		<a href="# "><img src="web_style/images/act3.png " /></a>
+	</div>
+	<div class="am-u-sm-6 am-u-md-4 am-u-lg-2 text-two ">
+			<div class="outer-con ">
+				<div class="title ">
+					雪之恋和风大福
+				</div>
+				
+				<div class="sub-title ">
+					仅售：¥13.8
+				</div>
+			</div>
+			<a href="# "><img src="web_style/images/5.jpg " /></a>						
+	</div> -->
+	@if($pufflist['two'])
+		@foreach($pufflist['two'] as $val)
+		<div class="am-u-sm-6 am-u-md-3 am-u-lg-2 text-four ">
+				<div class="outer-con ">
+					<div class="title ">
+						{{$val['goods_name']}}
+					</div>
+					
+					<div class="sub-title ">
+						仅售：¥{{$val['shop_price']}}
+					</div>
+				</div>
+				<a href="# "><img src="../{{$val['cover_img']}}" /></a>	
+		</div>
+		@endforeach
+	@endif
+
+	@if($pufflist['two'])
+		@foreach($pufflist['two'] as $val)
+			<div class="am-u-sm-4 am-u-md-3 am-u-lg-4 text-five">
+				<div class="outer-con ">
+					<div class="title ">
+						{{$val['goods_name']}}
+					</div>								
+					<div class="sub-title ">
+						尝鲜价：{{$val['shop_price']}}
+					</div>
+					
+				</div>
+				<a href="goods/{{$val['goods_id']}}"><img src="../{{$val['cover_img']}}" /></a>
+			</div>
+		@endforeach
+	@endif
+
+	<!-- <div class="am-u-sm-4 am-u-md-3 am-u-lg-2 text-six">
+		<div class="outer-con ">
+			<div class="title ">
+				小优布丁
+			</div>
+			
+			<div class="sub-title ">
+				尝鲜价：¥4.8
+			</div>
+		</div>
+		<a href="# "><img src="web_style/images/act3.png " /></a>
+	</div>	
+	<div class="am-u-sm-4 am-u-md-3 am-u-lg-4 text-five">
+		<div class="outer-con ">
+			<div class="title ">
+				小优布丁
+			</div>
+			<div class="sub-title ">
+				尝鲜价：¥4.8
+			</div>
+			
+		</div>
+		<a href="# "><img src="web_style/images/act2.png " /></a>
+	</div>	 -->
+
+</div>
+
+<div class="clear "></div>
+@endsection
+
+@section('cat_tree')
+<div class="am-container ">
+	<div class="shopTitle ">
+		<h4>{{$meatlist['name']}}</h4>
+		<h3>你是我的优乐美么？不，我是你小鱼干</h3>
+		<div class="today-brands ">
+			@if($meatlist['child'])
+				@foreach($meatlist['child'] as $val)
+					<a href="javascript:;">{{$val['name']}}</a>
+				@endforeach
+			@endif
+		</div>
+		<span class="more ">
+<a class="more-link " href="cat_list/{{$meatlist['id']}}">更多美味</a>
+    </span>
+	</div>
+</div>
+<div class="am-g am-g-fixed flood method3 ">
+	<ul class="am-thumbnails ">
+		@if($meatlist['list'])
+			@foreach($meatlist['list'] as $val)
+				<li>
+					<div class="list ">
+						<a href="goods/{{$val['goods_id']}}">
+							<img width="188" height="188" src="../{{$val['cover_img']}}" />
+							<div class="pro-title ">{{$val['goods_name']}}</div>
+							<span class="e-price">￥{{$val['shop_price']}}</span>
+						</a>
+					</div>
+				</li>
+			@endforeach
+		@endif
+
+	<!-- 	<li>
+			<div class="list ">
+				<a href="# ">
+					<img src="web_style/images/cp2.jpg " />
+					<div class="pro-title ">ZEK 原味海苔</div>
+					<span class="e-price ">￥8.90</span>
+				</a>
+			</div>
+		</li>
+		<li>
+			<div class="list ">
+				<a href="# ">
+					<img src="web_style/images/cp.jpg " />
+					<div class="pro-title ">萨拉米 1+1小鸡腿</div>
+					<span class="e-price ">￥29.90</span>
+				</a>
+			</div>
+		</li>
+		<li>
+			<div class="list ">
+				<a href="# ">
+					<img src="web_style/images/cp2.jpg " />
+					<div class="pro-title ">ZEK 原味海苔</div>
+					<span class="e-price ">￥8.90</span>
+				</a>
+			</div>
+		</li>
+		<li>
+			<div class="list ">
+				<a href="# ">
+					<img src="web_style/images/cp.jpg " />
+					<div class="pro-title ">萨拉米 1+1小鸡腿</div>
+					<span class="e-price ">￥29.90</span>
+				</a>
+			</div>
+		</li>
+		<li>
+			<div class="list ">
+				<a href="# ">
+					<img src="web_style/images/cp2.jpg " />
+					<div class="pro-title ">ZEK 原味海苔</div>
+					<span class="e-price ">￥8.90</span>
+				</a>
+			</div>
+		</li>
+		<li>
+			<div class="list ">
+				<a href="# ">
+					<img src="web_style/images/cp.jpg " />
+					<div class="pro-title ">萨拉米 1+1小鸡腿</div>
+					<span class="e-price ">￥29.90</span>
+				</a>
+			</div>
+		</li>
+		<li>
+			<div class="list ">
+				<a href="# ">
+					<img src="web_style/images/cp2.jpg " />
+					<div class="pro-title ">ZEK 原味海苔</div>
+					<span class="e-price ">￥8.90</span>
+				</a>
+			</div>
+		</li>
+		<li>
+			<div class="list ">
+				<a href="# ">
+					<img src="web_style/images/cp.jpg " />
+					<div class="pro-title ">萨拉米 1+1小鸡腿</div>
+					<span class="e-price ">￥29.90</span>
+				</a>
+			</div>
+		</li>
+		<li>
+			<div class="list ">
+				<a href="# ">
+					<img src="web_style/images/cp2.jpg " />
+					<div class="pro-title ">ZEK 原味海苔</div>
+					<span class="e-price ">￥8.90</span>
+				</a>
+			</div>
+		</li> -->
+
+	</ul>
+</div>
+@endsection
+
+@section('footer')
+<div class="footer ">
+	<div class="footer-hd ">
+		<p>
+			<a href="# ">恒望科技</a>
+			<b>|</b>
+			<a href="# ">商城首页</a>
+			<b>|</b>
+			<a href="# ">支付宝</a>
+			<b>|</b>
+			<a href="# ">物流</a>
+		</p>
+	</div>
+	<div class="footer-bd ">
+		<p>
+			<a href="# ">关于恒望</a>
+			<a href="# ">合作伙伴</a>
+			<a href="# ">联系我们</a>
+			<a href="# ">网站地图</a>
+			<em>© 2015-2025 Hengwang.com 版权所有. 更多模板 <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></em>
+		</p>
+	</div>
+</div>
+@endsection
+
+@section('inc')
+<div class="navCir">
+	<li class="active"><a href="home3.html"><i class="am-icon-home "></i>首页</a></li>
+	<li><a href="sort.html"><i class="am-icon-list"></i>分类</a></li>
+	<li><a href="shopcart.html"><i class="am-icon-shopping-basket"></i>购物车</a></li>	
+	<li><a href="web_style/person/index.html"><i class="am-icon-user"></i>我的</a></li>					
+</div>
+@endsection
+
+@section('menu')
+<div class=tip>
 			<div id="sidebar">
 				<div id="wrap">
 					<div id="prof" class="item ">
-						<a href="{{url('/list')}} ">
+						<a href="# ">
 							<span class="setting "></span>
 						</a>
 						<div class="ibar_login_box status_login ">
@@ -527,15 +737,15 @@
 								</ul>
 							</div>
 							<div class="login_btnbox ">
-								<a href="{{url('/list')}} " class="login_order ">我的订单</a>
-								<a href="{{url('/list')}} " class="login_favorite ">我的收藏</a>
+								<a href="# " class="login_order ">我的订单</a>
+								<a href="# " class="login_favorite ">我的收藏</a>
 							</div>
 							<i class="icon_arrow_white "></i>
 						</div>
 
 					</div>
 					<div id="shopCart " class="item ">
-						<a href="{{url('/list')}} ">
+						<a href="# ">
 							<span class="message "></span>
 						</a>
 						<p>
@@ -544,7 +754,7 @@
 						<p class="cart_num ">0</p>
 					</div>
 					<div id="asset " class="item ">
-						<a href="{{url('/list')}} ">
+						<a href="# ">
 							<span class="view "></span>
 						</a>
 						<div class="mp_tooltip ">
@@ -554,7 +764,7 @@
 					</div>
 
 					<div id="foot " class="item ">
-						<a href="{{url('/list')}} ">
+						<a href="# ">
 							<span class="zuji "></span>
 						</a>
 						<div class="mp_tooltip ">
@@ -564,7 +774,7 @@
 					</div>
 
 					<div id="brand " class="item ">
-						<a href="{{url('/list')}}">
+						<a href="#">
 							<span class="wdsc "><img src="web_style/images/wdsc.png " /></span>
 						</a>
 						<div class="mp_tooltip ">
@@ -574,7 +784,7 @@
 					</div>
 
 					<div id="broadcast " class="item ">
-						<a href="{{url('/list')}} ">
+						<a href="# ">
 							<span class="chongzhi "><img src="web_style/images/chongzhi.png " /></span>
 						</a>
 						<div class="mp_tooltip ">
@@ -585,16 +795,16 @@
 
 					<div class="quick_toggle ">
 						<li class="qtitem ">
-							<a href="{{url('/list')}} "><span class="kfzx "></span></a>
+							<a href="# "><span class="kfzx "></span></a>
 							<div class="mp_tooltip ">客服中心<i class="icon_arrow_right_black "></i></div>
 						</li>
 						<!--二维码 -->
 						<li class="qtitem ">
-							<a href="{{url('/list')}}none "><span class="mpbtn_qrcode "></span></a>
+							<a href="#none "><span class="mpbtn_qrcode "></span></a>
 							<div class="mp_qrcode " style="display:none; "><img src="web_style/images/weixin_code_145.png " /><i class="icon_arrow_white "></i></div>
 						</li>
 						<li class="qtitem ">
-							<a href="{{url('/list')}}top " class="return_top "><span class="top "></span></a>
+							<a href="#top " class="return_top "><span class="top "></span></a>
 						</li>
 					</div>
 
@@ -629,15 +839,15 @@
 				</div>
 
 				<div class="ia-head-list ">
-					<a href="{{url('/list')}} " target="_blank " class="pl ">
+					<a href="# " target="_blank " class="pl ">
 						<div class="num ">0</div>
 						<div class="text ">优惠券</div>
 					</a>
-					<a href="{{url('/list')}} " target="_blank " class="pl ">
+					<a href="# " target="_blank " class="pl ">
 						<div class="num ">0</div>
 						<div class="text ">红包</div>
 					</a>
-					<a href="{{url('/list')}} " target="_blank " class="pl money ">
+					<a href="# " target="_blank " class="pl money ">
 						<div class="num ">￥0</div>
 						<div class="text ">余额</div>
 					</a>
@@ -668,45 +878,35 @@
 					充值
 				</div>
 			</div>
-		</div>
-		<script>
-			window.jQuery || document.write('<script src="basic/js/jquery.min.js "><\/script>');
-		</script>
-		<script type="text/javascript">
-			$.ajaxSetup
-	        ({
-	                headers: 
-	                {
-	                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-	                }
-	        });
+</div>
+<script>
+	window.jQuery || document.write('<script src="basic/js/jquery.min.js "><\/script>');
+</script>
+<script type="text/javascript " src="../basic/js/quick_links.js "></script>
+@endsection
 
-	        function info(num)
-	        {
-	        	
-	        	var url = '/type/'+num;
 
-	        		$.get(url, {id:num}, function(response)
-	        		{
-	        			$('.smallType').html('');
-	        			for(var i = 0; i<response.length; i++)
-	        			{
-	        			
-	        			var info=response[i]['name'];
-	       			 	
-
-	        			$('.smallType').append("<p>"+info+"</p>");
-	        			}
-	        			        			
-	        		});
-	        };
-
-	        // function out()
-	        // {
-	        // 	$('.smallType').next.remove();
-	        // };
-		</script>
-		<script type="text/javascript " src="web_style/basic/js/quick_links.js "></script>
-	</body>
-
-</html>
+@section('small_nav')
+<div class="am-g am-g-fixed smallnav">
+	<div class="am-u-sm-3">
+		<a href="sort.html"><img src="web_style/images/navsmall.jpg" />
+			<div class="title">商品分类</div>
+		</a>
+	</div>
+	<div class="am-u-sm-3">
+		<a href="#"><img src="web_style/images/huismall.jpg" />
+			<div class="title">大聚惠</div>
+		</a>
+	</div>
+	<div class="am-u-sm-3">
+		<a href="#"><img src="web_style/images/mansmall.jpg" />
+			<div class="title">个人中心</div>
+		</a>
+	</div>
+	<div class="am-u-sm-3">
+		<a href="#"><img src="web_style/images/moneysmall.jpg" />
+			<div class="title">投资理财</div>
+		</a>
+	</div>
+</div>
+@endsection

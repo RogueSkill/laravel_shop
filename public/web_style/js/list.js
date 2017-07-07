@@ -112,25 +112,71 @@ $(document).ready(function() {
 
 
 
-	//获得文本框对象
-	var t = $("#text_box");
-	//初始化数量为1,并失效减
-	$('#min').attr('disabled', true);
-	//数量增加操作
-	$("#add").click(function() {
-			t.val(parseInt(t.val()) + 1)
-			if (parseInt(t.val()) != 1) {
-				$('#min').attr('disabled', false);
-			}
+	//手动输入数量的时候防止用户输入非法值
+	$('#text_box').keyup( function() {
 
-		})
-		//数量减少操作
-	$("#min").click(function() {
-		t.val(parseInt(t.val()) - 1);
-		if (parseInt(t.val()) == 1) {
-			$('#min').attr('disabled', true);
+		//当前的值
+		var val = $(this).val();
+
+		//不为空
+		if(val != "") {
+
+			//不为数字
+			if(isNaN(val)){
+
+				$(this).val(1);
+
+			} else if(val < 1){ //小于1
+
+				$(this).val(1);
+			}
+		} else { //为空
+
+			$(this).val(1);
 		}
 
-	})
+		val = $(this).val();
+		
+
+	});
+
+	//点击加号加1
+	$("#add").on("click", function() {
+
+		//获取当前的数量
+		var num = $('#text_box').val();
+		
+		//加1
+		num++;
+
+		//把最新的赋值给购买数量输入框
+		$('#text_box').val(num);
+
+	
+	});
+
+	//点击减号减1
+	$("#min").on("click", function() {
+
+		//获取当前的数量
+		var num = $('#text_box').val();
+		
+		//判断大于1是为了防止用户直接输入小于1的数量
+		if(num > 1) {
+
+			num--;
+
+		} else {
+
+			//如果小于1则单项商品总计的值变为1
+			$('#text_box').val(1);
+		}
+
+		//把最新的赋值给购买数量输入框
+		$('#text_box').val(num);
+
+		
+
+	});
 
 })

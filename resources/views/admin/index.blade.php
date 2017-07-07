@@ -62,6 +62,17 @@
     <li><a href="{{url('admin/order_list')}}" target="right"><span class="icon-caret-right"></span>订单列表</a></li>      
   </ul>
 
+  <h2><span class="icon-pencil-square-o"></span>评论管理</h2>
+  <ul>
+    <li><a href="{{url('admin/comments_list')}}" target="right"><span class="icon-caret-right"></span>评论列表</a></li>
+  </ul>
+
+  <h2><span class="icon-pencil-square-o"></span>友情链接</h2>
+  <ul>
+    <li><a href="{{url('admin/link_list')}}" target="right"><span class="icon-caret-right"></span>友链列表</a></li>
+    <li><a href="{{url('admin/link_add')}}" target="right"><span class="icon-caret-right"></span>添加友链</a></li>
+  </ul>
+
   @if($pass == 1)
   <h2><span class="icon-pencil-square-o"></span>管理员模块</h2>
   <ul>
@@ -71,10 +82,6 @@
   </ul>    
   @endif
 
-  <h2><span class="icon-pencil-square-o"></span>评论管理</h2>
-  <ul>
-    <li><a href="{{url('admin/comments_list')}}" target="right"><span class="icon-caret-right"></span>评论列表</a></li>
-  </ul>
 </div>
 <script type="text/javascript">
 $(function(){
@@ -92,8 +99,10 @@ $(function(){
 <ul class="bread">
   <li><a href="{:U('Index/info')}" target="right" class="icon-home"> 首页</a></li>
   <li><a href="##" id="a_leader_txt">网站信息</a></li>
+
   <li><b>当前用户：</b><span style="color:red;">{{session('username')}}</php></span>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<!-- 切换语言：<a href="##">中文</a> &nbsp;&nbsp;<a href="##">英文</a>  --></li>
+
 </ul>
 <div class="admin">
   <iframe scrolling="auto" rameborder="0" src="{{url('admin/info')}}" name="right" width="100%" height="100%"></iframe>

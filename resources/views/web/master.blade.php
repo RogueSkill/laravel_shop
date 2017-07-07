@@ -23,12 +23,10 @@
         </div>
         <div class="navbar-collapse collapse" role="navigation">
             <ul class="nav navbar-nav">
-                <li class="hidden-sm hidden-md"><a href="{{url('#')}}" target="_blank">测试</a></li>
+                <li class="hidden-sm hidden-md">
 
-                <li><a href="{{url('#')}}" target="_blank">测试</a></li>
-                <li><a href="{{url('#')}}" target="_blank">测试</a></li>
-                <li><a href="{{url('#')}}" target="_blank">测试</a></li>
-                <li><a href="{{url('#')}}" target="_blank">测试</a></li>
+                <li><a href="{{url('index')}}" target="_blank">首页</a></li>
+                <li><a href="{{url('cart')}}" target="_blank">购物车</a></li>
                 <li><a href="{{url('center')}}" target="_blank">用户中心</a></li>
             </ul>
             <form class="navbar-form navbar-left">
@@ -38,8 +36,14 @@
                 <button type="submit" class="btn btn-default">搜索</button>
             </form>
             <ul class="nav navbar-nav navbar-right hidden-sm">
-                <li><a href="{{url('login')}}">登录</a></li>
-                <li><a href="{{url('register')}}">注册</a></li>
+
+                @if(session('webusername') == "")
+                    <li><a href="{{url('login')}}">登录</a></li>
+                    <li><a href="{{url('register')}}">注册</a></li>
+                    @else
+                    <li><a>欢迎您: {{session('webusername')}}</a></li>
+                   <li> <a href="{{url('quit')}}">退出</a></li>
+                @endif
             </ul>
         </div>
     </div>
@@ -53,15 +57,20 @@
     <div class="bq-img"><img src="{{asset('images/bq-nav.png')}}" alt="" class="img-responsive"></div>
 </div>
 <!--end-->
-
+<?php
+    $list = DB::table('links')->get();
+?>
 <!-- 友情链接 -->
+
 <div class="container">
     <div class="links">
         <div class="links-font">友情链接</div>
         <ul>
-            <li><a href="{{url('http://www.baidu.com')}}">百度</a></li>
-            <li><a href="{{url('http://www.google.com.hk')}}">谷歌</a></li>
-            <li><a href="{{url('http://www.bing.com')}}">必应</a></li>
+            @if($list)
+                @foreach($list as $url)
+                    <li><a href="{{$url['url']}}">{{$url['name']}}</a></li>
+                @endforeach
+            @endif
         </ul>
         <hr>
     </div>

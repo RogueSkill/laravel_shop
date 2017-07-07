@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\MessageBag;
 use App\Good;
 use App\Type;
 use App\Http\Requests;
 use DB;
+
 
 
 class GoodController extends Controller
@@ -16,24 +17,53 @@ class GoodController extends Controller
     public function index()
     {
 
-        $goods = DB::table('goods as g')->join('types as t','t.id','=','g.typeid')->select('g.goods_id','g.goods_name','g.sort','cover_img','t.name','g.updated_at');
+        $goods = DB::table('goods as g')->join('types as t','t.id','=','g.typeid')->select('g.goods_id','g.goods_name','g.is_new','g.is_hot','g.is_recommend','is_on_sale','g.sort','cover_img','t.name','g.updated_at');
 
         $goods = $goods->get();
-        // var_dump($goods);
+        // dd($goods);
     	return view('admin/goods/index', compact('goods'));
     }
 
     //产品页面显示
     public function add()
     {
-        $goodtypes = DB::table('types')->get();
-        // var_dump($goodtypes);
+
+        $goodtypes = DB::table('types')
+            ->select(DB::raw('*,concat(path,id) as map'))
+             ->orderBy('map','asc')
+             ->get();
+        
+
     	return view('admin/goods/add' ,compact('goodtypes'));
     }
 
     //产品处理页面
     public function doAdd(Request $request)
     {
+        
+        // dump($request->all());
+
+        $this->validate($request, [
+            'goods_name' => 'required|min:1|max:30',
+            'typeid' => 'required',
+            // 'shop_price'=>'required',
+            // 'created_at' => 'required'
+        ],[
+            'required' => ':attribute 是必填字段',
+            'min' => ':attribute 必须不少于3个字符',
+            'max' => ':attribute 必须少于30个字符',
+        ],[
+            'goods_name' => '商品名称',
+            'typeid' => '分类名称',
+            // 'shop_price'=>'价格',
+            // 'created_at' => '发布时间',
+        ]);
+
+        // dd(1);
+
+        // $messages = $validator->errors();
+
+        // echo $messages->first('goods_name');
 
         if($request->isMethod('POST')){
 
@@ -71,6 +101,8 @@ class GoodController extends Controller
                     $ext = $val->getClientOriginalExtension();     // 扩展名
                     $fileName = date('Y-m-d_H-i-s').uniqid().'.'.$ext;
                     $val->move('./upload', $fileName);
+                    // $file = $img->open($val->move('./upload', $fileName));
+                    // dd($file);
                     $fileUrl[] = $fileName;   
                 }
 
@@ -81,6 +113,8 @@ class GoodController extends Controller
             $goods->typeid = $typeid;
             $goods->goods_sn = $goods_sn;
             $goods->shop_price = $shop_price;
+            $goods->mareket_price = $mareket_price;
+            $goods->cost_price = $cost_price;
             $goods->goods_remake = $goods_remake;
             $goods->goods_content = $goods_content;
             $goods->sales_num = $sales_num;
@@ -92,7 +126,7 @@ class GoodController extends Controller
             $goods->click_num = $click_num;
             $goods->created_at = $created_at;
             $goods->original_img = $fileUrl;
-
+            // dd($goods);
             $data_add = $goods->save();
             
             if($data_add){
@@ -107,7 +141,10 @@ class GoodController extends Controller
     //产品编辑页面显示
     public function edit($id)
     {
-        $goodtypes = DB::table('types')->get();
+        $goodtypes = DB::table('types')
+            ->select(DB::raw('*,concat(path,id) as map'))
+             ->orderBy('map','asc')
+             ->get();
 
         $goodsrow = Good::find($id);
         // dd($goodsrow['goods_id']);
@@ -119,6 +156,7 @@ class GoodController extends Controller
     //商品编辑处理页
     public function doEdit(Request $request)
     {
+        
         // var_dump($request->all());
         // exit;
         $data = $request->except('_token');
@@ -142,11 +180,113 @@ class GoodController extends Controller
 
         // dd($data);
         $boo = Good::where('goods_id',$id)->update($data);
-        if($boo){
+        // if($boo){
+            // exit();
             return redirect('/admin/goods_list');
+        // }
+    }
+    //新品
+    public function changeNew(Request $req ,$new)
+    {   
+
+        $id = $req->input('id');
+        $is_new = $req->input('is_new');
+
+        if($is_new == '1'){
+            $is_new = '0';
+        }elseif($is_new == '0'){
+            $is_new = '1';
+        }
+
+        $boo = Good::where('goods_id',$id)->update(['is_new'=>$is_new]);
+
+        $newNum = Good::where('goods_id',$id)->pluck('is_new');
+        $newNum = $newNum[0];
+        
+        // echo $tt;
+        if($newNum ==1){
+            echo 0;
+        }elseif($newNum==0){
+            echo 1;
+        }
+    }
+    //热销
+    public function changeHot(Request $req, $hot,$tid)
+    {   
+        
+        $id = $req->input('id');
+        $is_hot = $req->input('is_hot');
+
+        if($is_hot == '1'){
+            $is_hot = '0';
+        }elseif($is_hot == '0'){
+            $is_hot = '1';
+        }
+
+        $boo = Good::where('goods_id',$id)->update(['is_hot'=>$is_hot]);
+
+        $newNum = Good::where('goods_id',$id)->pluck('is_hot');
+        $newNum = $newNum[0];
+        
+        // echo $tt;
+        if($newNum ==1){
+            echo 0;
+        }elseif($newNum==0){
+            echo 1;
         }
     }
 
+    //推荐
+    public function changeRecommend(Request $req, $recommend,$pid,$tid)
+    {   
+        
+        $id = $req->input('id');
+        $is_recommend = $req->input('is_recommend');
+
+        if($is_recommend == '1'){
+            $is_recommend = '0';
+        }elseif($is_recommend == '0'){
+            $is_recommend = '1';
+        }
+
+        $boo = Good::where('goods_id',$id)->update(['is_recommend'=>$is_recommend]);
+
+        $newNum = Good::where('goods_id',$id)->pluck('is_recommend');
+        $newNum = $newNum[0];
+        
+        // echo $tt;
+        if($newNum ==1){
+            echo 0;
+        }elseif($newNum==0){
+            echo 1;
+        }
+    }
+
+    //是否上架
+    public function changeSale(Request $req, $sale,$pid,$tid,$kid)
+    {   
+        
+        $id = $req->input('id');
+        $is_on_sale = $req->input('is_on_sale');
+
+        if($is_on_sale == '1'){
+            $is_on_sale = '0';
+        }elseif($is_on_sale == '0'){
+            $is_on_sale = '1';
+        }
+
+        $boo = Good::where('goods_id',$id)->update(['is_on_sale'=>$is_on_sale]);
+
+        $newNum = Good::where('goods_id',$id)->pluck('is_on_sale');
+        $newNum = $newNum[0];
+        
+        // echo $tt;
+        if($newNum ==1){
+            echo 0;
+        }elseif($newNum==0){
+            echo 1;
+        }
+    }
     // 商品编辑添加
     // public function addEditImg(Request $request)
     // {
@@ -196,13 +336,112 @@ class GoodController extends Controller
         $original_img = DB::table('goods')->where('goods_id',$id)->pluck('original_img');
         $original_img = $original_img[0];
         $original = explode(',', $original_img);
+
+
         foreach($original as $val){
 
             unlink('./upload/'.$val);
 
         }
-    
+
         $good = Good::find($id); 
         $good->delete();
     }
+
+    //
+    public function web_index()
+    {
+        //前台广告
+        $banner = DB::table('pics')->pluck('name');
+        //右侧栏分类
+        $typelist = DB::table('types')->where('pid',0)->limit(10)->get();
+        foreach($typelist as $key=>$val){
+            $typelist[$key]['child'] = DB::table('types')->where('pid',$val['id'])->get();
+        }
+       foreach ($typelist as $key => $val) {
+
+            foreach($val['child'] as $k=>$v){
+                $typelist[$key]['child'][$k]['son'] = DB::table('types')->where('pid',$val['child'][$k]['id'])->get();
+            }
+
+       }
+       //推荐
+       $recommend = DB::table('goods')->select('goods_id','goods_name','goods_remake','cover_img')->where(['is_on_sale'=>1,'is_recommend'=>1])->orderBy('updated_at', 'desc')->limit(3)->get();
+
+       //热销
+       $hot = DB::table('goods')->select('goods_id','typeid','goods_name','goods_remake','cover_img')->where(['is_on_sale'=>1,'is_hot'=>1])->orderBy('updated_at', 'desc')->limit(4)->get();
+       
+       //点心、蛋糕类
+       $candylist = [];
+
+       $candylist['name'] = DB::table('types')->where('id', 1)->pluck('name')[0];
+       $candylist['id'] = 1;
+       $candylist['child'] = DB::table('types')->where('pid', 1)->get();
+       $candylist['one'] = DB::table('goods as g')->leftjoin('types as t', 'g.typeid','=','t.id')->where('g.typeid', 1)->orderBy('g.created_at','desc')->limit(1)->get()[0];
+       $candylist['two'] = DB::table('goods as g')->leftjoin('types as t', 'g.typeid','=','t.id')->where('g.typeid', 1)->orderBy('g.created_at','desc')->limit(2)->get();
+       $candylist['four'] = DB::table('goods as g')->leftjoin('types as t', 'g.typeid','=','t.id')->where('g.typeid', 1)->orderBy('g.created_at','desc')->limit(4)->get();
+       // dump($candylist);
+       //坚果、炒货
+       $pufflist = [];
+       $pufflist['name'] = DB::table('types')->where('id', 2)->pluck('name')[0];
+       $pufflist['id'] = 2;
+       $pufflist['child'] = DB::table('types')->where('pid', 2)->get();
+
+       $pufflist['one'] = DB::table('goods as g')->leftjoin('types as t', 'g.typeid','=','t.id')->where('g.typeid', 2)->orderBy('g.created_at','desc')->limit(1)->get()[0];
+
+       $pufflist['two'] = DB::table('goods as g')->leftjoin('types as t', 'g.typeid','=','t.id')->where('g.typeid', 2)->orderBy('g.created_at','desc')->limit(2)->get();
+
+
+       $pufflist['four'] = DB::table('goods as g')->leftjoin('types as t', 'g.typeid','=','t.id')->where('g.typeid', 2)->orderBy('g.created_at','desc')->limit(4)->get();
+
+
+       //熟食、肉类
+       $meatlist = [];
+       $meatlist['name'] = DB::table('types')->where('id', 3)->pluck('name')[0];
+       $meatlist['id'] = 3;
+       $meatlist['child'] = DB::table('types')->where('pid', 3)->get();
+       $meatlist['list'] = DB::table('goods as g')->leftjoin('types as t', 'g.typeid','=','t.id')->where('g.typeid', 3)->orderBy('g.created_at','desc')->limit(12)->get();
+       // dump($meatlist);
+
+       return view('web/lar_index', compact('banner','typelist','recommend','hot','candylist','candylist','pufflist','meatlist'));
+    }
+
+    //前台分类列表
+    public function cat_list($pid)
+    {
+        // $pid = $id
+        $typelist = DB::table('types')->where('pid',0)->limit(10)->get();
+        foreach($typelist as $key=>$val){
+            $typelist[$key]['child'] = DB::table('types')->where('pid',$val['id'])->get();
+        }
+       foreach ($typelist as $key => $val) {
+
+            foreach($val['child'] as $k=>$v){
+                $typelist[$key]['child'][$k]['son'] = DB::table('types')->where('pid',$val['child'][$k]['id'])->get();
+            }
+
+       }
+
+        dump($typelist);
+        return view('web/lar_cat_list',compact('typelist','pid'));
+    }
+
+    //前台商品列表页
+    public function lister($pid)
+    {
+        $goodslist = Good::where('typeid',$pid)->orderBy('updated_at','desc')->paginate(12);
+        
+        return  view('web/lar_list', compact('goodslist'));
+    }
+
+    //前台商品详细页
+    // public function webDetail($id)
+    // {
+    //     $data = DB::table('goods')->where('goods_id',$id)->get();
+    //     $detail = $data[0];
+    //     $detail['original_img'] = explode(',',trim($detail['original_img'],','));
+    //     // dd($detail);
+    //     return view('web/lar_introduction', compact('detail'));
+    // }
+
 }

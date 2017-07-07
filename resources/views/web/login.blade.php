@@ -41,7 +41,7 @@
 
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
-                                <button type="button" class="btn btn-success submit" name="login">登录</button>
+                                <button type="button" class="btn btn-success submit" name="login">登录</button>&ensp;&ensp;&ensp;&ensp;<a href="{{url('Retrieve')}}">忘记密码</a>
                                 <br>
                                 <br>
                                 <p><a href="{{url('register')}}">还没有账号?马上注册</a></p>

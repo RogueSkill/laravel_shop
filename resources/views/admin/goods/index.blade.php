@@ -4,6 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <meta name="renderer" content="webkit">
 <title></title>
 <link rel="stylesheet" href="{{asset('style/css/pintuer.css')}}">
@@ -18,7 +19,7 @@
     <div class="panel-head"><strong class="icon-reorder"> 内容列表</strong> <a href="" style="float:right; display:none;">添加字段</a></div>
     <div class="padding border-bottom">
       <ul class="search" style="padding-left:10px;">
-        <li> <a class="button border-main icon-plus-square-o" href="add.html"> 添加内容</a> </li>
+        <li> <a class="button border-main icon-plus-square-o" href="{{url('admin/goods_add')}}"> 添加内容</a> </li>
         <li>搜索：</li>
         <li>首页
           <select name="s_ishome" class="input" onchange="changesearch()" style="width:60px; line-height:17px; display:inline-block">
@@ -59,39 +60,92 @@
     </div>
     <table class="table table-hover text-center">
       <tr>
-        <th width="100" style="text-align:left; padding-left:20px;">ID</th>
-        <th width="10%">排序</th>
+        <th width="3%" style="text-align:left; padding-left:10px;">ID</th>
+        <th width="1%">排序</th>
         <th>图片</th>
         <th>名称</th>
-        <th>属性</th>
+        <th>新品</th>
+        <th>热销</th>
+        <th>推荐</th>
+        <th>是否上架</th>
         <th>分类名称</th>
         <th width="10%">更新时间</th>
         <th width="310">操作</th>
       </tr>
       <volist name="list" id="vo">
 <!-- 商品列表 -->
-        @foreach($goods as $val)
-        <tr>
-          <td style="text-align:left; padding-left:20px;"><input type="checkbox" name="id[]" value="" />
-           {{$val['goods_id']}}</td>
-          <td><input type="text" name="sort[1]" value="{{$val['sort']}}" style="width:50px; text-align:center; border:1px solid #ddd; padding:7px 0;" /></td>
+	        @foreach($goods as $val)
+	        <tr>
+	          <td style="text-align:left; padding-left:10px;"><input type="checkbox" name="id[]" value="{{$val['goods_id']}}" />
+	          </td>
+	          <td><input type="text" name="sort[1]" value="{{$val['sort']}}" style="width:30px; text-align:center; border:1px solid #ddd; padding:7px 0;" /></td>
+	          @if($val['cover_img'])
+	          <td width="10%"><img src="../{{$val['cover_img']}}" alt="" width="70" height="50" /></td>
+	          @else
+	            <td width="10%"><img src="../style/images/lietu.png" alt="" width="70" height="50" /></td>
+	          @endif
+	          <td>{{$val['goods_name']}}</td>
+	          <!-- 新品 -->
+	          <td>
+	          @if($val['is_new']==1)
+		          <a href="javascript:;">
+		          	<img name="is_new" value="{{$val['is_new']}}" src="../style/images/icon_right_s.png" />
+		          </a>
+		      @elseif($val['is_new']==0)
+		      		<a href="javascript:;">
+		          	<img name="is_new" value="{{$val['is_new']}}" src="../style/images/icon_error_s.png" />
+		          </a>
+		      @endif
+	          </td>
+	          <!--热销-->
+	          <td>
+	          @if($val['is_hot']==1)
+		          <a href="javascript:;">
+		          	<img name="is_hot" value="{{$val['is_hot']}}" src="../style/images/icon_right_s.png" />
+		          </a>
+		      @elseif($val['is_hot']==0)
+		      		<a href="javascript:;">
+		          	<img name="is_hot" value="{{$val['is_hot']}}" src="../style/images/icon_error_s.png" />
+		          </a>
+		      @endif
+		      </td>
+	          <td>
+	          @if($val['is_recommend']==1)
+		          <a href="javascript:;">
+		          	<img name="is_recommend" value="{{$val['is_recommend']}}" src="../style/images/icon_right_s.png" />
+		          </a>
+		      @elseif($val['is_recommend']==0)
+		      		<a href="javascript:;">
+		          	<img name="is_recommend" value="{{$val['is_recommend']}}" src="../style/images/icon_error_s.png" />
+		          </a>
+		      @endif
+	          </td>
+			  
+			  <td>
+	          @if($val['is_on_sale']==1)
+		          <a href="javascript:;">
+		          	<img name="is_on_sale" value="{{$val['is_on_sale']}}" src="../style/images/icon_right_s.png" />
+		          </a>
+		      @elseif($val['is_on_sale']==0)
+		      		<a href="javascript:;">
+		          	<img name="is_on_sale" value="{{$val['is_on_sale']}}" src="../style/images/icon_error_s.png" />
+		          </a>
+		      @endif
+	          </td>
 
-          <td width="10%"><img src="../{{$val['cover_img']}}" alt="" width="70" height="50" /></td>
+	          <td>{{$val['name']}}</td>
+	          <td>{{$val['updated_at']}}</td>
+	          <td><div class="button-group"> <a class="button border-main" href="{{url('/admin/goods_edit')}}/{{$val['goods_id']}}"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="{{url('/admin/goods_del')}}/{{$val['goods_id']}}" onclick="return del(1,1,1)"><span class="icon-trash-o"></span> 删除</a> </div></td>
+	        </tr>
+	        @endforeach
 
-          <td>{{$val['goods_name']}}</td>
-          <td><font color="#00CC99">首页</font></td>
-          <td>{{$val['name']}}</td>
-          <td>{{$val['updated_at']}}</td>
-          <td><div class="button-group"> <a class="button border-main" href="{{url('/admin/goods_edit')}}/{{$val['goods_id']}}"><span class="icon-edit"></span> 修改</a> <a class="button border-red" href="{{url('/admin/goods_del')}}/{{$val['goods_id']}}" onclick="return del(1,1,1)"><span class="icon-trash-o"></span> 删除</a> </div></td>
-        </tr>
-        @endforeach
 <!-- 商品列表end -->
       <tr>
         <td style="text-align:left; padding:19px 0;padding-left:20px;"><input type="checkbox" id="checkall"/>
           全选 </td>
-        <td colspan="7" style="text-align:left;padding-left:20px;"><a href="javascript:void(0)" class="button border-red icon-trash-o" style="padding:5px 15px;" onclick="DelSelect()"> 删除</a> <a href="javascript:void(0)" style="padding:5px 15px; margin:0 10px;" class="button border-blue icon-edit" onclick="sorts()"> 排序</a> 操作：
+        <td colspan="10" style="text-align:left;padding-left:20px;"><a href="javascript:void(0)" class="button border-red icon-trash-o" style="padding:5px 15px;" onclick="DelSelect()"> 删除</a> <a href="javascript:void(0)" style="padding:5px 15px; margin:0 10px;" class="button border-blue icon-edit" onclick="sorts()"> 排序</a> 操作：
           <select name="ishome" style="padding:5px 15px; border:1px solid #ddd;" onchange="changeishome(this)">
-            <option value="">首页</option>
+            <option value="">新品</option>
             <option value="1">是</option>
             <option value="0">否</option>
           </select>
@@ -101,13 +155,13 @@
             <option value="0">否</option>
           </select>
           <select name="istop" style="padding:5px 15px; border:1px solid #ddd;" onchange="changeistop(this)">
-            <option value="">置顶</option>
+            <option value="">热销</option>
             <option value="1">是</option>
             <option value="0">否</option>
           </select>
           &nbsp;&nbsp;&nbsp;
           
-          移动到：
+          <!-- 移动到：
           <select name="movecid" style="padding:5px 15px; border:1px solid #ddd;" onchange="changecate(this)">
             <option value="">请选择分类</option>
             <option value="">产品分类</option>
@@ -121,7 +175,9 @@
             <option value="10">复制10条</option>
             <option value="15">复制15条</option>
             <option value="20">复制20条</option>
-          </select></td>
+          </select> -->
+
+          </td>
       </tr>
       <tr>
         <td colspan="8"><div class="pagelist"> <a href="">上一页</a> <span class="current">1</span><a href="">2</a><a href="">3</a><a href="">下一页</a><a href="">尾页</a> </div></td>
@@ -301,6 +357,154 @@ function changecopy(o){
 	}
 }
 
+$(function(){
+
+	$.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+
+
+	//新品
+	$('img[name=is_new]').click(function(){
+		// alert('new');
+		var that = $('img[name=is_new]');
+		var id = $(this).parent().parent().siblings('td').children('input[type=checkbox]').val();
+		var is_new = $(this).attr('value');
+
+		if(is_new==1){
+			var url = '../style/images/icon_error_s.png';
+			$(this).attr('value',0);
+			$(this).attr('src',url);
+		}else if(is_new==0){
+			var url = '../style/images/icon_right_s.png';
+			$(this).attr('value',1);
+			$(this).attr('src',url);
+		}
+
+
+		// alert(is_new);
+		$.ajax({
+			url:'/admin/goods_list/{new}',
+		   data:{id:id,is_new:is_new},
+		   type:'POST',
+	   dataType:'JSON',
+
+	   		susscee:function(data){
+
+	   		}
+
+		});
+
+	});
+
+	//热销
+	$('img[name=is_hot]').click(function(){
+		// alert('hot');
+		var that = $('img[name=is_hot]');
+		var id = $(this).parent().parent().siblings('td').children('input[type=checkbox]').val();
+		var is_hot = $(this).attr('value');
+
+		if(is_hot==1){
+			var url = '../style/images/icon_error_s.png';
+			$(this).attr('value',0);
+			$(this).attr('src',url);
+		}else if(is_hot==0){
+			var url = '../style/images/icon_right_s.png';
+			$(this).attr('value',1);
+			$(this).attr('src',url);
+		}
+
+
+		// alert(is_hot);
+		$.ajax({
+			url:'/admin/goods_list/{hot}/1',
+		   data:{id:id,is_hot:is_hot},
+		   type:'POST',
+	   dataType:'JSON',
+
+	   		susscee:function(data){
+
+	   		}
+
+		});
+
+	});
+
+
+	//推荐
+	$('img[name=is_recommend]').click(function(){
+		// alert('recommend');
+		var that = $('img[name=is_recommend]');
+		var id = $(this).parent().parent().siblings('td').children('input[type=checkbox]').val();
+		var is_recommend = $(this).attr('value');
+
+		if(is_recommend==1){
+			var url = '../style/images/icon_error_s.png';
+			$(this).attr('value',0);
+			$(this).attr('src',url);
+		}else if(is_recommend==0){
+			var url = '../style/images/icon_right_s.png';
+			$(this).attr('value',1);
+			$(this).attr('src',url);
+		}
+
+
+		// alert(is_recommend);
+		$.ajax({
+			url:'/admin/goods_list/{recommend}/1/2',
+		   data:{id:id,is_recommend:is_recommend},
+		   type:'POST',
+	   dataType:'JSON',
+
+	   		susscee:function(data){
+
+	   		}
+
+		});
+
+	});
+
+	//是否上架
+	$('img[name=is_on_sale]').click(function(){
+		// alert('recommend');
+		var that = $('img[name=is_on_sale]');
+		var id = $(this).parent().parent().siblings('td').children('input[type=checkbox]').val();
+		var is_on_sale = $(this).attr('value');
+
+		if(is_on_sale==1){
+			var url = '../style/images/icon_error_s.png';
+			$(this).attr('value',0);
+			$(this).attr('src',url);
+		}else if(is_on_sale==0){
+			var url = '../style/images/icon_right_s.png';
+			$(this).attr('value',1);
+			$(this).attr('src',url);
+		}
+
+
+		// alert(is_recommend);
+		$.ajax({
+			url:'/admin/goods_list/{is_on_sale}/1/2/3',
+		   data:{id:id,is_on_sale:is_on_sale},
+		   type:'POST',
+	   dataType:'JSON',
+
+	   		susscee:function(data){
+
+	   		}
+
+		});
+
+	});
+
+
+});
+
+
+
 </script>
+
 </body>
 </html>

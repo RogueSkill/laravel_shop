@@ -41,11 +41,16 @@ class AdminController extends BaseController
     //商品分类
     public function cate_list()
     {
-        $types_page = DB::table('types')->paginate(10);
 
-        $types_data = DB::table('types')->paginate(10);
+        $types_data = DB::table('types')
+                ->select(DB::raw('*,concat(path,id) as map'))
+                ->orderBy('map','asc')
+                ->paginate(20);
 
-
+        $types_page = DB::table('types')
+                ->select(DB::raw('*,concat(path,id) as map'))
+                ->orderBy('map','asc')
+                ->paginate(20);
 
         return view('admin/cate/index', compact('types_data','types_page'));
     }
@@ -53,7 +58,10 @@ class AdminController extends BaseController
     //商品分类添加显示
     public function cate_add()
     {
-        $types = DB::table('types')->get();
+        $types = DB::table('types')
+             ->select(DB::raw('*,concat(path,id) as map'))
+             ->orderBy('map','asc')
+             ->get();
         return view('admin/cate/add',compact('types'));
     }
 
@@ -94,14 +102,7 @@ class AdminController extends BaseController
             
 
       $type_add = DB::table('types')->insert(['name'=>$name,'pid'=>$id,'path'=>$path,'created_at'=>$created_at]);
-      // if($type_add){
-      //    echo "<script>alert('添加成功')</script>";
-      //    return view('/admin/cate_list');
-      //    return redirect('/admin/cate_list');
-      // }
-       //1. 使用 请求 Request $request->all()
-        // $post = $request->all();
-//        dd($post);
+
         if ($type_add) {
             return redirect('/admin/cate_list')->with(['success' => '添加成功！！！！！！！']);
         } else {
@@ -115,7 +116,10 @@ class AdminController extends BaseController
     {
 
         //分类列表
-        $types = DB::table('types')->get();
+        $types = DB::table('types')
+             ->select(DB::raw('*,concat(path,id) as map'))
+             ->orderBy('map','asc')
+             ->get();
         // var_dump($types);
         
         return view('admin/cate/edit',compact('types','id','pid','name'));
@@ -411,6 +415,84 @@ class AdminController extends BaseController
         }else{
 
             echo "<script>alert('请修改后在提交');window.history.go(-1);</script>";
+
+        }
+
+    }
+
+    /**
+     *
+     *********************************************友情链接****************************************
+     */
+
+    //友情链接列表url
+    public function link_list()
+    {
+        $list = DB::table('links')->paginate(10);
+        $page = DB::table('links')->paginate(10);
+        return view('admin/links/index',compact('list','page'));
+    }
+
+    //友情链接添加
+    public function link_add()
+    {
+
+            return view("admin/links/add");
+
+    }
+
+    //友链添加处理页面
+    public function link_submit()
+    {
+
+            $submit = DB::table('links')->insert(['name'=>$_POST['linkname'], 'url'=>$_POST['link']]);
+
+            if ($submit)
+            {
+                exit("<script>alert('添加成功');window.location.href='link_list'</script>");
+            }
+
+    }
+
+    //友链删除
+    public function link_updata()
+    {
+
+        $add = DB::table('links')->where('id',$_GET['id'])->delete();
+
+        if ($add > 0)
+        {
+
+            exit("<script>alert('删除成功');window.location.href='link_list'</script>");
+
+        }
+
+    }
+
+    //友链编辑
+    public function link_upadd()
+    {
+        $upadd = DB::table('links')->where('id',$_GET['id'])->get();
+
+        $upadd = $upadd[0];
+
+        return view("admin/links/upadd",compact('upadd'));
+    }
+
+    //友链编辑成功
+    public function link_upadds()
+    {
+
+        $upadd = DB::table('links')->where('id', $_POST['linkid'])->update(['name'=>$_POST['linkname'], 'url'=>$_POST['link']]);
+
+        if ($upadd > 0 )
+        {
+
+            exit("<script>alert('修改成功');window.location.href='link_list'</script>");
+
+        }else{
+
+            exit("<script>alert('修改失败');history.go(-1);</script>");
 
         }
 

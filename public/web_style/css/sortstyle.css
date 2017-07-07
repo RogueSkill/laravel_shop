@@ -8,7 +8,7 @@ img{width:100%;}
 #meauBack a{position: absolute;right:10px;top:0px;font-size:14px ;height:36px;line-height:36px;color:#fff;width:auto;}
 
 #nav .category-content{ position:relative; width:100%; float: left;}
-#nav .category-content .long-title{background:#d2364c;color:#fff ;display: block;width:100%;}
+#nav .category-content .long-title{background:#d2364c;color:#fff ;display: block;width:100%; }
 #nav .category-content .all-goods { display: block; width:100px;height: 36px; padding: 0; border-radius: 5px 5px 0 0;text-align: center; font-size: 14px; font-weight: 600; line-height: 36px;}
 #nav .category-content .all-goods em{ font: 12px/36px "Microsoft YaHei"; }
 .status .list i,.category-content .down-ico,.category-content .list-cake i,.category-content .list-nacake i,.category-content .list-tz i,.category-content .list-ny i,.category-content .list-xb i,.category-content .list-xl i{ background: url(../images/index_ico_png32.png) no-repeat;}
@@ -20,8 +20,7 @@ img{width:100%;}
 
 .category-content .category-name{ overflow:hidden; position: relative;}
 .category-content .category-name i{ display: none;}
-.category-content .category-list .bd-b{ height: 1px;  margin: -1px 10px 0 10px;  background: #eee; line-height: 1; font-size: 0; }
-
+.category-content .category-list .bd-b{ height: 1px;  margin: -1px 10px 0 10px;  background: #eee; line-height: 1; font-size: 0;}
 .category-content .b-category-name { padding-top: 4px;line-height:32px;}
 .category-content .b-category-name b{ margin-left: 4px; font:400 12px/28px "宋体"; }
 .category-content .b-category-name a{ color: #4c4c4c; }
