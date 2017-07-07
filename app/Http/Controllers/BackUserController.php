@@ -11,9 +11,15 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 use App\Pic;
+use App\Http\Requests;
 // use Illuminate\Pagination\LengthAwarePaginator;
 use DB;
-class BackUserController extends BaseController
+use Session;
+use Captcha;
+use  Validator, Redirect;
+use Hash;
+
+class BackUserController extends Controller
 {
     /**
     *
@@ -23,10 +29,15 @@ class BackUserController extends BaseController
     {
 
         // $user = User::paginate(5);
+        $pass = '';
+         if(session('level') == 0)
+         {
+            $pass = 1;
+         }
         $user = Member::paginate(5);
 
        // dd($user);
-    	return view('admin/user/index',compact('user'));
+    	return view('admin/user/index',compact('user','pass'));
     }
 
     //用户添加
@@ -40,27 +51,30 @@ class BackUserController extends BaseController
 
     //用户添加执行操作
     public function insert(Request $request){
+
         //表单验证
-//        $this->validata($request, [
-//            'username'=>'required|min:3|max:10',
-//                'pass'=>'required',
-//                'phone'=>'required',
-//                'email'=>'required'
-//        ],[
-//                'required'=>':attribute是必填字段',
-//                'min'=>':attribute必须大于3个字符',
-//                'max'=>':attribute不能大于10个字符',
-//            ],[
-//                'username'=>'用户名',
-//                'pass'=>'密码',
-//                'phone'=>'电话号码',
-//                'email'=>'电子邮箱',
-//            ]
-//        );
+        $this->validate($request, [
+           'username'=>'required|min:3|max:10',
+               'pass'=>'required|same:repass',
+               'phone'=>'required',
+               'email'=>'required'
+        ],[
+               'required'=>':attribute是必填字段',
+               'same'=> ':attribute 和 重复密码 必须相同。',
+               'min'=>':attribute必须大于3个字符',
+               'max'=>':attribute不能大于10个字符',
+        ],[
+               'username'=>'用户名',
+               'pass'=>'密码',
+               'phone'=>'电话号码',
+               'email'=>'电子邮箱',
+        ]);
 
 
-       $data = $request->only(['username','pass','sex','address','code','phone','email','state']);
-
+       $data = $request->only(['username','pass','sex','address','code','phone','email','state','created_at']);
+       // dd($data);
+        $data['pass']= Hash::make($data['pass']);
+       // dd($data);
         if (DB::table('members')->insert($data)) {
             return redirect('/admin/user_list')->with(['success' => '添加成功！！！！！！！']);
         } else {
@@ -107,6 +121,36 @@ class BackUserController extends BaseController
     }
 
 
+    //用户搜索
+    public function search()
+    {
+        $name = $_POST['name'];
+
+         $info = Member::where('username','like',"%".$name."%")->get();
+
+         $arr = $info->toArray();
+         $str="";
+         foreach($arr as $v){
+        $str .= '<tr class="new"><td><input type="checkbox" name="id[]" value="1" /></td>'; //id
+        $str.= "<td>{$v['username']}</td>";   //用户
+        $str.="<td>{$v['sex']}</td>";   //性别
+        $str.="<td>{$v['phone']}</td>";       //电话
+        $str.="<td>{$v['code']}</td>";        //邮编
+        $str.="<td>{$v['email']}</td>";       //邮箱
+        $str.="<td>{$v['address']}</td>";     //地址
+        $str.="<td>{$v['state']}</td>";   //状态
+        $str.="<td>{$v['created_at']}</td></tr>";  //添加时间 
+        }
+         // dd($arr);
+        return $str;
+        // return [
+        //     'error' => 0,
+        // ];
+       // return view('admin/user/index',compact('user','pass'));
+    }
+
+
+
 //     /**
 //     *
 //     *********************************************登录模块****************************************
@@ -114,6 +158,8 @@ class BackUserController extends BaseController
     //登录模块
     public function login(Request $request)
     {
+
+
 
     // $value=session('username');
 
@@ -128,11 +174,21 @@ class BackUserController extends BaseController
 
       //   }
     }
+    //  验证码
+    public function mews() {
+
+        return Captcha::create('default');
+
+    }
 
     //提交登录
     public function dologin(Request $request)
     {
-   
+   $this->validate($request, [
+           "code" => 'required|captcha'
+        ]);
+
+
     // 查输入的名字和密码的第一条数据
     $check = DB::table('users')->where('username','=',$request->input('username'))->where('pass','=',$request->input('pass'))->first();
 
@@ -229,7 +285,7 @@ class BackUserController extends BaseController
 
     public function pic_list(Request $request)
     {
-        $date=Pic::all();
+        $date=Pic::paginate(5);
 
         return view('admin/pic/pic_list',compact('date'));
     }
@@ -239,17 +295,23 @@ class BackUserController extends BaseController
         // 校验
 
         // 修改广告图的状态值
+        
+        $pic=Pic::find($id);
+
+        $picDel=$pic->name;
+
         Pic::destroy($id);
+
+        $a=unlink('upload/'.$picDel);
+        
+        
+
 
         return [
             'error' => 0,
         ];
-        // return redirect('/admin/pic/pic_list');
-
+       
     }
-
-
-
 
 
 

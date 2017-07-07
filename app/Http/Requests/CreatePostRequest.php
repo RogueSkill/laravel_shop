@@ -24,8 +24,11 @@ class CreatePostRequest extends Request
     public function rules()
     {
         return [
-            //
-            'title'->'required',
+            'username'=>'required|min:3|max:10',
+            'pass'=>'required|same:repass',
+            'phone'=>'required',
+            'email'=>'required'
+
         ];
     }
 }

@@ -26,7 +26,7 @@
                     <div class="tips"></div>
                 </div>
             </div>
-            <div class="form-group">
+<!--             <div class="form-group">
                 <div class="label">
                     <label>密码：</label>
                 </div>
@@ -43,7 +43,7 @@
                     <input type="password" class="input w50" value="" name="pass" data-validate="required:请再次输入确认密码" />
                     <div class="tips"></div>
                 </div>
-            </div>
+            </div> -->
          <!--  <div class="form-group">
             <div class="label">
             <label>图片：</label>
