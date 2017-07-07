@@ -38,6 +38,9 @@ class WebController extends Controller
         //查询商品表拿到商品详细信息
         $data = DB::table('goods')->where("goods_id", $id)->get();
 
+        $comments = DB::table('goods_comments')->where(["goodsid"=>$id,"content"=>1])->join('members','goods_comments.userid','=','members.id')->paginate(10);
+        $comments_two = DB::table('goods_comments')->where(["goodsid"=>$id,"content"=>1])->join('members','goods_comments.userid','=','members.id')->paginate(10);
+//        dd($comments);
         //返回的是二维数组所以得转成一维数组赋值到首页
         $data = $data[0];
 
@@ -50,7 +53,7 @@ class WebController extends Controller
             return view('web/lar_introduction', compact('username', 'data'));
         } else {
 
-            return view('web/lar_introduction', compact('data'));
+            return view('web/lar_introduction', compact('data', 'comments','comments_two'));
         }
 
 
