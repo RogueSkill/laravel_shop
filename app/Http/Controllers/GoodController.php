@@ -13,15 +13,67 @@ use DB;
 
 class GoodController extends Controller
 {
-    //产品列表页
-    public function index()
+    //后台产品列表页aa
+    public function index(Request $req)
     {
+        
+        $goodtypes = DB::table('types')
+            ->select(DB::raw('*,concat(path,id) as map'))
+             ->orderBy('map','asc')
+             ->get();
 
         $goods = DB::table('goods as g')->join('types as t','t.id','=','g.typeid')->select('g.goods_id','g.goods_name','g.is_new','g.is_hot','g.is_recommend','is_on_sale','g.sort','cover_img','t.name','g.updated_at');
+        
+        // $data = $goods->paginate(20);
 
-        $goods = $goods->get();
-        // dd($goods);
-    	return view('admin/goods/index', compact('goods'));
+        if($req->isMethod('GET')){
+
+            $search['is_new'] = $req->input('is_new');
+            $search['is_hot'] = $req->input('is_hot');
+            $search['is_recommend'] = $req->input('is_recommend');
+            $search['is_on_sale'] = $req->input('is_on_sale');
+            $search['cid'] = $req->input('cid');
+            $search['keywords'] = $req->input('keywords');
+
+            if(!empty($req->has('is_new'))){
+                $goods->where('is_new', $req->input('is_new'));
+                // dump($goods);
+            }
+
+            if(!empty($req->has('is_hot'))){
+                $goods->where('is_hot', $req->input('is_hot'));
+                // dump($goods);
+            }
+
+            if(!empty($req->has('is_recommend'))){
+                $goods->where('is_recommend', $req->input('is_recommend'));
+                // dump($goods);
+            }
+
+            if(!empty($req->has('is_on_sale'))){
+                $goods->where('is_on_sale', $req->input('is_on_sale'));
+                // dump($goods);
+            }
+
+            if(!empty($req->has('cid'))){
+                $goods->where('typeid', $req->input('cid'));
+                
+            }
+
+            if(!empty($req->has('keywords'))){
+                $keywords = $req->input('keywords');
+                $goods->where('goods_name','like','%'.$keywords.'%');
+                // $goods->where(DB::raw("goods_name like '%{{$keywords}}%'"));
+                // dump($goods);
+            }
+
+        }
+
+       $goods = $goods->paginate(10);
+            // echo $goods->toSql();
+            // dd($goods);
+
+    	return view('admin/goods/index', compact('goods','goodtypes','search'));
     }
 
     //产品页面显示
@@ -44,7 +96,7 @@ class GoodController extends Controller
         // dump($request->all());
 
         $this->validate($request, [
-            'goods_name' => 'required|min:1|max:30',
+            'goods_name' => 'required|min:3|max:30',
             'typeid' => 'required',
             // 'shop_price'=>'required',
             // 'created_at' => 'required'
@@ -422,7 +474,7 @@ class GoodController extends Controller
 
        }
 
-        dump($typelist);
+        // dump($typelist);
         return view('web/lar_cat_list',compact('typelist','pid'));
     }
 
