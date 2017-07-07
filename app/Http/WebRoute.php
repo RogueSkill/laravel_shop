@@ -7,6 +7,9 @@
 //首页
 Route::get("/","WebController@index");
 
+//首页分类
+Route::get("type/{id}","WebController@type");
+
 //登录页
 Route::get("login", "WebController@login");
 

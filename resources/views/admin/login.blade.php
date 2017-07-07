@@ -19,7 +19,16 @@
         <div class="xs6 xm4 xs3-move xm4-move">
             <div style="height:150px;"></div>
             <div class="media media-y margin-big-bottom">           
-            </div>         
+            </div>
+            @if(count($errors) > 0)
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+             @endif         
             <form action="{{url('/admin/dologin')}}" method="post">
             {{ csrf_field() }}
             <div class="panel loginbox">
@@ -37,12 +46,12 @@
                             <span class="icon icon-key margin-small"></span>
                         </div>
                     </div>
-                    <!-- <div class="form-group">
+                    <div class="form-group">
                         <div class="field">
                             <input type="text" class="input input-big" name="code" placeholder="填写右侧的验证码" data-validate="required:请填写右侧的验证码" />
-                           <img src="images/passcode.jpg" alt="" width="100" height="32" class="passcode" style="height:43px;cursor:pointer;" onclick="this.src=this.src+'?'">                      
+                           <img src="{{ url('captcha/mews') }}" onclick="this.src='{{ url('captcha/mews') }}?r='+Math.random();" alt="" width="100" height="32" class="passcode" style="height:43px;cursor:pointer;" >                      
 
-                        </div> -->
+                        </div>
                     </div>
                 </div>
                 <div style="padding:30px;"><input type="submit" class="button button-block bg-main text-big input-big" value="登录"></div>
@@ -51,6 +60,9 @@
         </div>
     </div>
 </div>
+<script>
+    
 
+</script>
 </body>
 </html>

@@ -4,7 +4,8 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
+ 	    <meta name="csrf-token" content="{{ csrf_token() }}">
+		
 		<title>首页</title>
 
 		<link href="web_style/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css" />
@@ -88,10 +89,6 @@
 							<ul>
 								@foreach($bigType as $v)
 								<li class="index"><a href="{{url('/list/'.$v['id'])}}">{{$v['name']}}</a></li>
-                                <!-- <li class="qc"><a href="{{url('/list')}}">闪购</a></li>
-                                <li class="qc"><a href="{{url('/list')}}">限时抢</a></li>
-                                <li class="qc"><a href="{{url('/list')}}">团购</a></li>
-                                <li class="qc last"><a href="{{url('/list')}}">大包装</a></li> -->
                                 @endforeach
 							</ul>
 						    <div class="nav-extra">
@@ -104,40 +101,25 @@
 						<div id="nav" class="navfull">
 							<div class="area clearfix">
 								<div class="category-content" id="guide_2">
-									
 									<div class="category">
 										<ul class="category-list" id="js_climit_li">
 										 @foreach($bigType as $v) 
-										 <!-- dd($v); -->
 											<li class="appliance js_toggle relative first">
 												<div class="category-info">
-													<h3 class="category-name b-category-name"><i><img src="web_style/images/cake.png"></i><a class="ml-22" title="点心">{{$v['name']}}</a></h3>
+													<h3 class="category-name b-category-name"><i><img src="web_style/images/cake.png"></i><a href="javascript:void(0)" onmouseover="return info({{$v['id']}})" class="ml-22" title="点心">{{$v['name']}}</a></h3>
 													<em>&gt;</em></div>
 												<div class="menu-item menu-in top">
 													<div class="area-in">
 														<div class="area-bg">
 															<div class="menu-srot">
 																<div class="sort-side">
-																	<dl class="dl-sort">
-																		<dt><span title="蛋糕">{{$smallArr[1]}}</span></dt>
-																		<dd><a title="蒸蛋糕" href="{{url('/list')}}"><span>商品</span></a></dd>
-																		
-																		
-																	</dl>
-																	<dl class="dl-sort">
-																		<dt><span title="蛋糕">小分类2</span></dt>
-																		<dd><a title="蒸蛋糕" href="{{url('/list')}}"><span>商品</span></a></dd>
-																		
-																		
-																	</dl>
-
+																
+																		<dl class="dl-sort">
+																		<dt><span class='smallType'  title="蛋糕"></span></dt>
+																		</dl>
+																		<dd><a class='minType' title="蒸蛋糕" href="{{url('/list')}}"><span>商品</span></a></dd>
+																	
 																</div>
-																<!-- <div class="brand-side">
-																	<dl class="dl-sort"><dt><span>实力商家</span></dt>
-																		<dd><a rel="nofollow" title="呵官方旗舰店" target="_blank" href="{{url('/list')}}" rel="nofollow"><span  class="red" >呵官方旗舰店</span></a></dd>
-																		
-																	</dl>
-																</div> -->
 															</div>
 														</div>
 													</div>
@@ -145,314 +127,7 @@
 											<b class="arrow"></b>	
 											</li>
 										 @endforeach 
-<!-- 											<li class="appliance js_toggle relative">
-												<div class="category-info">
-													<h3 class="category-name b-category-name"><i><img src="web_style/images/cookies.png"></i><a class="ml-22" title="饼干、膨化">饼干/膨化</a></h3>
-													<em>&gt;</em></div>
-												<div class="menu-item menu-in top">
-													<div class="area-in">
-														<div class="area-bg">
-															<div class="menu-srot">
-																<div class="sort-side">
-																	<dl class="dl-sort">
-																		<dt><span title="饼干">饼干</span></dt>
-																		<dd><a title="蒸蛋糕" href="{{url('/list')}}"><span>蒸蛋糕</span></a></dd>
-																		
-																	</dl>
-																	<dl class="dl-sort">
-																		<dt><span title="薯片">薯片</span></dt>
-																		<dd><a title="蒸蛋糕" href="{{url('/list')}}"><span>蒸蛋糕</span></a></dd>
-																		
-																	</dl>
-																	<dl class="dl-sort">
-																		<dt><span title="蛋糕">虾条</span></dt>
-																		<dd><a title="蒸蛋糕" href="{{url('/list')}}"><span>蒸蛋糕</span></a></dd>
-																		
-																	</dl>
-																</div>
-																<div class="brand-side">
-																	<dl class="dl-sort"><dt><span>实力商家</span></dt>
-																		<dd><a rel="nofollow" title="YYKCLOT" target="_blank" href="{{url('/list')}}" rel="nofollow"><span  class ="red" >YYKCLOT</span></a></dd>
-																		
-																	</dl>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-                                             <b class="arrow"></b>
-											</li>
-											<li class="appliance js_toggle relative">
-												<div class="category-info">
-													<h3 class="category-name b-category-name"><i><img src="web_style/images/meat.png"></i><a class="ml-22" title="熟食、肉类">熟食/肉类</a></h3>
-													<em>&gt;</em></div>
-												<div class="menu-item menu-in top">
-													<div class="area-in">
-														<div class="area-bg">
-															<div class="menu-srot">
-																<div class="sort-side">
-																	<dl class="dl-sort">
-																		<dt><span title="猪肉脯">猪肉脯</span></dt>
-																		<dd><a title="蒸蛋糕" href="{{url('/list')}}"><span>蒸蛋糕</span></a></dd>
-																		
-																	</dl>
-																	<dl class="dl-sort">
-																		<dt><span title="牛肉丝">牛肉丝</span></dt>
-																		<dd><a title="蒸蛋糕" href="{{url('/list')}}"><span>蒸蛋糕</span></a></dd>
-																		
-																	</dl>
-																	<dl class="dl-sort">
-																		<dt><span title="小香肠">小香肠</span></dt>
-																		<dd><a title="蒸蛋糕" href="{{url('/list')}}"><span>蒸蛋糕</span></a></dd>
-																		
-																	</dl>
-																</div>
-																<div class="brand-side">
-																	<dl class="dl-sort"><dt><span>实力商家</span></dt>
-																		<dd><a rel="nofollow" title="花颜巧语 " target="_blank" href="{{url('/list')}}" rel="nofollow"><span  class="red" >花颜巧语 </span></a></dd>
-																		
-																	</dl>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-                                            <b class="arrow"></b>
-											</li>
-											<li class="appliance js_toggle relative">
-												<div class="category-info">
-													<h3 class="category-name b-category-name"><i><img src="web_style/images/bamboo.png"></i><a class="ml-22" title="素食、卤味">素食/卤味</a></h3>
-													<em>&gt;</em></div>
-												<div class="menu-item menu-in top">
-													<div class="area-in">
-														<div class="area-bg">
-															<div class="menu-srot">
-																<div class="sort-side">
-																	<dl class="dl-sort">
-																		<dt><span title="豆干">豆干</span></dt>
-																		<dd><a title="蒸蛋糕" href="{{url('/list')}}"><span>蒸蛋糕</span></a></dd>
-																		
-																	</dl>
-																	<dl class="dl-sort">
-																		<dt><span title="干笋">干笋</span></dt>
-																		<dd><a title="蒸蛋糕" href="{{url('/list')}}"><span>蒸蛋糕</span></a></dd>
-																		 
-																	</dl>
-																	<dl class="dl-sort">
-																		<dt><span title="鸭脖">鸭脖</span></dt>
-																		<dd><a title="蒸蛋糕" href="{{url('/list')}}"><span>蒸蛋糕</span></a></dd>
-																		
-																	</dl>
-																</div>
-																<div class="brand-side">
-																	<dl class="dl-sort"><dt><span>实力商家</span></dt>
-																		<dd><a rel="nofollow" title="歌芙品牌旗舰店" target="_blank" href="{{url('/list')}}" rel="nofollow"><span  class="red" >歌芙品牌旗舰店</span></a></dd>
-																		
-																	</dl>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-                                             <b class="arrow"></b>
-											</li>
-											<li class="appliance js_toggle relative">
-												<div class="category-info">
-													<h3 class="category-name b-category-name"><i><img src="web_style/images/nut.png"></i><a class="ml-22" title="坚果、炒货">坚果/炒货</a></h3>
-													<em>&gt;</em></div>
-												<div class="menu-item menu-in top">
-													<div class="area-in">
-														<div class="area-bg">
-															<div class="menu-srot">
-																<div class="sort-side">
-																	<dl class="dl-sort">
-																		<dt><span title="蛋糕">坚果</span></dt>
-																		<dd><a title="蒸蛋糕" href="{{url('/list')}}"><span>蒸蛋糕</span></a></dd>
-																		
-																	</dl>
-																	<dl class="dl-sort">
-																		<dt><span title="蛋糕">锅巴</span></dt>
-																		<dd><a title="蒸蛋糕" href="{{url('/list')}}"><span>蒸蛋糕</span></a></dd>
-																		
-																	</dl>
-																</div>
-																<div class="brand-side">
-																	<dl class="dl-sort"><dt><span>实力商家</span></dt>
-																		<dd><a rel="nofollow" title="呵呵嘿官方旗舰店" target="_blank" href="{{url('/list')}}" rel="nofollow"><span  class="red" >呵呵嘿官方旗舰店</span></a></dd>
-																		
-																	</dl>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-												<b class="arrow"></b>
-											</li>
-											<li class="appliance js_toggle relative">
-												<div class="category-info">
-													<h3 class="category-name b-category-name"><i><img src="web_style/images/candy.png"></i><a class="ml-22" title="糖果、蜜饯">糖果/蜜饯</a></h3>
-													<em>&gt;</em></div>
-												<div class="menu-item menu-in top">
-													<div class="area-in">
-														<div class="area-bg">
-															<div class="menu-srot">
-																<div class="sort-side">
-																	<dl class="dl-sort">
-																		<dt><span title="糖果">糖果</span></dt>
-																		<dd><a title="蒸蛋糕" href="{{url('/list')}}"><span>蒸蛋糕</span></a></dd>
-																		
-																	</dl>
-																	<dl class="dl-sort">
-																		<dt><span title="蜜饯">蜜饯</span></dt>
-																		<dd><a title="猕猴桃干" href="{{url('/list')}}"><span>猕猴桃干</span></a></dd>
-																		
-																	</dl>
-																</div>
-																<div class="brand-side">
-																	<dl class="dl-sort"><dt><span>实力商家</span></dt>
-																		<dd><a rel="nofollow" title="YYKCLOT" target="_blank" href="{{url('/list')}}" rel="nofollow"><span  class ="red" >YYKCLOT</span></a></dd>
-																		
-																	</dl>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-                                            <b class="arrow"></b>
-											</li>
-											<li class="appliance js_toggle relative">
-												<div class="category-info">
-													<h3 class="category-name b-category-name"><i><img src="web_style/images/chocolate.png"></i><a class="ml-22" title="巧克力">巧克力</a></h3>
-													<em>&gt;</em></div>
-												<div class="menu-item menu-in top">
-													<div class="area-in">
-														<div class="area-bg">
-															<div class="menu-srot">
-																<div class="sort-side">
-																	<dl class="dl-sort">
-																		<dt><span title="蛋糕">巧克力</span></dt>
-																		<dd><a title="蒸蛋糕" href="{{url('/list')}}"><span>蒸蛋糕</span></a></dd>
-																		
-																	</dl>
-																	<dl class="dl-sort">
-																		<dt><span title="蛋糕">果冻</span></dt>
-																		<dd><a title="蒸蛋糕" href="{{url('/list')}}"><span>蒸蛋糕</span></a></dd>
-																		
-																	</dl>
-																</div>
-																<div class="brand-side">
-																	<dl class="dl-sort"><dt><span>实力商家</span></dt>
-																		<dd><a rel="nofollow" title="花颜巧语 " target="_blank" href="{{url('/list')}}" rel="nofollow"><span  class="red" >花颜巧语 </span></a></dd>
-																		
-																	</dl>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-												<b class="arrow"></b>
-											</li>
-											<li class="appliance js_toggle relative">
-												<div class="category-info">
-													<h3 class="category-name b-category-name"><i><img src="web_style/images/fish.png"></i><a class="ml-22" title="海味、河鲜">海味/河鲜</a></h3>
-													<em>&gt;</em></div>
-												<div class="menu-item menu-in top">
-													<div class="area-in">
-														<div class="area-bg">
-															<div class="menu-srot">
-																<div class="sort-side">
-																	<dl class="dl-sort">
-																		<dt><span title="海带丝">海带丝</span></dt>
-																		<dd><a title="蒸蛋糕" href="{{url('/list')}}"><span>蒸蛋糕</span></a></dd>
-																		
-																	</dl>
-																	<dl class="dl-sort">
-																		<dt><span title="小鱼干">小鱼干</span></dt>
-																		<dd><a title="蒸蛋糕" href="{{url('/list')}}"><span>蒸蛋糕</span></a></dd>
-																		
-																	</dl>
-																	<dl class="dl-sort">
-																		<dt><span title="鱿鱼丝">鱿鱼丝</span></dt>
-																		<dd><a title="蒸蛋糕" href="{{url('/list')}}"><span>蒸蛋糕</span></a></dd>
-																		
-																	</dl>
-																</div>
-																<div class="brand-side">
-																	<dl class="dl-sort"><dt><span>实力商家</span></dt>
-																		<dd><a rel="nofollow" title="歌芙品牌旗舰店" target="_blank" href="{{url('/list')}}" rel="nofollow"><span  class="red" >歌芙品牌旗舰店</span></a></dd>
-																		
-																	</dl>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-                                             <b class="arrow"></b>
-											</li>
-											<li class="appliance js_toggle relative">
-												<div class="category-info">
-													<h3 class="category-name b-category-name"><i><img src="web_style/images/tea.png"></i><a class="ml-22" title="花茶、果茶">花茶/果茶</a></h3>
-													<em>&gt;</em></div>
-												<div class="menu-item menu-in top">
-													<div class="area-in">
-														<div class="area-bg">
-															<div class="menu-srot">
-																<div class="sort-side">
-																	<dl class="dl-sort">
-																		<dt><span title="蛋糕">蛋糕</span></dt>
-																		<dd><a title="蒸蛋糕" href="{{url('/list')}}"><span>蒸蛋糕</span></a></dd>
-																		
-																	</dl>
-																	<dl class="dl-sort">
-																		<dt><span title="蛋糕">点心</span></dt>
-																		<dd><a title="蒸蛋糕" href="{{url('/list')}}"><span>蒸蛋糕</span></a></dd>
-																		
-																	</dl>
-																</div>
-																<div class="brand-side">
-																	<dl class="dl-sort"><dt><span>实力商家</span></dt>
-																		<dd><a title="今生只围你" target="_blank" href="{{url('/list')}}" rel="nofollow"><span >今生只围你</span></a></dd>
-																		
-																	</dl>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-												<b class="arrow"></b>
-											</li>
-											<li class="appliance js_toggle relative last">
-												<div class="category-info">
-													<h3 class="category-name b-category-name"><i><img src="web_style/images/package.png"></i><a class="ml-22" title="品牌、礼包">品牌/礼包</a></h3>
-													<em>&gt;</em></div>
-												<div class="menu-item menu-in top">
-													<div class="area-in">
-														<div class="area-bg">
-															<div class="menu-srot">
-																<div class="sort-side">
-																	<dl class="dl-sort">
-																		<dt><span title="大包装">大包装</span></dt>
-																		<dd><a title="蒸蛋糕" href="{{url('/list')}}"><span>蒸蛋糕</span></a></dd>
-																		
-																	</dl>
-																	<dl class="dl-sort">
-																		<dt><span title="两件套">两件套</span></dt>
-																		<dd><a title="蒸蛋糕" href="{{url('/list')}}"><span>蒸蛋糕</span></a></dd>
-																		
-																	</dl>
-																</div>
-																<div class="brand-side">
-																	<dl class="dl-sort"><dt><span>实力商家</span></dt>
-																		<dd><a title="琳琅鞋业" target="_blank" href="{{url('/list')}}" rel="nofollow"><span >琳琅鞋业</span></a></dd>
-																		
-																	</dl>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
 
-											</li> -->
 										</ul>
 									</div>
 								</div>
@@ -513,11 +188,7 @@
 									<img src="web_style/images/TJ2.jpg"></img>
 									<span>[特惠]</span>商城爆品1分秒								
 								</a></li>
-								<!-- <li class="title-first"><a target="_blank" href="{{url('/list')}}">
-									<span>[公告]</span>商城与广州市签署战略合作协议
-								     <img src="web_style/images/TJ.jpg"></img>
-								     <p>XXXXXXXXXXXXXXXXXX</p>
-							    </a></li> -->
+
 							    
 						<div class="mod-vip">
 							<div class="m-baseinfo">
@@ -543,8 +214,6 @@
 						</div>																	    
 							    
 								<li><a target="_blank" href="{{url('/list')}}"><span>[特惠]</span>洋河年末大促，低至两件五折</a></li>
-								<!-- <li><a target="_blank" href="{{url('/list')}}"><span>[公告]</span>华北、华中部分地区配送延迟</a></li>
-								<li><a target="_blank" href="{{url('/list')}}"><span>[特惠]</span>家电狂欢千亿礼券 买1送1！</a></li> -->
 								
 							</ul>
                         <div class="advTip"><img src="web_style/images/advTip.jpg"/></div>
@@ -670,58 +339,73 @@
 					<div class="clear "></div>
 
 					<!--甜点-->
+					@foreach($bigType as $k=>$v)
+					<!-- {{var_dump($a = json_decode($v))}} -->
+						<!-- type表id -->
+						<!-- {{$a->id}} -->
 					
+						
+			
 					<div class="am-container ">
 						<div class="shopTitle ">
-							<h4>甜品</h4>
+							<h4>{{$a->name}}</h4>
 							<h3>每一道甜品都有一个故事</h3>
 							<div class="today-brands ">
-								<a href="{{url('/list')}} ">桂花糕</a>
+								@foreach($info as $vv)<a href="{{url('/list')}} ">@if($vv['pid']==$a->id){{$vv['name']}}@endif</a>@endforeach
 							</div>
 							<span class="more ">
-                    <a class="more-link " href="{{url('/list')}} ">更多美味</a>
+                    <a class="more-link " href="{{url('/list')}} ">更多商品</a>
                         </span>
 						</div>
 					</div>
 					
+						
 					<div class="am-g am-g-fixed floodOne ">
 						<div class="am-u-sm-5 am-u-md-3 am-u-lg-4 text-one ">
 							<a href="{{url('/list')}} ">
 								<div class="outer-con ">
 									<div class="title ">
-										零食大礼包开抢啦
+
+									@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[0]['goods_name']}} @endif @endforeach
+										
 									</div>					
 									<div class="sub-title ">
 										当小鱼儿恋上软豆腐
 									</div>
 								</div>
-                                  <img src="web_style/images/act1.png " />								
+                                  <img src="@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[0]['cover_img']}} @endif @endforeach" />								
 							</a>
 						</div>
 						<div class="am-u-sm-7 am-u-md-5 am-u-lg-4">
 							<div class="text-two">
 								<div class="outer-con ">
 									<div class="title ">
-										雪之恋和风大福
+									@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[1]['goods_name']}} @endif @endforeach
+								
+										
 									</div>									
 									<div class="sub-title ">
-										仅售：¥13.8
+										仅售:
+									@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[1]['shop_price']}} @endif @endforeach
+
 									</div>
 									
 								</div>
-								<a href="{{url('/list')}} "><img src="web_style/images/act2.png " /></a>
+								<a href="{{url('/list')}} "><img src="@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[1]['cover_img']}} @endif @endforeach" width="319"/></a>
 							</div>
 							<div class="text-two last">
 								<div class="outer-con ">
 									<div class="title ">
-										雪之恋和风大福
+									@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[2]['goods_name']}} @endif @endforeach
+									
+										
 									</div>
-									<div class="sub-title ">
-										仅售：¥13.8
+									<div class="sub-title ">仅售:
+										@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[2]['shop_price']}} @endif @endforeach
 									</div>
 									
 								</div>
-								<a href="{{url('/list')}} "><img src="web_style/images/act2.png " /></a>
+								<a href="{{url('/list')}} "><img src="@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[2]['cover_img']}} @endif @endforeach" width="199"/></a>
 						    </div>
 						</div> 
 
@@ -731,57 +415,64 @@
 						<div class="am-u-sm-3 am-u-md-6 text-three">
 							<div class="outer-con ">
 								<div class="title ">
-									小优布丁
+									@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[3]['goods_name']}} @endif @endforeach
+								
+									
 								</div>
 								
-								<div class="sub-title ">
-									尝鲜价：¥4.8
+								<div class="sub-title ">仅售:
+									@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[3]['shop_price']}} @endif @endforeach
 								</div>
 							</div>
-							<a href="{{url('/list')}} "><img src="web_style/images/act3.png " /></a>
+							<a href="{{url('/list')}} "><img src="@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[3]['cover_img']}} @endif @endforeach" height="139"/></a>
 						</div>
 
 						<div class="am-u-sm-3 am-u-md-6 text-three">
 							<div class="outer-con ">
 								<div class="title ">
-									小优布丁
+									@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[4]['goods_name']}} @endif @endforeach
+								
+									
 								</div>
 								
-								<div class="sub-title ">
-									尝鲜价：¥4.8
+								<div class="sub-title ">仅售:
+									@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[4]['shop_price']}} @endif @endforeach
 								</div>
 							</div>
-							<a href="{{url('/list')}} "><img src="web_style/images/act3.png " /></a>
+							<a href="{{url('/list')}} "><img src="@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[4]['cover_img']}} @endif @endforeach" /></a>
 						</div>
 
 						<div class="am-u-sm-3 am-u-md-6 text-three">
 							<div class="outer-con ">
 								<div class="title ">
-									小优布丁
+									@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[5]['goods_name']}} @endif @endforeach
+									
 								</div>
 								
-								<div class="sub-title ">
-									尝鲜价：¥4.8
+								<div class="sub-title ">仅售:
+									@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[5]['shop_price']}} @endif @endforeach
 								</div>
 							</div>
-							<a href="{{url('/list')}} "><img src="web_style/images/act3.png " /></a>
+							<a href="{{url('/list')}} "><img src="@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[5]['cover_img']}} @endif @endforeach" /></a>
 						</div>
 
 						<div class="am-u-sm-3 am-u-md-6 text-three last ">
 							<div class="outer-con ">
 								<div class="title ">
-									小优布丁
+									@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[6]['goods_name']}} @endif @endforeach
+									
 								</div>
 								
-								<div class="sub-title ">
-									尝鲜价：¥4.8
+								<div class="sub-title ">仅售:
+									@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[6]['shop_price']}} @endif @endforeach
 								</div>
 							</div>
-							<a href="{{url('/list')}} "><img src="web_style/images/act3.png " /></a>
+							<a href="{{url('/list')}} "><img src="@foreach($goods as $ka=>$ab)@if($k == $ka) {{$ab[6]['cover_img']}} @endif @endforeach" /></a>
 						</div> 
 					</div>
-
 					</div>
+						
+					@endforeach
                  <div class="clear "></div>
 
 
@@ -980,6 +671,40 @@
 		</div>
 		<script>
 			window.jQuery || document.write('<script src="basic/js/jquery.min.js "><\/script>');
+		</script>
+		<script type="text/javascript">
+			$.ajaxSetup
+	        ({
+	                headers: 
+	                {
+	                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	                }
+	        });
+
+	        function info(num)
+	        {
+	        	
+	        	var url = '/type/'+num;
+
+	        		$.get(url, {id:num}, function(response)
+	        		{
+	        			$('.smallType').html('');
+	        			for(var i = 0; i<response.length; i++)
+	        			{
+	        			
+	        			var info=response[i]['name'];
+	       			 	
+
+	        			$('.smallType').append("<p>"+info+"</p>");
+	        			}
+	        			        			
+	        		});
+	        };
+
+	        // function out()
+	        // {
+	        // 	$('.smallType').next.remove();
+	        // };
 		</script>
 		<script type="text/javascript " src="web_style/basic/js/quick_links.js "></script>
 	</body>

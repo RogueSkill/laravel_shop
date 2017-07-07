@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="{{asset('style/css/admin.css')}}">
     <script src="{{asset('style/js/jquery.js')}}"></script>
     <script src="{{asset('style/js/pintuer.js')}}"></script>  
+    <link rel="stylesheet" href="{{asset('web_style/jquery-lightbox-0.5/css/jquery.lightbox-0.5.css')}}">
+    <script src="{{asset('web_style/jquery-lightbox-0.5/js/jquery.js')}}"></script>
+    <script src="{{asset('web_style/jquery-lightbox-0.5/js/jquery.lightbox-0.5.js')}}"></script>
 </head>
 <body>
 <form method="post" action="">
@@ -39,23 +42,29 @@
           <td><input type="checkbox" name="id[]" value="1" />
             {{$v['id']}}</td>
           <td>{{$v['url']}}</td>
-          <td><img src="{{asset('upload/'.$v['name'])}}" alt="" width="100"></td>
+          <td>
+          <div id="element_id">
+          <a href="{{asset('upload/'.$v['name'])}}" title="文字说明">
+          <img src="{{asset('upload/'.$v['name'])}}" alt="" width="100">
+          </a>
+          </div>
+          </td>
           <td>{{$v['name']}}</td>
           <td>{{$v['created_at']}}</td>
           <td><div class="button-group">
-              <a class="button border-red" href="{{url('/admin/user_edit/'.$v['id'])}}"><span class="icon-trash-o"></span> 添加</a>
+              <!-- <a class="button border-red" href="{{url('/admin/user_edit/'.$v['id'])}}"><span class="icon-trash-o"></span> 修改</a> -->
 
 
 
               <a class="button border-red" href="javascript:void(0)" onclick="return del({{$v['id']}})"><span class="icon-trash-o"></span> 删除</a></div></td>
-                  <!-- <a class="button border-red" href="{{url('/admin/pic_del/'.$v['id'])}}"><span class="icon-trash-o"></span> 删除</a> -->
+                 <!--  <a class="button border-red" href="{{url('/admin/'.$v['id'].'/pic_del')}}"><span class="icon-trash-o"></span> 删除</a> -->
 
 
 
 
         </tr>
       @endforeach
-
+<tr>{{$date->links()}}</tr>
     </table>
   </div>
 </form>
@@ -84,6 +93,9 @@ function del(num)
           });
     }
 };  
+
+  $('#element_id a').lightBox();
+
 
 // $("#checkall").click(function(){
 //  $("input[name='id[]']").each(function(){

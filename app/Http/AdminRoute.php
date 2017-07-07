@@ -7,6 +7,7 @@ Route::get('/admin/user_edit/{id}', 'BackUserController@user_edit');
 Route::post('/admin/update/{id}', 'BackUserController@update');
 Route::post('/admin/insert', 'BackUserController@insert');
 Route::get('/admin/user_del/{id}', 'BackUserController@user_del');
+Route::post('/admin/search','BackUserController@search');
 
 	//登录
 // Route::get('/admin/login', 'BackUserController@login');

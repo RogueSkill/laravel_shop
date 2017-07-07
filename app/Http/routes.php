@@ -6,7 +6,7 @@
 	Route::get('/admin/login', 'BackUserController@login');//后台登录,不要放入路由组
 	Route::post('/admin/dologin', 'BackUserController@dologin');//后台登录,不要放入路由组
 	Route::get('welcome', 'BackUserController@welcome');//无权限
-
+	Route::get('captcha/mews','BackUserController@mews');
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -26,7 +26,6 @@
 // });
 
 //######################前台#################################
-
 
 //######################后台#################################
 

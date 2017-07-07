@@ -16,7 +16,7 @@
   <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>增加轮播图</strong></div>
   <div class="body-content">
     <form method="post" class="form-x" action="{{url('/admin/pic_insert')}}" enctype="multipart/form-data">
-      <input type="hidden" name="created_at" value="{{date('YmdHid',time())}}">
+      <input type="hidden" name="created_at" value="{{date('YmdHis',time())}}">
       <div class="form-group">
         <div class="label">
           <label>名字：</label>

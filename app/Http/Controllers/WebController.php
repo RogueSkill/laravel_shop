@@ -12,43 +12,69 @@ use DB;
 class WebController extends Controller
 {
     //首页
-    public function index(Request $request)
+    public function index()
     {
-        // //轮播图
-        // $pic = Pic::paginate(3);
-        // //最新商品
-        // $user = Good::where('is_on_sale','1')->paginate(8);
-        // //热卖商品
-        // $hotsale = Good::where('is_hot','1')->paginate(8);
+        // $pic = Pic::paginate(3);//轮播图
 
-        //分类
+        //主类
         $bigType = Type::where('pid','0')->paginate(10);
-        // dd($bigType[1]['id']);
-        $smallArr = array();
-        foreach($bigType as $v)
-        {
-             $smallType = DB::table('types')->where('pid',$v['id'])->paginate(10);
-             // dd($smallType);
-             foreach($smallType as $b)
-             {
-                
-                $newarray = array_push($smallArr, $b['name']);
-                
-             }
+        $info=array();
+        $arr=array();
+       foreach($bigType as $v){
+
+            // $smallType =  Type::where('pid',$v['id'])->paginate(10);
+            $smallType =  DB::table('types')->where('pid','>',0)->paginate(10);
+            // dump($smallType);
+
+
+            $arr[]=array_push($arr,$smallType);
+            $info =$arr[0]->toArray()['data'];
         }
-        // var_dump($bigType);
-        // var_dump($smallArr);
+
+        foreach($smallType as $v)
+        {
+            $good[] =  DB::table('goods')->where('typeid',$v['id'])->paginate(7);
+        }
+        // dd($smallType[0]["id"]);
+        foreach($bigType as $k=>$v)
+        {
+            $v->good = $good[$k];
+        }
+        // dd($bigType);
+            // dd($good);
+        // $computerGoods = Good::where('is_hot','1')->get();
+
+                
+        $computerGoods = DB::table('goods')->join('types','goods.typeid','=','types.id')->where('types.pid',1)->select('goods.*','types.pid')->get();
+        
+       // dump($computerGoods);
+                // $goodsArr = array($computerGoods);
+                
+                // $goodsInfo=$goodsArr[0]->toArray();
+        // dd($computerGoods);
+       
+        // dump($info);
+
+        //查商品
+        foreach($smallType as $v)
+        {
+                // dump($v);
+            $goods[] = DB::table('goods')->join('types','goods.typeid','=','types.id')->where('types.pid',$v['pid'])->select('goods.*','types.pid')->get();
+        }
+        // dd($goods);
+
+        return view('web/lar_index',compact('bigType','info','computerGoods',"good",'goods'));
+
       
-        return view('web/lar_index',compact('bigType','smallArr'));
+    }
 
+    //首页分类
+    public function type(Request $request,$id)
+    {
 
-        // $id = $bigType->id;
-        // dd($id);
+             $smallType = DB::table('types')->where('pid',$id)->paginate(10);
 
-        // return view('web/index',compact('pic','user','hotsale'));
-
-
-        // return view('web/index',compact('hotsale'));
+             return $smallType->toArray()['data'];
     }
 
     //登录页
