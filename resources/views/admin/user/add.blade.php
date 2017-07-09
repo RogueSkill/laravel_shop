@@ -15,7 +15,18 @@
 <div class="panel admin-panel">
   <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>增加用户</strong></div>
   <div class="body-content">
+          @if (count($errors) > 0)
+              <div class="alert alert-danger">
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+          @endif
+          
     <form method="post" class="form-x" action="{{url('/admin/insert')}}">
+      <input type="hidden" name="created_at" value="{{date('YmdHis',time())}}">
 
       <div class="form-group">
         <div class="label">
@@ -40,7 +51,7 @@
           <label>确认密码：</label>
         </div>
         <div class="field">
-          <input type="password" class="input w50" value="" name="pass" data-validate="required:请再次输入确认密码" />
+          <input type="password" class="input w50" value="" name="repass" data-validate="required:请再次输入确认密码" />
           <div class="tips"></div>
         </div>
       </div>

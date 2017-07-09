@@ -12,7 +12,7 @@
 			<!--顶部导航条 -->
 			@yield('top_nav')
 			<!-- end顶部导航条 -->
-			
+
 			<!-- banner -->
 			@yield('banner')						
 			<!-- end banner -->
@@ -26,28 +26,7 @@
 						@yield('left_nav')
 
 					<!--小导航 -->
-					<div class="am-g am-g-fixed smallnav">
-						<div class="am-u-sm-3">
-							<a href="sort.html"><img src="web_style/images/navsmall.jpg" />
-								<div class="title">商品分类</div>
-							</a>
-						</div>
-						<div class="am-u-sm-3">
-							<a href="#"><img src="web_style/images/huismall.jpg" />
-								<div class="title">大聚惠</div>
-							</a>
-						</div>
-						<div class="am-u-sm-3">
-							<a href="#"><img src="web_style/images/mansmall.jpg" />
-								<div class="title">个人中心</div>
-							</a>
-						</div>
-						<div class="am-u-sm-3">
-							<a href="#"><img src="web_style/images/moneysmall.jpg" />
-								<div class="title">投资理财</div>
-							</a>
-						</div>
-					</div>
+					@yield('small_nav')
 
 					<!--走马灯 -->
 					@yield('right_box')
@@ -58,11 +37,9 @@
 					<!--今日推荐 -->
 					@yield('recommend')
 					<!-- end 今日推荐 -->
-					
 					<!--热门活动 -->
 					@yield('hot')
 					<!-- end 热门活动 -->
-
 					<!--甜点-->
 					@yield('cat_one')
 					<!--坚果-->

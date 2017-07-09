@@ -8,6 +8,9 @@
 Route::get("/","GoodController@web_index");
 Route::get("index","GoodController@web_index");
 
+//首页分类
+Route::get("type/{id}","WebController@type");
+
 //登录页
 Route::get("login", "WebController@login");
 
@@ -29,8 +32,8 @@ Route::get("paysucceed", "WebController@paysucceed");
 
 //分类列表页
 Route::get("cat_list/{pid}", "GoodController@cat_list");
-//产品列表页
-Route::get("list/{id}", "GoodController@lister");
+//商品列表页
+Route::get("cat_list/list/{pid}", "GoodController@lister");
 
 //订单页
 Route::get("order", "WebController@order");

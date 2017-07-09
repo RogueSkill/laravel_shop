@@ -6,7 +6,7 @@
 	Route::get('/admin/login', 'BackUserController@login');//后台登录,不要放入路由组
 	Route::post('/admin/dologin', 'BackUserController@dologin');//后台登录,不要放入路由组
 	Route::get('welcome', 'BackUserController@welcome');//无权限
-
+	Route::get('captcha/mews','BackUserController@mews');
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -26,7 +26,6 @@
 // });
 
 //######################前台#################################
-
 
 //######################后台#################################
 Route::get('/admin/goods_add', 'GoodController@add');
@@ -55,7 +54,7 @@ Route::group(['middleware'=>['web','admin.login']],function(){
 
 	//商品模块
 	Route::get('/admin/goods_list', 'GoodController@index');
-
+	// Route::post('/admin/goods_list', 'GoodController@index');
 	 Route::get('/admin/edit/{id}',[
  		'as'=>'aedit',
  		'edit'=>'AdminController@edit'
@@ -70,13 +69,15 @@ Route::group(['middleware'=>['web','admin.login']],function(){
 	// 	'as'=>'changeHot',
 	// 	'changeHot'=>'GoodController@changeHot'
 	// ]);
-	Route::post('/admin/goods_list/{hot}', 'GoodController@changeHot');
+	Route::post('/admin/goods_list/{hot}/{tid}', 'GoodController@changeHot');
 
 	// 	Route::post('/admin/goods_list', [
 	// 	'as'=>'changeRecommend',
 	// 	'changeRecommend'=>'GoodController@changeRecommend'
 	// ]);
-	Route::post('/admin/goods_list/{recommend}', 'GoodController@changeRecommend');
+	Route::post('/admin/goods_list/{recommend}/{pid}/{tid}', 'GoodController@changeRecommend');
+
+	Route::post('/admin/goods_list/{sale}/{pid}/{tid}/{kid}', 'GoodController@changeSale');
 
 	Route::get('/admin/goods_edit/{id}', 'GoodController@edit');
 	Route::post('/admin/goods_edit', 'GoodController@doEdit');
@@ -100,6 +101,9 @@ Route::group(['middleware'=>['web','admin.login']],function(){
     Route::get('/admin/link_list', 'AdminController@link_list');
     Route::get('/admin/link_add', 'AdminController@link_add');
     Route::post('/admin/link_add', 'AdminController@link_submit');
+    Route::get('/admin/link_updata', 'AdminController@link_updata');
+    Route::get('/admin/link_upadd', 'AdminController@link_upadd');
+    Route::post('/admin/link_upadds', 'AdminController@link_upadds');
 });
 
 Route::group(['middleware'=>['web','admin.login','level']],function(){

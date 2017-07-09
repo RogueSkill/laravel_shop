@@ -57,15 +57,20 @@
     <div class="bq-img"><img src="{{asset('images/bq-nav.png')}}" alt="" class="img-responsive"></div>
 </div>
 <!--end-->
-
+<?php
+    $list = DB::table('links')->get();
+?>
 <!-- 友情链接 -->
+
 <div class="container">
     <div class="links">
         <div class="links-font">友情链接</div>
         <ul>
-            <li><a href="{{url('http://www.baidu.com')}}">百度</a></li>
-            <li><a href="{{url('http://www.google.com.hk')}}">谷歌</a></li>
-            <li><a href="{{url('http://www.bing.com')}}">必应</a></li>
+            @if($list)
+                @foreach($list as $url)
+                    <li><a href="{{$url['url']}}">{{$url['name']}}</a></li>
+                @endforeach
+            @endif
         </ul>
         <hr>
     </div>

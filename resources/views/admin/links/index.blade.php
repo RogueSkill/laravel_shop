@@ -29,7 +29,8 @@
                     <td>{{$v['name']}}</td>
                     <td>{{$v['url']}}</td>
                     <td><div class="button-group">
-                            <a class="button border-main" href="{{url('admin/link_add')}}?id={{$v['id']}}"><span class="icon-edit"></span> 审核</a>
+                            <a class="button border-main" href="{{url('admin/link_upadd')}}?id={{$v['id']}}"><span class="icon-edit"></span> 编辑</a>
+                            <a class="button border-red" href="{{url('admin/link_updata')}}?id={{$v['id']}}"><span class="icon-edit"></span> 删除</a>
                         </div>
                     </td>
                 </tr>

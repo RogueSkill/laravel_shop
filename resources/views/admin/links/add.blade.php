@@ -40,7 +40,7 @@
                     <label></label>
                 </div>
                 <div class="field">
-                    <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+                    <button class="button bg-main icon-check-square-o" type="submit" id="submit"> 提交</button>
                 </div>
             </div>
         </form>
@@ -50,28 +50,25 @@
 </html>
 <script>
 
-    // $(function(){
-    //     $('button').click(function(){
-    //         var pid = $('#pid').val();
-    //         var path = $("#pid").find("option:selected").attr("path");
-    //         var name = $("#title").val();
-    //         // alert(pid+'--'+path+'--'+title);
-    //         var data = $("#add_cate").serialize();
-    //         console.log(data)
-    //         // return;
-    //         $.ajax({
-    //           url:'/admin/cate_add',
-    //           type:'post',
-    //           dataType:"JSON",
-    //           // name=John&location=Boston
-    //           // data:'pid='+ pid +'&path='+path+'&name='+name,
-    //           data:data,
-    //           success:function(msg){
-    //               console.log(msg);
-    //           }
-    //         });
+    var submit = document.getElementById('submit');
+    submit.onclick = function () {
+        var name = document.getElementById('linkname').value;
+        var link = document.getElementById('link').value;
 
+        if(name == null || name == ""){
+            alert("友链名称不能为空");
+            return false;
+        }
 
-    //     });
-    // });
+        if(link == null || link == ""){
+            alert("友链地址不能为空");
+            return false;
+        }
+
+        if (!(/(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/.test(link))) {
+            alert("请输入正确的友链地址");
+            return false;
+        }
+    }
+
 </script>
