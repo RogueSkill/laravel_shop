@@ -19,7 +19,7 @@
             <div class="paysucceed-bg">您已经成功下单</div>
             <div class="paysucceed-bluebg">
                 <div class="paysucceed-left">
-                    <span>订单编号：2017062005765</span>
+                    <span>订单编号：{{$_GET['ordernum']}}</span>
                     <a href="">查看我的订单</a>
                 </div>
                 <div class="paysucceed-right">

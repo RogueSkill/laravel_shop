@@ -1,7 +1,7 @@
 /*--------------------------------------------------购物车-------------------------------------------------------------*/
 
 //全选
-function checkAll() {
+/*function checkAll() {
 
 	//给全选按钮绑定点击事件
 	$("input[name='checkall']").on("click", function() {
@@ -14,38 +14,63 @@ function checkAll() {
 
 			//全选所有商品
 			$("input[name='check[]']").prop('checked', true);
+			var shop_price = document.getElementsByClassName('order-price');
+			var sprice = 0;
+			for(var i =0; i<shop_price.length; i++) {
 
+				sprice = sprice + parseFloat(shop_price[i].innerHTML);
+			}
+			$(".total").html(sprice.toFixed(2));
+			$(".num").html(shop_price.length);
 		} else {
 
 			//如果已经全选了商品的时候点击全选按钮则把所有商品变为未选,并把全选按钮也变为未选
 			$("input[name='check[]']").prop('checked', false);
 			$("input[name='checkall']").prop('checked', false);
-
+			$(".total").html("0.00");
+			$(".num").html("0");
 		}
 
 	});
 
+	var price_shop = 0;
 	//给商品选择按钮绑定点击事件
 	$("input[name='check[]']").on("click", function() {
+
+		var that = $(this);
+
+		var total_price = parseFloat(that.parent().next().next().next().next().next().html());
+
+		var total = parseFloat($(".total").html());
+
+		var gnum = parseInt($(".num").html());
 
 		//点击任意一个商品选择按钮则判断当前商品按钮是否为未选状态，是则把全选按钮变为未选
 		$(this).each( function() {
 
 			//当前按钮状态
 			var bool = $(this).prop('checked');
-			
+
+			$(".total").html((total + total_price).toFixed(2));
+
+			$(".num").html(gnum+1);
+
 			//未选状态
 			if(bool == false) {
 
 				//把全选按钮变为未选
 				$("input[name='checkall']").prop('checked', false);
+
+				$(".total").html((total - total_price).toFixed(2));
+
+				$(".num").html(gnum-1);
 			}
 		});
 		
 		
 	});
 
-}
+}*/
 
 //购买数量及单项商品总计
 function goodNum(){
@@ -55,7 +80,7 @@ function goodNum(){
 
 		//当前的值
 		var val = $(this).val();
-
+		
 		//不为空
 		if(val != "") {
 
@@ -67,6 +92,7 @@ function goodNum(){
 			} else if(val < 1){ //小于1
 
 				$(this).val(1);
+
 			}
 		} else { //为空
 
@@ -83,6 +109,8 @@ function goodNum(){
 
 		//赋值给单项商品总计
 		$(this).parent().next().html(sum);
+
+		total();
 
 	});
 
@@ -109,6 +137,8 @@ function goodNum(){
 
 		//赋值给单项商品总计
 		$(this).parent().next().html(sum);
+
+		total();
 
 	});
 
@@ -144,13 +174,113 @@ function goodNum(){
 		//赋值给单项商品总计
 		$(this).parent().next().html(sum);
 
+		total();
+
 	});
 }
 
 
+
+//购买按纽点击事件
+$("button[name='shoping']").on("click", function() {
+	window.location.href = window.location.protocol+"//"+window.location.host;
+});
+
+//结算按纽点击事件
+$("button[name='pay']").on("click", function() {
+
+	var img = document.getElementsByClassName("order-img");
+
+	var arr = [];
+
+	for(var i =0; i<img.length; i++) {
+
+		var pic = $(img[i]).find("img").attr("src");
+
+		var shopname = $(img[i]).next().html();
+
+		var shopprice = $(img[i]).next().next().html();
+
+		var shopnum = $(img[i]).next().next().next().find("input[name='good-num']").val();
+
+		var arrData = [{
+			cover_img:pic,
+			goods_name:shopname,
+			shop_price:shopprice,
+			goodnum:shopnum
+		}];
+
+		Array.prototype.push.apply(arr, arrData);
+	}
+
+	$.ajax({
+
+		type:"get",
+		url:window.location.protocol+"//"+window.location.host+"/cartSession",
+		data:{
+			"shopData":arr
+		},
+
+		success:function(data) {
+			
+			if(data == 1) {
+				window.location.href = window.location.protocol+"//"+window.location.host+"/pay";
+			}
+		}
+	});
+});
+
+//删除按纽点击事件
+
+var gname = document.getElementsByName("delete");
+
+for(var i  = 0; i<gname.length; i++) {
+
+	gname[i].onclick =  function() {
+
+		var that = $(this);
+
+		$.ajax({
+
+			type:"get",
+			url:window.location.protocol+"//"+window.location.host+"/cartDelete",
+			data:{id:$(this).attr('val')},
+			success:function(data) {
+				
+				if(data > 0) {
+					that.parent().parent().remove();
+				}
+			}
+		});
+	};
+}
+
+
+//商品总计
+function total() {
+
+	var sumprice = document.getElementsByClassName("order-price");
+
+	var sumtotal = 0;
+
+	for(var i = 0; i < sumprice.length; i++) {
+
+		sumtotal = parseFloat(sumtotal) + parseFloat($(sumprice[i]).html());
+		
+		
+	}
+
+	$(".total").html(sumtotal.toFixed(2));
+}
+
+
+
+
 //全选
-checkAll();
+// checkAll();
 
 //购买数量
 goodNum();
 
+//商品总计
+total()

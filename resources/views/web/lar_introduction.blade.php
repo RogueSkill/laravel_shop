@@ -250,7 +250,7 @@
 														<dd>
 
 															<input id="min" class="am-btn am-btn-default" name="" type="button" value="-" />
-															<input id="text_box" name="" type="text" value="1" style="width:30px;" />
+															<input id="text_box" name="goodname" type="text" value="1" style="width:30px;" />
 															<input id="add" class="am-btn am-btn-default" name="" type="button" value="+" />
 															<span id="Stock" class="tb-hidden">库存<span class="stock">{{$data['store_count']}}</span>件</span>
 														</dd>
@@ -310,18 +310,45 @@
 							</div>
 							<li>
 								<div class="clearfix tb-btn tb-btn-buy theme-login">
-									<a id="LikBuy" title="点此按钮到下一步确认购买信息" href="{{url('pay/'.$data['goods_id'])}}">立即购买</a>
+									<a id="LikBuy" title="点此按钮到下一步确认购买信息">立即购买</a>
 								</div>
 							</li>
 							<li>
 								<div class="clearfix tb-btn tb-btn-basket theme-login">
-									<a id="LikBasket" title="加入购物车" href="#"><i></i>加入购物车</a>
+									<a id="LikBasket" title="加入购物车"><i></i>加入购物车</a>
 								</div>
 							</li>
 						</div>
 
 					</div>
+						<script>
 
+							$("#LikBuy").on("click", function() {
+								var goodnum = $("input[name='goodname']").val();
+								window.location.href = window.location.protocol+"//"+window.location.host+"/pay/{{$data['goods_id']}}/"+goodnum;
+							});
+
+							$("#LikBasket").on("click", function() {
+                                var iflogin = "{{session("webid")}}";
+							    if(iflogin == "") {
+                                    window.location.href = window.location.protocol+"//"+window.location.host+"/login";
+								} else {
+							    var gval = $("input[name='goodname']").val();
+							    $.ajax({
+
+									type:"get",
+									url:window.location.protocol+"//"+window.location.host+"/cartAjax/{{$data['goods_id']}}/"+gval,
+									success:function(data) {
+									   if(data > 0) {
+									       alert("添加购物车成功");
+									   } else {
+									       alert("添加购物车失败");
+									   }
+									}
+								});
+                                }
+							});
+						</script>
 					<div class="clear"></div>
 
 				</div>

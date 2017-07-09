@@ -25,7 +25,7 @@ Route::get("goods/{goods_id}", "WebController@goods");
 Route::get("cart", "WebController@cart");
 
 //结算页
-Route::get("pay/{id}", "WebController@pay");
+Route::get("pay/{id?}/{goodnum?}", "WebController@pay");
 
 //结算成功页
 Route::get("paysucceed", "WebController@paysucceed");
@@ -37,6 +37,7 @@ Route::get("cat_list/list/{pid}", "GoodController@lister");
 
 //订单页
 Route::get("order", "WebController@order");
+Route::get("myorder", "WebController@myorder");
 
 //用户中心页
 Route::get("center", "WebController@ucenter");
@@ -78,3 +79,12 @@ Route::post("Retrievepass","WebController@Retrievepass");
 Route::get("changepass/{id}/{time}","WebController@changepass");
 Route::post("changepass","WebController@changepassword");
 
+//购物车页ajax
+Route::get("cartAjax/{id}/{gnum}", "WebController@cartAjax");
+
+//购物车删除
+Route::get("cartDelete", "WebController@cartDelete");
+
+//购物车结算存session
+Route::get("cartSession", "WebController@cartSession");
+Route::get("paysucceedAjax", "WebController@paysucceedAjax");

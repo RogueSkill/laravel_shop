@@ -4,8 +4,7 @@
 //一加载就请求出省份信息
 $.get(
 
-		"http://localhost/Laravel/ShopCenter/public/cityModel",
-
+		window.location.protocol+"//"+window.location.host+"/cityModel",
 		{
 			upid:0,
 		},
@@ -32,7 +31,8 @@ $("select[name='province']").on("change", function() {
 	
 	$.get(
 
-		"http://localhost/Laravel/ShopCenter/public/cityModel",
+		
+		window.location.protocol+"//"+window.location.host+"/cityModel",
 
 		{
 			upid:id
@@ -53,7 +53,7 @@ $("select[name='province']").on("change", function() {
 
 			$.get(
 
-				"http://localhost/Laravel/ShopCenter/public/cityModel",
+				window.location.protocol+"//"+window.location.host+"/cityModel",
 
 				{
 					upid:data[0].id
@@ -96,7 +96,7 @@ $("select[name='province']").on("change", function() {
 
 		$.get(
 
-		"http://localhost/Laravel/ShopCenter/public/cityModel",
+		window.location.protocol+"//"+window.location.host+"/cityModel",
 
 		{
 			upid:cid

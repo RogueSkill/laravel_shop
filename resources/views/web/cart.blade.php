@@ -17,54 +17,41 @@
     <div class="container">
         <div class="table-responsive">
             <table class="table table-hover table-bordered order-table">
-                <th><input type="checkbox" name="checkall">全选</th>
                 <th>缩略图</th>
                 <th>商品名称</th>
-                <th>商品属性</th>
                 <th>商品价格</th>
                 <th>数量</th>
                 <th>总计</th>
                 <th>操作</th>
+
+                @foreach($carydata as $val)
+
                 <tr>
-                    <td><input type="checkbox" name="check[]"></td>
-                    <td class="order-img"><img src="./images/1.jpg" alt="商品缩略图" class="img-rounded"></td>
-                    <td>saber模型</td>
-                    <td>蓝白色</td>
-                    <td class="price">120.12</td>
+
+                    <td class="order-img"><img src="{{$val['pic']}}" alt="{{$val['goods_name']}}" class="img-rounded"></td>
+                    <td>{{$val['goods_name']}}</td>
+                    <td class="price">{{$val['shop_price']}}</td>
                     <td>
                         <span class="cart-sub min" >-</span>
-                        <input type="text" name="good-num" value="1" class="cart-num">
+                        <input type="text" name="good-num" value="{{$val['num']}}" class="cart-num">
                         <span class="cart-sub add" >+</span>
                     </td>
-                    <td class="order-price">120.12</td>
-                    <td><button type="button" class="btn btn-danger">删除</button></td>
+                    <td class="order-price">{{number_format($val['shop_price']*$val['num'], 2)}}</td>
+                    <td><button type="button" class="btn btn-danger" val="{{$val['id']}}" name="delete">删除</button></td>
                 </tr>
-                <tr>
-                    <td><input type="checkbox" name="check[]"></td>
-                    <td class="order-img"><img src="./images/1.jpg" alt="商品缩略图" class="img-rounded"></td>
-                    <td>saber模型</td>
-                    <td>蓝白色</td>
-                    <td class="price">120.12</td>
-                    <td>
-                        <span class="cart-sub min" >-</span>
-                        <input type="text" name="good-num" value="1" class="cart-num">
-                        <span class="cart-sub add" >+</span>
-                    </td>
-                    <td class="order-price">120.12</td>
-                    <td><button type="button" class="btn btn-danger">删除</button></td>
-                </tr>
+               @endforeach
             </table>
         </div>
 
         <div class="order-pay">
             <div class="order-payleft">
                 总计:
-                <span>0.00元</span>
-                <strong>共1件</strong>
+                <span class="total">0.00</span>元
+
             </div>
             <div class="order-payright">
-                <button type="button" class="btn btn-primary">购物</button>
-                <button type="button" class="btn btn-info">结算</button>
+                <button type="button" class="btn btn-primary" name="shoping">购物</button>
+                <button type="button" class="btn btn-info" name="pay">结算</button>
             </div>
         </div>
     </div>

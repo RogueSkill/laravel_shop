@@ -176,7 +176,11 @@
 									<li>
 										<div class="i-pic limit">
 											@if($val['cover_img'])
+<<<<<<< HEAD
+												<a href="{{url('./goods')}}/{{$val['goods_id']}}"><img width="218" height="218" src="../{{$val['cover_img']}}" /></a>
+=======
 												<a href="{{url('./goods')}}/{{$val['goods_id']}}"><img width="218" height="218" src="../../{{$val['cover_img']}}" /></a>
+>>>>>>> e7387f5cba44c0b8ecb85a48d0db98a4ff711e67
 											@else
 												<img width="218" height="218" src="{{asset('style/images/image.png')}}" />
 											@endif
