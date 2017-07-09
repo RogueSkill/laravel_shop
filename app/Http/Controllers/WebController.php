@@ -44,7 +44,7 @@ class WebController extends Controller
         $data = $data[0];
 
         //判断username是否存在session中,存在则赋值到首页
-        $bool =  $request->session()->has("username");
+        $bool =  $request->session()->has("username","comments");
 
         if($bool) {
             $username =  $request->session()->get("username");
