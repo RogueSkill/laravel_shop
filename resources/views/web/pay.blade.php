@@ -97,9 +97,13 @@
 
                 @foreach($addressData as $addval)
                     <div class="panel-heading">
-                        <input type="radio" name="address-radio[]">
-                        <a class="panel-title"  href="#">{{$addval['province'].$addval['city'].$addval['county'].$addval['detailed_address']}}
-                            {{$addval['consignee']}} {{$addval['phone']}}</a>
+                        @if($addval['status'] == 1)
+                            <input type="radio" name="address-radio[]" val="{{$addval['id']}}" checked>
+                            @else
+                            <input type="radio" name="address-radio[]" val="{{$addval['id']}}">
+                        @endif
+                        <a class="panel-title"  href="{{url('addresedat/'.$addval['id'])}}"><span name="address">{{$addval['province'].$addval['city'].$addval['county'].$addval['detailed_address']}}</span>
+                            <span name="name">{{$addval['consignee']}} </span> <span name="phone">{{$addval['phone']}}</span></a>
                     </div>
                 @endforeach
         </div>
@@ -116,10 +120,10 @@
                     <tr>
                         <td>请选择支付方式</td>
                         <td>
-                            <select class="form-control" name="province" id="province" style="margin-left:10px; width:200px;">
+                            <select class="form-control" name="payment" id="payment" style="margin-left:10px; width:200px;">
                                 <option>--请选择支付方式--</option>
-                                <option>支付宝</option>
-                                <option>微信</option>
+                                <option value="支付宝">支付宝</option>
+                                <option value="微信">微信</option>
                             </select>
                         </td>
                     </tr>
@@ -148,8 +152,20 @@
                                 <td class="order-img"><img src="{{asset($val['cover_img'])}}" alt="商品缩略图" class="img-rounded"></td>
                                 <td>{{$val['goods_name']}}</td>
                                 <td>{{$val['shop_price']}}</td>
-                                <td>1</td>
-                                <td class="order-price">120.00</td>
+                                <td>
+                                    @if($goodnum == null)
+                                        {{$val['goodnum']}}
+                                        @else
+                                        {{$goodnum}}
+                                    @endif
+                                </td>
+                                <td class="order-price">
+                                    @if($goodnum == null)
+                                        {{number_format($val['shop_price']*$val['goodnum'], 2)}}
+                                        @else
+                                        {{number_format($val['shop_price']*$goodnum, 2)}}
+                                    @endif
+                                </td>
                             </tr>
                         @endforeach
                     </table>
@@ -158,18 +174,19 @@
                 <div class="pay-pay">
                     <div class="pay-left">
                         <span>商品价格:</span>
-                        <strong>120.00</strong>
+                        <strong class="shopprice">0.00</strong>
                         <span>+</span>
                         <span>运费:</span>
-                        <strong>0</strong>
+                        <strong class="freight">0.00</strong>
                         <span>=</span>
-                        <strong>120.00元</strong>
+                        <strong class="total">0.00元</strong>
                     </div>
                     <div class="order-payright">
-                        <button type="button" class="btn btn-info">确认下单</button>
+                        <button type="button" class="btn btn-info" name="enter">确认下单</button>
                     </div>
                 </div>
                 <!-- end -->
+
             </div>
         </div>
     </div>
@@ -181,4 +198,5 @@
     <!--引入JS文件-->
     <script src="{{asset('js/cityModel.js')}}"></script>
     <script src="{{asset('js/payAddAddress.js')}}"></script>
+    <script src="{{asset('js/pay.js')}}"></script>
 @endsection

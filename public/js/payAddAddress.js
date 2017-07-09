@@ -1,4 +1,5 @@
 
+
 $("button[name='addaddress']").on("click", function() {
 
 	var uid = $("select[name='province']").val();
@@ -51,7 +52,7 @@ $("button[name='addaddress']").on("click", function() {
 		$.ajax({
 
 			type:"POST",
-			url:"http://localhost/Laravel/ShopCenter/public/payAddress",
+			url:window.location.protocol+"//"+window.location.host+"/payAddress",
 			data:{
 				consignee:uname,
 				phone:uphone,
@@ -68,7 +69,7 @@ $("button[name='addaddress']").on("click", function() {
             	
             	switch(data) {
             		case "1":
-
+http://www.80yl.cn/pay/3
             			$("input[name='uname']").val("");
 
 						$("input[name='uaddress']").val("");

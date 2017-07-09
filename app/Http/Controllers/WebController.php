@@ -58,29 +58,67 @@ class WebController extends Controller
 
 
     //购物车页
-    public function cart()
+    public function cart(Request $request)
     {
-        return view("web/cart");
+        //拿到当前用户的id
+        $uid = $request->session()->get("webid");
+
+        //查询购物车表拿到保存的数据
+        $data = DB::table('cars')->where('userid', $uid)->get();
+
+        $carydata = [];
+        $number = 0;
+        //判断当前用户是否有添加数据到购物车
+        if(count($data) > 0) {
+
+            //根据购物车表的数据查询商品表
+            foreach ($data as $val){
+                $id = $val['id'];
+                $goodid = $val['goodsid'];
+                $num = $val['num'];
+                $gdata = DB::table('goods')->where("goods_id", $goodid)->get();
+                $arr[$number] = [
+                    "id" => $id,
+                   "goods_name" => $gdata[0]['goods_name'],
+                    "shop_price" => $gdata[0]['shop_price'],
+                    "num" => $num,
+                    "pic" => $gdata[0]['cover_img']
+                ];
+                $carydata = $arr;
+                $number++;
+            }
+        }
+
+        return view("web/cart", compact("carydata"));
     }
 
     //结算页
-    public function pay(Request $request, $id)
+    public function pay(Request $request, $id=null, $goodnum=null)
     {
+
         if(!$request->session()->has("webusername")) {
-            echo "<script>alert('请先登录!');window.location.href='http://localhost/Laravel/ShopCenter/public/login'</script>";
+            echo "<script>alert('请先登录!');window.location.href=(window.location.protocol+'//'+window.location.host+'/login')</script>";
 
         }
-
-        //商品数据
-        $data = DB::table('goods')->where('goods_id', $id)->get();
-
         //拿到当前用户的ID
-       $userid =  $request->session()->get("webid");
+        $userid =  $request->session()->get("webid");
 
         //地址数据
         $addressData = DB::table("addresses")->where("userid", $userid)->get();
 
-        return view("web/pay", compact("data", "addressData"));
+        //判断是直接购买进来还是从购物车中进来
+        if(!$id == null) {
+
+            //商品数据
+            $data = DB::table('goods')->where('goods_id', $id)->get();
+
+        } else {
+
+            //拿到用记提交的订单数据
+            $data = $request->session()->get("shopData");
+
+        }
+        return view("web/pay", compact("data", "addressData", "goodnum"));
 
 
     }
@@ -88,6 +126,7 @@ class WebController extends Controller
     //结算成功页
     public function paysucceed()
     {
+
         return view("web/paysucceed");
     }
 
@@ -103,6 +142,17 @@ class WebController extends Controller
     public function order()
     {
         return view("web/order");
+    }
+
+    public function myorder(Request $request)
+    {
+        //拿到当前用户的ID
+        $userid = $request->session()->get("webid");
+
+        //查询订单表
+        $data = DB::table("orders")->where("userid", $userid)->get();
+
+        return view("web/myorder", compact("data"));
     }
 
 //用户中心页
@@ -578,6 +628,112 @@ class WebController extends Controller
 
     }
 
+    //购物车页ajax
+    public function cartAjax(Request $request, $id, $gnum)
+    {
+        if(!$request->session()->has("webusername")) {
+            echo "<script>alert('请先登录!');window.location.href=(window.location.protocol+'//'+window.location.host+'/login')</script>";
+        }
+
+        //查询商品表拿到商品数据
+        $data = DB::table("goods")->where("goods_id", $id)->get();
+
+
+        //拿到当前用户的id
+        $uid = $request->session()->get("webid");
+
+        //判断购物车表有没有一样的数据,有则加1,没有则添加
+        $formerly = DB::table("cars")->where([
+            "userid"=>$uid,
+            "goodsid"=>$id
+        ])->get();
+
+        if(count($formerly) > 0 ) {
+            //商品数量加1
+           $bool = DB::table("cars")->where([
+                "userid"=>$uid,
+                "goodsid"=>$id
+            ])->increment('num');
+
+           echo $bool;
+        } else {
+
+           $bool =  DB::table('cars')->insert([
+               "userid"=>$uid,
+               "goodsid"=>$data[0]['goods_id'],
+               "num"=>$gnum
+           ]);
+
+           echo $bool;
+        }
+
+    }
+
+    //购物车删除
+    public function cartDelete() {
+
+        //购物车商品ID
+        $id =  $_GET['id'];
+
+        //删除该商品
+        $data = DB::table("cars")->where("id", $id)->delete();
+
+        echo $data;
+
+    }
+
+    //购物车结算存session
+    public function cartSession(Request $request)
+    {
+        $shopData = $_GET['shopData'];
+
+        //存进session之前先清除session之前的数据
+        $request->session()->pull("shopData");
+
+        //把订单数据存进session
+        $request->session()->put("shopData", $shopData);
+
+        echo "1";
+    }
+
+    //购物车页存session里的数据存进订单表
+    public function paysucceedAjax(Request $request)
+    {
+        //拿到提交过来的订单数据
+        $orderData = $_GET['orderData'];
+
+//        $request->session()->put("sheshi", $orderData);
+      //拿到当前用户的ID
+        $userid = $request->session()->get("webid");
+
+        //生成一个订单号
+        $ordernum = $userid.date("YmdHis", time()).rand(100,999);
+
+        //订单创建时间
+        $ordertime = date("Y-m-d H:i:s");
+
+        foreach($orderData as $val) {
+
+            $data = DB::table('orders')->insert([
+                "userid" => $userid,
+                "ordernum" => $ordernum,
+                "linkman" => $val['linkman'],
+                "address" => $val['address'],
+                "imgurl" => $val['cover_img'],
+                "phone" => $val['phone'],
+                "goods" => $val['goods_name'],
+                "status" => 0,
+                "total" => $val['order_price'],
+                "created_at" => $ordertime
+            ]);
+        }
+        $arr = [
+            "data"=> $data,
+            "ordernum"=> $ordernum
+        ];
+
+        echo json_encode($arr);
+    }
 }
 
 

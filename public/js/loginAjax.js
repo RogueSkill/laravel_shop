@@ -16,7 +16,7 @@ $("button[name='login']").on("click", function() {
 
             if(data > 1) {
                 alert("登录成功");
-                window.location.href='center';
+                window.location.href=history.go(-1);
 
             }else if (data == 1){
 
