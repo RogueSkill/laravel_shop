@@ -59,23 +59,3 @@
 
 </body></html>
 
-<script>
-  $("button[name='send']").on("click", function() {
-
-      var expressid = $("input[name='expressid']").val();
-      $.ajax({
-          type:"get",
-          url:window.location.protocol+"//"+window.location.host+"/admin/send",
-          data:{
-              expressid:expressid
-          },
-          success:function(data) {
-              if(data > 0){
-                  alert("发货成功");
-              } else {
-                  alert("发货失败");
-              }
-          }
-      });
-  });
-</script>
