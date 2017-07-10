@@ -20,7 +20,7 @@
   <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>订单发货</strong></div>
   <div class="body-content">
 
-    <form method="post" id="form" class="form-x" action="" enctype="multipart/form-data">
+    <form id="form" class="form-x"  enctype="multipart/form-data">
     <?php echo csrf_field(); ?>  
     
       <if condition="$iscid eq 1">
@@ -38,7 +38,7 @@
           <label>快递单号:</label>
         </div>
         <div class="field">
-          <input type="text" class="input w50" name="shop_price" value=""/>
+          <input type="text" class="input w50" name="expressid" value=""/>
         </div>
       </div>
 
@@ -50,7 +50,7 @@
           <label></label>
         </div>
         <div class="field">
-          <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+          <button class="button bg-main icon-check-square-o" type="button" name="send"> 提交</button>
         </div>
       </div>
     </form>
@@ -59,3 +59,23 @@
 
 </body></html>
 
+<script>
+  $("button[name='send']").on("click", function() {
+
+      var expressid = $("input[name='expressid']").val();
+      $.ajax({
+          type:"get",
+          url:window.location.protocol+"//"+window.location.host+"/admin/send",
+          data:{
+              expressid:expressid
+          },
+          success:function(data) {
+              if(data > 0){
+                  alert("发货成功");
+              } else {
+                  alert("发货失败");
+              }
+          }
+      });
+  });
+</script>

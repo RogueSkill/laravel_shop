@@ -300,6 +300,12 @@ class AdminController extends BaseController
         return view('admin/order/send');
     }
 
+    public function send()
+    {
+        $expressid = $_GET['expressid'];
+        $data = DB::table("orders")->update(['expressid'=>$expressid]);
+        echo $data;
+    }
     /**
     *
     *********************************************管理员模块****************************************
