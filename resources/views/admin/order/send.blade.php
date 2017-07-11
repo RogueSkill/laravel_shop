@@ -20,7 +20,7 @@
   <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>订单发货</strong></div>
   <div class="body-content">
 
-    <form method="post" id="form" class="form-x" action="" enctype="multipart/form-data">
+    <form id="form" class="form-x"  enctype="multipart/form-data">
     <?php echo csrf_field(); ?>  
     
       <if condition="$iscid eq 1">
