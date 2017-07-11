@@ -70,13 +70,15 @@
 					   <div class="long-title"><span class="all-goods">全部分类</span>
 					   </div>
 					   <div class="nav-cont">
-							<ul>
-								<li class="index"><a href="{{url('/goods/id')}}">首页</a></li>
-                                <li class="qc"><a href="{{url('/goods/id')}}">闪购</a></li>
-                                <li class="qc"><a href="{{url('/goods/id')}}">限时抢</a></li>
-                                <li class="qc"><a href="{{url('/goods/id')}}">团购</a></li>
-                                <li class="qc last"><a href="{{url('/goods/id')}}">大包装</a></li>
-							</ul>
+							<!-- <ul>
+								<li class="index"><a href="">首页</a></li>
+								@if($midtype)
+									@foreach($midtype as $val)
+                                		<li class="qc"><a href="/list/{{$val['id']}}">{{$val['name']}}</a></li>
+                                	@endforeach
+                                @endif
+                                
+							</ul> -->
 						    <div class="nav-extra">
 						    	<i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的福利
 						    	<i class="am-icon-angle-right" style="padding-left: 10px;"></i>
@@ -86,16 +88,16 @@
 @endsection
 
 @section('search_keyword')
-<div class="searchAbout">
+<!-- <div class="searchAbout">
 	<span class="font-pale">相关搜索：</span>
 	<a title="坚果" href="{{url('/goods/id')}}">坚果</a>
 	<a title="瓜子" href="{{url('/goods/id')}}">瓜子</a>
 	<a title="鸡腿" href="{{url('/goods/id')}}">豆干</a>
-</div>
+</div> -->
 @endsection
 
 @section('select')
-<ul class="select">
+<!-- <ul class="select">
 	<p class="title font-normal">
 		<span class="fl">松子</span>
 		<span class="total fl">搜索到<strong class="num">997</strong>件相关商品</span>
@@ -157,15 +159,15 @@
 		</dl>
 	</li>
 </ul>
-<div class="clear"></div>
+<div class="clear"></div> -->
 @endsection
 
 @section('sort')
 <div class="sort">
-<li class="first"><a title="综合">综合排序</a></li>
+<!-- <li class="first"><a title="综合">综合排序</a></li>
 <li><a title="销量">销量排序</a></li>
 <li><a title="价格">价格优先</a></li>
-<li class="big"><a title="评价" href="{{url('/goods/id')}}">评价为主</a></li>
+<li class="big"><a title="评价" href="{{url('/goods/id')}}">评价为主</a></li> -->
 </div>
 <div class="clear"></div>
 @endsection
@@ -176,11 +178,7 @@
 									<li>
 										<div class="i-pic limit">
 											@if($val['cover_img'])
-<<<<<<< HEAD
-												<a href="{{url('./goods')}}/{{$val['goods_id']}}"><img width="218" height="218" src="../{{$val['cover_img']}}" /></a>
-=======
 												<a href="{{url('./goods')}}/{{$val['goods_id']}}"><img width="218" height="218" src="../../{{$val['cover_img']}}" /></a>
->>>>>>> e7387f5cba44c0b8ecb85a48d0db98a4ff711e67
 											@else
 												<img width="218" height="218" src="{{asset('style/images/image.png')}}" />
 											@endif

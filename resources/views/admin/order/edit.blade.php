@@ -93,14 +93,7 @@ $arr = [0=>'待发货',1=>'已发货',2=>'待评价',3=>'交易完成'];
         </div>
       </div>
 
-     <div class="form-group">
-        <div class="label">
-          <label>邮编:</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input w50" name="order_code" value="{{$data['code']}}" />
-        </div>
-      </div>  
+     
 
      <div class="form-group">
         <div class="label">
@@ -141,14 +134,7 @@ $arr = [0=>'待发货',1=>'已发货',2=>'待评价',3=>'交易完成'];
         
       <div class="clear"></div>
 
-      <div class="form-group">
-        <div class="label">
-          <label></label>
-        </div>
-        <div class="field">
-          <button class="button bg-main icon-check-square-o" type="button"> 提交</button>
-        </div>
-      </div>
+      
     </form>
   </div>
 </div>

@@ -58,10 +58,10 @@
           <td>
             @if($val['status'] == 0)
 
-                <a href="{{url('/admin/order_send')}}">发货</a>
+                <a href="{{url('/admin/order_send/'.$val['id'])}}">发货</a>
               
             @endif
-            <a href="{{url('/admin/order_edit/'.$val['id'])}}">编辑</a> 
+            <a href="{{url('/admin/order_edit/'.$val['id'])}}">详情</a> 
             <a name='del' valid="{{$val['id']}}" >删除</a></td>
         </tr>
 

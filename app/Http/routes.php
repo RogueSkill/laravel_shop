@@ -90,7 +90,8 @@ Route::group(['middleware'=>['web','admin.login']],function(){
 	Route::post('/admin/order_update', 'AdminController@order_update');
 	Route::get('/admin/order_edit/{id}', 'AdminController@order_edit');
 	Route::get('/admin/order_del', 'AdminController@order_del');
-	Route::get('/admin/order_send', 'AdminController@order_send');
+	Route::get('/admin/order_send/{id}', 'AdminController@order_send');
+	Route::get('/admin/send', 'AdminController@send');
 
     //评论模块
     Route::get('/admin/comments_list', 'AdminController@comments_list');

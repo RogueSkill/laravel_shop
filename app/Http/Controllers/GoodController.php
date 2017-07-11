@@ -7,6 +7,8 @@ use Illuminate\Support\MessageBag;
 use App\Good;
 use App\Type;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Redis;
+// use Redis;
 use DB;
 
 
@@ -16,7 +18,9 @@ class GoodController extends Controller
     //后台产品列表页aa
     public function index(Request $req)
     {
-        
+        // Redis::set('name','1111111');
+        // $name = Redis::get('name');
+        // echo $name;
         $goodtypes = DB::table('types')
             ->select(DB::raw('*,concat(path,id) as map'))
              ->orderBy('map','asc')
@@ -403,8 +407,14 @@ class GoodController extends Controller
     //
     public function web_index()
     {
+
+        // Redis::set('name','charleslai');
+
         //前台广告
         $banner = DB::table('pics')->pluck('name');
+        //中部导航
+        $midtype = DB::table('types')->where('pid',1)->limit(4)->get();
+        // dd($midtype);
         //右侧栏分类
         $typelist = DB::table('types')->where('pid',0)->limit(10)->get();
         foreach($typelist as $key=>$val){
@@ -455,12 +465,14 @@ class GoodController extends Controller
        $meatlist['list'] = DB::table('goods as g')->leftjoin('types as t', 'g.typeid','=','t.id')->where('g.typeid', 3)->orderBy('g.created_at','desc')->limit(12)->get();
        // dump($meatlist);
 
-       return view('web/lar_index', compact('banner','typelist','recommend','hot','candylist','candylist','pufflist','meatlist'));
+       return view('web/lar_index', compact('banner','typelist','recommend','hot','candylist','candylist','pufflist','meatlist','midtype'));
     }
 
     //前台分类列表
     public function cat_list($pid)
     {
+
+        $midtype = DB::table('types')->where('pid',1)->limit(4)->get();
         // $pid = $id
         $typelist = DB::table('types')->where('pid',0)->limit(10)->get();
         foreach($typelist as $key=>$val){
@@ -475,15 +487,16 @@ class GoodController extends Controller
        }
 
         // dump($typelist);
-        return view('web/lar_cat_list',compact('typelist','pid'));
+        return view('web/lar_cat_list',compact('typelist','pid','midtype'));
     }
 
     //前台商品列表页
     public function lister($pid)
     {
+        $midtype = DB::table('types')->where('pid',1)->limit(4)->get();
         $goodslist = Good::where('typeid',$pid)->orderBy('updated_at','desc')->paginate(12);
         
-        return  view('web/lar_list', compact('goodslist'));
+        return  view('web/lar_list', compact('goodslist','midtype'));
     }
 
     //前台商品详细页

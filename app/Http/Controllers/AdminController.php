@@ -295,9 +295,25 @@ class AdminController extends BaseController
     }
 
     //发货
-    public function order_send()
+    public function order_send($id)
     {
-        return view('admin/order/send');
+        
+        return view('admin/order/send', compact("id"));
+    }
+
+    public function send()
+    {
+        $id =  $_GET['id'];
+
+        $expressid = $_GET['expressid'];
+
+        $data = DB::table("orders")->where("id", $id)->update([
+            "expressid"=>$expressid,
+            "status"=>1
+            ]);
+
+
+        echo $data;
     }
 
     /**

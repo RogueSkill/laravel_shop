@@ -38,7 +38,7 @@
           <label>快递单号:</label>
         </div>
         <div class="field">
-          <input type="text" class="input w50" name="shop_price" value=""/>
+          <input type="text" class="input w50" name="expressid" value=""/>
         </div>
       </div>
 
@@ -50,7 +50,7 @@
           <label></label>
         </div>
         <div class="field">
-          <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+          <button class="button bg-main icon-check-square-o" type="button" name="send"> 提交</button>
         </div>
       </div>
     </form>
@@ -59,3 +59,26 @@
 
 </body></html>
 
+<script>
+  $("button[name='send']").on("click", function() {
+    var id = {{$id}};
+    var expressid = $("input[name='expressid']").val();
+    $.ajax({
+      type:"get",
+      url:window.location.protocol+"//"+window.location.host+"/admin/send",
+      data:{
+        id:id,
+        expressid:expressid
+      },
+      success:function(data) {
+        
+        if(data > 0) {
+          alert("发货成功");
+          window.location.href = window.location.protocol+"//"+window.location.host+"/admin/order_list";
+        } else {
+          alert("发货失败");
+        }
+      }
+    });
+  });
+</script>

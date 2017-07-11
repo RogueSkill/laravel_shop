@@ -34,6 +34,7 @@ class WebController extends Controller
     public function goods(Request $request, $id)
     {
 
+        $midtype = DB::table('types')->where('pid',1)->limit(4)->get();
         //查询商品表拿到商品详细信息
         $data = DB::table('goods')->where("goods_id", $id)->get();
 
@@ -49,10 +50,10 @@ class WebController extends Controller
         if($bool) {
             $username =  $request->session()->get("username");
 
-            return view('web/lar_introduction', compact('username', 'data'));
+            return view('web/lar_introduction', compact('username', 'data','midtype'));
         } else {
 
-            return view('web/lar_introduction', compact('data', 'comments','comments_two'));
+            return view('web/lar_introduction', compact('data', 'comments','comments_two','midtype'));
         }
 
 
