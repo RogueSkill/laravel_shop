@@ -2,7 +2,7 @@
 *.css linguist-vendored
 *.scss linguist-vendored
 
-*.php linguist-language=go
-*.js linguist-language=go
-*.html linguist-language=go
-*.html linguist-language=go
+
+*.js linguist-language=php
+
+*.js linguist-language=js
